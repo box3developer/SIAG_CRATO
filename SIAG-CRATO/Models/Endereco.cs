@@ -32,8 +32,8 @@ namespace SIAG_CRATO.Models
     {
 
         public int Codigo { get; set; }
-        public DepositoModel Deposito { get; set; }
-        public string Descricao { get; set; }
+        public DepositoModel? Deposito { get; set; }
+        public string Descricao { get; set; } = string.Empty;
     }
 
     public class DepositoModel

@@ -2,7 +2,7 @@
 
 namespace SIAG_CRATO.Models
 {
-    public class AreaArmazenagem
+    public class AreaArmazenagemModel
     {
         public long Codigo { get; set; }
         public TipoAreaModel TipoArea { get; set; } = new TipoAreaModel();

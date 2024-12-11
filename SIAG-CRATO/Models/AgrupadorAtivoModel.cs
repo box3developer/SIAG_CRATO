@@ -12,7 +12,7 @@ namespace SIAG_CRATO.Models
         public string Codigo3 { get; set; }
         public Int64 Sequencia { get; set; }
         public DateTime DataAgrupador { get; set; }
-        public AreaArmazenagem AreaArmazenagem { get; set; }
+        public AreaArmazenagemModel AreaArmazenagem { get; set; }
         public StatusAgrupador Status { get; set; }
     }
 }
