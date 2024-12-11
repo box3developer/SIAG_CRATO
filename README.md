@@ -121,8 +121,6 @@
 | alocacaoautomaticafatiaendereco | 12.414           |
 | motoristacontato                | 9.859            |
 | imp_caixa                       | 8.485            |
-| JobParameter                    | 6.257            |
-| State                           | 4.696            |
 | visaoembarque_carregamento      | 4.418            |
 | imp_pedido_baca                 | 4.147            |
 | desempenhoonline                | 3.694            |
@@ -133,7 +131,6 @@
 | imp_pedidocongelado             | 1.892            |
 | monitorexecucao                 | 1.886            |
 | portletconfig                   | 1.861            |
-| Job                             | 1.564            |
 | portletativo                    | 1.317            |
 | prioridadesareasarmazenagem     | 1.099            |
 | equipamentoManutencao           | 881              |
@@ -154,7 +151,6 @@
 | equipamentoendereco             | 69               |
 | embalagemEquipamento            | 60               |
 | equipamentoatividade            | 60               |
-| AggregatedCounter               | 58               |
 | SolicitanteOrdem                | 54               |
 | tmp_acaosorter_historico        | 48               |
 | preenchimento                   | 46               |
@@ -173,7 +169,6 @@
 | turnoParada                     | 21               |
 | tmp_acaosorter_bkp_int          | 19               |
 | tmp_transicaochamadaBCK         | 18               |
-| Hash                            | 18               |
 | equipamentoStatus               | 17               |
 | tela                            | 15               |
 | convocacaoPrioridade            | 13               |
@@ -187,16 +182,10 @@
 | tempoatividade                  | 6                |
 | imp_visaoembarque_predata       | 5                |
 | tipoEventosSorter               | 5                |
-| Counter                         | 3                |
-| Set                             | 2                |
 | USODEATIVIDADE                  | 2                |
-| Schema                          | 1                |
-| Server                          | 1                |
 | imp_programa_dimensoes          | 0                |
 | ordemretrabalho                 | 0                |
 | ordemexportacao                 | 0                |
-| JobQueue                        | 0                |
-| List                            | 0                |
 | agendamento                     | 0                |
 | desempenhotrocacaracol          | 0                |
 | embalagemduplicada              | 0                |
