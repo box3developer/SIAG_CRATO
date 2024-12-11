@@ -1,0 +1,6 @@
+@SIAG_CRATO_HostAddress = http://localhost:5240
+
+GET {{SIAG_CRATO_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
