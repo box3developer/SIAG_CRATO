@@ -179,8 +179,6 @@
 | atividadeRejeicao               | 1                |
 | Schema                          | 1                |
 | Server                          | 1                |
-| Tabela                          | Número de Linhas |
-|---------------------------------|------------------|
 | turnoexcecao                    | 1                |
 | regiaotrabalho                  | 1                |
 | imp_programa_dimensoes          | 0                |
