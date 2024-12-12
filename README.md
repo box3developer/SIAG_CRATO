@@ -8,38 +8,26 @@
 | EmbalarCaixas                   | HttpPost    | List<CaixaAEmbalar> caixas
 | IncluirHistorico                | HttpPost    | string caixa, DateTime dataLeitura, TipoCaixaLeitura tipoCaixaLeitura, StatusCaixaLeitura statusCaixaLeitura
 
----
-
 | ChamadaController               | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | CriarChamadasPorLado            | HttpGet     | long endereco, int lado, long ordem
-
----
 
 | EquipamentoController           | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | ListaEquipamentosPorSetorModelo | HttpGet     | int setor, int modelo
 
----
-
 | MotivoInterrupcaoController     | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | ListaEquipamentosPorSetorModelo | HttpGet     |
-
----
 
 | MotoristaController             | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | MotoristaOrdem                  | HttpGet     | long ordem
 
----
-
 | OperadorController              | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | VerificaOperador                | HttpGet     | long operador
 | AtribuirHistoricoOperador       | HttpPost    | long operador, int endereco, EventoOperador motivo, DateTime dtEvento
-
----
 
 | OrdemController                 | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
@@ -49,32 +37,22 @@
 | InsereOrdemSequencia            | HttpPost(/Ordem/v2/InsereOrdemSequencia)    | SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem
 | AlteraStatusOrdem               | HttpPost    | Ordem ordem
 
----
-
 | PalletController                | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | LiberarPallet                   | HttpGet     | int pallet, long ordem, int portao
 
----
-
 | ParametroController             | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | ValorParametro                  | HttpGet     | int id_parametro
-
----
 
 | PortaoController                | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | VerificarPortao                 | HttpGet     | int id
 | ListarPortoes                   | HttpGet     | int Setor
 
----
-
 | UtilController                  | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
 | GetWebPageToImage               | HttpPost    | object data
-
----
 
 | UtilController                  | Método      | Parâmetros
 |---------------------------------|-------------|-------------|
@@ -84,6 +62,8 @@
 | ExcluirVeiculo                  | HttpPost    | VeiculoAPI dados
 | ContratarVeiculo                | HttpPost    | VeiculoAPI dados
 | DescontratarVeiculo             | HttpPost    | Ordem dados
+
+---
 
 ## Tabelas
 | Tabela crud                     | Número de Linhas 
@@ -149,13 +129,9 @@
 | auditoriacaixa                  | 0                
 | centrodecustos                  | 0                         
 
----
-
 | Tabela log                      | Número de Linhas 
 |---------------------------------|------------------
 | logSIAG                         | 123.915          
-
----
 
 | Tabelas usadas sistema Caracol  | Número de Linhas 
 |---------------------------------|------------------
@@ -172,15 +148,11 @@
 | status_leitor                   | 4                  
 | caixahistorico                  | 0              
 
----
-
 | Tabelas usadas sistema Chamadas  | Número de Linhas 
 |---------------------------------|------------------
 | historicopallet                 | 7.584.244              
 | tmp_transicaochamada            | 174        
 | atividadeRotina                 | 35                   
-
----
 
 | Tabelas sem uso definido        | Número de Linhas 
 |---------------------------------|------------------
@@ -205,8 +177,6 @@
 | agendamento                     | 0                
 | desempenhotrocacaracol          | 0                
 | caixaimagem                     | 0              
-
----
 
 | Tabelas não usadas API SIAG     | Número de Linhas 
 |---------------------------------|------------------
