@@ -2,12 +2,11 @@
 
 ## APIs
 | **Controller**                  | **Método**                      | **Verbo HTTP** | **Parâmetros**                                                                  
-|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
-| **CaixaController**             |                                 |                |                                                                                 
-|                                 | CarregarCaixasOrdem             | HttpGet        | long ordem                                                                      
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------        
+| **CaixaController**             | CarregarCaixasOrdem             | HttpGet        | long ordem                                                                      
 |                                 | ExpedirCaixas                   | HttpPost       | List<CaixasNaOrdemAPI> caixas                                                   
 |                                 | EmbalarCaixas                   | HttpPost       | List<CaixaAEmbalar> caixas                                                     
-|                                 | IncluirHistorico                | HttpPost       | string caixa, DateTime dataLeitura, TipoCaixaLeitura tipoCaixaLeitura, StatusCaixaLeiturastatusCaixaLeitura
+|                                 | IncluirHistorico                | HttpPost       | string caixa, DateTime dataLeitura, TipoCaixaLeitura tipoCaixaLeitura, StatusCaixaLeiturastatusCaixaLeitura |
 |                                 | CriarChamadasPorLado            | HttpGet        | long endereco, int lado, long ordem                                            
 |---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
 | **ChamadaController**           |                                 |                |                                                                                 
@@ -25,9 +24,8 @@
 | **OperadorController**          |                                 |                |                                                                                 
 |                                 | VerificaOperador                | HttpGet        | long operador                                                                  
 |                                 | AtribuirHistoricoOperador       | HttpPost       | long operador, int endereco, EventoOperador motivo, DateTime dtEvento          
-|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
-| **OrdemController**             |                                 |                |                                                                                 
-|                                 | OrdensAlocadas                  | HttpGet        | int portao                                                                      
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------        
+| **OrdemController**             | OrdensAlocadas                  | HttpGet        | int portao                                                                      
 |                                 | interromperOrdem                | HttpGet        | long ordem, int id_motivointerrupcao, string dt_interrupcao, int qtCaixas      
 |                                 | InsereOrdemSequencia            | HttpPost       | models.SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem                         
 |                                 | InsereOrdemSequencia            | HttpPost(/Ordem/v2/InsereOrdemSequencia) | SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem       
@@ -42,15 +40,14 @@
 | **PortaoController**            |                                 |                |                                                                                 
 |                                 | VerificarPortao                 | HttpGet        | int id                                                                         
 |                                 | ListarPortoes                   | HttpGet        | int Setor                                                                      
-|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
-| **UtilController**              |                                 |                |                                                                                 
-|                                 | GetWebPageToImage               | HttpPost       | object data                                                                    
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------        
+| **UtilController**              | GetWebPageToImage               | HttpPost       | object data                                                                    
 |                                 | VeiculoOrdem                    | HttpPost       | long ordem                                                                     
 |                                 | IncluirVeiculo                  | HttpPost       | VeiculoAPI dados                                                               
 |                                 | EditarVeiculo                   | HttpPost       | VeiculoAPI dados                                                               
 |                                 | ExcluirVeiculo                  | HttpPost       | VeiculoAPI dados                                                               
 |                                 | ContratarVeiculo                | HttpPost       | VeiculoAPI dados                                                               
-|                                 | DescontratarVeiculo             | HttpPost       | Ordem dados                                                                    
+|                                 | DescontratarVeiculo             | HttpPost       | Ordem dados                                                                                                                         
 
 ---
 
