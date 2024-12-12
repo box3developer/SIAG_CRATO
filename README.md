@@ -174,7 +174,7 @@
 |                                 |                                 |
 |                                 | imp_log_sucesso                 | 112.238          
 |                                 | imp_log_falha                   | 111.176        
-|                                 
+|                                 |                                 |
 |                                 | logSorterBack                   | 20.275.620       
 |                                 | ms_sorter_log_proc              | 5.754.023        
 |                                 | logSorterBackSick               | 5.290.681        
