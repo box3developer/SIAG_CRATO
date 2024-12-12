@@ -13,32 +13,23 @@
 | notafiscal                      | 1.712.639      
 | agrupadorativo                  | 1.099.761        
 | veiculotipocarga                | 371.715          
-| previsaoveiculo                 | 105.189
-| visaoembarque_predatapordia     | 87.969           
+| previsaoveiculo                 | 105.189   
 | cliente                         | 62.232           
 | pallet                          | 31.299           
 | areaarmazenagem                 | 30.342             
 | ordem                           | 25.264           
 | ordemsequencia                  | 21.235         
 | ordeminterrupcao                | 20.715       
-| veiculo                         | 18.316         
-| lote                            | 17.446           
-| visaoembarque_predata           | 16.932           
-| produto                         | 13.184     
+| veiculo                         | 18.316          
 | motoristacontato                | 9.859      
-| motorista                       | 9.463            
-| visaoembarque_carregamento      | 4.418            
-| visaoembarque_faturamento       | 3.662            
-| fatia                           | 3.441             
+| motorista                       | 9.463               
 | operador                        | 2.766            
 | monitorexecucao                 | 1.886       
 | portletconfig                   | 1.861            
 | portletativo                    | 1.317         
 | transportadoratipocarga         | 581              
-| operadorDiariobordo             | 272               
 | metaembarque                    | 252                 
-| equipamento                     | 184              
-| tmp_transicaochamada            | 174                    
+| equipamento                     | 184                    
 | parametro                       | 92          
 | equipamentoendereco             | 69                  
 | endereco                        | 66               
@@ -47,20 +38,14 @@
 | preenchimento                   | 46     
 | atividadeprioridade             | 39                              
 | atividadeTarefa                 | 37        
-| atividadeRotina                 | 35                   
 | programacaotela                 | 29    
 | equipamentoChecklist            | 28               
 | uf                              | 27               
 | atividade                       | 22      
 | canal                           | 21     
 | turnoParada                     | 21   
-| equipamentoStatus               | 17               
 | tela                            | 15               
-| convocacaoPrioridade            | 13               
-| motivoInterrupcao               | 13               
-| portlet                         | 11               
-| previsaoveiculousuario          | 11               
-| utilitario                      | 10               
+| motivoInterrupcao               | 13                 
 | equipamentoModelo               | 9                
 | operadorResponsavel             | 6                
 | tempoatividade                  | 6                
@@ -75,13 +60,6 @@
 | atividadeRejeicao               | 1                
 | turnoexcecao                    | 1                
 | regiaotrabalho                  | 1       
-| ordemretrabalho                 | 0                
-| ordemexportacao                 | 0                
-| agendamento                     | 0                
-| desempenhotrocacaracol          | 0                
-| embalagemduplicada              | 0                
-| caixaimagem                     | 0                
-| caixahistorico                  | 0              
 | auditoria                       | 0                
 | auditoriacaixa                  | 0                
 | centrodecustos                  | 0                         
@@ -96,14 +74,52 @@
 
 | Tabelas usadas sistema Caracol  | Número de Linhas 
 |---------------------------------|------------------
+| caixaleitura                    | 151.437.816      
 | logCaracol                      | 145.885.396      
+| desempenho                      | 43.578.748       
 | siaglog                         | 7.608.224        
+| operadorhistorico               | 5.892.427        
 | lidervirtual                    | 192.997          
 | prioridadesareasarmazenagem     | 1.099            
 | parametromensagemCaracol        | 28               
 | posicaoCaracolRefugo            | 10               
 | niveisAgrupadores               | 8                
-| status_leitor                   | 4                
+| status_leitor                   | 4                  
+| caixahistorico                  | 0              
+
+---
+
+| Tabelas usadas sistema Chamadas  | Número de Linhas 
+|---------------------------------|------------------
+| historicopallet                 | 7.584.244              
+| tmp_transicaochamada            | 174        
+| atividadeRotina                 | 35                   
+
+---
+
+| Tabelas sem uso definido        | Número de Linhas 
+|---------------------------------|------------------
+| historico                       | 5.782.885        
+| equipamentochecklistoperador    | 1.088.705        
+| ordemhistorico                  | 108.697
+| visaoembarque_predatapordia     | 87.969        
+| lote                            | 17.446          
+| visaoembarque_predata           | 16.932           
+| produto                         | 13.184
+| visaoembarque_carregamento      | 4.418              
+| visaoembarque_faturamento       | 3.662              
+| fatia                           | 3.441      
+| operadorDiariobordo             | 272               
+| equipamentoStatus               | 17               
+| convocacaoPrioridade            | 13                 
+| portlet                         | 11           
+| previsaoveiculousuario          | 11               
+| utilitario                      | 10               
+| ordemretrabalho                 | 0                
+| ordemexportacao                 | 0                
+| agendamento                     | 0                
+| desempenhotrocacaracol          | 0                
+| caixaimagem                     | 0              
 
 ---
 
@@ -214,16 +230,5 @@
 | gta_projeto                     | 0                
 | caixadestino                    | 0                
 | notafiscal_bck_ajuste_dt_embarque | 0              
-| equipamentotroca                | 0              
-
----
-
-| Tabelas indefinidas             | Número de Linhas 
-|---------------------------------|------------------
-| caixaleitura                    | 151.437.816      
-| desempenho                      | 43.578.748       
-| historicopallet                 | 7.584.244        
-| operadorhistorico               | 5.892.427        
-| historico                       | 5.782.885        
-| equipamentochecklistoperador    | 1.088.705        
-| ordemhistorico                  | 108.697
+| equipamentotroca                | 0             
+| embalagemduplicada              | 0                 
