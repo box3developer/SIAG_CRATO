@@ -1,7 +1,7 @@
 # SIAG CRATO
 
 ## Tabelas
-| Tabela crud                     | Número de Linhas |
+| Tabela crud                 (30)| Número de Linhas |
 |---------------------------------|------------------|
 | pallet                          | 31.299           |
 | ordem                           | 25.264           |
@@ -34,7 +34,7 @@
 | turnoexcecao                    | 1                |
 | regiaotrabalho                  | 1                |
 
-| Tabela log                      | Número de Linhas |
+| Tabela log                  (26)| Número de Linhas |
 |---------------------------------|------------------|
 | logCaracol                      | 145.885.396      |
 | logSorterBack                   | 20.275.620       |
@@ -63,7 +63,7 @@
 | caixa_status_log                | 0                |
 | log_chamada_finalizada          | 0                |
 
-| Tabelas indefinidas             | Número de Linhas |
+| Tabelas indefinidas         (64)| Número de Linhas |
 |---------------------------------|------------------|
 | caixaleitura                    | 151.437.816      |
 | desempenho                      | 43.578.748       |
@@ -131,7 +131,7 @@
 | caixahistorico                  | 0                |
 
 
-| Tabelas não usadas API SIAG     | Número de Linhas |
+| Tabelas não usadas API SIAG (76)| Número de Linhas |
 |---------------------------------|------------------|
 | tmp_dadosclp                    | 75.395.657       |
 | imp_caixa_historico_            | 63.073.103       |
