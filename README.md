@@ -30,9 +30,13 @@
 | turnoexcecao                    | 1                |
 | regiaotrabalho                  | 1                |
 
+---
+
 | Tabela log                      | Número de Linhas |
 |---------------------------------|------------------|
 | logSIAG                         | 123.915          |
+
+---
 
 | Tabelas usadas sistema Caracol  | Número de Linhas |
 |---------------------------------|------------------|
@@ -43,6 +47,8 @@
 | parametromensagemCaracol        | 28               |
 | niveisAgrupadores               | 8                |
 | status_leitor                   | 4                |
+
+---
 
 | Tabelas não usadas API SIAG     | Número de Linhas |
 |---------------------------------|------------------|
@@ -144,6 +150,8 @@
 | logvisaoembarque                | 0                |
 | caixa_status_log                | 0                |
 | log_chamada_finalizada          | 0                |
+
+---
 
 | Tabelas indefinidas             | Número de Linhas |
 |---------------------------------|------------------|
