@@ -63,10 +63,8 @@
 | tmp_acaosorter                  | 0      
 |---------------------------------|------------------
 | imp_caixa_historico_            | 63.073.103       
-| imp_caixa_historico             | 28.782.483       
-| imp_log_sucesso                 | 112.238          
+| imp_caixa_historico             | 28.782.483         
 | imp_pedidopredata               | 111.235          
-| imp_log_falha                   | 111.176          
 | imp_caixa_sum                   | 13.861           
 | imp_caixa                       | 8.485            
 | imp_pedido_baca                 | 4.147            
@@ -87,51 +85,61 @@
 | imp_pedido_remove_notafiscal    | 0                
 | imp_caixa_ivp                   | 0                
 | imp_notafiscal                  | 0       
-|---------------------------------|------------------
-| tmp_impcaixaprocesso            | 24               
-| tmp_impagrupador                | 6        
-|---------------------------------|------------------
+|---------------------------------|------------------     
+| logSorterBack                   | 20.275.620       
+| ms_sorter_log_proc              | 5.754.023        
+| logSorterBackSick               | 5.290.681        
+| ms_sorter_log                   | 3.213.397        
+| logSorterErros                  | 1.814.185        
+| logProcedure                    | 955.390          
+| logPortalSorter                 | 952.108          
+| fs_logconsultas1                | 171.430          
+| logcaixaembalagem               | 33.413           
+| logImportacao                   | 29.539           
+| logprogramadocumento            | 18.915           
+| logCLP                          | 11.348           
+| logPedido                       | 655              
+| logcaixaestufada                | 2                
+| logtrocadecaracolchamada        | 0                
+| logtrocadecaracolexecucao       | 0                
+| logvisaoembarque                | 0                
+| caixa_status_log                | 0                
+| log_chamada_finalizada          | 0                
+|---------------------------------|------------------    
+| imp_log_sucesso                 | 112.238          
+| imp_log_falha                   | 111.176        
 | caixa_bkp                       | 11.939.059       
 | caixa_bkp_Artur                 | 5.869.725        
 | pedido_bkp                      | 4.121.124        
 | pedido_bkp_Artur                | 3.428.309        
 | notafiscal_bkp                  | 999.001          
+|---------------------------------|------------------    
 | logSIAG_bkp                     | 19.671          
 |---------------------------------|------------------          
 | tmp_acaosorter_bkp_int          | 19      
-|---------------------------------|------------------     
+|---------------------------------|------------------
+| tmp_impcaixaprocesso            | 24               
+| tmp_impagrupador                | 6        
+|---------------------------------|------------------
 | caixaintegracao                 | 53.566.708       
-| logSorterBack                   | 20.275.620       
 | chamadatarefa_historico         | 9.742.909        
-| ms_sorter_log_proc              | 5.754.023        
-| logSorterBackSick               | 5.290.681        
 | chamada_historico               | 4.728.126        
 | caixaleituraauditoria           | 3.862.433        
-| ms_sorter_log                   | 3.213.397        
 | caixadataembalagem              | 1.913.863        
-| logSorterErros                  | 1.814.185        
 | ordemInternaAux                 | 1.113.194        
-| logProcedure                    | 955.390          
-| logPortalSorter                 | 952.108          
 | chamadadependencia              | 546.612          
 | sorterfilacaixa                 | 446.923          
 | chamadadependencia_historico    | 390.646          
-| fs_logconsultas1                | 171.430          
 | equipamentoineficiencia         | 150.050          
 | embalagemrfid                   | 135.355          
 | pedidopredata                   | 74.284           
 | desempenhocaixa                 | 55.005           
-| logcaixaembalagem               | 33.413           
-| logImportacao                   | 29.539           
 | pedidocongelado                 | 19.175           
-| logprogramadocumento            | 18.915           
 | alocacaoautomaticafatiaendereco | 12.414           
-| logCLP                          | 11.348           
 | desempenhoonline                | 3.694            
 | caixadataestoqueestrategico     | 2.540            
 | equipamentoManutencao           | 881              
 | MotivoOrdem                     | 834              
-| logPedido                       | 655              
 | alocacaoautomaticafatia         | 611              
 | sorterAcaoclp                   | 154              
 | sortercaixascaracol             | 110              
@@ -145,16 +153,10 @@
 | fluxoFabrica                    | 9                
 | tipoEventosSorter               | 5                
 | USODEATIVIDADE                  | 2                
-| logcaixaestufada                | 2                
 | gta_projeto                     | 0                
 | caixadestino                    | 0                
 | notafiscal_bck_ajuste_dt_embarque | 0              
-| equipamentotroca                | 0                
-| logtrocadecaracolchamada        | 0                
-| logtrocadecaracolexecucao       | 0                
-| logvisaoembarque                | 0                
-| caixa_status_log                | 0                
-| log_chamada_finalizada          | 0                
+| equipamentotroca                | 0              
 
 ---
 
