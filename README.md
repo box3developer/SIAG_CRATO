@@ -1,67 +1,56 @@
 # SIAG CRATO
 
 ## APIs
-| CaixaController                 | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| CarregarCaixasOrdem             | HttpGet     | long ordem
-| ExpedirCaixas                   | HttpPost    | List<CaixasNaOrdemAPI> caixas
-| EmbalarCaixas                   | HttpPost    | List<CaixaAEmbalar> caixas
-| IncluirHistorico                | HttpPost    | string caixa, DateTime dataLeitura, TipoCaixaLeitura tipoCaixaLeitura, StatusCaixaLeitura statusCaixaLeitura
-
-| ChamadaController               | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| CriarChamadasPorLado            | HttpGet     | long endereco, int lado, long ordem
-
-| EquipamentoController           | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| ListaEquipamentosPorSetorModelo | HttpGet     | int setor, int modelo
-
-| MotivoInterrupcaoController     | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| ListaEquipamentosPorSetorModelo | HttpGet     |
-
-| MotoristaController             | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| MotoristaOrdem                  | HttpGet     | long ordem
-
-| OperadorController              | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| VerificaOperador                | HttpGet     | long operador
-| AtribuirHistoricoOperador       | HttpPost    | long operador, int endereco, EventoOperador motivo, DateTime dtEvento
-
-| OrdemController                 | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| OrdensAlocadas                  | HttpGet     | int portao
-| interromperOrdem                | HttpGet     | long ordem, int id_motivointerrupcao, string dt_interrupcao, int qtCaixas
-| InsereOrdemSequencia            | HttpPost    | models.SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem
-| InsereOrdemSequencia            | HttpPost(/Ordem/v2/InsereOrdemSequencia)    | SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem
-| AlteraStatusOrdem               | HttpPost    | Ordem ordem
-
-| PalletController                | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| LiberarPallet                   | HttpGet     | int pallet, long ordem, int portao
-
-| ParametroController             | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| ValorParametro                  | HttpGet     | int id_parametro
-
-| PortaoController                | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| VerificarPortao                 | HttpGet     | int id
-| ListarPortoes                   | HttpGet     | int Setor
-
-| UtilController                  | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| GetWebPageToImage               | HttpPost    | object data
-
-| UtilController                  | Método      | Parâmetros
-|---------------------------------|-------------|-------------|
-| VeiculoOrdem                    | HttpPost    | long ordem
-| IncluirVeiculo                  | HttpPost    | VeiculoAPI dados
-| EditarVeiculo                   | HttpPost    | VeiculoAPI dados
-| ExcluirVeiculo                  | HttpPost    | VeiculoAPI dados
-| ContratarVeiculo                | HttpPost    | VeiculoAPI dados
-| DescontratarVeiculo             | HttpPost    | Ordem dados
+| **Controller**                  | **Método**                      | **Verbo HTTP** | **Parâmetros**                                                                  
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **CaixaController**             |                                 |                |                                                                                 
+|                                 | CarregarCaixasOrdem             | HttpGet        | long ordem                                                                      
+|                                 | ExpedirCaixas                   | HttpPost       | List<CaixasNaOrdemAPI> caixas                                                   
+|                                 | EmbalarCaixas                   | HttpPost       | List<CaixaAEmbalar> caixas                                                     
+|                                 | IncluirHistorico                | HttpPost       | string caixa, DateTime dataLeitura, TipoCaixaLeitura tipoCaixaLeitura, StatusCaixaLeiturastatusCaixaLeitura
+|                                 | CriarChamadasPorLado            | HttpGet        | long endereco, int lado, long ordem                                            
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **ChamadaController**           |                                 |                |                                                                                 
+|                                 | CriarChamadasPorLado | HttpGet  | long endereco, int lado, long ordem                                                          
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **EquipamentoController**       |                                 |                |                                                                                 
+|                                 | ListaEquipamentosPorSetorModelo | HttpGet        | int setor, int modelo                                                          
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **MotivoInterrupcaoController** |                                 |                |                                                                                 
+|                                 | ListaEquipamentosPorSetorModelo | HttpGet        |                                                                                 
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **MotoristaController**         |                                 |                |                                                                                 
+|                                 | MotoristaOrdem                  | HttpGet        | long ordem                                                                      
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **OperadorController**          |                                 |                |                                                                                 
+|                                 | VerificaOperador                | HttpGet        | long operador                                                                  
+|                                 | AtribuirHistoricoOperador       | HttpPost       | long operador, int endereco, EventoOperador motivo, DateTime dtEvento          
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **OrdemController**             |                                 |                |                                                                                 
+|                                 | OrdensAlocadas                  | HttpGet        | int portao                                                                      
+|                                 | interromperOrdem                | HttpGet        | long ordem, int id_motivointerrupcao, string dt_interrupcao, int qtCaixas      
+|                                 | InsereOrdemSequencia            | HttpPost       | models.SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem                         
+|                                 | InsereOrdemSequencia            | HttpPost(/Ordem/v2/InsereOrdemSequencia) | SequenciaTipoCargaOrdem sequenciaTipoCargaOrdem       
+|                                 | AlteraStatusOrdem               | HttpPost       | Ordem ordem                                                                     
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **PalletController**            |                                 |                |                                                                                 
+|                                 | LiberarPallet                   | HttpGet        | int pallet, long ordem, int portao                                             
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **ParametroController**         |                                 |                |                                                                                 
+|                                 | ValorParametro                  | HttpGet        | int id_parametro                                                               
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **PortaoController**            |                                 |                |                                                                                 
+|                                 | VerificarPortao                 | HttpGet        | int id                                                                         
+|                                 | ListarPortoes                   | HttpGet        | int Setor                                                                      
+|---------------------------------|---------------------------------|----------------|---------------------------------------------------------------------------------
+| **UtilController**              |                                 |                |                                                                                 
+|                                 | GetWebPageToImage               | HttpPost       | object data                                                                    
+|                                 | VeiculoOrdem                    | HttpPost       | long ordem                                                                     
+|                                 | IncluirVeiculo                  | HttpPost       | VeiculoAPI dados                                                               
+|                                 | EditarVeiculo                   | HttpPost       | VeiculoAPI dados                                                               
+|                                 | ExcluirVeiculo                  | HttpPost       | VeiculoAPI dados                                                               
+|                                 | ContratarVeiculo                | HttpPost       | VeiculoAPI dados                                                               
+|                                 | DescontratarVeiculo             | HttpPost       | Ordem dados                                                                    
 
 ---
 
