@@ -8,19 +8,15 @@
 | veiculo                         | 18.316           |
 | motorista                       | 9.463            |
 | operador                        | 2.766            |
-| MotivoOrdem                     | 834              |
 | transportadoratipocarga         | 581              |
 | equipamento                     | 184              |
 | endereco                        | 66               |
 | transportadora                  | 61               |
 | equipamentoChecklist            | 28               |
-| parametromensagemCaracol        | 28               |
 | uf                              | 27               |
-| equipamentoenderecoPrioridade   | 19               |
 | motivoInterrupcao               | 13               |
 | posicaoCaracolRefugo            | 10               |
 | equipamentoModelo               | 9                |
-| niveisAgrupadores               | 8                |
 | operadorResponsavel             | 6                |
 | hierarquiaTurnosetor            | 5                |
 | tipoVeiculo                     | 5                |
@@ -36,32 +32,7 @@
 
 | Tabela log                  (26)| Número de Linhas |
 |---------------------------------|------------------|
-| logCaracol                      | 145.885.396      |
-| logSorterBack                   | 20.275.620       |
-| siaglog                         | 7.608.224        |
-| ms_sorter_log_proc              | 5.754.023        |
-| logSorterBackSick               | 5.290.681        |
-| ms_sorter_log                   | 3.213.397        |
-| logSorterErros                  | 1.814.185        |
-| logProcedure                    | 955.390          |
-| logPortalSorter                 | 952.108          |
-| fs_logconsultas1                | 171.430          |
 | logSIAG                         | 123.915          |
-| imp_log_sucesso                 | 112.238          |
-| imp_log_falha                   | 111.176          |
-| logcaixaembalagem               | 33.413           |
-| logImportacao                   | 29.539           |
-| logSIAG_bkp                     | 19.671           |
-| logprogramadocumento            | 18.915           |
-| logCLP                          | 11.348           |
-| logPedido                       | 655              |
-| status_leitor                   | 4                |
-| logcaixaestufada                | 2                |
-| logtrocadecaracolchamada        | 0                |
-| logtrocadecaracolexecucao       | 0                |
-| logvisaoembarque                | 0                |
-| caixa_status_log                | 0                |
-| log_chamada_finalizada          | 0                |
 
 | Tabelas indefinidas         (64)| Número de Linhas |
 |---------------------------------|------------------|
@@ -133,34 +104,51 @@
 
 | Tabelas não usadas API SIAG (76)| Número de Linhas |
 |---------------------------------|------------------|
+| logCaracol                      | 145.885.396      |
 | tmp_dadosclp                    | 75.395.657       |
 | imp_caixa_historico_            | 63.073.103       |
 | caixaintegracao                 | 53.566.708       |
 | imp_caixa_historico             | 28.782.483       |
+| logSorterBack                   | 20.275.620       |
 | caixa_bkp                       | 11.939.059       |
 | caixatemp                       | 10.189.966       |
 | chamadatarefa_historico         | 9.742.909        |
+| siaglog                         | 7.608.224        |
+| ms_sorter_log_proc              | 5.754.023        |
 | caixa_bkp_Artur                 | 5.869.725        |
+| logSorterBackSick               | 5.290.681        |
 | chamada_historico               | 4.728.126        |
 | pedido_bkp                      | 4.121.124        |
 | caixaleituraauditoria           | 3.862.433        |
 | pedido_bkp_Artur                | 3.428.309        |
+| ms_sorter_log                   | 3.213.397        |
 | caixadataembalagem              | 1.913.863        |
+| logSorterErros                  | 1.814.185        |
 | ordemInternaAux                 | 1.113.194        |
 | notafiscal_bkp                  | 999.001          |
+| logProcedure                    | 955.390          |
+| logPortalSorter                 | 952.108          |
 | chamadadependencia              | 546.612          |
 | sorterfilacaixa                 | 446.923          |
 | chamadadependencia_historico    | 390.646          |
 | lidervirtual                    | 192.997          |
+| fs_logconsultas1                | 171.430          |
 | equipamentoineficiencia         | 150.050          |
 | embalagemrfid                   | 135.355          |
+| imp_log_sucesso                 | 112.238          |
 | imp_pedidopredata               | 111.235          |
+| imp_log_falha                   | 111.176          |
 | pedidopredata                   | 74.284           |
 | tmp_dadosclpautomatico          | 57.771           |
 | desempenhocaixa                 | 55.005           |
+| logcaixaembalagem               | 33.413           |
+| logImportacao                   | 29.539           |
+| logSIAG_bkp                     | 19.671           |
 | pedidocongelado                 | 19.175           |
+| logprogramadocumento            | 18.915           |
 | imp_caixa_sum                   | 13.861           |
 | alocacaoautomaticafatiaendereco | 12.414           |
+| logCLP                          | 11.348           |
 | imp_caixa                       | 8.485            |
 | imp_pedido_baca                 | 4.147            |
 | desempenhoonline                | 3.694            |
@@ -169,6 +157,8 @@
 | imp_pedidocongelado             | 1.892            |
 | prioridadesareasarmazenagem     | 1.099            |
 | equipamentoManutencao           | 881              |
+| MotivoOrdem                     | 834              |
+| logPedido                       | 655              |
 | alocacaoautomaticafatia         | 611              |
 | imp_visaoembarque_carregamento  | 278              |
 | imp_visaoembarque_faturamento   | 229              |
@@ -185,18 +175,23 @@
 | tmp_acaosorter_int              | 45               |
 | imp_visaoembarque_predatapordia | 38               |
 | imp_programa                    | 33               |
+| parametromensagemCaracol        | 28               |
 | usoDeAtividadePorModelo         | 27               |
 | imp_cliente                     | 26               |
 | tmp_impcaixaprocesso            | 24               |
+| equipamentoenderecoPrioridade   | 19               |
 | tmp_acaosorter_bkp_int          | 19               |
 | tmp_transicaochamadaBCK         | 18               |
 | visaoembarque_carregamento_composicao | 12         |
 | imp_lote                        | 11               |
 | fluxoFabrica                    | 9                |
+| niveisAgrupadores               | 8                |
 | tmp_impagrupador                | 6                |
 | imp_visaoembarque_predata       | 5                |
 | tipoEventosSorter               | 5                |
+| status_leitor                   | 4                |
 | USODEATIVIDADE                  | 2                |
+| logcaixaestufada                | 2                |
 | imp_programa_dimensoes          | 0                |
 | gta_projeto                     | 0                |
 | caixadestino                    | 0                |
@@ -209,3 +204,8 @@
 | imp_pedido_remove_notafiscal    | 0                |
 | imp_caixa_ivp                   | 0                |
 | imp_notafiscal                  | 0                |
+| logtrocadecaracolchamada        | 0                |
+| logtrocadecaracolexecucao       | 0                |
+| logvisaoembarque                | 0                |
+| caixa_status_log                | 0                |
+| log_chamada_finalizada          | 0                |
