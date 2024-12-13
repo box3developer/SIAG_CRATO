@@ -5,47 +5,38 @@ namespace SIAG_CRATO.Models;
 public class ChamadaModel
 {
     [Column("id_chamada")]
-    public Guid Codigo { get; set; }
+    public int Codigo { get; set; }
 
     [Column("id_palletorigem")]
     public int PalletOrigemId { get; set; }
-    public PalletModel? PalletOrigem { get; set; }
 
     [Column("id_palletdestino")]
     public int PalletDestinoId { get; set; }
-    public PalletModel? PalletDestino { get; set; }
 
     [Column("id_palletleitura")]
     public int PalletLeituraId { get; set; }
-    public PalletModel? PalletLeitura { get; set; }
 
     [Column("id_areaarmazenagemorigem")]
-    public int AreaArmazenagemOrigemId { get; set; }
-    public AreaArmazenagemModel? AreaArmazenagemOrigem { get; set; }
+    public long AreaArmazenagemOrigemId { get; set; }
 
     [Column("id_areaarmazenagemdestino")]
-    public int AreaArmazenagemDestinoId { get; set; }
-    public AreaArmazenagemModel? AreaArmazenagemDestino { get; set; }
+    public long AreaArmazenagemDestinoId { get; set; }
 
     [Column("id_areaarmazenagemleitura")]
-    public int AreaArmazenagemLeituraId { get; set; }
-    public AreaArmazenagemModel? AreaArmazenagemLeitura { get; set; }
+    public long AreaArmazenagemLeituraId { get; set; }
 
     [Column("id_operador")]
-    public int OperadorId { get; set; }
+    public long OperadorId { get; set; }
     public OperadorModel? Operador { get; set; }
 
     [Column("id_equipamento")]
     public int EquipamentoId { get; set; }
-    public EquipamentoModel? Equipamento { get; set; }
 
     [Column("id_atividaderejeicao")]
     public int AtividadeRejeicaoId { get; set; }
-    public AtividadeRejeicaoModel? AtividadeRejeicao { get; set; }
 
     [Column("id_atividade")]
     public int AtividadeId { get; set; }
-    public AtividadeModel? Atividade { get; set; }
 
     [Column("fg_status")]
     public StatusChamada Status { get; set; }
