@@ -9,14 +9,12 @@ public class EquipamentoModel
 
     [Column("id_equipamentomodelo")]
     public int ModeloId { get; set; }
-    public EquipamentoModeloModel? Modelo { get; set; }
 
     [Column("id_setortrabalho")]
-    public SetorModel? Setor { get; set; }
+    public int? SetorId { get; set; }
 
     [Column("id_operador")]
     public int OperadorId { get; set; }
-    public OperadorModel? Operador { get; set; }
 
     [Column("nm_equipamento")]
     public string Descricao { get; set; } = string.Empty;
