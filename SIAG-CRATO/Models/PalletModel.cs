@@ -14,12 +14,10 @@ public class PalletModel
     public int QtUtilizacao { get; set; }
 
     [Column("id_areaarmazenagem")]
-    public int AreaArmazenagemId { get; set; }
-    public AreaArmazenagemModel? AreaArmazenagem { get; set; }
+    public Guid AreaArmazenagemId { get; set; }
 
     [Column("id_agrupador")]
-    public int AgrupadorId { get; set; }
-    public AgrupadorAtivoModel? Agrupador { get; set; }
+    public Guid AgrupadorId { get; set; }
 
     [Column("fg_status")]
     public StatusPallet Status { get; set; }

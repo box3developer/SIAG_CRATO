@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.Data;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Pallet;
@@ -13,8 +14,8 @@ public class PalletBLL
             { "@Codigo", pallet.Codigo },
             { "@Status", pallet.Status },
             { "@QtdUtilizacao", pallet.QtUtilizacao },
-            { "@AreaArmazenagem", pallet.AreaArmazenagemId > 0 ? pallet.AreaArmazenagemId : DBNull.Value},
-            { "@Agrupador", pallet.AgrupadorId > 0 ? pallet.AgrupadorId : DBNull.Value },
+            { "@AreaArmazenagem", pallet.AreaArmazenagemId == Guid.Empty ? pallet.AreaArmazenagemId : DBNull.Value},
+            { "@Agrupador", pallet.AgrupadorId == Guid.Empty ? pallet.AgrupadorId : DBNull.Value },
             { "@DataUltimaMovimentacao", pallet.DataUltimaMovimentacao != null ? pallet.DataUltimaMovimentacao : DBNull.Value },
             { "@Identificacao", pallet.Identificacao != null ? pallet.Identificacao : DBNull.Value},
         };
@@ -30,10 +31,10 @@ public class PalletBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var pallets = await conexao.QueryAsync<PalletModel>(PalletQuery.SELECT);
 
-        return pallets.ToList() ?? [];
+        return pallets.ToList();
     }
 
-    public async Task<PalletModel?> GetPalletByIdAsync(int idPallet)
+    public async Task<PalletModel?> GetByIdAsync(int idPallet)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_pallet = @idPallet";
 
@@ -43,12 +44,22 @@ public class PalletBLL
         return pallets;
     }
 
-    public async Task<PalletModel?> GetPalletByIdentificadorAsync(string identificador)
+    public async Task<PalletModel?> GetByIdentificadorAsync(string identificador)
     {
         string sql = $"{PalletQuery.SELECT} WHERE cd_identificacao = @identificador";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var pallets = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sql, new { identificador });
+
+        return pallets;
+    }
+
+    public async Task<PalletModel?> GetByAreaArmazenagemAsync(string idAreaArmazenagem)
+    {
+        string sql = $"{PalletQuery.SELECT} WHERE id_areaarmazenagem = @idAreaArmazenagem";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var pallets = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sql, new { idAreaArmazenagem });
 
         return pallets;
     }
@@ -63,7 +74,68 @@ public class PalletBLL
         return 0;
     }
 
-    public async Task<bool> VincularNovoPalletPorPrioridade(string? identificadorCaracol, AreaArmazenagemModel areaAtual, int nivelAgrupador)
+    public async Task<int> SeStatusAsync(int id, StatusPallet status)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var pallet = await conexao.ExecuteAsync(PalletQuery.UPDADE_STATUS, new { status = (int)status, id });
+
+        return pallet;
+    }
+
+    public async Task<bool> VincularAgrupadorAreaReservadaAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
+    {
+        var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 
+                            WHERE 
+                                CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) = @identificadorCaracol 
+                                AND areaarmazenagem.id_agrupador IS NULL 
+                                AND areaarmazenagem.id_agrupador_reservado = @idAgrupadorReservado 
+                                AND pallet.fg_status = 1 
+                                AND (areaarmazenagem.fg_status = 2 or areaarmazenagem.fg_status = 1) 
+                            ORDER BY nr_posicaoy";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.AgrupadorId });
+
+        if (palletNovo == null)
+        {
+            return false;
+        }
+
+        await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
+        {
+            idAgrupador = DBNull.Value,
+            status = 1,
+            idAreaArmazenagem = areaAtual.Codigo
+        });
+
+        if (palletNovo.AgrupadorId == Guid.Empty)
+        {
+            throw new Exception("Pallet novo ser agrupador.");
+        }
+
+        var sqlAgrupadorDestino = @"UPDATE agrupadorativo 
+                                    SET id_areaarmazenagem = null, fg_status = 2 
+                                    WHERE id_agrupador = @idAgrupador";
+
+        await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.AgrupadorId });
+
+        await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
+        {
+            idAgrupador = areaAtual.AgrupadorId,
+            status = 2,
+            idAreaArmazenagem = palletNovo.AreaArmazenagemId,
+        });
+
+        var sqlAgrupadorOrigem = @"UPDATE agrupadorativo 
+                                   SET id_areaarmazenagem = @idAreaArmazenagem
+                                   WHERE id_agrupador = @idAgrupador";
+
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.AreaArmazenagemId, idAgrupador = areaAtual.AgrupadorId });
+
+        return true;
+    }
+
+    public async Task<bool> VincularNovoPalletPorPrioridadeAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual, int nivelAgrupador)
     {
         bool livreSemPrioridade = false;
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 
@@ -76,7 +148,7 @@ public class PalletBLL
                             ORDER BY nr_posicaoy";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.Agrupador.Codigo });
+        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.AgrupadorId });
 
         if (palletNovo == null)
         {
@@ -136,7 +208,7 @@ public class PalletBLL
 
         await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Agrupador.Codigo,
+            idAgrupador = areaAtual.AgrupadorId,
             status = 2,
             idAreaArmazenagem = palletNovo.AreaArmazenagemId,
         });
@@ -145,12 +217,12 @@ public class PalletBLL
                                    SET id_areaarmazenagem = @idAreaArmazenagem
                                    WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.AreaArmazenagemId, idAgrupador = areaAtual.Agrupador.Codigo });
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.AreaArmazenagemId, idAgrupador = areaAtual.AgrupadorId });
 
         return true;
     }
 
-    public async Task<bool> VincularNovoPalletDisponivel(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
+    public async Task<bool> VincularNovoPalletDisponivelAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
     {
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA}
                             LEFT JOIN agrupadorativo ON agrupadorativo.id_areaarmazenagem = areaarmazenagem.id_areaarmazenagem AND agrupadorativo.fg_status = 3
@@ -172,7 +244,7 @@ public class PalletBLL
 
         var linhasArea = await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Agrupador.Codigo,
+            idAgrupador = areaAtual.AgrupadorId,
             status = 2,
             idAreaArmazenagem = areaAtual.Codigo
         });
@@ -188,12 +260,12 @@ public class PalletBLL
                              SET id_areaarmazenagem = @idAreaArmazenagem 
                              WHERE id_agrupador = @idAgrupador";
 
-        var linhasAgrupador = await conexao.ExecuteAsync(sqlAgrupador, new { idAreaArmazenagem = areaAtual.Codigo, idAgrupador = areaAtual.Agrupador.Codigo });
+        var linhasAgrupador = await conexao.ExecuteAsync(sqlAgrupador, new { idAreaArmazenagem = areaAtual.Codigo, idAgrupador = areaAtual.AgrupadorId });
 
         return linhasArea > 0 && linhasAreaAntiga > 0 && linhasAgrupador > 0;
     }
 
-    public static async Task<bool> VincularNovoPalletReservado(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
+    public static async Task<bool> VincularNovoPalletReservadoAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
     {
         var reservadaSemAgrupador = false;
         var sqlReseva = $@"{PalletQuery.SELECT_RESERVA}
@@ -282,7 +354,7 @@ public class PalletBLL
 
         await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Agrupador.Codigo,
+            idAgrupador = areaAtual.AgrupadorId,
             status = 2,
             idAreaArmazenagem = palletNovo.AreaArmazenagemId
         });
@@ -291,7 +363,7 @@ public class PalletBLL
                                    SET id_areaarmazenagem = @idAreaArmazenagem 
                                    WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.AreaArmazenagemId, idAgrupador = areaAtual.Agrupador.Codigo });
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.AreaArmazenagemId, idAgrupador = areaAtual.AgrupadorId });
 
         return true;
     }
