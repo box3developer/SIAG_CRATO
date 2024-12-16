@@ -1,45 +1,36 @@
 ﻿using SIAG_CRATO.Data;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG_CRATO.Models
 {
     public class EnderecoModel
     {
-        public int Codigo { get; set; }
-        public RegiaoModel Regiao { get; set; }
-        public SetorModel Setor { get; set; }
-        public TipoEndereco TipoEndereco { get; set; }
-        public string Descricao { get; set; }
-        public int EstoqueMinimo { get; set; }
-        public int EstoqueMaximo { get; set; }
-        public StatusEndereco Status { get; set; }
-        public TipoPreenchimento TipoPreenchimento { get; set; }
-    }
+        [Column("id_endereco")]
+        public int IdEndereco { get; set; }
 
-    public class TipoEndereco
-    {
-        public int Codigo { get; set; }
-        public string Descricao { get; set; }
-    }
+        [Column("id_regiaotrabalho")]
+        public int Regiao { get; set; }
 
-    public class RegiaoModel
-    {
-        public int Codigo { get; set; }
-        public DepositoModel Deposito { get; set; }
-        public string Descricao { get; set; }
-    }
+        [Column("id_setortrabalho")]
+        public int Setor { get; set; }
 
-    public class SetorModel
-    {
+        [Column("id_tipoendereco")]
+        public int TipoEndereco { get; set; }
 
-        public int Codigo { get; set; }
-        public DepositoModel? Deposito { get; set; }
+        [Column("nm_endereco")]
         public string Descricao { get; set; } = string.Empty;
-    }
 
-    public class DepositoModel
-    {
-        public int Codigo { get; set; }
-        public string Descricao { get; set; }
+        [Column("qt_estoqueminimo")]
+        public int EstoqueMinimo { get; set; }
+
+        [Column("qt_estoquemaximo")]
+        public int EstoqueMaximo { get; set; }
+
+        [Column("fg_status")]
+        public StatusEndereco Status { get; set; }
+
+        [Column("tp_preenchimento")]
+        public TipoPreenchimento TipoPreenchimento { get; set; }
     }
 
 }

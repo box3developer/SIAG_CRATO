@@ -17,7 +17,7 @@ public class AreaArmazenagemBLL
 
     public static async Task<AreaArmazenagemModel?> GetByIdAsync(int id)
     {
-        var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_areaarmazenagem = $id";
+        var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_areaarmazenagem = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { id });
