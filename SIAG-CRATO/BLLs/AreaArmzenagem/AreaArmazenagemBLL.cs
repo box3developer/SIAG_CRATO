@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Parametro;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.Models;
 
@@ -65,5 +66,26 @@ public class AreaArmazenagemBLL
         var area = await conexao.ExecuteAsync(AreaArmazenagemQuery.UPDATE_STATUS, new { status = (int)status, id });
 
         return area;
+    }
+
+    //sp_rotina_retornastageinlivre
+    public static async Task<AreaArmazenagemModel?> GetStageInLivreAsync(int idEndereco)
+    {
+        var parametroEntity = await ParametroBLL.GetParametroByNmParametro("TIPO AREA STAGEIN")
+        ??
+            throw new Exception("Erro ao executar StageInLivre");
+
+        var nmValor = Int16.Parse(parametroEntity.Valor??"");
+
+        var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
+		                                            and id_tipoarea = @nmValor
+		                                            and fg_status = 1
+		                                            order by nr_posicaoy, nr_lado";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco, nmValor });
+
+        return areasArmazenagem;
+
     }
 }

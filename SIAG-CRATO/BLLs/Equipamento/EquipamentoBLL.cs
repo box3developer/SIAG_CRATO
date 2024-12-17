@@ -43,4 +43,24 @@ public class EquipamentoBLL
 
         return equipamentos.ToList();
     }
+
+    //sp_siag_atualizaequipamento
+    public static async Task<int> UpdateEquipamento( int id_equipamento, int? id_endereco)
+    {
+        if(id_endereco.HasValue && id_endereco > 0)
+        {
+            var sqlEndereco = $@"{EquipamentoQuery.UPDATE_ENDERECO} where id_equipamento = @id_equipamento";
+            using var conexaoEndereco = new SqlConnection(Global.Conexao);
+            var returnEndereco = await conexaoEndereco.ExecuteAsync(sqlEndereco, new {id_equipamento, id_endereco});
+
+            return returnEndereco;
+        }
+
+        var sqlEquipamento = $@"{EquipamentoQuery.UPDATE_DATE} where id_equipamento = @id_equipamento";
+        using var conexao = new SqlConnection(Global.Conexao);
+        var returnEquipamento = await conexao.ExecuteAsync(sqlEquipamento, new { id_equipamento });
+
+        return returnEquipamento;
+
+    }
 }
