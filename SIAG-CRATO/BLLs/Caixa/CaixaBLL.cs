@@ -38,7 +38,7 @@ public class CaixaBLL
 
     public async static Task<int> GetQuantidadePendentesAsync(int idAgrupador)
     {
-        var sql = $"{CaixaQuery.SELECT} WHERE id_agrupador = @idAgrupador AND (fg_status < 4 OR fg_status = 8)";
+        var sql = $"{CaixaQuery.SELECT_COUNT} WHERE id_agrupador = @idAgrupador AND (fg_status < 4 OR fg_status = 8)";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var quantidade = await conexao.QueryFirstOrDefaultAsync<int>(sql, new { idAgrupador });
@@ -50,6 +50,14 @@ public class CaixaBLL
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var caixasPendentes = await conexao.QueryAsync<Tuple<string, int>>(CaixaQuery.SELECT_PENDENTES);
+
+        return caixasPendentes.ToDictionary(x => x.Item1, x => x.Item2);
+    }
+
+    public async static Task<Dictionary<string, int>> GetPendentesByLiderAsync()
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var caixasPendentes = await conexao.QueryAsync<Tuple<string, int>>(CaixaQuery.SELECT_PENDENTES_LIDER);
 
         return caixasPendentes.ToDictionary(x => x.Item1, x => x.Item2);
     }
