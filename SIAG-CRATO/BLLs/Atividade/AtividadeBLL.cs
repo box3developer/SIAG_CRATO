@@ -6,7 +6,7 @@ namespace SIAG_CRATO.BLLs.Atividade;
 
 public class AtividadeBLL
 {
-    public async Task<AtividadeModel?> GetAtividadeByIdAsync(int id)
+    public static async Task<AtividadeModel?> GetAtividadeByIdAsync(int id)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE id_atividade = @idAtividade";
 
@@ -16,7 +16,7 @@ public class AtividadeBLL
         return atividade;
     }
 
-    public async Task<AtividadeModel?> GetAtividadeByNomeAsync(string nome)
+    public static async Task<AtividadeModel?> GetAtividadeByNomeAsync(string nome)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE nm_atividade = @nomeAtividade";
 
