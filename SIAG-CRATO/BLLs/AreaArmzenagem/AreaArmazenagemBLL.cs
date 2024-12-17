@@ -47,7 +47,7 @@ public class AreaArmazenagemBLL
         return areasArmazenagem;
     }
 
-    public static async Task<List<AreaArmazenagemModel>> GetByIdentificadoCaracolAsync(string identificadorCaracol)
+    public static async Task<List<AreaArmazenagemModel>> GetByIdentificadorCaracolAsync(string identificadorCaracol)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} 
                      WHERE CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) = @identificadorCaracol
