@@ -5,7 +5,7 @@ namespace SIAG_CRATO.Models;
 public class ChamadaModel
 {
     [Column("id_chamada")]
-    public int Codigo { get; set; }
+    public Guid Codigo { get; set; }
 
     [Column("id_palletorigem")]
     public int PalletOrigemId { get; set; }
@@ -27,7 +27,6 @@ public class ChamadaModel
 
     [Column("id_operador")]
     public long OperadorId { get; set; }
-    public OperadorModel? Operador { get; set; }
 
     [Column("id_equipamento")]
     public int EquipamentoId { get; set; }
