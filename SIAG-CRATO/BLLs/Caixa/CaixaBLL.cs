@@ -65,6 +65,4 @@ public class CaixaBLL
 
         return fabrica ?? "";
     }
-
-
 }

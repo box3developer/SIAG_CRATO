@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Caixa;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.Models;
 
@@ -43,6 +44,7 @@ public class PalletBLL
 
         return pallets;
     }
+
 
     public async Task<PalletModel?> GetByIdentificadorAsync(string identificador)
     {
@@ -367,4 +369,23 @@ public class PalletBLL
 
         return true;
     }
+
+    //sp_siag_busca_qtde_pallets
+    public async Task<int> GetQtyPallets (int id_endereco, int id_pallet)
+    {
+        var pallet = await GetByIdAsync(id_pallet);
+        var caixa = await CaixaBLL.GetCaixaByPalletId(id_pallet);
+        var idAgrupador = pallet?.AgrupadorId ?? caixa?.IdAgrupador ??
+            throw new Exception("Erro ao executar GetQtyPallets");
+        
+
+        var sql = $@"{PalletQuery.COUNT_PALLETS}";
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var quantity = await conexao.ExecuteScalarAsync<int>(sql, new { id_endereco, id_agrupador= idAgrupador });
+
+        return quantity;
+
+    }
+
 }

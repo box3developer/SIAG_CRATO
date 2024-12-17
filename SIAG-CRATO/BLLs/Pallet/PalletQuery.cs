@@ -21,5 +21,10 @@ public class PalletQuery
                                                    SET id_agrupador = @idAgrupador, fg_status = @status 
                                                    WHERE id_areaarmazenagem = @idAreaArmazenagem";
 
-
+    public const string COUNT_PALLETS = @"SELECT COUNT(1)
+                                            FROM pallet
+                                            INNER JOIN areaarmazenagem 
+                                                ON pallet.id_areaarmazenagem = areaarmazenagem.id_areaarmazenagem
+                                                AND pallet.id_agrupador = @id_agrupador
+                                            WHERE areaarmazenagem.id_endereco = @id_endereco";
 }
