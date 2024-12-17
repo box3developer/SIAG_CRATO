@@ -1,5 +1,5 @@
-﻿using SIAG_CRATO.Data;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SIAG_CRATO.Data;
 
 namespace SIAG_CRATO.Models
 {
@@ -32,5 +32,4 @@ namespace SIAG_CRATO.Models
         [Column("tp_preenchimento")]
         public TipoPreenchimento TipoPreenchimento { get; set; }
     }
-
 }
