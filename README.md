@@ -296,7 +296,7 @@
 | sp_siag_gestaovisual_gravaperformance
 | sp_siag_criachamada
 | sp_siag_criachamada_BKP_09-10-24
-| **Procedures com uso desconhecido **
+| **Procedures com uso desconhecido**
 | sp_portoes_ExpedirCaixa
 | sp_siag_importa_dados
 | sp_Hygor_ObterHistoricoPallets
