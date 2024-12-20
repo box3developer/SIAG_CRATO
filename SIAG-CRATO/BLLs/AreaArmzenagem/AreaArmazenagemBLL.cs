@@ -69,14 +69,13 @@ public class AreaArmazenagemBLL
         return area;
     }
 
-    //sp_rotina_retornastageinlivre
     public static async Task<AreaArmazenagemModel?> GetStageInLivreAsync(int idEndereco)
     {
         var parametroEntity = await ParametroBLL.GetParametroByNmParametro("TIPO AREA STAGEIN")
         ??
             throw new Exception("Erro ao executar StageInLivre");
 
-        var nmValor = Int16.Parse(parametroEntity.Valor??"");
+        var nmValor = Int16.Parse(parametroEntity.Valor ?? "");
 
         var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
 		                                            and id_tipoarea = @nmValor

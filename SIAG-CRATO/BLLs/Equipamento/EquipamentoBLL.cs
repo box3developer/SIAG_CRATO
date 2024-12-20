@@ -18,6 +18,16 @@ public class EquipamentoBLL
         return equipamentos.ToList();
     }
 
+    public static async Task<List<EquipamentoModel>> GetAllCaracois()
+    {
+        var sql = $"{EquipamentoQuery.SELECT} WHERE id_equipamentomodelo = 1";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var equipamentos = await conexao.QueryAsync<EquipamentoModel>(sql);
+
+        return equipamentos.ToList();
+    }
+
     public static async Task<EquipamentoModel?> GetByIdAsync(int id)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE id_equipamento = @id";
@@ -65,6 +75,16 @@ public class EquipamentoBLL
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { cracha });
+
+        return equipamento;
+    }
+
+    public static async Task<EquipamentoModel?> GetByCaixaPendenteAsync(string idCaixa)
+    {
+        var sql = $@"{EquipamentoQuery.SELECT} WHERE cd_leitura_pendente = @cdCaixaPendente";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { idCaixa });
 
         return equipamento;
     }
