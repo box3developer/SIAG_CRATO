@@ -113,4 +113,15 @@ public class ChamadaBLL
 
         return true;
     }
+
+    public static async Task<List<ChamadaModel>> GetByStatus(int fg_status)
+    {
+        var sql = $@"{ChamadaQuery.SELECT} WHERE fg_status < @fg_status and dt_chamada >= dateadd(day,-1,getdate())";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var list = await conexao.QueryAsync<ChamadaModel>(sql, new { fg_status });
+
+        return list.ToList();
+    }
 }

@@ -26,6 +26,7 @@ public class AreaArmazenagemBLL
         return areasArmazenagem;
     }
 
+
     public static async Task<AreaArmazenagemModel?> GetByAgrupadorAsync(int idAgrupador)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_agrupador = @idAgrupador";

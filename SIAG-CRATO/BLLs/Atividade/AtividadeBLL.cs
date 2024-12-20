@@ -25,4 +25,20 @@ public class AtividadeBLL
 
         return atividade;
     }
+
+    public static async Task<List<AtividadeModel>> GeAtividadesByEquipModeloSetor(int id_equipamentomodelo, int id_setortrabalho)
+    {
+        if(id_equipamentomodelo == 0 || id_setortrabalho == 0)
+        {
+            return [];
+        }
+
+        var sql = $@"{AtividadeQuery.SELECT} WHERE id_equipamentomodelo = @id_equipamentomodelo and id_setortrabalho = @id_setortrabalho";
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var list = await conexao.QueryAsync<AtividadeModel>(sql, new { id_equipamentomodelo, id_setortrabalho });
+
+        return list.ToList();
+
+    }
 }

@@ -23,5 +23,15 @@ namespace SIAG_CRATO.BLLs.Endereco
 
             return endereco;
         }
+
+        public static async Task<List<EnderecoModel>> GetBySetorStatus(int id_setortrabalho,int fg_status)
+        {
+            var sql = $@"{EnderecoQuery.SELECT} WHERE id_endereco = id_setortrabalho = @id_setortrabalho and endereco.fg_status = @fg_status";
+
+            using var conexao = new SqlConnection(Global.Conexao);
+            var endereco = await conexao.QueryAsync<EnderecoModel>(sql, new { id_setortrabalho, fg_status });
+
+            return endereco.ToList();
+        }
     }
 }
