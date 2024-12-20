@@ -1,8 +1,8 @@
-###GTA SIAG SOBRAL
+#GTA SIAG SOBRAL
 
 ##Caracol
 
-#Inicio
+###Inicio
 1. Controle de chamadas START
    1. temporizador
    2. exec sp_siag_expedicaocontrolaordens
@@ -53,7 +53,7 @@
    2. Finaliza agrupadores sem pendencia 
       1. exec sp_sorter_desalocaagrupadoressempendencia
 
-#Fim
+###Fim
 1. Caracol STOP
    1. fecha leitura do caracol
 2. Caracol Pronto STOP
@@ -67,7 +67,7 @@
 
 ##Portal do Sorter
 
-#Portal START
+###Portal START
 1. portal de leitura
 2. verifica destino da caixa
    1. CONCAT("exec sp_sorter_destinocaixa '",#1.Retorno#,"'")
@@ -84,5 +84,5 @@
 13. atualiza dados da caixa
     1.  CONCAT("exec sp_sorter_confirmaleituraportal '",#1.Retorno#,"'")
 
-#Portal STOP
+###Portal STOP
 1. para leitura do portal
