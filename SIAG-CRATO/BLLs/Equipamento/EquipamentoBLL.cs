@@ -1,5 +1,9 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Atividade;
+using SIAG_CRATO.BLLs.Chamada;
+using SIAG_CRATO.BLLs.Endereco;
+using SIAG_CRATO.Data;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Equipamento;
@@ -20,6 +24,27 @@ public class EquipamentoBLL
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { id });
+
+        return equipamento;
+    }
+
+    public static async Task<List<EquipamentoModel>> GetActiveEquipByModel(int id_equipamentomodelo)
+    {
+        var sql = $@"{EquipamentoQuery.SELECT} WHERE id_equipamentomodelo = @id_equipamentomodelo and id_operador is not null";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var list = await conexao.QueryAsync<EquipamentoModel>(sql, new { id_equipamentomodelo });
+
+        return list.ToList();
+    }
+
+    public static async Task<EquipamentoModel?> GetByidentificadorAsync(string nm_identificador)
+    {
+        var sql = $@"{EquipamentoQuery.SELECT} WHERE nm_identificador = @nm_identificador";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { nm_identificador });
 
         return equipamento;
     }
@@ -62,6 +87,14 @@ public class EquipamentoBLL
         return id > 0;
     }
 
+    public static async Task<bool> SetEquipamentoOperador(int id_operador,int id_equipamento)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR, new { id_operador, id_equipamento });
+
+        return result > 0;
+    }
+
     public static async Task<bool> UpdateLeitura(int idEquipamento)
     {
         using var conexao = new SqlConnection(Global.Conexao);
@@ -69,5 +102,49 @@ public class EquipamentoBLL
 
         return id > 0;
     }
-}
+
+    public static async Task<int> UpdateEquipamento(int id_equipamento, int? id_endereco)
+    {
+        if (id_endereco.HasValue && id_endereco > 0)
+        {
+            var sqlEndereco = $@"{EquipamentoQuery.UPDATE_ENDERECO} where id_equipamento = @id_equipamento";
+            using var conexaoEndereco = new SqlConnection(Global.Conexao);
+            var returnEndereco = await conexaoEndereco.ExecuteAsync(sqlEndereco, new { id_equipamento, id_endereco });
+
+            return returnEndereco;
+        }
+
+        var sqlEquipamento = $@"{EquipamentoQuery.UPDATE_DATE} where id_equipamento = @id_equipamento";
+        using var conexao = new SqlConnection(Global.Conexao);
+        var returnEquipamento = await conexao.ExecuteAsync(sqlEquipamento, new { id_equipamento });
+
+        return returnEquipamento;
+
+    }
+
+
+
+    public static async Task<bool> AlocacaoAutomaticaBilateral()
+    {
+
+        var atividadeList = await AtividadeBLL.GeAtividadesByEquipModeloSetor(Constants.EQUIPAMENTO_EMPILHADEIRABILATERAL , Constants.SETOR_PORTAPALLET) ;
+
+        var chamadalist = await ChamadaBLL.GetByStatus(Constants.STATUS_CHAMADAREJEITADA);
+
+        var atividadesId = atividadeList.Select(a => a.Codigo).ToList();
+
+        var areaChamadas = chamadalist.Where(c => atividadesId.Contains(c.AtividadeId));
+
+        var bilateraisAtivas = await GetActiveEquipByModel(Constants.EQUIPAMENTO_EMPILHADEIRABILATERAL);
+
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var enderecoList = EnderecoBLL.GetBySetorStatus(Constants.SETOR_PORTAPALLET, Constants.ENDERECO_ATIVO);
+
+
+
+
+        return true;
+    }
+ }
 
