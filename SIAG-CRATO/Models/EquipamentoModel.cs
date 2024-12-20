@@ -46,6 +46,10 @@ public class EquipamentoModel
     [Column("fg_statustrocacaracol")]
     public Ativo StatusTrocaCaracol { get; set; }
 
+    [Column("cd_leitura_pendente")]
+    public string LeituraPendete { get; set; } = string.Empty;
+
+    [Column("cd_ultimaleitura")]
     public string UltimaLeitura { get; set; } = string.Empty;
 
     public string Observacao { get; set; } = string.Empty;
