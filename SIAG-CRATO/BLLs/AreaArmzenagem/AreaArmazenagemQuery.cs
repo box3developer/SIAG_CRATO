@@ -3,7 +3,7 @@
 public class AreaArmazenagemQuery
 {
     public const string SELECT = @"SELECT 
-                                        CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2), 
+                                        CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) as id_caracol, 
                                         id_endereco,
                                         id_tipoarea,
                                         id_areaarmazenagem, 

@@ -17,6 +17,9 @@ namespace SIAG_CRATO.Models
         [Column("id_agrupador")]
         public Guid AgrupadorId { get; set; }
 
+        [Column("id_caracol")]
+        public string? IdentificadorCaracol { get; set; }
+
         [Column("nr_posicaox")]
         public int PosicaoX { get; set; }
 
