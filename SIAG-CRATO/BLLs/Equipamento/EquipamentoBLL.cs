@@ -107,7 +107,7 @@ public class EquipamentoBLL
         return id > 0;
     }
 
-    public static async Task<bool> SetEquipamentoOperador(int id_operador,int id_equipamento)
+    public static async Task<bool> SetEquipamentoOperador(int id_operador, int id_equipamento)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR, new { id_operador, id_equipamento });
@@ -142,12 +142,10 @@ public class EquipamentoBLL
 
     }
 
-
-
     public static async Task<bool> AlocacaoAutomaticaBilateral()
     {
 
-        var atividadeList = await AtividadeBLL.GeAtividadesByEquipModeloSetor(Constants.EQUIPAMENTO_EMPILHADEIRABILATERAL , Constants.SETOR_PORTAPALLET) ;
+        var atividadeList = await AtividadeBLL.GetByEquipModeloSetor(Constants.EQUIPAMENTO_EMPILHADEIRABILATERAL, Constants.SETOR_PORTAPALLET);
 
         var chamadalist = await ChamadaBLL.GetByStatus(Constants.STATUS_CHAMADAREJEITADA);
 
@@ -161,10 +159,7 @@ public class EquipamentoBLL
 
         var enderecoList = EnderecoBLL.GetBySetorStatus(Constants.SETOR_PORTAPALLET, Constants.ENDERECO_ATIVO);
 
-
-
-
         return true;
     }
- }
+}
 

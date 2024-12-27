@@ -8,6 +8,20 @@ public class ChamadaQuery
                                         id_atividade, fg_status, dt_chamada, dt_recebida, dt_atendida, dt_finalizada, dt_rejeitada, id_chamadasuspensa
                                    FROM chamada";
 
+    public const string SELECT_DISPONIVEL = @"SELECT chamada.id_chamada AS id_chamada,
+	                                                 chamada.dt_chamada AS dt_chamada,
+	                                                 chamada.id_atividade AS id_atividade,
+	                                                 ao.id_endereco AS id_endereco_origem,
+	                                                 ad.id_endereco AS id_endereco_destino,
+	                                                 0 AS qt_prioridade,
+	                                                 0 AS fg_processado,
+	                                                 chamada.id_areaarmazenagemorigem AS id_areaarmazenagemorigem,
+	                                                 chamada.priorizar AS priorizar
+                                              FROM chamada WITH(NOLOCK)
+                                                   INNER JOIN atividade WITH(NOLOCK) ON (atividade.id_atividade = chamada.id_atividade)
+                                                   LEFT JOIN areaarmazenagem ao ON ao.id_areaarmazenagem = chamada.id_areaarmazenagemorigem
+	                                               LEFT JOIN areaarmazenagem ad ON ad.id_areaarmazenagem = chamada.id_areaarmazenagemdestino";
+
     public const string INSERT = @"INSERT INTO chamada 
                                         (id_chamada, id_palletorigem, id_areaarmazenagemorigem, id_palletdestino, id_areaarmazenagemdestino, id_atividade, fg_status, dt_chamada, priorizar) 
 		                           VALUES 

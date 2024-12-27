@@ -32,6 +32,40 @@ public class ChamadaBLL
         return chamada;
     }
 
+    public static async Task<List<ChamadaDisponivelDTO>> GetChamadaDisponiveisAsync(int idEquipamentoModelo, int idSetorTrabalho)
+    {
+        var sql = $@"{ChamadaQuery.SELECT_DISPONIVEL} 
+                     WHERE chamada.fg_status = @status
+	                       AND chamada.id_operador IS NULL
+	                       AND chamada.id_equipamento IS NULL
+	                       AND chamada.dt_finalizada IS NULL
+	                       AND atividade.id_equipamentomodelo = @idEquipamentoModelo
+	                       AND atividade.id_setortrabalho = @idSetorTrabalho";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var chamadas = await conexao.QueryAsync<ChamadaDisponivelDTO>(sql, new
+        {
+            status = StatusChamada.Andamento,
+            idEquipamentoModelo,
+            idSetorTrabalho
+        });
+
+        return chamadas.ToList();
+    }
+
+    public static async Task<ChamadaModel?> GetChamadaAbertaByOperadorAsync(int idOperador, int idEquipamento)
+    {
+        var sql = $@"{ChamadaQuery.SELECT} 
+                     WHERE (id_operador = @idOperador or id_equipamento = @idEquipamento)
+                           AND fg_status > @status
+                     ORDER BY fg_status desc, dt_chamada desc";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, StatusChamada.Andamento });
+
+        return chamada;
+    }
+
     public static async Task<Guid> SetChamadaAsync(ChamadaInsertDTO chamada)
     {
         chamada.Codigo = Guid.NewGuid();
