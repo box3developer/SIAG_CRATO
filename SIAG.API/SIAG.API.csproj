@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Armazenagem\Core\" />
+    <Folder Include="Controllers\Chamada\Cadastro\" />
+    <Folder Include="Controllers\Chamada\Core\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SIAG.Application\SIAG.Application.csproj" />
+    <ProjectReference Include="..\SIAG.Infrastructure\SIAG.Infrastructure.csproj" />
+    <ProjectReference Include="..\SIAG.CrossCutting\SIAG.CrossCutting.csproj" />
+  </ItemGroup>
+
+</Project>

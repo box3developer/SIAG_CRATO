@@ -1,0 +1,6 @@
+@SIAG.API_HostAddress = http://localhost:5005
+
+GET {{SIAG.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

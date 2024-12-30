@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Bhh9MHd2ZyNxkDGsuzuh95HOt88nnZc+NPLSNjqsdQHGO7XmzgDKvrRKeUEn4TC1s+C8NcB9XdGze5Q5ZXgLAA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\SIAG.CrossCutting.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\crist\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\serilog.sinks.console\\6.0.0\\serilog.sinks.console.6.0.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\serilog.sinks.file\\6.0.0\\serilog.sinks.file.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

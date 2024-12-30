@@ -1,0 +1,6 @@
+| Projeto	          | Propósito                                                               | Diretórios Importantes
+|---------------------|-------------------------------------------------------------------------|-------------------------------------------------------- 
+| SIAG.API            | Interface pública da aplicação. Expõe endpoints HTTP.                   | Controllers: Gerencia requisições HTTP e chama os serviços de aplicação.
+| SIAG.Application    | Orquestra os casos de uso, valida dados e interage com os repositórios. | DTOs: Modelos para transporte de dados. Services: Lógica de aplicação que gerencia casos de uso.
+| SIAG.Domain         | Contém o núcleo da aplicação: entidades e regras de negócio.            | Models: Entidades que representam os objetos de negócio. Interfaces: Contratos para repositórios e serviços relacionados ao domínio.
+| SIAG.Infrastructure | Lida com persistência e integração externa.                             | Repositorios: Implementações concretas para os repositórios. Configuracao: Configurações de banco de dados e outros serviços de infraestrutura.
