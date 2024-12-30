@@ -28,10 +28,10 @@ namespace SIAG_CRATO.Controllers
         [HttpGet("equipamento-setor")]
         public async Task<IActionResult> GetAtividadesByEquipModeloSetorAsync(int id_equipamentomodelo, int id_setortrabalho)
         {
-            var result = await AtividadeBLL.GeAtividadesByEquipModeloSetor(id_equipamentomodelo, id_setortrabalho);
+            var result = await AtividadeBLL.GetByEquipModeloSetor(id_equipamentomodelo, id_setortrabalho);
             if (result == null || result.Count == 0) return NotFound();
             return Ok(result);
         }
     }
 }
-}
+

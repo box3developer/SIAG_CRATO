@@ -10,30 +10,63 @@ namespace SIAG_CRATO.Controllers
     public class CaixaController : ControllerBase
 {
         [HttpGet("{id}")]
-        public async Task<ActionResult<CaixaModel>> GetByIdAsync(string id)
+        public async Task<IActionResult> GetByIdAsync(string id)
     {
             var caixa = await CaixaBLL.GetByIdAsync(id);
             return caixa == null ? NotFound() : Ok(caixa);
         }
 
         [HttpGet("pallet/{idPallet}")]
-        public async Task<ActionResult<List<CaixaModel>>> GetByPalletAsync(int idPallet)
+        public async Task<IActionResult> GetByPalletAsync(int idPallet)
         {
             var caixas = await CaixaBLL.GetByPalletAsync(idPallet);
             return Ok(caixas);
         }
 
-        // ... outros endpoints similares para os demais métodos
+        [HttpGet("quantidade-pallet/{idPallet}")]
+        public async Task<IActionResult> GetQuantidadeByPalletAsync(int idPallet)
+        {
+            var caixas = await CaixaBLL.GetQuantidadeByPalletAsync(idPallet);
+            return Ok(caixas);
+        }
+
+        [HttpGet("quantidade-pendentes/{idAgrupador}")]
+        public async Task<IActionResult> GetQuantidadePendentesAsync(int idAgrupador)
+        {
+            var caixas = await CaixaBLL.GetQuantidadePendentesAsync(idAgrupador);
+            return Ok(caixas);
+        }
+
+        [HttpGet("fabricante-caixa/{idCaixa}")]
+        public async Task<IActionResult> GetFabricaAsync (string idCaixa)
+        {
+            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa));
+            return Ok(caixas);
+        }
+
+        [HttpGet("quantidade-pedido")]
+        public async Task<IActionResult> GetFabricaAsync (int idPedido, long codigoPedido, long idPallet)
+        {
+            var caixas = await CaixaBLL.GetQuantidadeByPedido(idPedido, codigoPedido, idPallet);
+            return Ok(caixas);
+        }
+
+        [HttpGet("caixa-pedido/{idPallet}")]
+        public async Task<IActionResult> GetCaixasPedidos(long idPallet)
+        {
+            var caixas = await CaixaBLL.GetCaixasPedidos(idPallet);
+            return Ok(caixas);
+        }
 
         [HttpGet("pendentes")]
-        public async Task<ActionResult<Dictionary<string, int>>> GetPendentesAsync()
+        public async Task<IActionResult> GetPendentesAsync()
         {
             var pendentes = await CaixaBLL.GetPendentesAsync();
             return Ok(pendentes);
         }
 
         [HttpGet("pendentes-lider")]
-        public async Task<ActionResult<Dictionary<string, int>>> GetPendentesByLiderAsync()
+        public async Task<IActionResult> GetPendentesByLiderAsync()
         {
             var pendentes = await CaixaBLL.GetPendentesByLiderAsync();
             return Ok(pendentes);

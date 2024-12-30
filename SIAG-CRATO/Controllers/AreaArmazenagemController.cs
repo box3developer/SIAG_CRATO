@@ -47,13 +47,13 @@ namespace SIAG_CRATO.Controllers
             return Ok("Status alterado com sucesso.");
         }
 
-        [HttpGet("stage/{idEndereco}")]
+        [HttpGet("stagein/{idEndereco}")]
         public async Task<IActionResult> GetStageInLivreAsync(int idEndereco)
         {
             var result = await AreaArmazenagemBLL.GetStageInLivreAsync(idEndereco);
             if (result == null) return NotFound();
             return Ok(result);
         }
-        }
+        
     }
 }
