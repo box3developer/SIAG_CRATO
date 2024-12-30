@@ -9,10 +9,18 @@ namespace SIAG_CRATO.Controllers
     public class AtividadeController : ControllerBase
     {
 
+        [HttpGet]
+        public async Task<IActionResult> GetAtividadeList(int id)
+        {
+            var result = await AtividadeBLL.GetListAsync();
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAtividadeByIdAsync(int id)
         {
-            var result = await AtividadeBLL.GetAtividadeByIdAsync(id);
+            var result = await AtividadeBLL.GetByIdAsync(id);
             if (result == null) return NotFound();
             return Ok(result);
         }
@@ -20,7 +28,7 @@ namespace SIAG_CRATO.Controllers
         [HttpGet("nome/{nome}")]
         public async Task<IActionResult> GetAtividadeByNomeAsync(string nome)
         {
-            var result = await AtividadeBLL.GetAtividadeByNomeAsync(nome);
+            var result = await AtividadeBLL.GetByNomeAsync(nome);
             if (result == null) return NotFound();
             return Ok(result);
         }
