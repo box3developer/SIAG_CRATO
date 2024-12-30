@@ -71,7 +71,7 @@ public class AreaArmazenagemBLL
 
     public static async Task<AreaArmazenagemModel?> GetStageInLivreAsync(int idEndereco)
     {
-        var parametroEntity = await ParametroBLL.GetParametroByNmParametro("TIPO AREA STAGEIN")
+        var parametroEntity = await ParametroBLL.GetParametroByParametro("TIPO AREA STAGEIN")
         ??
             throw new Exception("Erro ao executar StageInLivre");
 

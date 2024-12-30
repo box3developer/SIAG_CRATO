@@ -49,7 +49,7 @@ public class CaixaBLL
     public async static Task<Dictionary<string, int>> GetPendentesAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
-        var caixasPendentes = await conexao.QueryAsync<Tuple<string, int>>(CaixaQuery.SELECT_PENDENTES);
+        var caixasPendentes = await conexao.QueryAsync<Tuple<string, int>>(CaixaQuery.SELECT_COUNT_PENDENTES);
 
         return caixasPendentes.ToDictionary(x => x.Item1, x => x.Item2);
     }
