@@ -8,7 +8,7 @@ namespace SIAG_CRATO.BLLs.Pallet;
 
 public class PalletBLL
 {
-    public async Task<int> InsertAsync(PalletModel pallet)
+    public static async Task<int> InsertAsync(PalletModel pallet)
     {
         var parametros = new Dictionary<string, object>
         {
@@ -27,7 +27,7 @@ public class PalletBLL
         return id;
     }
 
-    public async Task<List<PalletModel>> GetListAsync()
+    public static async Task<List<PalletModel>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var pallets = await conexao.QueryAsync<PalletModel>(PalletQuery.SELECT);
@@ -35,7 +35,7 @@ public class PalletBLL
         return pallets.ToList();
     }
 
-    public async Task<PalletModel?> GetByIdAsync(int idPallet)
+    public static async Task<PalletModel?> GetByIdAsync(int idPallet)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_pallet = @idPallet";
 
@@ -46,7 +46,7 @@ public class PalletBLL
     }
 
 
-    public async Task<PalletModel?> GetByIdentificadorAsync(string identificador)
+    public static async Task<PalletModel?> GetByIdentificadorAsync(string identificador)
     {
         string sql = $"{PalletQuery.SELECT} WHERE cd_identificacao = @identificador";
 
@@ -56,7 +56,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public async Task<PalletModel?> GetByAreaArmazenagemAsync(string idAreaArmazenagem)
+    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(long idAreaArmazenagem)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_areaarmazenagem = @idAreaArmazenagem";
 
@@ -66,7 +66,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public async Task<int> GetQuatidadeCaixasAsync(int idPallet)
+    public static async Task<int> GetQuatidadeCaixasAsync(int idPallet)
     {
         string query = $"{PalletQuery.SELECT_COUNT_CAIXAS} WHERE id_pallet = @idPallet";
 
@@ -76,7 +76,7 @@ public class PalletBLL
         return 0;
     }
 
-    public async Task<int> SeStatusAsync(int id, StatusPallet status)
+    public static async Task<int> SeStatusAsync(int id, StatusPallet status)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var pallet = await conexao.ExecuteAsync(PalletQuery.UPDADE_STATUS, new { status = (int)status, id });
@@ -84,7 +84,7 @@ public class PalletBLL
         return pallet;
     }
 
-    public async Task<bool> VincularAgrupadorAreaReservadaAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
+    public static async Task<bool> VincularAgrupadorAreaReservadaAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
     {
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 
                             WHERE 
@@ -137,7 +137,7 @@ public class PalletBLL
         return true;
     }
 
-    public async Task<bool> VincularNovoPalletPorPrioridadeAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual, int nivelAgrupador)
+    public static async Task<bool> VincularNovoPalletPorPrioridadeAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual, int nivelAgrupador)
     {
         bool livreSemPrioridade = false;
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 
@@ -224,7 +224,7 @@ public class PalletBLL
         return true;
     }
 
-    public async Task<bool> VincularNovoPalletDisponivelAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
+    public static async Task<bool> VincularNovoPalletDisponivelAsync(string? identificadorCaracol, AreaArmazenagemModel areaAtual)
     {
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA}
                             LEFT JOIN agrupadorativo ON agrupadorativo.id_areaarmazenagem = areaarmazenagem.id_areaarmazenagem AND agrupadorativo.fg_status = 3
@@ -371,18 +371,18 @@ public class PalletBLL
     }
 
     //sp_siag_busca_qtde_pallets
-    public async Task<int> GetQtyPallets (int id_endereco, int id_pallet)
+    public static async Task<int> GetQtyPallets(int id_endereco, int id_pallet)
     {
         var pallet = await GetByIdAsync(id_pallet);
-        var caixa = await CaixaBLL.GetCaixaByPalletId(id_pallet);
-        var idAgrupador = pallet?.AgrupadorId ?? caixa?.IdAgrupador ??
+        var caixa = await CaixaBLL.GetByPalletAsync(id_pallet);
+        var idAgrupador = pallet?.AgrupadorId ?? caixa.FirstOrDefault()?.IdAgrupador ??
             throw new Exception("Erro ao executar GetQtyPallets");
-        
+
 
         var sql = $@"{PalletQuery.COUNT_PALLETS}";
         using var conexao = new SqlConnection(Global.Conexao);
 
-        var quantity = await conexao.ExecuteScalarAsync<int>(sql, new { id_endereco, id_agrupador= idAgrupador });
+        var quantity = await conexao.ExecuteScalarAsync<int>(sql, new { id_endereco, id_agrupador = idAgrupador });
 
         return quantity;
 

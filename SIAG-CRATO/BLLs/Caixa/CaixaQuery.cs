@@ -2,7 +2,7 @@
 
 public class CaixaQuery
 {
-    public const string SELECT = $"SELECT id_caixa, id_agrupador, id_pedido, dt_expedicao, dt_estufamento, id_pallet, fg_status, dt_sorter FROM caixa WITH(NOLOCK)";
+    public const string SELECT = @$"SELECT id_caixa, id_agrupador, id_pallet, id_programa, id_pedido, cd_produto, cd_cor, cd_gradetamanho, nr_caixa, nr_pares, fg_rfid, fg_status, dt_embalagem, dt_sorter, dt_estufamento, dt_expedicao FROM caixa WITH(NOLOCK)";
 
     public const string SELECT_COUNT = "SELECT count(*) FROM caixa WITH(NOLOCK)";
 

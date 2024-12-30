@@ -7,6 +7,12 @@ public class PedidoModel
     [Column("id_pedido")]
     public string? IdPedido { get; set; }
 
+    [Column("cd_pedido")]
+    public string? CodigoPedido { get; set; }
+
     [Column("cd_lote")]
     public string? CodigoLote { get; set; }
+
+    [Column("cd_box")]
+    public string? Box { get; set; }
 }

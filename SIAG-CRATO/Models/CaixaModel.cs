@@ -19,6 +19,18 @@ public class CaixaModel
     [Column("id_pedido")]
     public string? IdPedido { get; set; }
 
+    [Column("cd_produto")]
+    public string? CodigoProduto { get; set; }
+
+    [Column("cd_cor")]
+    public string? CodigoCor { get; set; }
+
+    [Column("cd_gradetamanho")]
+    public string? CodigoGradeTamanho { get; set; }
+
+    [Column("nr_caixa")]
+    public int? NrCaixa { get; set; }
+
     [Column("nr_pares")]
     public int? NrPares { get; set; }
 
@@ -27,6 +39,9 @@ public class CaixaModel
 
     [Column("fg_status")]
     public int? FgStatus { get; set; }
+
+    [Column("dt_embalagem")]
+    public DateTime? DtEmbalagem { get; set; }
 
     [Column("dt_expedicao")]
     public DateTime? DtExpedicao { get; set; }

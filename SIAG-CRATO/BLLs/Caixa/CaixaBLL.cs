@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.Caixa;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Caixa;
@@ -72,5 +73,37 @@ public class CaixaBLL
         var fabrica = await conexao.QueryFirstOrDefaultAsync(sqlPrograma, new { idPrograma });
 
         return fabrica ?? "";
+    }
+
+    public async static Task<List<CaixaPedidoDTO>> GetListByPedido(FiltroCaixaPedidoDTO filtro)
+    {
+        var sql = $"{CaixaQuery.SELECT} WHERE id_pedido = @idPedido AND cd_pedido = @codigoPedido AND id_pallet = @idPallet";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var caixas = await conexao.QueryAsync<CaixaModel>(sql, new
+        {
+            idPedido = filtro.IdPedido,
+            codigoPedido = filtro.CodigoPedido,
+            idPallet = filtro.IdPallet
+        });
+
+        return caixas.Select(caixa => new CaixaPedidoDTO()
+        {
+            Codigo = caixa.IdCaixa,
+            Produto = caixa.CodigoProduto ?? "",
+            Cor = caixa.CodigoCor ?? "",
+            GradeTamanho = caixa.CodigoProduto ?? "",
+            Pares = caixa.NrPares ?? 0,
+        }).ToList();
+    }
+
+    public async static Task<int> GetQuantidadeByPedido(int idPedido, long codigoPedido, long idPallet)
+    {
+        var sql = $"{CaixaQuery.SELECT_COUNT} WHERE id_pedido = @idPedido AND cd_pedido = @codigoPedido AND id_pallet = @idPallet";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var quantidade = await conexao.QueryFirstOrDefaultAsync<int>(sql, new { idPedido, codigoPedido, idPallet });
+
+        return quantidade;
     }
 }
