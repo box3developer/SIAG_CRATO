@@ -375,14 +375,14 @@ public class PalletBLL
     {
         var pallet = await GetByIdAsync(id_pallet);
         var caixa = await CaixaBLL.GetByPalletAsync(id_pallet);
-        var idAgrupador = pallet?.AgrupadorId ?? caixa[0]?.IdAgrupador ??
+        var idAgrupador = pallet?.AgrupadorId ?? caixa.FirstOrDefault()?.IdAgrupador ??
             throw new Exception("Erro ao executar GetQtyPallets");
-        
+
 
         var sql = $@"{PalletQuery.COUNT_PALLETS}";
         using var conexao = new SqlConnection(Global.Conexao);
 
-        var quantity = await conexao.ExecuteScalarAsync<int>(sql, new { id_endereco, id_agrupador= idAgrupador });
+        var quantity = await conexao.ExecuteScalarAsync<int>(sql, new { id_endereco, id_agrupador = idAgrupador });
 
         return quantity;
 

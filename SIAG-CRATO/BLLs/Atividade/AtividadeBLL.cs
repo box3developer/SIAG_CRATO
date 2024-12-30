@@ -6,7 +6,15 @@ namespace SIAG_CRATO.BLLs.Atividade;
 
 public class AtividadeBLL
 {
-    public static async Task<AtividadeModel?> GetAtividadeByIdAsync(int id)
+    public static async Task<List<AtividadeModel>> GetListAsync()
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var atividades = await conexao.QueryAsync<AtividadeModel>(AtividadeQuery.SELECT);
+
+        return atividades.ToList();
+    }
+
+    public static async Task<AtividadeModel?> GetByIdAsync(int id)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE id_atividade = @idAtividade";
 
@@ -16,7 +24,7 @@ public class AtividadeBLL
         return atividade;
     }
 
-    public static async Task<AtividadeModel?> GetAtividadeByNomeAsync(string nome)
+    public static async Task<AtividadeModel?> GetByNomeAsync(string nome)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE nm_atividade = @nomeAtividade";
 
@@ -26,9 +34,9 @@ public class AtividadeBLL
         return atividade;
     }
 
-    public static async Task<List<AtividadeModel>> GeAtividadesByEquipModeloSetor(int id_equipamentomodelo, int id_setortrabalho)
+    public static async Task<List<AtividadeModel>> GetByEquipModeloSetor(int id_equipamentomodelo, int id_setortrabalho)
     {
-        if(id_equipamentomodelo == 0 || id_setortrabalho == 0)
+        if (id_equipamentomodelo == 0 || id_setortrabalho == 0)
         {
             return [];
         }

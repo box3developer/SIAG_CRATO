@@ -5,13 +5,13 @@ using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+[Route("api/[controller]")]
+[ApiController]
     public class CaixaController : ControllerBase
-    {
+{
         [HttpGet("{id}")]
         public async Task<ActionResult<CaixaModel>> GetByIdAsync(string id)
-        {
+    {
             var caixa = await CaixaBLL.GetByIdAsync(id);
             return caixa == null ? NotFound() : Ok(caixa);
         }

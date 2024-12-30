@@ -29,7 +29,7 @@ namespace SIAG_CRATO.Controllers
             var result = await AreaArmazenagemBLL.GetByPosicaoAsync(identificadorCaracol, posicaoY);
             if (result == null) return NotFound();
             return Ok(result);
-        }
+    }
 
         [HttpGet("caracol/{identificadorCaracol}")]
         public async Task<IActionResult> GetByIdentificadorCaracolAsync(string identificadorCaracol)
@@ -54,6 +54,6 @@ namespace SIAG_CRATO.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
+        }
     }
-}
 }
