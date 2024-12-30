@@ -9,11 +9,11 @@ namespace SIAG_CRATO.Controllers;
 public class CaixaController : ControllerCustom
 {
     [HttpPost("pedido")]
-    public async Task<ActionResult> GetStatusCaracol([FromBody] FiltroCaixaPedidoDTO filtro)
+    public async Task<ActionResult> GetListaCaixasPedidos([FromBody] FiltroCaixaPedidoDTO filtro)
     {
         try
         {
-            var response = await CaixaBLL.GetListByPedido(filtro);
+            var response = await CaixaBLL.GetCaixasPedidos(filtro.IdPallet);
 
             return OkResponse(response);
         }

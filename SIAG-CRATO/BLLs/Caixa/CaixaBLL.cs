@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Pedido;
 using SIAG_CRATO.DTOs.Caixa;
+using SIAG_CRATO.DTOs.Pedido;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Caixa;
@@ -17,7 +19,7 @@ public class CaixaBLL
         return caixa;
     }
 
-    public async static Task<List<CaixaModel>> GetByPalletAsync(int idPallet)
+    public async static Task<List<CaixaModel>> GetByPalletAsync(long idPallet)
     {
         var sql = $"{CaixaQuery.SELECT} WHERE id_pallet = @idPallet";
 
@@ -75,28 +77,6 @@ public class CaixaBLL
         return fabrica ?? "";
     }
 
-    public async static Task<List<CaixaPedidoDTO>> GetListByPedido(FiltroCaixaPedidoDTO filtro)
-    {
-        var sql = $"{CaixaQuery.SELECT} WHERE id_pedido = @idPedido AND cd_pedido = @codigoPedido AND id_pallet = @idPallet";
-
-        using var conexao = new SqlConnection(Global.Conexao);
-        var caixas = await conexao.QueryAsync<CaixaModel>(sql, new
-        {
-            idPedido = filtro.IdPedido,
-            codigoPedido = filtro.CodigoPedido,
-            idPallet = filtro.IdPallet
-        });
-
-        return caixas.Select(caixa => new CaixaPedidoDTO()
-        {
-            Codigo = caixa.IdCaixa,
-            Produto = caixa.CodigoProduto ?? "",
-            Cor = caixa.CodigoCor ?? "",
-            GradeTamanho = caixa.CodigoProduto ?? "",
-            Pares = caixa.NrPares ?? 0,
-        }).ToList();
-    }
-
     public async static Task<int> GetQuantidadeByPedido(int idPedido, long codigoPedido, long idPallet)
     {
         var sql = $"{CaixaQuery.SELECT_COUNT} WHERE id_pedido = @idPedido AND cd_pedido = @codigoPedido AND id_pallet = @idPallet";
@@ -105,5 +85,43 @@ public class CaixaBLL
         var quantidade = await conexao.QueryFirstOrDefaultAsync<int>(sql, new { idPedido, codigoPedido, idPallet });
 
         return quantidade;
+    }
+
+    public async static Task<ListaCaixasPedidosDTO> GetCaixasPedidos(long idPallet)
+    {
+        var caixas = await GetByPalletAsync(idPallet);
+        var pedidos = caixas.Select(x => x.IdPedido).Where(x => x != null).Distinct().ToList();
+
+        var listaPedidos = new List<PedidoDTO>();
+        var listaCaixas = caixas.Select(x => new CaixaPedidoDTO()
+        {
+            Codigo = x.IdCaixa,
+            Produto = x.CodigoProduto ?? "",
+            Cor = x.CodigoCor ?? "",
+            GradeTamanho = x.CodigoGradeTamanho ?? "",
+            Pares = x.NrPares ?? 0
+        }).ToList();
+
+        foreach (var pedido in pedidos)
+        {
+            var pedidoAux = await PedidoBLL.GetById(pedido ?? "");
+
+            if (pedidoAux == null) { continue; }
+
+            listaPedidos.Add(new()
+            {
+                IdPedido = pedidoAux.IdPedido,
+                CodigoPedido = pedidoAux.CodigoPedido ?? "",
+                CodigoLote = pedidoAux.CodigoLote ?? "",
+                Box = pedidoAux.Box ?? "",
+                QuantidadeCaixas = caixas.Where(x => x.IdPedido == pedido).Count()
+            });
+        }
+
+        return new ListaCaixasPedidosDTO()
+        {
+            Caixas = listaCaixas,
+            Pedidos = listaPedidos
+        };
     }
 }
