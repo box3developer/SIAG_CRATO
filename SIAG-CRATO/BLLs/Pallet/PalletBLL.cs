@@ -56,7 +56,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(long idAreaArmazenagem)
+    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(string idAreaArmazenagem)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_areaarmazenagem = @idAreaArmazenagem";
 
@@ -66,7 +66,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public static async Task<int> GetQuatidadeCaixasAsync(int idPallet)
+    public static async Task<int> GetQuantidadeCaixasAsync(int idPallet)
     {
         string query = $"{PalletQuery.SELECT_COUNT_CAIXAS} WHERE id_pallet = @idPallet";
 
@@ -371,7 +371,7 @@ public class PalletBLL
     }
 
     //sp_siag_busca_qtde_pallets
-    public static async Task<int> GetQtyPallets(int id_endereco, int id_pallet)
+    public static async Task<int> GetQtyPallets (int id_endereco, int id_pallet)
     {
         var pallet = await GetByIdAsync(id_pallet);
         var caixa = await CaixaBLL.GetByPalletAsync(id_pallet);

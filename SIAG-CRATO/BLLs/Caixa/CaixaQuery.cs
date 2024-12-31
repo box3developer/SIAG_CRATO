@@ -6,7 +6,7 @@ public class CaixaQuery
 
     public const string SELECT_COUNT = "SELECT count(*) FROM caixa WITH(NOLOCK)";
 
-    public const string SELECT_PENDENTES = @"SELECT 
+    public const string SELECT_COUNT_PENDENTES = @"SELECT 
                                                  CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) as Item1, 
                                                  count(*) as Item2
                                              FROM caixa WITH(NOLOCK)

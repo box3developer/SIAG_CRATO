@@ -25,7 +25,6 @@ namespace SIAG_CRATO.BLLs.EquipamentoManutencao
             return equipamento;
         }
 
-
         public static async Task<bool> SetDtFimByEquipamento(int id_equipamento)
         {
             using var conexao = new SqlConnection(Global.Conexao);

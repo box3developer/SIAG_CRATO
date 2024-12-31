@@ -1,40 +1,59 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.AreaArmzenagem;
-using SIAG_CRATO.Util;
+using SIAG_CRATO.Data;
 
-namespace SIAG_CRATO.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
-public class AreaArmazenagemController : ControllerCustom
+namespace SIAG_CRATO.Controllers
 {
-    [HttpGet("{id}/Status")]
-    public async Task<ActionResult> GetStatusCaracol(int id)
+    public class AreaArmazenagemController : Controller
     {
-        try
-        {
-            var response = await AreaArmazenagemBLL.GetStatusGaiolas(id);
 
-            return OkResponse(response);
-        }
-        catch (Exception ex)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            return HandleException(ex);
+            var result = await AreaArmazenagemBLL.GetByIdAsync(id);
+            if (result == null) return NotFound();
+            return Ok(result);
         }
+
+        [HttpGet("agrupador/{idAgrupador}")]
+        public async Task<IActionResult> GetByAgrupadorAsync(int idAgrupador)
+        {
+            var result = await AreaArmazenagemBLL.GetByAgrupadorAsync(idAgrupador);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("posicao")]
+        public async Task<IActionResult> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
+        {
+            var result = await AreaArmazenagemBLL.GetByPosicaoAsync(identificadorCaracol, posicaoY);
+            if (result == null) return NotFound();
+            return Ok(result);
     }
 
-    [HttpGet("Status")]
-    public ActionResult GetListaTiposStatusGaiolas()
-    {
-        try
+        [HttpGet("caracol/{identificadorCaracol}")]
+        public async Task<IActionResult> GetByIdentificadorCaracolAsync(string identificadorCaracol)
         {
-            var response = AreaArmazenagemBLL.GetTiposStatusGaiolas();
+            var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificadorCaracol);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
 
-            return OkResponse(response);
-        }
-        catch (Exception ex)
+        [HttpPost("set-status")]
+        public async Task<IActionResult> SetStatusAsync(long id, [FromBody] StatusAreaArmazenagem status)
         {
-            return HandleException(ex);
+            var result = await AreaArmazenagemBLL.SetStatusAsync(id, status);
+            if (result == 0) return BadRequest("Status não pôde ser alterado.");
+            return Ok("Status alterado com sucesso.");
         }
+
+        [HttpGet("stagein/{idEndereco}")]
+        public async Task<IActionResult> GetStageInLivreAsync(int idEndereco)
+        {
+            var result = await AreaArmazenagemBLL.GetStageInLivreAsync(idEndereco);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+        
     }
 }

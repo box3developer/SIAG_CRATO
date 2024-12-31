@@ -1,24 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Setor;
 using SIAG_CRATO.Util;
 
-namespace SIAG_CRATO.Controllers;
+namespace SIAG_CRATO.Controllers
+{
 [Route("api/[controller]")]
 [ApiController]
-public class SetorController : ControllerCustom
+    public class SetorController : ControllerBase
 {
-    [HttpGet("Select")]
-    public async Task<ActionResult> GetListSelect()
-    {
-        try
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var response = await SetorBLL.GetListSelectsAsync();
+            var result = await SetorBLL.GetById(id);
 
-            return OkResponse(response);
-        }
-        catch (Exception ex)
-        {
-            return HandleException(ex);
+            return Ok(result);
         }
     }
 }
