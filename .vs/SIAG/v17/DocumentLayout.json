@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Caixa.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T20:17:33.285Z",
+              "EditorCaption": ""
             }
           ]
         }

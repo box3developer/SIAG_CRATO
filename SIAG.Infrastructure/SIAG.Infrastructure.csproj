@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Armazenagem\Core\" />
     <Folder Include="Chamada\Cadastro\" />
     <Folder Include="Chamada\Core\" />
   </ItemGroup>
