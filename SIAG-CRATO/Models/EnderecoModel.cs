@@ -1,35 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using SIAG_CRATO.Data;
+﻿using SIAG_CRATO.Data;
 
-namespace SIAG_CRATO.Models
+namespace SIAG_CRATO.Models;
+
+public class EnderecoModel
 {
-    public class EnderecoModel
-    {
-        [Column("id_endereco")]
-        public int IdEndereco { get; set; }
-
-        [Column("id_regiaotrabalho")]
-        public int Regiao { get; set; }
-
-        [Column("id_setortrabalho")]
-        public int Setor { get; set; }
-
-        [Column("id_tipoendereco")]
-        public int TipoEndereco { get; set; }
-
-        [Column("nm_endereco")]
-        public string Descricao { get; set; } = string.Empty;
-
-        [Column("qt_estoqueminimo")]
-        public int EstoqueMinimo { get; set; }
-
-        [Column("qt_estoquemaximo")]
-        public int EstoqueMaximo { get; set; }
-
-        [Column("fg_status")]
-        public StatusEndereco Status { get; set; }
-
-        [Column("tp_preenchimento")]
-        public TipoPreenchimento TipoPreenchimento { get; set; }
-    }
+    public int Id_endereco { get; set; }
+    public int Id_regiaotrabalho { get; set; }
+    public int Id_setortrabalho { get; set; }
+    public int Id_tipoendereco { get; set; }
+    public string Nm_endereco { get; set; } = string.Empty;
+    public int Qt_estoqueminimo { get; set; }
+    public int Qt_estoquemaximo { get; set; }
+    public StatusEndereco Fg_status { get; set; }
+    public TipoPreenchimento Tp_preenchimento { get; set; }
 }

@@ -1,16 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SIAG_CRATO.Models;
+﻿namespace SIAG_CRATO.Models;
 
 public class SetorModel
 {
-    [Column("id_setortrabalho")]
-    public int Codigo { get; set; }
-
-    [Column("id_deposito")]
-    public int IdDeposito { get; set; }
-
-    [Column("nm_setortrabalho")]
-    public string Descricao { get; set; } = string.Empty;
+    public int Id_setortrabalho { get; set; }
+    public int Id_deposito { get; set; }
+    public string Nm_setortrabalho { get; set; } = string.Empty;
 }
-

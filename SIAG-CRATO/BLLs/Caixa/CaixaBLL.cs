@@ -90,16 +90,16 @@ public class CaixaBLL
     public async static Task<ListaCaixasPedidosDTO> GetCaixasPedidos(long idPallet)
     {
         var caixas = await GetByPalletAsync(idPallet);
-        var pedidos = caixas.Select(x => x.IdPedido).Where(x => x != null).Distinct().ToList();
+        var pedidos = caixas.Select(x => x.Id_pedido).Where(x => x != null).Distinct().ToList();
 
         var listaPedidos = new List<PedidoDTO>();
         var listaCaixas = caixas.Select(x => new CaixaPedidoDTO()
         {
-            Codigo = x.IdCaixa,
-            Produto = x.CodigoProduto ?? "",
-            Cor = x.CodigoCor ?? "",
-            GradeTamanho = x.CodigoGradeTamanho ?? "",
-            Pares = x.NrPares ?? 0
+            Codigo = x.Id_caixa,
+            Produto = x.Cd_produto ?? "",
+            Cor = x.Cd_cor ?? "",
+            GradeTamanho = x.Cd_gradetamanho ?? "",
+            Pares = x.Nr_pares ?? 0
         }).ToList();
 
         foreach (var pedido in pedidos)
@@ -110,11 +110,11 @@ public class CaixaBLL
 
             listaPedidos.Add(new()
             {
-                IdPedido = pedidoAux.IdPedido,
-                CodigoPedido = pedidoAux.CodigoPedido ?? "",
-                CodigoLote = pedidoAux.CodigoLote ?? "",
-                Box = pedidoAux.Box ?? "",
-                QuantidadeCaixas = caixas.Where(x => x.IdPedido == pedido).Count()
+                IdPedido = pedidoAux.Id_pedido,
+                CodigoPedido = pedidoAux.Cd_pedido ?? "",
+                CodigoLote = pedidoAux.Cd_lote ?? "",
+                Box = pedidoAux.Cd_box ?? "",
+                QuantidadeCaixas = caixas.Where(x => x.Id_pedido == pedido).Count()
             });
         }
 
