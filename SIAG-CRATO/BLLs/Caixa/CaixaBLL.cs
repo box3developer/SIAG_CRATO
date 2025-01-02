@@ -1,9 +1,15 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.AreaArmzenagem;
+using SIAG_CRATO.BLLs.CaixaLeitura;
+using SIAG_CRATO.BLLs.Equipamento;
+using SIAG_CRATO.BLLs.Log;
+using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.BLLs.Pedido;
 using SIAG_CRATO.DTOs.Caixa;
 using SIAG_CRATO.DTOs.Pedido;
 using SIAG_CRATO.Models;
+using System;
 
 namespace SIAG_CRATO.BLLs.Caixa;
 
@@ -47,6 +53,285 @@ public class CaixaBLL
         var quantidade = await conexao.QueryFirstOrDefaultAsync<int>(sql, new { idAgrupador });
 
         return quantidade;
+    }
+
+    public async static Task<bool> EmitirEstufamento(string identificadorCaracol, Guid? id_requisicao)
+    {
+        try
+        {
+            var log = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NomeIdentificador = identificadorCaracol,
+                IdCaixa = "",
+                Data = DateTime.UtcNow,
+                Mensagem = $"Emitindo estufamento para caracol {identificadorCaracol}",
+                Metodo = "EmitirEstufamento",
+                IdOperador = "",
+                Tipo = "info"
+
+            };
+
+            using var httpClient = new HttpClient();
+
+            await httpClient.GetStringAsync(new Uri($"http://gra-lxsobcaracol.sob.ad-grendene.com:3000/EmitirEstufamento/{identificadorCaracol}"));
+
+            await LogBLL.CreateLogCaracol(log);
+            return true;
+        }
+        catch (Exception)
+        {
+            var logError = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NomeIdentificador = identificadorCaracol,
+                IdCaixa = "",
+                Data = DateTime.UtcNow,
+                Mensagem = $"Erro ao emitir estufamento para caracol {identificadorCaracol}",
+                Metodo = "EmitirEstufamento",
+                IdOperador = "",
+                Tipo = "erro"
+            }; 
+
+            await LogBLL.CreateLogCaracol(logError);
+
+            throw;
+        }
+
+    }
+
+    public async static Task<bool> GravarLeitura(string id_caixa, int id_areaarmazenagem, int id_pallet)
+    {
+        try
+        {
+            var caixa = await GetByIdAsync(id_caixa) ?? throw new Exception("Caixa não encotrada!");
+
+            var pallet = await PalletBLL.GetByIdAsync(id_pallet) ?? throw new Exception("Pallet não encontrado.");
+
+            var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(id_areaarmazenagem) ?? throw new Exception("Área de armazenagem não encontrada.");
+
+            var equipamento = await EquipamentoBLL.GetByidentificadorAsync(areaArmazenagem.IdentificadorCaracol ?? "") ?? throw new Exception("Equipamento não encontrado.");
+
+            if (equipamento.LeituraPendete != null && equipamento.LeituraPendete == id_caixa)
+            
+                await EquipamentoBLL.SetCaixaPendente(null, equipamento.Codigo.ToString());
+                
+            
+
+            var returnNovaLeitura =  await EquipamentoBLL.NovaLeitura(equipamento.Codigo, caixa.IdCaixa);
+
+            var caixaLeitura = new CaixaLeituraModel
+            {
+                Id_caixa = caixa.IdCaixa,
+                Dt_leitura = DateTime.Now,
+                Fg_tipo = 3,
+                Fg_status= 1,
+                Id_operador = equipamento.OperadorId,
+                Id_pallet = pallet.Codigo,
+                Fg_cancelado = 0,
+                Id_areaarmazenagem = areaArmazenagem.Codigo,
+                Id_caixaleitura = null,
+                Id_endereco = null,
+                Id_equipamento = equipamento.Codigo,
+            };
+
+            var returnCaixaLeitura = await CaixaLeituraBLL.CreateCaixaLeitura(caixaLeitura);
+
+            return (returnNovaLeitura && returnCaixaLeitura);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+    }
+
+    public async static Task<bool> RemoverEstufamentoCaixa(string id_caixa)
+    {
+        try
+        {
+            var caixa = await GetByIdAsync(id_caixa) ?? throw new Exception("Caixa não encotrada!");
+
+            var pallet = await PalletBLL.GetByIdAsync(caixa.IdPallet??0) ?? throw new Exception("Pallet não encontrado.");
+
+            var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(pallet.AreaArmazenagemId ?? 0) ?? throw new Exception("Área de armazenagem não encontrada.");
+
+            var equipamento = await EquipamentoBLL.GetByidentificadorAsync(areaArmazenagem.IdentificadorCaracol ?? "") ?? throw new Exception("Equipamento não encontrado.");
+            
+            if (equipamento.LeituraPendete != null && equipamento.LeituraPendete == id_caixa)
+                await EquipamentoBLL.SetCaixaPendente(null, equipamento.Codigo.ToString());
+
+            using var conexao = new SqlConnection(Global.Conexao);
+
+            var result = await conexao.ExecuteAsync(CaixaQuery.UPDATE_REMOVE_DT_ESTUFAMENTO, new { id_caixa });
+
+            return result > 0;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async static Task<bool> EstufarCaixa(string id_caixa, Guid? id_requisicao)
+    {
+        try
+        {
+            var caixa = await GetByIdAsync(id_caixa);
+            if (caixa == null)
+            {
+                var logError = new LogModel
+                {
+                    IdRequisicao = id_requisicao,
+                    NomeIdentificador = "",
+                    IdCaixa = id_caixa,
+                    Data = DateTime.UtcNow,
+                    Mensagem = $"Caixa {id_caixa} não encontrada",
+                    Metodo = "EstufarCaixa",
+                    IdOperador = "",
+                    Tipo = "erro"
+                };
+
+                await LogBLL.CreateLogCaracol(logError);
+
+                throw new Exception("Caixa não encotrada!");
+            }
+
+            var pallet = await PalletBLL.GetByIdAsync(caixa.IdPallet??0);
+            if (pallet == null)
+            {
+                var logError = new LogModel
+                {
+                    IdRequisicao = id_requisicao,
+                    NomeIdentificador = "",
+                    IdCaixa = id_caixa,
+                    Data = DateTime.UtcNow,
+                    Mensagem = $"Nenhum pallet encontrado para caixa {idCaixa}",
+                    Metodo = "EstufarCaixa",
+                    IdOperador = "",
+                    Tipo = "erro"
+                };
+
+                await LogBLL.CreateLogCaracol(logError);
+
+                throw new Exception("Pallet não encotrada!");
+            }
+
+            var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(pallet.AreaArmazenagemId??0);
+            if (areaArmazenagem == null)
+            {
+                var logError = new LogModel
+                {
+                    IdRequisicao = id_requisicao,
+                    NomeIdentificador = "",
+                    IdCaixa = id_caixa,
+                    Data = DateTime.UtcNow,
+                    Mensagem = $"Nenhum área de armazenagem encontrada para pallet {pallet.Codigo}",
+                    Metodo = "EstufarCaixa",
+                    IdOperador = "",
+                    Tipo = "erro"
+                };
+
+                await LogBLL.CreateLogCaracol(logError);
+
+                throw new Exception("Área de armazenagem não encontrada.");
+            }
+
+            var equipamento = await EquipamentoBLL.GetByCaracolAsync(areaArmazenagem.IdentificadorCaracol?? "");
+            if (equipamento == null)
+            {
+                var logError = new LogModel
+                {
+                    IdRequisicao = id_requisicao,
+                    NomeIdentificador = "",
+                    IdCaixa = id_caixa,
+                    Data = DateTime.UtcNow,
+                    Mensagem = $"Equipamento {areaArmazenagem.IdentificadorCaracol} da área de armazenagem {areaArmazenagem.Codigo} não identificado",
+                    Metodo = "EstufarCaixa",
+                    IdOperador = "",
+                    Tipo = "erro"
+                };
+
+                await LogBLL.CreateLogCaracol(logError);
+
+                throw new Exception("Equipamento não encontrado.");
+            }
+
+            if(equipamento.LeituraPendete != null && equipamento.LeituraPendete == id_caixa)
+            {
+                var log= new LogModel
+                {
+                    IdRequisicao = id_requisicao,
+                    NomeIdentificador = equipamento.Identificador,
+                    IdCaixa = id_caixa,
+                    Data = DateTime.UtcNow,
+                    Mensagem = $"Libera estufamento de caixa pendente no equipamento {equipamento.Codigo}",
+                    Metodo = "EstufarCaixa",
+                    IdOperador = "",
+                    Tipo = "info"
+                };
+
+                await LogBLL.CreateLogCaracol(log);
+
+                await EquipamentoBLL.SetCaixaPendente(null, equipamento.Codigo.ToString());
+
+            }
+
+            using var conexao = new SqlConnection(Global.Conexao);
+
+            var resultDtEstufamento = await conexao.ExecuteAsync(CaixaQuery.UPDATE_SET_DT_ESTUFAMENTO_BY_CAIXA, new { dt_estufamento = DateTime.Now, id_caixa});
+
+            var resultEquipamentoReset = await EquipamentoBLL.UpdateLeitura(equipamento.Codigo);
+            var caixaLeitura = new CaixaLeituraModel
+            {
+                Id_caixa = id_caixa,
+                Dt_leitura = DateTime.Now,
+                Fg_tipo = 19,
+                Fg_status = 1,
+                Id_operador = equipamento.OperadorId,
+                Id_equipamento = equipamento.Codigo,
+                Id_pallet = pallet.Codigo,
+                Id_areaarmazenagem = areaArmazenagem.Codigo,
+                Id_endereco = areaArmazenagem.EnderecoId,
+                Fg_cancelado = 0,
+                Id_caixaleitura = 0,
+                Id_ordem = null
+            };
+
+            var resultCaixaLeitura = await CaixaLeituraBLL.CreateCaixaLeitura(caixaLeitura);
+            var logEstufada = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NomeIdentificador = areaArmazenagem.IdentificadorCaracol,
+                IdCaixa = id_caixa,
+                Data = DateTime.UtcNow,
+                Mensagem = $"Caixa {caixa.IdCaixa} estufada no equipamento {equipamento.Codigo} no pallet {pallet.Codigo}",
+                Metodo = "EstufarCaixa",
+                IdOperador = "",
+                Tipo = "info"
+            };
+            await LogBLL.CreateLogCaracol(logEstufada);
+
+            return resultDtEstufamento > 0 && resultEquipamentoReset && resultCaixaLeitura;
+        }
+        catch (Exception)
+        {
+            var logError = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NomeIdentificador = "",
+                IdCaixa = id_caixa,
+                Data = DateTime.UtcNow,
+                Mensagem = $"Caixa {id_caixa} não encontrada",
+                Metodo = "EstufarCaixa",
+                IdOperador = "",
+                Tipo = "erro"
+            };
+
+            await LogBLL.CreateLogCaracol(logError);
+
+            throw new Exception("Caixa não encotrada!");
+        }
     }
 
     public async static Task<Dictionary<string, int>> GetPendentesAsync()

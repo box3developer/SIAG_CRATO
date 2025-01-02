@@ -123,6 +123,14 @@ public class EquipamentoBLL
         return id > 0;
     }
 
+    public static async Task<bool> NovaLeitura(int id_equipamento, string id_caixa)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var id = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_NOVA_LEITURA, new { id_equipamento, id_caixa, dt_ultimaleitura = DateTime.Now });
+
+        return id > 0;
+    }
+
     public static async Task<int> UpdateEquipamento(int id_equipamento, int? id_endereco)
     {
         if (id_endereco.HasValue && id_endereco > 0)

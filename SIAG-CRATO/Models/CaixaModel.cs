@@ -11,7 +11,7 @@ public class CaixaModel
     public Guid? IdAgrupador { get; set; }
 
     [Column("id_pallet")]
-    public string? IdPallet { get; set; }
+    public int? IdPallet { get; set; }
 
     [Column("id_programa")]
     public int? IdPrograma { get; set; }

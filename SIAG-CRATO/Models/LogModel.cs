@@ -5,7 +5,7 @@ namespace SIAG_CRATO.Models;
 public class LogModel
 {
     [Column("id_requisicao")]
-    public Guid IdRequisicao { get; set; }
+    public Guid? IdRequisicao { get; set; }
 
     [Column("nm_identificador")]
     public string? NomeIdentificador { get; set; }

@@ -14,7 +14,7 @@ public class PalletModel
     public int QtUtilizacao { get; set; }
 
     [Column("id_areaarmazenagem")]
-    public Guid AreaArmazenagemId { get; set; }
+    public long? AreaArmazenagemId { get; set; }
 
     [Column("id_agrupador")]
     public Guid AgrupadorId { get; set; }

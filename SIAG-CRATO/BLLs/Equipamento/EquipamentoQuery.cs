@@ -9,4 +9,5 @@ public class EquipamentoQuery
     public const string UPDATE_ENDERECO = @"UPDATE equipamento SET dt_ultimaleitura = GETDATE(), id_endereco = @id_endereco";
     public const string UPDATE_EQUIPAMENTO_OPERADOR = @"UPDATE equipamento SET id_operador = @id_operador, fg_status = 1 WHERE id_equipamento = @id_equipamento";
     public const string UPDATE_EQUIPAMENTO_OPERADOR_LOGOFF = @"UPDATE equipamento SET id_operador = null WHERE id_equipamento = @id_equipamento";
+    public const string UPDATE_NOVA_LEITURA = @"UPDATE equipamento SET cd_ultimaleitura = @id_caixa, dt_ultimaleitura = @dt_ultimaleitura WHERE id_equipamento = @id_equipamento";
 }

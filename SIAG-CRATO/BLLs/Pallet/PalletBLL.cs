@@ -15,7 +15,7 @@ public class PalletBLL
             { "@Codigo", pallet.Codigo },
             { "@Status", pallet.Status },
             { "@QtdUtilizacao", pallet.QtUtilizacao },
-            { "@AreaArmazenagem", pallet.AreaArmazenagemId == Guid.Empty ? pallet.AreaArmazenagemId : DBNull.Value},
+            { "@AreaArmazenagem", pallet.AreaArmazenagemId == null? DBNull.Value: pallet.AreaArmazenagemId},
             { "@Agrupador", pallet.AgrupadorId == Guid.Empty ? pallet.AgrupadorId : DBNull.Value },
             { "@DataUltimaMovimentacao", pallet.DataUltimaMovimentacao != null ? pallet.DataUltimaMovimentacao : DBNull.Value },
             { "@Identificacao", pallet.Identificacao != null ? pallet.Identificacao : DBNull.Value},
@@ -56,7 +56,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(string idAreaArmazenagem)
+    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(long idAreaArmazenagem)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_areaarmazenagem = @idAreaArmazenagem";
 

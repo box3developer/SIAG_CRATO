@@ -19,7 +19,7 @@ public class AreaArmazenagemBLL
         return areasArmazenagem.ToList();
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByIdAsync(int id)
+    public static async Task<AreaArmazenagemModel?> GetByIdAsync(long id)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_areaarmazenagem = @id";
 
