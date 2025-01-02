@@ -90,4 +90,20 @@ public class AtividadeTarefaBLL
 
         return tarefas.ToList();
     }
+
+    private static AtividadeTarefaDTO ConvertToDTO(AtividadeTarefaModel atividade)
+    {
+        return new()
+        {
+            Codigo = atividade.Codigo,
+            Descricao = atividade.Descricao,
+            Mensagem = atividade.Mensagem,
+            AtividadeId = atividade.AtividadeId,
+            Sequencia = atividade.Sequencia,
+            Recursos = atividade.Recursos,
+            AtividadeRotinaId = atividade.AtividadeRotinaId,
+            PotenciaNormal = atividade.PotenciaNormal,
+            PotenciaAumentada = atividade.PotenciaAumentada,
+        };
+    }
 }

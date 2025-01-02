@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.Endereco;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Endereco
@@ -42,6 +43,22 @@ namespace SIAG_CRATO.BLLs.Endereco
             var endereco = await conexao.QueryAsync<EnderecoModel>(sql, new { id_setortrabalho });
 
             return endereco.ToList();
+        }
+
+        private static EnderecoDTO ConvertToDTO(EnderecoModel endereco)
+        {
+            return new()
+            {
+                EnderecoId = endereco.Id_endereco,
+                RegiaoTrabalhoId = endereco.Id_regiaotrabalho,
+                SetorId = endereco.Id_setortrabalho,
+                TipoEnderecoId = endereco.Id_tipoendereco,
+                NomeEndereco = endereco.Nm_endereco,
+                EstoqueMinimo = endereco.Qt_estoqueminimo,
+                EstoqueMaximo = endereco.Qt_estoquemaximo,
+                Status = endereco.Fg_status,
+                TipoPreenchimento = endereco.Tp_preenchimento,
+            };
         }
     }
 }

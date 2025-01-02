@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.Models;
@@ -14,7 +13,7 @@ namespace SIAG_CRATO.Controllers
         public async Task<IActionResult> Create(PalletModel pallet)
         {
             await PalletBLL.InsertAsync(pallet);
-            return CreatedAtAction("GetById", new { id = pallet.Codigo }, pallet);
+            return CreatedAtAction("GetById", new { id = pallet.Id_pallet }, pallet);
         }
 
         [HttpGet]
@@ -29,7 +28,9 @@ namespace SIAG_CRATO.Controllers
         {
             var pallet = await PalletBLL.GetByIdAsync(id);
             if (pallet == null)
+            {
                 return NotFound();
+            }
 
             return Ok(pallet);
         }
@@ -39,8 +40,10 @@ namespace SIAG_CRATO.Controllers
         {
             var pallet = await PalletBLL.GetByIdentificadorAsync(identificador);
             if (pallet == null)
+            {
                 return NotFound();
-            
+            }
+
             return Ok(pallet);
         }
 
@@ -63,7 +66,9 @@ namespace SIAG_CRATO.Controllers
         {
             var result = await PalletBLL.SeStatusAsync(id, status);
             if (result > 0)
+            {
                 return Ok(result);
+            }
 
             return BadRequest("Erro ao atualizar base de dados");
         }
@@ -71,12 +76,14 @@ namespace SIAG_CRATO.Controllers
         [HttpPut("vincular-agrupador")]
         public async Task<IActionResult> VincularAgrupadorReservado(AreaArmazenagemModel areaAtual)
         {
-            var sucesso = await PalletBLL.VincularAgrupadorAreaReservadaAsync(areaAtual.IdentificadorCaracol, areaAtual);
+            var sucesso = await PalletBLL.VincularAgrupadorAreaReservadaAsync(areaAtual.Id_caracol, areaAtual);
             if (sucesso)
+            {
                 return Ok("Pallet vinculado com sucesso.");
-          
+            }
+
             return BadRequest("Erro ao vincular o pallet.");
-          
+
         }
 
         [HttpPost("vincular-por-prioridade")]
@@ -84,17 +91,18 @@ namespace SIAG_CRATO.Controllers
         {
             var sucesso = await PalletBLL.VincularNovoPalletPorPrioridadeAsync(identificadorCaracol, areaAtual, nivelAgrupador);
             if (sucesso)
+            {
                 return Ok("Pallet vinculado com sucesso.");
-         
-   
+            }
+
             return BadRequest("Erro ao vincular o pallet.");
-            
+
         }
 
         [HttpPost("vincular-disponivel")]
         public async Task<IActionResult> VincularNovoPalletDisponivel([FromBody] AreaArmazenagemModel areaAtual)
         {
-            var sucesso = await PalletBLL.VincularNovoPalletDisponivelAsync(areaAtual.IdentificadorCaracol, areaAtual);
+            var sucesso = await PalletBLL.VincularNovoPalletDisponivelAsync(areaAtual.Id_caracol, areaAtual);
             if (sucesso)
             {
                 return Ok("Pallet vinculado com sucesso.");

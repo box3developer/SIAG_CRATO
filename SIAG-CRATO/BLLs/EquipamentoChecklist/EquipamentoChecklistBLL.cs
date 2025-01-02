@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Equipamento;
+using SIAG_CRATO.DTOs.EquipamentoCheckList;
 using SIAG_CRATO.Models;
 namespace SIAG_CRATO.BLLs.EquipamentoChecklist;
 
@@ -40,10 +41,24 @@ public class EquipamentoChecklistBLL
 
 
         if (modelo == null || modelo.ModeloId == 0)
+        {
             return [];
+        }
 
         var checklists = await GetByModeloAsync(modelo.ModeloId);
 
         return checklists ?? [];
+    }
+
+    private static EquipamentoChecklistDTO ConvertToDTO(EquipamentoChecklistModel checklist)
+    {
+        return new()
+        {
+            EquipamentoChecklistId = checklist.IdEquipamentoChecklist,
+            EquipamentoModeloId = checklist.IdEquipamentoModelo,
+            NomeDescricao = checklist.NmDescricao,
+            Critico = checklist.FgCritico,
+            Status = checklist.FgStatus,
+        };
     }
 }

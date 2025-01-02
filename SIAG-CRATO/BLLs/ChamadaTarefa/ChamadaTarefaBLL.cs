@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Chamada;
+using SIAG_CRATO.DTOs.ChamadaTarefa;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.ChamadaTarefa;
@@ -52,5 +53,16 @@ public class ChamadaTarefaBLL
         });
 
         return id > 0;
+    }
+
+    private static ChamdaTarefaDTO ConvertToDTO(ChamadaTarefaModel chamada)
+    {
+        return new()
+        {
+            TarefaId = chamada.TarefaId,
+            ChamadaId = chamada.ChamadaId,
+            DataInicio = chamada.DataInicio,
+            DataFim = chamada.DataFim,
+        };
     }
 }

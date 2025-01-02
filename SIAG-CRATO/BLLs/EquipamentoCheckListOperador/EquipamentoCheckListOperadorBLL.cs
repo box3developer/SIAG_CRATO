@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.EquipamentoCheckListOperador;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.EquipamentoCheckListOperador;
@@ -19,5 +20,17 @@ public class EquipamentoCheckListOperadorBLL
         });
 
         return id > 0;
+    }
+
+    private static EquipamentoCheckListOperadorDTO ConvertToDTO(EquipamentoCheckListOperadorModel checklist)
+    {
+        return new()
+        {
+            EquipamentoId = checklist.EquipamentoId,
+            OperadorId = checklist.OperadorId,
+            ChecklistId = checklist.ChecklistId,
+            Resposta = checklist.Resposta,
+            Data = checklist.Data,
+        };
     }
 }

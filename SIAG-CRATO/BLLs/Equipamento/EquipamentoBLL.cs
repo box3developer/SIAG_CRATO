@@ -4,6 +4,7 @@ using SIAG_CRATO.BLLs.Atividade;
 using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.Endereco;
 using SIAG_CRATO.Data;
+using SIAG_CRATO.DTOs.Equipamento;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Equipamento;
@@ -160,6 +161,30 @@ public class EquipamentoBLL
         var enderecoList = EnderecoBLL.GetBySetorStatus(Constants.SETOR_PORTAPALLET, Constants.ENDERECO_ATIVO);
 
         return true;
+    }
+
+    private static EquipamentoDTO ConvertToDTO(EquipamentoModel equipamento)
+    {
+        return new()
+        {
+            Codigo = equipamento.Codigo,
+            ModeloId = equipamento.ModeloId,
+            SetorId = equipamento.SetorId,
+            OperadorId = equipamento.OperadorId,
+            Descricao = equipamento.Descricao,
+            DescricaoAbreviada = equipamento.DescricaoAbreviada,
+            Identificador = equipamento.Identificador,
+            Status = equipamento.Status,
+            DataInclusao = equipamento.DataInclusao,
+            DataManutencao = equipamento.DataManutencao,
+            DataUltimaLeitura = equipamento.DataUltimaLeitura,
+            EnderecoTrabalho = equipamento.EnderecoTrabalho,
+            IP = equipamento.IP,
+            StatusTrocaCaracol = equipamento.StatusTrocaCaracol,
+            LeituraPendete = equipamento.LeituraPendete,
+            UltimaLeitura = equipamento.UltimaLeitura,
+            Observacao = equipamento.Observacao,
+        };
     }
 }
 

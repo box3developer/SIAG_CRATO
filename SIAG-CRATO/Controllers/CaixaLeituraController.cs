@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.CaixaLeitura;
 using SIAG_CRATO.Models;
 
-namespace SIAG_CRATO.Controllers
+namespace SIAG_CRATO.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CaixaLeituraController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CaixaLeituraController : ControllerBase
+    [HttpGet("{idCaixa}")]
+    public async Task<ActionResult<CaixaLeituraModel>> GetUltimaCaixaLida(string idCaixa)
     {
-        [HttpGet("{idCaixa}")]
-        public async Task<ActionResult<CaixaLeituraModel>> GetUltimaCaixaLida(string idCaixa)
-        {
-            var result = await CaixaLeituraBLL.GetUltimaCaixaLida(idCaixa);
-            return result == null ? NotFound() : Ok(result);
+        var result = await CaixaLeituraBLL.GetUltimaCaixaLida(idCaixa);
+        return result == null ? NotFound() : Ok(result);
     }
 }

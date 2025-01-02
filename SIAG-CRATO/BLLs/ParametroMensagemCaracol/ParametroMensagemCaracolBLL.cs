@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.ParametroMensagemCaracol;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.ParametroMensagemCaracol;
@@ -14,5 +15,16 @@ public class ParametroMensagemCaracolBLL
         var parametro = await conexao.QueryFirstOrDefaultAsync<ParametroMensagemCaracolModel>(sql, new { descricao });
 
         return parametro ?? new ParametroMensagemCaracolModel { Descricao = descricao, Mensagem = descricao, Cor = "#dc2626" };
+    }
+
+    private static ParametroMensagemCaracolDTO ConvertToDTO(ParametroMensagemCaracolModel parametro)
+    {
+        return new()
+        {
+            ParametroMensagemCaracolId = parametro.IdParametroMensagemCaracol,
+            Descricao = parametro.Descricao,
+            Mensagem = parametro.Mensagem,
+            Cor = parametro.Cor,
+        };
     }
 }

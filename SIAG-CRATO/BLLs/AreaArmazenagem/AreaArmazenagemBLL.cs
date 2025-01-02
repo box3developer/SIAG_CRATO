@@ -29,6 +29,15 @@ public class AreaArmazenagemBLL
         return areasArmazenagem;
     }
 
+    public static async Task<AreaArmazenagemModel?> GetByIdentificadorAsync(string identificador)
+    {
+        var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE cd_identificacao = @identificador";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { identificador });
+
+        return areasArmazenagem;
+    }
 
     public static async Task<AreaArmazenagemModel?> GetByAgrupadorAsync(int idAgrupador)
     {
@@ -252,5 +261,22 @@ public class AreaArmazenagemBLL
         }
 
         return lista;
+    }
+
+    private static AreaArmazenagemDTO ConvertToDTO(AreaArmazenagemModel areaArmazenagem)
+    {
+        return new()
+        {
+            AreaArmazenagemId = areaArmazenagem.Id_areaarmazenagem,
+            TipoAreaId = areaArmazenagem.Id_tipoarea,
+            EnderecoId = areaArmazenagem.Id_endereco,
+            AgrupadorId = areaArmazenagem.Id_agrupador,
+            CaracolId = areaArmazenagem.Id_caracol,
+            PosicaoX = areaArmazenagem.Nr_posicaox,
+            PosicaoY = areaArmazenagem.Nr_posicaoy,
+            Lado = areaArmazenagem.Nr_lado,
+            Status = areaArmazenagem.Fg_status,
+            Identificacao = areaArmazenagem.Cd_identificacao,
+        };
     }
 }

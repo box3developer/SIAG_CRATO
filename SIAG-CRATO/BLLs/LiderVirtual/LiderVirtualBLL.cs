@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.LiderVirtual;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.LiderVirtual;
@@ -69,5 +70,20 @@ public class LiderVirtualBLL
         });
 
         return id;
+    }
+
+    private static LiderVirtualDTO ConvertToDTO(LiderVirtualModel lider)
+    {
+        return new()
+        {
+            LiderVirtualId = lider.IdLiderVirtual,
+            OperadorId = lider.IdOperador,
+            EquipamentoOrigemId = lider.IdEquipamentoOrigem,
+            EquipamentoDestinoId = lider.IdEquipamentoDestino,
+            DataLogin = lider.DataLogin,
+            DataLogoff = lider.DataLogoff,
+            OperadorLoginId = lider.IdOperadorLogin,
+            DataLoginLimite = lider.DataLoginLimite,
+        };
     }
 }

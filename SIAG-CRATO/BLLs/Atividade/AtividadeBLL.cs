@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.Atividade;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Atividade;
@@ -48,5 +49,21 @@ public class AtividadeBLL
 
         return list.ToList();
 
+    }
+
+    private static AtividadeDTO ConvertToDTO(AtividadeModel atividade)
+    {
+        return new()
+        {
+            Codigo = atividade.Codigo,
+            Descricao = atividade.Descricao,
+            EquipamentoModeloId = atividade.EquipamentoModeloId,
+            AtividadeRotinaValidacaoId = atividade.AtividadeRotinaValidacaoId,
+            AtividadeAnteriorId = atividade.AtividadeAnteriorId,
+            SetorTrabalhoId = atividade.SetorTrabalhoId,
+            PermiteRejeitar = atividade.PermiteRejeitar,
+            TipoAtribuicaoAutomatica = atividade.TipoAtribuicaoAutomatica,
+            EvitarConflitoEndereco = atividade.EvitarConflitoEndereco,
+        };
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.StatusLeitor;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.StatusLeitor;
@@ -48,5 +49,18 @@ public class StatusLeitorBLL
         });
 
         return id;
+    }
+
+    private StatusLeitorDTO ConvertToDTO(StatusLeitorModel status)
+    {
+        return new()
+        {
+            Equipamento = status.Equipamento,
+            Leitor = status.Leitor,
+            Configurado = status.Configurado,
+            Conectado = status.Conectado,
+            Executando = status.Executando,
+            DataStatus = status.DataStatus,
+        };
     }
 }

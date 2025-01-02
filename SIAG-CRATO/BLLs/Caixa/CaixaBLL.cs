@@ -124,4 +124,28 @@ public class CaixaBLL
             Pedidos = listaPedidos
         };
     }
+
+    private static CaixaDTO ConvertToDTO(CaixaModel caixa)
+    {
+        return new()
+        {
+            CaixaId = caixa.Id_caixa,
+            AgrupadorId = caixa.Id_agrupador,
+            PalletId = caixa.Id_pallet,
+            ProgramaId = caixa.Id_programa,
+            PedidoId = caixa.Id_pedido,
+            CodigoProduto = caixa.Cd_produto,
+            CodigoCor = caixa.Cd_cor,
+            CodigoGradeTamanho = caixa.Cd_gradetamanho,
+            NumeroCaixa = caixa.Nr_caixa,
+            Pares = caixa.Nr_pares,
+            RFID = caixa.Fg_rfid,
+            Status = caixa.Fg_status,
+            DataEmbalagem = caixa.Dt_embalagem,
+            DataExpedicao = caixa.Dt_expedicao,
+            DataSorter = caixa.Dt_sorter,
+            DataEstufamento = caixa.Dt_estufamento,
+            DataLeitura = caixa.Dt_leitura,
+        };
+    }
 }

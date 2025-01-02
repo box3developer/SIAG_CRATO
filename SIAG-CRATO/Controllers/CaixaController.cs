@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Caixa;
-using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.Controllers
 {
-[Route("api/[controller]")]
-[ApiController]
+    [Route("api/[controller]")]
+    [ApiController]
     public class CaixaController : ControllerBase
-{
+    {
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(string id)
-    {
+        {
             var caixa = await CaixaBLL.GetByIdAsync(id);
             return caixa == null ? NotFound() : Ok(caixa);
         }
@@ -38,14 +36,14 @@ namespace SIAG_CRATO.Controllers
         }
 
         [HttpGet("fabricante-caixa/{idCaixa}")]
-        public async Task<IActionResult> GetFabricaAsync (string idCaixa)
+        public async Task<IActionResult> GetFabricaAsync(string idCaixa)
         {
-            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa));
+            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
             return Ok(caixas);
         }
 
         [HttpGet("quantidade-pedido")]
-        public async Task<IActionResult> GetFabricaAsync (int idPedido, long codigoPedido, long idPallet)
+        public async Task<IActionResult> GetFabricaAsync(int idPedido, long codigoPedido, long idPallet)
         {
             var caixas = await CaixaBLL.GetQuantidadeByPedido(idPedido, codigoPedido, idPallet);
             return Ok(caixas);

@@ -24,4 +24,14 @@ public class SetorBLL
 
         return setores.Select(x => new SetorSelectDTO() { Id = x.Id_setortrabalho, Descricao = x.Nm_setortrabalho }).ToList();
     }
+
+    private static SetorDTO ConvertToDTO(SetorModel setor)
+    {
+        return new()
+        {
+            SetorId = setor.Id_setortrabalho,
+            DepositoId = setor.Id_deposito,
+            NomeSetor = setor.Nm_setortrabalho,
+        };
+    }
 }

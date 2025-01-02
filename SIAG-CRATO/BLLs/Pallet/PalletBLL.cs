@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Caixa;
 using SIAG_CRATO.Data;
+using SIAG_CRATO.DTOs.Pallet;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Pallet;
@@ -371,7 +372,7 @@ public class PalletBLL
     }
 
     //sp_siag_busca_qtde_pallets
-    public static async Task<int> GetQtyPallets (int id_endereco, int id_pallet)
+    public static async Task<int> GetQtyPallets(int id_endereco, int id_pallet)
     {
         var pallet = await GetByIdAsync(id_pallet);
         var caixa = await CaixaBLL.GetByPalletAsync(id_pallet);
@@ -388,4 +389,17 @@ public class PalletBLL
 
     }
 
+    private static PalletDTO ConvertToDTO(PalletModel pallet)
+    {
+        return new()
+        {
+            PalletId = pallet.Id_pallet,
+            CodigoIdentificacao = pallet.Cd_identificacao,
+            QuantidadeUtilizacao = pallet.Qt_utilizacao,
+            AreaArmazenagemId = pallet.Id_areaarmazenagem,
+            AgrupadorId = pallet.Id_agrupador,
+            Status = pallet.Fg_status,
+            DataUltimaMovimentacao = pallet.Dt_ultimamovimentacao,
+        };
+    }
 }

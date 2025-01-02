@@ -37,6 +37,20 @@ public class ChamadaController : ControllerBase
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetChamadaById(Guid id)
+    {
+        try
+        {
+            var chamada = await ChamadaBLL.GetByIdAsync(id);
+            return Ok(chamada);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpPost("{id}/reiniciar")]
     public async Task<ActionResult> ReiniciarChamada(Guid id)
     {

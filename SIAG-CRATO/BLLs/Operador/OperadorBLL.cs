@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.BLLs.EquipamentoManutencao;
 using SIAG_CRATO.BLLs.OperadorHistorico;
+using SIAG_CRATO.DTOs.Operador;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.Operador;
@@ -29,7 +30,7 @@ public class OperadorBLL
         return meta;
     }
 
-    public static async Task<bool> Login(int id_operador,int id_equipamento)
+    public static async Task<bool> Login(int id_operador, int id_equipamento)
     {
 
         await LogOff(id_operador, id_equipamento);
@@ -43,13 +44,13 @@ public class OperadorBLL
 
     public static async Task<bool> LogOff(int id_operador, int id_equipamento)
     {
-        if(id_operador == 0 || id_equipamento == 0)
+        if (id_operador == 0 || id_equipamento == 0)
         {
             return false;
         }
         var getEquip = await EquipamentoBLL.GetByOperadorAsync(id_operador.ToString()) ?? await EquipamentoBLL.GetByIdAsync(id_equipamento);
 
-        if(getEquip == null)
+        if (getEquip == null)
         {
             return false;
         }
@@ -59,5 +60,20 @@ public class OperadorBLL
 
         //....sp_siag_alocacaoautomaticabilaterais
         return result > 0;
+    }
+
+    private static OperadorDTO ConvertToDTO(OperadorModel operador)
+    {
+        return new()
+        {
+            Codigo = operador.Codigo,
+            NFC = operador.NFC,
+            CPF = operador.CPF,
+            Descricao = operador.Descricao,
+            DataLogin = operador.DataLogin,
+            Localidade = operador.Localidade,
+            FuncaoOperador = operador.FuncaoOperador,
+            ResponsavelId = operador.ResponsavelId,
+        };
     }
 }

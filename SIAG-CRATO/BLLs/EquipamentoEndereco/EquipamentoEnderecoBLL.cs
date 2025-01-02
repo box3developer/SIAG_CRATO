@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.Data;
+using SIAG_CRATO.DTOs.EquipamentoEndereco;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.EquipamentoEndereco;
@@ -48,5 +49,15 @@ public class EquipamentoEnderecoBLL
         });
 
         return equipamentos.ToList();
+    }
+
+    private static EquipamentoEnderecoDTO ConvertToDTO(EquipamentoEnderecoModel endereco)
+    {
+        return new()
+        {
+            EquipamentoEnderecoId = endereco.EquipamentoEnderecoId,
+            EquipamentoId = endereco.EquipamentoId,
+            EnderecoId = endereco.EnderecoId,
+        };
     }
 }

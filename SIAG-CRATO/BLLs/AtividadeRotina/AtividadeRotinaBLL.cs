@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.DTOs.AtividadeRotina;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.AtividadeRotina;
@@ -15,5 +16,16 @@ public class AtividadeRotinaBLL
         var atividade = await conexao.QueryFirstOrDefaultAsync<AtividadeRotinaModel>(sql, new { id });
 
         return atividade;
+    }
+
+    private static AtividadeRotinaDTO ConvertToDTO(AtividadeRotinaModel atividade)
+    {
+        return new()
+        {
+            Codigo = atividade.Codigo,
+            Nome = atividade.Nome,
+            Procedure = atividade.Procedure,
+            Tipo = atividade.Tipo,
+        };
     }
 }

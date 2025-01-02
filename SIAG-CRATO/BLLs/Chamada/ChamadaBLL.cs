@@ -158,4 +158,30 @@ public class ChamadaBLL
 
         return list.ToList();
     }
+
+    private static ChamadaDTO ConvertToDTO(ChamadaModel chamada)
+    {
+        return new()
+        {
+            Codigo = chamada.Codigo,
+            PalletOrigemId = chamada.PalletLeituraId,
+            PalletDestinoId = chamada.PalletDestinoId,
+            PalletLeituraId = chamada.PalletLeituraId,
+            AreaArmazenagemOrigemId = chamada.AreaArmazenagemOrigemId,
+            AreaArmazenagemDestinoId = chamada.AreaArmazenagemDestinoId,
+            AreaArmazenagemLeituraId = chamada.AreaArmazenagemLeituraId,
+            OperadorId = chamada.OperadorId,
+            EquipamentoId = chamada.EquipamentoId,
+            AtividadeRejeicaoId = chamada.AtividadeRejeicaoId,
+            AtividadeId = chamada.AtividadeId,
+            Status = chamada.Status,
+            DataChamada = chamada.DataChamada,
+            DataRecebida = chamada.DataRecebida,
+            DataAtendida = chamada.DataAtendida,
+            DataFinalizada = chamada.DataFinalizada,
+            DataRejeitada = chamada.DataRejeitada,
+            DataSuspensa = chamada.DataSuspensa,
+            CodigoChamadaSuspensa = chamada.CodigoChamadaSuspensa,
+        };
+    }
 }

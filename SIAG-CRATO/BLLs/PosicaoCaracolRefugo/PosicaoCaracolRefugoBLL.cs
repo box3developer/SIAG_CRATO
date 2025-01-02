@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
+using SIAG_CRATO.DTOs.PosicaoCaracolRefugo;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.PosicaoCaracolRefugo;
@@ -34,5 +35,17 @@ public class PosicaoCaracolRefugoBLL
         var posicaoCaracol = await conexao.QueryFirstOrDefaultAsync<PosicaoCaracolRefugoModel>(sql, new { tipo, fabrica });
 
         return posicaoCaracol;
+    }
+
+    private static PosicaoCaracolRefugoDTO ConvertToDTO(PosicaoCaracolRefugoModel posicao)
+    {
+        return new()
+        {
+            PosicaoCaracolRefugoId = posicao.IdPosicaoCaracolRefugo,
+            Descricao = posicao.Descricao,
+            Posicao = posicao.Posicao,
+            Tipo = posicao.Tipo,
+            Fabrica = posicao.Fabrica,
+        };
     }
 }
