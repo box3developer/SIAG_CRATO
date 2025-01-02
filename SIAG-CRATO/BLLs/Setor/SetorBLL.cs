@@ -22,6 +22,6 @@ public class SetorBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var setores = await conexao.QueryAsync<SetorModel>(SetorQuery.SELECT);
 
-        return setores.Select(x => new SetorSelectDTO() { Id = x.Codigo, Descricao = x.Descricao }).ToList();
+        return setores.Select(x => new SetorSelectDTO() { Id = x.Id_setortrabalho, Descricao = x.Nm_setortrabalho }).ToList();
     }
 }

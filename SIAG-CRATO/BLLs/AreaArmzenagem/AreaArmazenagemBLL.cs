@@ -95,47 +95,52 @@ public class AreaArmazenagemBLL
     public static List<StatusAreaArmazenagemDTO> GetTiposStatusGaiolas()
     {
         var listaTipos = new List<StatusAreaArmazenagemDTO>()
+        {
+            new ()
             {
-                new()
-                {
-                    Cor = CorStatusAreaArmazenagem.Bloqueado,
-                    Tipo = "Bloqueado"
+                Cor = CorStatusAreaArmazenagem.Livre,
+                Tipo = "Livre"
+            },
+            new ()
+            {
+                Cor = CorStatusAreaArmazenagem.Reservado,
+                Tipo = "Reservado"
+            },
+            new()
+            {
+                Cor = CorStatusAreaArmazenagem.Ocupado,
+                Tipo = "Ocupado"
+            },
+            new()
+            {
+                Cor = CorStatusAreaArmazenagem.Estufado,
+                Tipo = "Estufado"
+            },
+            new()
+            {
+                Cor = CorStatusAreaArmazenagem.Bloqueado,
+                Tipo = "Bloqueado"
+            },
+            new()
+            {
+                Cor = CorStatusAreaArmazenagem.Desabilitado,
+                Tipo = "Desabilitado"
+            },
+            new()
+            {
+                Cor = CorStatusAreaArmazenagem.Manutencao,
+                Tipo = "Manutencao"
                 },
-                new()
-                {
-                    Cor = CorStatusAreaArmazenagem.Desabilitado,
-                    Tipo = "Desabilitado"
-                },
-                new()
-                {
-                    Cor = CorStatusAreaArmazenagem.Manutencao,
-                    Tipo = "Manutencao"
-                 },
-                new ()
-                {
-                    Cor = CorStatusAreaArmazenagem.Livre,
-                    Tipo = "Livre"
-                },
-                new ()
-                {
-                    Cor = CorStatusAreaArmazenagem.Reservado,
-                    Tipo = "Reservado"
-                },
-                new()
-                {
-                    Cor = CorStatusAreaArmazenagem.Ocupado,
-                    Tipo = "Ocupado"
-                }
-            };
+        };
 
         return listaTipos;
     }
 
-    public static async Task<StatusAreaArmazenagemDTO> GetStatusGaiola(AreaArmazenagemModel areaArmazenagem)
+    public static StatusAreaArmazenagemDTO GetStatusGaiola(AreaArmazenagemModel areaArmazenagem, List<PalletModel> pallets)
     {
         var retorno = new StatusAreaArmazenagemDTO();
 
-        switch (areaArmazenagem.Status)
+        switch (areaArmazenagem.Fg_status)
         {
             case StatusAreaArmazenagem.Bloqueado:
                 {
@@ -175,32 +180,32 @@ public class AreaArmazenagemBLL
                 }
         }
 
-        if (areaArmazenagem.Status == StatusAreaArmazenagem.Bloqueado ||
-            areaArmazenagem.Status == StatusAreaArmazenagem.Desabilitado ||
-            areaArmazenagem.Status == StatusAreaArmazenagem.Manutencao)
+        if (areaArmazenagem.Fg_status == StatusAreaArmazenagem.Bloqueado ||
+            areaArmazenagem.Fg_status == StatusAreaArmazenagem.Desabilitado ||
+            areaArmazenagem.Fg_status == StatusAreaArmazenagem.Manutencao)
         {
             return retorno;
         }
 
-        var pallet = await PalletBLL.GetByAreaArmazenagemAsync(areaArmazenagem.Codigo);
+        var pallet = pallets.Where(x => x.Id_areaarmazenagem == areaArmazenagem.Id_areaarmazenagem).FirstOrDefault();
 
         if (pallet == null)
         {
             retorno.SemPallet = true;
         }
-        else if (pallet.Status == StatusPallet.Cheio)
+        else if (pallet.Fg_status == StatusPallet.Cheio)
         {
             retorno.Cor = CorStatusAreaArmazenagem.Estufado;
         }
 
-        retorno.Pallet = pallet?.Codigo ?? 0;
+        retorno.Pallet = pallet?.Id_pallet ?? 0;
 
         return retorno;
     }
 
-    public static async Task<List<List<StatusAreaArmazenagemDTO>>> GetStatusGaiolas(int idSetor)
+    public static async Task<List<List<List<StatusAreaArmazenagemDTO>>>> GetStatusGaiolas(int idSetor)
     {
-        var lista = new List<List<StatusAreaArmazenagemDTO>>();
+        var lista = new List<List<List<StatusAreaArmazenagemDTO>>>();
 
         if (idSetor <= 0)
         {
@@ -208,35 +213,42 @@ public class AreaArmazenagemBLL
         }
 
         var enderecos = await EnderecoBLL.GetBySetor(idSetor);
+        var pallets = await PalletBLL.GetListAsync();
 
         using var conexao = new SqlConnection(Global.Conexao);
         var sql = $"{AreaArmazenagemQuery.SELECT} WHERE id_endereco = @idEndereco ORDER BY nr_posicaox";
 
         foreach (var endereco in enderecos)
         {
+            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.Id_endereco });
 
-            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.IdEndereco });
+            var listaAreasArmazenagem = areasArmazenagem.GroupBy(x => x.Nr_posicaox).Select(x => x.ToList()).ToList();
+            var listaCaracol = new List<List<StatusAreaArmazenagemDTO>>();
 
-            var listaGaiolas = new List<StatusAreaArmazenagemDTO>();
-
-            foreach (var areaArmazenagem in areasArmazenagem)
+            foreach (var areaArmazenagem in listaAreasArmazenagem)
             {
-                var statusGaiola = await GetStatusGaiola(areaArmazenagem);
-                statusGaiola.Caracol = areaArmazenagem.PosicaoX;
-                statusGaiola.Gaiola = areaArmazenagem.PosicaoY;
-                statusGaiola.Codigo = areaArmazenagem.Codigo;
+                var listaGaiolas = new List<StatusAreaArmazenagemDTO>();
 
-                listaGaiolas.Add(statusGaiola);
+                foreach (var gaiola in areaArmazenagem)
+                {
+                    var statusGaiola = GetStatusGaiola(gaiola, pallets);
+                    statusGaiola.Caracol = gaiola.Nr_posicaox;
+                    statusGaiola.Gaiola = gaiola.Nr_posicaoy;
+                    statusGaiola.Codigo = gaiola.Id_areaarmazenagem;
+
+                    listaGaiolas.Add(statusGaiola);
+                }
+
+                listaGaiolas = listaGaiolas.OrderBy(x => x.Gaiola).ToList();
+                if (listaGaiolas.Count == 0)
+                {
+                    continue;
+                }
+
+                listaCaracol.Add(listaGaiolas);
             }
 
-            listaGaiolas = listaGaiolas.OrderBy(x => x.Gaiola).ToList();
-
-            if (listaGaiolas.Count == 0)
-            {
-                continue;
-            }
-
-            lista.Add(listaGaiolas);
+            lista.Add(listaCaracol);
         }
 
         return lista;
