@@ -15,7 +15,7 @@ public class PalletBLL
             { "@Codigo", pallet.Id_pallet },
             { "@Status", pallet.Fg_status },
             { "@QtdUtilizacao", pallet.Qt_utilizacao },
-            { "@AreaArmazenagem", pallet.AreaArmazenagemId == null? DBNull.Value: pallet.AreaArmazenagemId},
+            { "@AreaArmazenagem", pallet.Id_areaarmazenagem == null? DBNull.Value: pallet.AreaArmazenagemId},
             { "@Agrupador", pallet.Id_agrupador == Guid.Empty ? pallet.Id_agrupador : DBNull.Value },
             { "@DataUltimaMovimentacao", pallet.Dt_ultimamovimentacao != null ? pallet.Dt_ultimamovimentacao : DBNull.Value },
             { "@Identificacao", pallet.Cd_identificacao != null ? pallet.Cd_identificacao : DBNull.Value},
