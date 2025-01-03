@@ -7,35 +7,40 @@ namespace SIAG_CRATO.BLLs.EquipamentoChecklist;
 
 public class EquipamentoChecklistBLL
 {
-    public static async Task<List<EquipamentoChecklistModel>> GetListAsync()
+    public static async Task<List<EquipamentoChecklistDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var EquipamentoChecklist = await conexao.QueryAsync<EquipamentoChecklistModel>(EquipamentoChecklistQuery.SELECT);
 
-        return EquipamentoChecklist.ToList();
+        return EquipamentoChecklist.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<EquipamentoChecklistModel?> GetByIdAsync(int id)
+    public static async Task<EquipamentoChecklistDTO?> GetByIdAsync(int id)
     {
         var sql = $@"{EquipamentoChecklistQuery.SELECT} WHERE id_equipamentochecklist = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var EquipamentoChecklist = await conexao.QueryFirstOrDefaultAsync<EquipamentoChecklistModel>(sql, new { id });
+        var checklist = await conexao.QueryFirstOrDefaultAsync<EquipamentoChecklistModel>(sql, new { id });
 
-        return EquipamentoChecklist;
+        if (checklist == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(checklist);
     }
 
-    public static async Task<List<EquipamentoChecklistModel>> GetByModeloAsync(int id_equipamentomodelo)
+    public static async Task<List<EquipamentoChecklistDTO>> GetByModeloAsync(int id_equipamentomodelo)
     {
         var sql = $@"{EquipamentoChecklistQuery.SELECT}WHERE id_equipamentomodelo = @id_equipamentomodelo";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var EquipamentoChecklist = await conexao.QueryAsync<EquipamentoChecklistModel>(sql, new { id_equipamentomodelo });
 
-        return EquipamentoChecklist.ToList();
+        return EquipamentoChecklist.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<List<EquipamentoChecklistModel>> GetChecklistEquipamentoByIdentificador(string nm_identificador)
+    public static async Task<List<EquipamentoChecklistDTO>> GetChecklistEquipamentoByIdentificador(string nm_identificador)
     {
         var modelo = await EquipamentoBLL.GetByidentificadorAsync(nm_identificador);
 

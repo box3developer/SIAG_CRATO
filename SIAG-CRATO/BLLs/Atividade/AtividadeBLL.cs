@@ -7,35 +7,45 @@ namespace SIAG_CRATO.BLLs.Atividade;
 
 public class AtividadeBLL
 {
-    public static async Task<List<AtividadeModel>> GetListAsync()
+    public static async Task<List<AtividadeDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var atividades = await conexao.QueryAsync<AtividadeModel>(AtividadeQuery.SELECT);
 
-        return atividades.ToList();
+        return atividades.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<AtividadeModel?> GetByIdAsync(int id)
+    public static async Task<AtividadeDTO?> GetByIdAsync(int id)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE id_atividade = @idAtividade";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var atividade = await conexao.QueryFirstOrDefaultAsync<AtividadeModel>(sql, new { idAtividade = id });
 
-        return atividade;
+        if (atividade == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(atividade);
     }
 
-    public static async Task<AtividadeModel?> GetByNomeAsync(string nome)
+    public static async Task<AtividadeDTO?> GetByNomeAsync(string nome)
     {
         var sql = $"{AtividadeQuery.SELECT} WHERE nm_atividade = @nomeAtividade";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var atividade = await conexao.QueryFirstOrDefaultAsync<AtividadeModel>(sql, new { nomeAtividade = nome });
 
-        return atividade;
+        if (atividade == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(atividade);
     }
 
-    public static async Task<List<AtividadeModel>> GetByEquipModeloSetor(int id_equipamentomodelo, int id_setortrabalho)
+    public static async Task<List<AtividadeDTO>> GetByEquipModeloSetor(int id_equipamentomodelo, int id_setortrabalho)
     {
         if (id_equipamentomodelo == 0 || id_setortrabalho == 0)
         {
@@ -43,12 +53,11 @@ public class AtividadeBLL
         }
 
         var sql = $@"{AtividadeQuery.SELECT} WHERE id_equipamentomodelo = @id_equipamentomodelo and id_setortrabalho = @id_setortrabalho";
+
         using var conexao = new SqlConnection(Global.Conexao);
+        var lista = await conexao.QueryAsync<AtividadeModel>(sql, new { id_equipamentomodelo, id_setortrabalho });
 
-        var list = await conexao.QueryAsync<AtividadeModel>(sql, new { id_equipamentomodelo, id_setortrabalho });
-
-        return list.ToList();
-
+        return lista.Select(ConvertToDTO).ToList();
     }
 
     private static AtividadeDTO ConvertToDTO(AtividadeModel atividade)

@@ -7,7 +7,7 @@ namespace SIAG_CRATO.BLLs.EquipamentoCheckListOperador;
 
 public class EquipamentoCheckListOperadorBLL
 {
-    public static async Task<bool> SetChecklistOperador(EquipamentoCheckListOperadorModel checklistOperador)
+    public static async Task<bool> SetChecklistOperador(EquipamentoCheckListOperadorDTO checklistOperador)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(EquipamentoCheckListOperadorQuery.INSERT, new

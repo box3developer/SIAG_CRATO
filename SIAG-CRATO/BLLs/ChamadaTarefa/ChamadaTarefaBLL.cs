@@ -8,22 +8,22 @@ namespace SIAG_CRATO.BLLs.ChamadaTarefa;
 
 public class ChamadaTarefaBLL
 {
-    public static async Task<List<ChamadaTarefaModel>> GetListAsync()
+    public static async Task<List<ChamadaTarefaDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<ChamadaTarefaModel>(ChamadaTarefaQuery.SELECT);
 
-        return tarefas.ToList();
+        return tarefas.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<List<ChamadaTarefaModel>> GetByIdAsync(Guid idChamada, int idTarefa)
+    public static async Task<List<ChamadaTarefaDTO>> GetByIdAsync(Guid idChamada, int idTarefa)
     {
         string sql = $"{ChamadaQuery.SELECT} WHERE id_tarefa = @idTarefa AND id_chamada = @idChamada";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<ChamadaTarefaModel>(sql, new { idTarefa, idChamada });
 
-        return tarefas.ToList();
+        return tarefas.Select(ConvertToDTO).ToList();
     }
 
     public static async Task<bool> SetTarefaAsync(Guid idChamada, int idTarefa)
@@ -34,7 +34,7 @@ public class ChamadaTarefaBLL
         return tarefa > 0;
     }
 
-    public static async Task<bool> UpdateTarefaAsync(ChamadaTarefaModel tarefa)
+    public static async Task<bool> UpdateTarefaAsync(ChamadaTarefaDTO tarefa)
     {
         string sql = $"{ChamadaTarefaQuery.UPDATE} WHERE id_tarefa = @idTarefa AND id_chamada = @idChamada";
 
@@ -55,7 +55,7 @@ public class ChamadaTarefaBLL
         return id > 0;
     }
 
-    private static ChamdaTarefaDTO ConvertToDTO(ChamadaTarefaModel chamada)
+    private static ChamadaTarefaDTO ConvertToDTO(ChamadaTarefaModel chamada)
     {
         return new()
         {

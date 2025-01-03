@@ -11,93 +11,118 @@ namespace SIAG_CRATO.BLLs.Equipamento;
 
 public class EquipamentoBLL
 {
-    public static async Task<List<EquipamentoModel>> GetListAsync()
+    public static async Task<List<EquipamentoDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamentos = await conexao.QueryAsync<EquipamentoModel>(EquipamentoQuery.SELECT);
 
-        return equipamentos.ToList();
+        return equipamentos.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<List<EquipamentoModel>> GetAllCaracois()
+    public static async Task<List<EquipamentoDTO>> GetAllCaracois()
     {
         var sql = $"{EquipamentoQuery.SELECT} WHERE id_equipamentomodelo = 1";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamentos = await conexao.QueryAsync<EquipamentoModel>(sql);
 
-        return equipamentos.ToList();
+        return equipamentos.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<EquipamentoModel?> GetByIdAsync(int id)
+    public static async Task<EquipamentoDTO?> GetByIdAsync(int id)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE id_equipamento = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { id });
 
-        return equipamento;
+        if (equipamento == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(equipamento);
     }
 
-    public static async Task<List<EquipamentoModel>> GetActiveEquipByModel(int id_equipamentomodelo)
+    public static async Task<List<EquipamentoDTO>> GetActiveEquipByModel(int id_equipamentomodelo)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE id_equipamentomodelo = @id_equipamentomodelo and id_operador is not null";
 
         using var conexao = new SqlConnection(Global.Conexao);
 
-        var list = await conexao.QueryAsync<EquipamentoModel>(sql, new { id_equipamentomodelo });
+        var lista = await conexao.QueryAsync<EquipamentoModel>(sql, new { id_equipamentomodelo });
 
-        return list.ToList();
+        return lista.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<EquipamentoModel?> GetByidentificadorAsync(string nm_identificador)
+    public static async Task<EquipamentoDTO?> GetByidentificadorAsync(string nm_identificador)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE nm_identificador = @nm_identificador";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { nm_identificador });
 
-        return equipamento;
+        if (equipamento == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(equipamento);
     }
 
-    public static async Task<EquipamentoModel?> GetByCaracolAsync(string identificadorCaracol)
+    public static async Task<EquipamentoDTO?> GetByCaracolAsync(string identificadorCaracol)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE nm_identificador = @identificadorCaracol";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { identificadorCaracol });
 
-        return equipamento;
+        if (equipamento == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(equipamento);
     }
 
-    public static async Task<EquipamentoModel?> GetByOperadorAsync(string cracha)
+    public static async Task<EquipamentoDTO?> GetByOperadorAsync(string cracha)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE id_operador = @cracha";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { cracha });
 
-        return equipamento;
+        if (equipamento == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(equipamento);
     }
 
-    public static async Task<EquipamentoModel?> GetByCaixaPendenteAsync(string idCaixa)
+    public static async Task<EquipamentoDTO?> GetByCaixaPendenteAsync(string idCaixa)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE cd_leitura_pendente = @cdCaixaPendente";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamento = await conexao.QueryFirstOrDefaultAsync<EquipamentoModel>(sql, new { idCaixa });
 
-        return equipamento;
+        if (equipamento == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(equipamento);
     }
 
-    public static async Task<List<EquipamentoModel>> GetByModeloAsync(int idModelo)
+    public static async Task<List<EquipamentoDTO>> GetByModeloAsync(int idModelo)
     {
         var sql = $@"{EquipamentoQuery.SELECT} WHERE id_equipamentomodelo = @idModelo";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamentos = await conexao.QueryAsync<EquipamentoModel>(sql, new { idModelo });
 
-        return equipamentos.ToList();
+        return equipamentos.Select(ConvertToDTO).ToList();
     }
 
     public static async Task<bool> SetCaixaPendente(string? idCaixa, string idEquipamento)

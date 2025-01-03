@@ -10,14 +10,19 @@ namespace SIAG_CRATO.BLLs.Operador;
 
 public class OperadorBLL
 {
-    public static async Task<OperadorModel?> GetByCrachaAsync(string cracha)
+    public static async Task<OperadorDTO?> GetByCrachaAsync(string cracha)
     {
         var sql = $"{OperadorQuery.SELECT} WHERE id_operador = @cracha";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var operador = await conexao.QueryFirstOrDefaultAsync<OperadorModel>(sql, new { cracha });
 
-        return operador;
+        if (operador == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(operador);
     }
 
     public static async Task<int> GetMetaAsync()

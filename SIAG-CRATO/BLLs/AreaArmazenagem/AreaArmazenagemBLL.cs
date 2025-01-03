@@ -12,45 +12,60 @@ namespace SIAG_CRATO.BLLs.AreaArmazenagem;
 
 public class AreaArmazenagemBLL
 {
-    public static async Task<List<AreaArmazenagemModel>> GetListAsync()
+    public static async Task<List<AreaArmazenagemDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(AreaArmazenagemQuery.SELECT);
 
-        return areasArmazenagem.ToList();
+        return areasArmazenagem.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByIdAsync(long id)
+    public static async Task<AreaArmazenagemDTO?> GetByIdAsync(long id)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_areaarmazenagem = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { id });
 
-        return areasArmazenagem;
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByIdentificadorAsync(string identificador)
+    public static async Task<AreaArmazenagemDTO?> GetByIdentificadorAsync(string identificador)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE cd_identificacao = @identificador";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { identificador });
 
-        return areasArmazenagem;
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByAgrupadorAsync(int idAgrupador)
+    public static async Task<AreaArmazenagemDTO?> GetByAgrupadorAsync(int idAgrupador)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_agrupador = @idAgrupador";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idAgrupador });
 
-        return areasArmazenagem;
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
+    public static async Task<AreaArmazenagemDTO?> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} 
                      WHERE CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) = @identificadorCaracol
@@ -59,10 +74,15 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { identificadorCaracol, posicaoY });
 
-        return areasArmazenagem;
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
     }
 
-    public static async Task<List<AreaArmazenagemModel>> GetByIdentificadorCaracolAsync(string identificadorCaracol)
+    public static async Task<List<AreaArmazenagemDTO>> GetByIdentificadorCaracolAsync(string identificadorCaracol)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} 
                      WHERE CAST(id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) = @identificadorCaracol
@@ -71,7 +91,7 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { identificadorCaracol });
 
-        return areasArmazenagem.ToList();
+        return areasArmazenagem.Select(ConvertToDTO).ToList();
     }
 
     public static async Task<int> SetStatusAsync(long id, StatusAreaArmazenagem status)
@@ -82,11 +102,10 @@ public class AreaArmazenagemBLL
         return area;
     }
 
-    public static async Task<AreaArmazenagemModel?> GetStageInLivreAsync(int idEndereco)
+    public static async Task<AreaArmazenagemDTO?> GetStageInLivreAsync(int idEndereco)
     {
         var parametroEntity = await ParametroBLL.GetParametroByParametro("TIPO AREA STAGEIN")
-        ??
-            throw new Exception("Erro ao executar StageInLivre");
+                                    ?? throw new Exception("Erro ao executar StageInLivre");
 
         var nmValor = short.Parse(parametroEntity.NmValor ?? "");
 
@@ -98,8 +117,12 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco, nmValor });
 
-        return areasArmazenagem;
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
 
+        return ConvertToDTO(areasArmazenagem);
     }
 
     public static List<StatusAreaArmazenagemDTO> GetTiposStatusGaiolas()

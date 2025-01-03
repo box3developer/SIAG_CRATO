@@ -7,37 +7,52 @@ namespace SIAG_CRATO.BLLs.LiderVirtual;
 
 public class LiderVirtualBLL
 {
-    public static async Task<LiderVirtualModel?> GetByOperador(string cracha)
+    public static async Task<LiderVirtualDTO?> GetByOperador(string cracha)
     {
         var sql = $"{LiderVirtualQuery.SELECT} WHERE id_operador = @cracha ORDER BY id_lidervirtual DESC";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var liderVirtual = await conexao.QueryFirstOrDefaultAsync<LiderVirtualModel>(sql, new { cracha });
 
-        return liderVirtual;
+        if (liderVirtual == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(liderVirtual);
     }
 
-    public static async Task<LiderVirtualModel?> GetByDestino(int idEquipamento)
+    public static async Task<LiderVirtualDTO?> GetByDestino(int idEquipamento)
     {
         var sql = $"{LiderVirtualQuery.SELECT} WHERE id_equipamentodestino = @idEquipamento ORDER BY id_lidervirtual DESC";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var liderVirtual = await conexao.QueryFirstOrDefaultAsync<LiderVirtualModel>(sql, new { idEquipamento });
 
-        return liderVirtual;
+        if (liderVirtual == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(liderVirtual);
     }
 
-    public static async Task<LiderVirtualModel?> GetByOrigem(int idEquipamento)
+    public static async Task<LiderVirtualDTO?> GetByOrigem(int idEquipamento)
     {
         var sql = $"{LiderVirtualQuery.SELECT} WHERE id_equipamentoOrigem = @idEquipamento ORDER BY id_lidervirtual DESC";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var liderVirtual = await conexao.QueryFirstOrDefaultAsync<LiderVirtualModel>(sql, new { idEquipamento });
 
-        return liderVirtual;
+        if (liderVirtual == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(liderVirtual);
     }
 
-    public static async Task<int> Create(LiderVirtualModel liderVirtual)
+    public static async Task<int> Create(LiderVirtualDTO liderVirtual)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(LiderVirtualQuery.INSERT, new
@@ -54,7 +69,7 @@ public class LiderVirtualBLL
         return id;
     }
 
-    public static async Task<int> Update(LiderVirtualModel liderVirtual)
+    public static async Task<int> Update(LiderVirtualDTO liderVirtual)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(LiderVirtualQuery.UPDATE, new

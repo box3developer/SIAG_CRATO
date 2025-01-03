@@ -7,7 +7,7 @@ namespace SIAG_CRATO.BLLs.CaixaLeitura;
 
 public class CaixaLeituraBLL
 {
-    public static async Task<CaixaLeituraModel?> GetUltimaCaixaLida(string idCaixa)
+    public static async Task<CaixaLeituraDTO?> GetUltimaCaixaLida(string idCaixa)
     {
         var sql = $@"{CaixaLeituraQuery.SELECT}
                      WHERE  id_caixa = @idCaixa AND fg_tipo = 19
@@ -16,7 +16,12 @@ public class CaixaLeituraBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var caixa = await conexao.QueryFirstOrDefaultAsync<CaixaLeituraModel>(sql, new { idCaixa });
 
-        return caixa;
+        if (caixa == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(caixa);
     }
 
     public static async Task<bool> CreateCaixaLeitura(CaixaLeituraModel caixaLeitura)

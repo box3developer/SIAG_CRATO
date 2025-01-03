@@ -14,24 +14,29 @@ namespace SIAG_CRATO.BLLs.Caixa;
 
 public class CaixaBLL
 {
-    public async static Task<CaixaModel?> GetByIdAsync(string id)
+    public async static Task<CaixaDTO?> GetByIdAsync(string id)
     {
         var sql = $"{CaixaQuery.SELECT} WHERE id_caixa = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var caixa = await conexao.QueryFirstOrDefaultAsync<CaixaModel>(sql, new { id });
 
-        return caixa;
+        if (caixa == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(caixa);
     }
 
-    public async static Task<List<CaixaModel>> GetByPalletAsync(long idPallet)
+    public async static Task<List<CaixaDTO>> GetByPalletAsync(long idPallet)
     {
         var sql = $"{CaixaQuery.SELECT} WHERE id_pallet = @idPallet";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var caixas = await conexao.QueryAsync<CaixaModel>(sql, new { idPallet });
 
-        return caixas.ToList();
+        return caixas.Select(ConvertToDTO).ToList();
     }
 
     public async static Task<int> GetQuantidadeByPalletAsync(int idPallet)

@@ -8,7 +8,7 @@ namespace SIAG_CRATO.BLLs.AtividadeRejeicao;
 
 public class AtividadeRejeicaoBLL
 {
-    public static async Task<List<AtividadeRejeicaoModel>> GetListAsync(AtividadeRejeicaoModel? atividadeRejeicao)
+    public static async Task<List<AtividadeRejeicaoDTO>> GetListAsync(AtividadeRejeicaoDTO? atividadeRejeicao)
     {
         var sql = $"{AtividadeRejeicaoQuery.SELECT} WHERE 1 = 1";
         object? filtro = null;
@@ -39,7 +39,7 @@ public class AtividadeRejeicaoBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var atividades = await conexao.QueryAsync<AtividadeRejeicaoModel>(sql, filtro);
 
-        return atividades.ToList();
+        return atividades.Select(ConvertToDTO).ToList();
     }
 
     private static AtividadeRejeicaoDTO ConvertToDTO(AtividadeRejeicaoModel atividadeRejeicao)

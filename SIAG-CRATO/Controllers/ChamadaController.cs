@@ -8,7 +8,7 @@ using SIAG_CRATO.BLLs.EquipamentoEndereco;
 using SIAG_CRATO.BLLs.EquipamentoEnderecoPrioridade;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
-using SIAG_CRATO.Models;
+using SIAG_CRATO.DTOs.EquipamentoEndereco;
 
 namespace SIAG_CRATO.Controllers;
 [Route("api/[controller]")]
@@ -112,7 +112,7 @@ public class ChamadaController : ControllerBase
             var atividades = await AtividadeBLL.GetListAsync();
 
             atividades = atividades.Where(x => chamadasPendentes.Select(y => y.AtividadeId).Distinct().Contains(x.IdAtividade)).ToList();
-            var equipamentosEndereco = new List<EquipamentoEnderecoModel>();
+            var equipamentosEndereco = new List<EquipamentoEnderecoDTO>();
 
             if (atividades.Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.BloquearEndereco || x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
             {

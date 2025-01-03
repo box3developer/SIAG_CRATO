@@ -7,17 +7,17 @@ namespace SIAG_CRATO.BLLs.StatusLeitor;
 
 public class StatusLeitorBLL
 {
-    public static async Task<List<StatusLeitorModel>> GetStatusByEquipamentoAsync(int idLeitor, int idEquipamento)
+    public static async Task<List<StatusLeitorDTO>> GetStatusByEquipamentoAsync(int idLeitor, int idEquipamento)
     {
         var sql = $"{StatusLeitorQuery.SELECT} WHERE equipamento = @idEquipamento AND leitor = @idLeitor";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var statusLeitor = await conexao.QueryAsync<StatusLeitorModel>(sql, new { idEquipamento, idLeitor });
 
-        return statusLeitor.ToList();
+        return statusLeitor.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<int> CreateStatusLeitorAsync(StatusLeitorModel statusLeitor)
+    public static async Task<int> CreateStatusLeitorAsync(StatusLeitorDTO statusLeitor)
     {
         using var conexao = new SqlConnection(Global.Conexao);
 
@@ -34,7 +34,7 @@ public class StatusLeitorBLL
         return id;
     }
 
-    public static async Task<int> UpdateStatusLeitorAsync(StatusLeitorModel statusLeitor)
+    public static async Task<int> UpdateStatusLeitorAsync(StatusLeitorDTO statusLeitor)
     {
         using var conexao = new SqlConnection(Global.Conexao);
 
@@ -51,7 +51,7 @@ public class StatusLeitorBLL
         return id;
     }
 
-    private StatusLeitorDTO ConvertToDTO(StatusLeitorModel status)
+    private static StatusLeitorDTO ConvertToDTO(StatusLeitorModel status)
     {
         return new()
         {
