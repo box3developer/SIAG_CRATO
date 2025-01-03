@@ -29,12 +29,46 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             return query;
         }
 
-        public async Task<List<AreaArmazenagem>> GetListAsync(FiltroPaginacaoDTO dto)
+        public async Task<DadosPaginadosDTO<AreaArmazenagem>> GetListAsync(FiltroPaginacaoDTO dto)
         {
             var query = _dbContext.AreaArmazenagem.AsQueryable();
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            return await query.ToListAsync();
+            var lista = await query.OrderByDescending(x => x.AreaArmazenagemId)
+                                   .GetPaged(dto.CurrentPage, dto.PageSize, dto.Impressao);
+
+            var listaFormatada = lista.Dados.Select(x => x).ToList();
+
+            var dadosPaginados = new DadosPaginadosDTO<AreaArmazenagem>
+            {
+                Dados = listaFormatada,
+                TotalPages = lista.TotalPages,
+                CurrentPage = lista.CurrentPage,
+                PageSize = lista.PageSize,
+                TotalRegisters = lista.TotalRegisters
+            };
+
+            return dadosPaginados;
+        }
+
+        public async Task<List<SelectDTO<int>>> GetSelectAsync(FiltroPaginacaoDTO dto)
+        {
+            var query = _dbContext.AreaArmazenagem.AsQueryable();
+
+            query = FiltroPesquisa(query, dto.Pesquisa);
+
+            query = query.OrderBy(x => x.AreaArmazenagemId)
+                         .Take(30);
+
+            var dados = await query
+                .Select(x => new SelectDTO<int>
+                {
+                    Id = x.AreaArmazenagemId,
+                    Descricao = $"Identificação: {x.CdIdentificacao} - Status: {x.FgStatus} - X: {x.NrPosicaoX} - Y: {x.NrPosicaoY}",
+                })
+                .ToListAsync();
+
+            return dados;
         }
     }
 }
