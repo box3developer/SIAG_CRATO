@@ -1,30 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SIAG_CRATO.Models;
+﻿namespace SIAG_CRATO.Models;
 
 public class CaixaLeituraModel
 {
-    public int? Id_caixaleitura { get; set; }
-
-    public string? Id_caixa { get; set; }
-
-    public DateTime Dt_leitura { get; set; }
-
-    public int? Fg_tipo { get; set; }
-
-    public int? Fg_status { get; set; }
-
-    public int? Id_operador { get; set; }
-
-    public int? Id_equipamento { get; set; }
-
-    public int? Id_pallet { get; set; }
-
-    public long? Id_areaarmazenagem { get; set; }
-
-    public int? Id_endereco { get; set; }
-
-    public int? Fg_cancelado { get; set; }
-
-    public int? Id_ordem { get; set; }
+    public int? IdCaixaLeitura { get; set; }
+    public string? IdCaixa { get; set; }
+    public DateTime DtLeitura { get; set; }
+    public int? FgTipo { get; set; }
+    public int? FgStatus { get; set; }
+    public int? IdOperador { get; set; }
+    public int? IdEquipamento { get; set; }
+    public int? IdPallet { get; set; }
+    public long? IdAreaArmazenagem { get; set; }
+    public int? IdEndereco { get; set; }
+    public int? FgCancelado { get; set; }
+    public int? IdOrdem { get; set; }
 }

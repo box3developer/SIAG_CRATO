@@ -2,8 +2,8 @@
 
 public class PedidoModel
 {
-    public string? Id_pedido { get; set; }
-    public string? Cd_pedido { get; set; }
-    public string? Cd_lote { get; set; }
-    public string? Cd_box { get; set; }
+    public string? IdPedido { get; set; }
+    public string? CdPedido { get; set; }
+    public string? CdLote { get; set; }
+    public string? CdBox { get; set; }
 }

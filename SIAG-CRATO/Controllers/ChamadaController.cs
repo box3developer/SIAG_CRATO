@@ -5,9 +5,10 @@ using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
 using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.BLLs.EquipamentoEndereco;
+using SIAG_CRATO.BLLs.EquipamentoEnderecoPrioridade;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
-using SIAG_CRATO.Models;
+using SIAG_CRATO.DTOs.EquipamentoEndereco;
 
 namespace SIAG_CRATO.Controllers;
 [Route("api/[controller]")]
@@ -20,16 +21,30 @@ public class ChamadaController : ControllerBase
         try
         {
             var codigoChamada = await ChamadaBLL.SetChamadaAsync(chamada);
-            var tarefas = await AtividadeTarefaBLL.GetByAtividadeAsync(chamada.AtividadeId);
+            var tarefas = await AtividadeTarefaBLL.GetByAtividadeAsync(chamada.IdAtividade);
 
-            foreach (var tarefa in tarefas.OrderBy(x => x.Sequencia))
+            foreach (var tarefa in tarefas.OrderBy(x => x.CdSequencia))
             {
-                await ChamadaTarefaBLL.SetTarefaAsync(chamada.Codigo, tarefa.AtividadeId);
+                await ChamadaTarefaBLL.SetTarefaAsync(chamada.IdChamada, tarefa.IdAtividade);
             }
 
-            await ChamadaBLL.SetStatusAsync(chamada.Codigo, StatusChamada.Aguardando);
+            await ChamadaBLL.SetStatusAsync(chamada.IdChamada, StatusChamada.Aguardando);
 
-            return Ok(chamada.Codigo);
+            return Ok(chamada.IdChamada);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetChamadaById(Guid id)
+    {
+        try
+        {
+            var chamada = await ChamadaBLL.GetByIdAsync(id);
+            return Ok(chamada);
         }
         catch (Exception ex)
         {
@@ -58,12 +73,12 @@ public class ChamadaController : ControllerBase
         {
             var chamada = await ChamadaBLL.GetByIdAsync(id);
 
-            if (chamada == null || chamada.Status >= StatusChamada.Rejeitado)
+            if (chamada == null || chamada.FgStatus >= StatusChamada.Rejeitado)
             {
                 return BadRequest("Chamada não encontrada!");
             }
 
-            await ChamadaBLL.RejeitarChamadaAsync(chamada.Codigo, chamada.AtividadeRejeicaoId);
+            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, chamada.IdAtividadeRejeicao);
 
             return Ok();
         }
@@ -92,41 +107,41 @@ public class ChamadaController : ControllerBase
                 return BadRequest("Chamada não encontrada!");
             }
 
-            var chamadasPendentes = await ChamadaBLL.GetChamadaDisponiveisAsync(equipamento.ModeloId, equipamento.SetorId ?? 0);
+            var chamadasPendentes = await ChamadaBLL.GetChamadaDisponiveisAsync(equipamento.IdEquipamentoModelo, equipamento.IdSetorTrabalho ?? 0);
 
             var atividades = await AtividadeBLL.GetListAsync();
 
-            atividades = atividades.Where(x => chamadasPendentes.Select(y => y.AtividadeId).Distinct().Contains(x.Codigo)).ToList();
-            var equipamentosEndereco = new List<EquipamentoEnderecoModel>();
+            atividades = atividades.Where(x => chamadasPendentes.Select(y => y.AtividadeId).Distinct().Contains(x.IdAtividade)).ToList();
+            var equipamentosEndereco = new List<EquipamentoEnderecoDTO>();
 
-            if (atividades.Where(x => x.EvitarConflitoEndereco == ConflitoDeEnderecos.BloquearEndereco || x.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
+            if (atividades.Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.BloquearEndereco || x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
             {
                 var dataAtivo = DateTime.Now.AddMinutes(-120);
                 var dataInativo = DateTime.Now.AddMinutes(-20);
 
-                equipamentosEndereco = await EquipamentoEnderecoBLL.GetOutrosEquipamentosAtivosAsync(equipamento.Codigo, equipamento.ModeloId, equipamento.SetorId ?? 0, dataAtivo, dataInativo);
+                equipamentosEndereco = await EquipamentoEnderecoBLL.GetOutrosEquipamentosAtivosAsync(equipamento.IdEquipamento, equipamento.IdEquipamentoModelo, equipamento.IdSetorTrabalho ?? 0, dataAtivo, dataInativo);
 
-                chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
-                                                                                       y.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
-                                                                           .Select(y => y.Codigo)
+                chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
+                                                                                       y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
+                                                                           .Select(y => y.IdAtividade)
                                                                            .Distinct().Contains(x.AtividadeId) &&
-                                                                 equipamentosEndereco.Select(y => y.EnderecoId).Distinct().Contains(x.AreaAmazenagemOrigemId))
+                                                                 equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.AreaAmazenagemOrigemId))
                                                      .ToList();
             }
 
-            if (atividades.Where(x => x.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona || x.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
+            if (atividades.Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona || x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
             {
-                equipamentosEndereco = await EquipamentoEnderecoBLL.GetByEquipamentoAsync(equipamento.Codigo);
+                equipamentosEndereco = await EquipamentoEnderecoBLL.GetByEquipamentoAsync(equipamento.IdEquipamento);
 
-                chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
-                                                                                       y.EvitarConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
-                                                                           .Select(y => y.Codigo)
+                chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
+                                                                                       y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
+                                                                           .Select(y => y.IdAtividade)
                                                                            .Distinct().Contains(x.AtividadeId) &&
-                                                                 equipamentosEndereco.Select(y => y.EnderecoId).Distinct().Contains(x.AreaAmazenagemOrigemId))
+                                                                 equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.AreaAmazenagemOrigemId))
                                                      .ToList();
             }
 
-            var equipamentosPrioridade = (await EquipamentoEnderecoPrioridadeBLL.GetListAsync()).Where(x => equipamentosEndereco.Select(y => y.EquipamentoEnderecoId).Distinct().Contains(x.EnderecoId));
+            var equipamentosPrioridade = (await EquipamentoEnderecoPrioridadeBLL.GetListAsync()).Where(x => equipamentosEndereco.Select(y => y.IdEquipamentoEndereco).Distinct().Contains(x.IdEquipamentoEndereco));
             var chamadasComPrioridade = new List<ChamadaDisponivelDTO>();
 
             if (equipamentosPrioridade.Any())

@@ -1,31 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Parametro;
-using SIAG_CRATO.Models;
 
-namespace SIAG_CRATO.Controllers
+namespace SIAG_CRATO.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ParametroController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ParametroController : ControllerBase
+    [HttpGet("{parametro}")]
+    public async Task<IActionResult> GetByValor(string parametro)
     {
-        [HttpGet("{parametro}")]
-        public async Task<IActionResult> GetByValor(string parametro)
+        var parametroModel = await ParametroBLL.GetParametroByParametro(parametro);
+        if (parametroModel == null)
         {
-            var parametroModel = await ParametroBLL.GetParametroByParametro(parametro);
-            if (parametroModel == null)
-            {
-                return NotFound();
-            }
-            return Ok(parametroModel);
+            return NotFound();
         }
+        return Ok(parametroModel);
+    }
 
-        // Obtém parâmetros por tipo
-        [HttpGet("tipo/{tipo}")]
-        public async Task<IActionResult> GetByTipo(string tipo)
-        {
-            var parametros = await ParametroBLL.GetParametroByTipo(tipo);
-            return Ok(parametros);
-        }
+    // Obtém parâmetros por tipo
+    [HttpGet("tipo/{tipo}")]
+    public async Task<IActionResult> GetByTipo(string tipo)
+    {
+        var parametros = await ParametroBLL.GetParametroByTipo(tipo);
+        return Ok(parametros);
     }
 }

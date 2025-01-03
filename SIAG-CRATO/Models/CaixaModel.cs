@@ -2,21 +2,21 @@
 
 public class CaixaModel
 {
-    public string Id_caixa { get; set; } = string.Empty;
-    public Guid? Id_agrupador { get; set; }
-    public int? Id_pallet { get; set; }
-    public int? Id_programa { get; set; }
-    public string? Id_pedido { get; set; }
-    public string? Cd_produto { get; set; }
-    public string? Cd_cor { get; set; }
-    public string? Cd_gradetamanho { get; set; }
-    public int? Nr_caixa { get; set; }
-    public int? Nr_pares { get; set; }
-    public bool? Fg_rfid { get; set; }
-    public int? Fg_status { get; set; }
-    public DateTime? Dt_embalagem { get; set; }
-    public DateTime? Dt_expedicao { get; set; }
-    public DateTime? Dt_sorter { get; set; }
-    public DateTime? Dt_estufamento { get; set; }
-    public DateTime Dt_leitura { get; set; }
+    public string IdCaixa { get; set; } = string.Empty;
+    public Guid? IdAgrupador { get; set; }
+    public int? IdPallet { get; set; }
+    public int? IdPrograma { get; set; }
+    public string? IdPedido { get; set; }
+    public string? CdProduto { get; set; }
+    public string? CdCor { get; set; }
+    public string? CdGradeTamanho { get; set; }
+    public int? NrCaixa { get; set; }
+    public int? NrPares { get; set; }
+    public bool? FgRFID { get; set; }
+    public int? FgStatus { get; set; }
+    public DateTime? DtEmbalagem { get; set; }
+    public DateTime? DtExpedicao { get; set; }
+    public DateTime? DtSorter { get; set; }
+    public DateTime? DtEstufamento { get; set; }
+    public DateTime DtLeitura { get; set; }
 }

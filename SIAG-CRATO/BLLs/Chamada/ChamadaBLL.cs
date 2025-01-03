@@ -8,17 +8,22 @@ namespace SIAG_CRATO.BLLs.Chamada;
 
 public class ChamadaBLL
 {
-    public static async Task<ChamadaModel?> GetByIdAsync(Guid id)
+    public static async Task<ChamadaDTO?> GetByIdAsync(Guid id)
     {
         var sql = $"{ChamadaQuery.SELECT} WHERE id_chamada = @idChamada";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idChamada = id });
 
-        return chamada;
+        if (chamada == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(chamada);
     }
 
-    public static async Task<ChamadaModel?> GetChamadaAbertaAsync(int idPallet, long idAreaArmazenagem, int idAtividade)
+    public static async Task<ChamadaDTO?> GetChamadaAbertaAsync(int idPallet, long idAreaArmazenagem, int idAtividade)
     {
         var sql = $@"{ChamadaQuery.SELECT} 
                      WHERE id_palletorigem = @idPallet
@@ -29,7 +34,12 @@ public class ChamadaBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idPallet, idAreaArmazenagem, idAtividade });
 
-        return chamada;
+        if (chamada == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(chamada);
     }
 
     public static async Task<List<ChamadaDisponivelDTO>> GetChamadaDisponiveisAsync(int idEquipamentoModelo, int idSetorTrabalho)
@@ -53,7 +63,7 @@ public class ChamadaBLL
         return chamadas.ToList();
     }
 
-    public static async Task<ChamadaModel?> GetChamadaAbertaByOperadorAsync(int idOperador, int idEquipamento)
+    public static async Task<ChamadaDTO?> GetChamadaAbertaByOperadorAsync(int idOperador, int idEquipamento)
     {
         var sql = $@"{ChamadaQuery.SELECT} 
                      WHERE (id_operador = @idOperador or id_equipamento = @idEquipamento)
@@ -63,30 +73,33 @@ public class ChamadaBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, StatusChamada.Andamento });
 
-        return chamada;
+        if (chamada == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(chamada);
     }
 
     public static async Task<Guid> SetChamadaAsync(ChamadaInsertDTO chamada)
     {
-        chamada.Codigo = Guid.NewGuid();
-        chamada.Status = StatusChamada.Dependente;
-
-        object chamadaInsert = new
-        {
-            id_chamada = chamada.Codigo,
-            id_palletorigem = chamada.PalletOrigemId,
-            id_palletdestino = chamada.PalletDestinoId,
-            id_areaarmazenagemorigem = chamada.AreaArmazenagemOrigemId,
-            id_areaarmazenagemdestino = chamada.AreaArmazenagemDestinoId,
-            id_atividade = chamada.AtividadeId,
-            fg_status = chamada.Status,
-            priorizar = chamada.Priorizar,
-        };
+        chamada.IdChamada = Guid.NewGuid();
+        chamada.FgStatus = StatusChamada.Dependente;
 
         using var conexao = new SqlConnection(Global.Conexao);
-        await conexao.ExecuteAsync(ChamadaQuery.INSERT, chamadaInsert);
+        await conexao.ExecuteAsync(ChamadaQuery.INSERT, new
+        {
+            idChamada = chamada.IdChamada,
+            idPalletOrigem = chamada.IdPalletOrigem,
+            idPalletDestino = chamada.IdPalletDestino,
+            idAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+            idAreaArmazenagemDestino = chamada.IdAreaArmazenagemDestino,
+            idAtividade = chamada.IdAtividade,
+            statusChamada = chamada.FgStatus,
+            priorizar = chamada.FgPriorizar,
+        });
 
-        return chamada.Codigo;
+        return chamada.IdChamada;
     }
 
     public static async Task<bool> SetStatusAsync(Guid idChamada, StatusChamada status)
@@ -148,14 +161,40 @@ public class ChamadaBLL
         return true;
     }
 
-    public static async Task<List<ChamadaModel>> GetByStatus(int fg_status)
+    public static async Task<List<ChamadaDTO>> GetByStatus(int fg_status)
     {
         var sql = $@"{ChamadaQuery.SELECT} WHERE fg_status < @fg_status and dt_chamada >= dateadd(day,-1,getdate())";
 
         using var conexao = new SqlConnection(Global.Conexao);
 
-        var list = await conexao.QueryAsync<ChamadaModel>(sql, new { fg_status });
+        var lista = await conexao.QueryAsync<ChamadaModel>(sql, new { fg_status });
 
-        return list.ToList();
+        return lista.Select(ConvertToDTO).ToList();
+    }
+
+    private static ChamadaDTO ConvertToDTO(ChamadaModel chamada)
+    {
+        return new()
+        {
+            IdChamada = chamada.IdChamada,
+            IdPalletOrigem = chamada.IdPalletOrigem,
+            IdPalletLeitura = chamada.IdPalletLeitura,
+            IdPalletDestino = chamada.IdPalletDestino,
+            IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+            IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemDestino,
+            IdAreaArmazenagemLeitura = chamada.IdAreaArmazenagemLeitura,
+            IdOperador = chamada.IdOperador,
+            IdEquipamento = chamada.IdEquipamento,
+            IdAtividadeRejeicao = chamada.IdAtividadeRejeicao,
+            IdAtividade = chamada.IdAtividade,
+            FgStatus = chamada.FgStatus,
+            DtChamada = chamada.DtChamada,
+            DtRecebida = chamada.DtRecebida,
+            DtAtendida = chamada.DtAtendida,
+            DtFinalizada = chamada.DtFinalizada,
+            DtRejeitada = chamada.DtRejeitada,
+            DtSuspensa = chamada.DtSuspensa,
+            IdChamadaSuspensa = chamada.IdChamadaSuspensa,
+        };
     }
 }

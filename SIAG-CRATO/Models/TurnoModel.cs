@@ -1,15 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SIAG_CRATO.Models;
+﻿namespace SIAG_CRATO.Models;
 
 public class TurnoModel
 {
-    [Column("cd_turno")]
-    public string? CodTurno { get; set; }
-
-    [Column("dt_inicio")]
+    public string? CdTurno { get; set; }
     public DateTime DtInicio { get; set; }
-
-    [Column("dt_fim")]
     public DateTime DtFim { get; set; }
 }

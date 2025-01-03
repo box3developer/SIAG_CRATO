@@ -8,15 +8,15 @@ namespace SIAG_CRATO.BLLs.AtividadeTarefa;
 
 public class AtividadeTarefaBLL
 {
-    public static async Task<List<AtividadeTarefaModel>> GetListAsync()
+    public static async Task<List<AtividadeTarefaDTO>> GetListAsync()
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<AtividadeTarefaModel>(AtividadeTarefaQuery.SELECT);
 
-        return tarefas.ToList();
+        return tarefas.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<List<AtividadeTarefaModel>> GetListAsync(AtividadeTarefaFiltroDTO tarefa)
+    public static async Task<List<AtividadeTarefaDTO>> GetListAsync(AtividadeTarefaFiltroDTO tarefa)
     {
         string sql = $"{AtividadeTarefaQuery.SELECT} WHERE 1=1";
         var filtros = new Dictionary<string, object>();
@@ -68,26 +68,47 @@ public class AtividadeTarefaBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<AtividadeTarefaModel>(sql, new DynamicParameters(filtros));
 
-        return tarefas.ToList();
+        return tarefas.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<AtividadeTarefaModel?> GetByIdAsync(int id)
+    public static async Task<AtividadeTarefaDTO?> GetByIdAsync(int id)
     {
         var sql = $"{AtividadeTarefaQuery.SELECT} WHERE id_tarefa = @id";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefa = await conexao.QueryFirstOrDefaultAsync<AtividadeTarefaModel>(sql, new { id });
 
-        return tarefa;
+        if (tarefa == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(tarefa);
     }
 
-    public static async Task<List<AtividadeTarefaModel>> GetByAtividadeAsync(int idAtividade)
+    public static async Task<List<AtividadeTarefaDTO>> GetByAtividadeAsync(int idAtividade)
     {
         var sql = $"{AtividadeTarefaQuery.SELECT} WHERE id_atividade = @idAtividade";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<AtividadeTarefaModel>(sql, new { idAtividade });
 
-        return tarefas.ToList();
+        return tarefas.Select(ConvertToDTO).ToList();
+    }
+
+    private static AtividadeTarefaDTO ConvertToDTO(AtividadeTarefaModel atividade)
+    {
+        return new()
+        {
+            IdTarefa = atividade.IdTarefa,
+            NmTarefa = atividade.NmTarefa,
+            NmMensagem = atividade.NmMensagem,
+            IdAtividade = atividade.IdAtividade,
+            CdSequencia = atividade.CdSequencia,
+            FgRecurso = atividade.FgRecurso,
+            IdAtividadeRotina = atividade.IdAtividadeRotina,
+            QtPotenciaNormal = atividade.QtPotenciaNormal,
+            QtPotenciaAumentada = atividade.QtPotenciaAumentada,
+        };
     }
 }

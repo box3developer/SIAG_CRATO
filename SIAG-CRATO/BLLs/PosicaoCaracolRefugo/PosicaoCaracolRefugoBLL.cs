@@ -1,23 +1,29 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
+using SIAG_CRATO.DTOs.PosicaoCaracolRefugo;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.PosicaoCaracolRefugo;
 
 public class PosicaoCaracolRefugoBLL
 {
-    public static async Task<PosicaoCaracolRefugoModel?> GetByPosicao(int posicao)
+    public static async Task<PosicaoCaracolRefugoDTO?> GetByPosicao(int posicao)
     {
         var sql = $"{PosicaoCaracolRefugoQuery.SELECT} WHERE posicao = @posicao";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var posicaoCaracol = await conexao.QueryFirstOrDefaultAsync<PosicaoCaracolRefugoModel>(sql, new { posicao });
 
-        return posicaoCaracol;
+        if (posicaoCaracol == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(posicaoCaracol);
     }
 
-    public static async Task<PosicaoCaracolRefugoModel?> GetByTipo(string tipo, string? fabrica)
+    public static async Task<PosicaoCaracolRefugoDTO?> GetByTipo(string tipo, string? fabrica)
     {
         var sql = $"{PosicaoCaracolRefugoQuery.SELECT} WHERE tipo = @tipo";
 
@@ -33,6 +39,23 @@ public class PosicaoCaracolRefugoBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var posicaoCaracol = await conexao.QueryFirstOrDefaultAsync<PosicaoCaracolRefugoModel>(sql, new { tipo, fabrica });
 
-        return posicaoCaracol;
+        if (posicaoCaracol == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(posicaoCaracol);
+    }
+
+    private static PosicaoCaracolRefugoDTO ConvertToDTO(PosicaoCaracolRefugoModel posicao)
+    {
+        return new()
+        {
+            IdPosicaoCaracolRefugo = posicao.IdPosicaoCaracolRefugo,
+            Descricao = posicao.Descricao,
+            Posicao = posicao.Posicao,
+            Tipo = posicao.Tipo,
+            Fabrica = posicao.Fabrica,
+        };
     }
 }
