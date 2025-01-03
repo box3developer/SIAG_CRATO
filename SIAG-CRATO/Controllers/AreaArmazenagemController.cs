@@ -16,7 +16,7 @@ namespace SIAG_CRATO.Controllers
         }
 
         [HttpGet("agrupador/{idAgrupador}")]
-        public async Task<IActionResult> GetByAgrupadorAsync(int idAgrupador)
+        public async Task<IActionResult> GetByAgrupadorAsync(Guid idAgrupador)
         {
             var result = await AreaArmazenagemBLL.GetByAgrupadorAsync(idAgrupador);
             if (result == null) return NotFound();

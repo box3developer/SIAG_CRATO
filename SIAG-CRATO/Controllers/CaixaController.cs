@@ -40,7 +40,7 @@ namespace SIAG_CRATO.Controllers
         [HttpGet("fabrica-caixa/{idCaixa}")]
         public async Task<IActionResult> GetFabricaAsync (string idCaixa)
         {
-            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa));
+            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
             return Ok(caixas);
         }
 

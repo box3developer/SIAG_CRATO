@@ -14,5 +14,6 @@ namespace SIAG_CRATO.Controllers
         {
             var result = await CaixaLeituraBLL.GetUltimaCaixaLida(idCaixa);
             return result == null ? NotFound() : Ok(result);
+        }
     }
 }
