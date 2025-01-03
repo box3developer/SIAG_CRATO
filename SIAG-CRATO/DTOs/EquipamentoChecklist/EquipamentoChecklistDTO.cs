@@ -2,9 +2,9 @@
 
 public class EquipamentoChecklistDTO
 {
-    public int EquipamentoChecklistId { get; set; }
-    public int EquipamentoModeloId { get; set; }
-    public string? NomeDescricao { get; set; }
-    public bool? Critico { get; set; }
-    public int? Status { get; set; }
+    public int IdEquipamentoChecklist { get; set; }
+    public int IdEquipamentoModelo { get; set; }
+    public string? NmDescricao { get; set; }
+    public bool? FgCritico { get; set; }
+    public int? FgStatus { get; set; }
 }

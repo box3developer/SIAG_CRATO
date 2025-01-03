@@ -4,23 +4,23 @@ namespace SIAG_CRATO.DTOs.Chamada;
 
 public class ChamadaDTO
 {
-    public Guid Codigo { get; set; }
-    public int PalletOrigemId { get; set; }
-    public int PalletDestinoId { get; set; }
-    public int PalletLeituraId { get; set; }
-    public long AreaArmazenagemOrigemId { get; set; }
-    public long AreaArmazenagemDestinoId { get; set; }
-    public long AreaArmazenagemLeituraId { get; set; }
-    public long OperadorId { get; set; }
-    public int EquipamentoId { get; set; }
-    public int AtividadeRejeicaoId { get; set; }
-    public int AtividadeId { get; set; }
-    public StatusChamada Status { get; set; }
-    public DateTime? DataChamada { get; set; }
-    public DateTime? DataRecebida { get; set; }
-    public DateTime? DataAtendida { get; set; }
-    public DateTime? DataFinalizada { get; set; }
-    public DateTime? DataRejeitada { get; set; }
-    public DateTime? DataSuspensa { get; set; }
-    public Guid CodigoChamadaSuspensa { get; set; }
+    public Guid IdChamada { get; set; }
+    public int IdPalletOrigem { get; set; }
+    public int IdPalletDestino { get; set; }
+    public int IdPalletLeitura { get; set; }
+    public long IdAreaArmazenagemOrigem { get; set; }
+    public long IdAreaArmazenagemDestino { get; set; }
+    public long IdAreaArmazenagemLeitura { get; set; }
+    public long IdOperador { get; set; }
+    public int IdEquipamento { get; set; }
+    public int IdAtividadeRejeicao { get; set; }
+    public int IdAtividade { get; set; }
+    public StatusChamada FgStatus { get; set; }
+    public DateTime? DtChamada { get; set; }
+    public DateTime? DtRecebida { get; set; }
+    public DateTime? DtAtendida { get; set; }
+    public DateTime? DtFinalizada { get; set; }
+    public DateTime? DtRejeitada { get; set; }
+    public DateTime? DtSuspensa { get; set; }
+    public Guid IdChamadaSuspensa { get; set; }
 }

@@ -124,6 +124,14 @@ public class EquipamentoBLL
         return id > 0;
     }
 
+    public static async Task<bool> NovaLeitura(int id_equipamento, string id_caixa)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var id = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_NOVA_LEITURA, new { id_equipamento, id_caixa, dt_ultimaleitura = DateTime.Now });
+
+        return id > 0;
+    }
+
     public static async Task<int> UpdateEquipamento(int id_equipamento, int? id_endereco)
     {
         if (id_endereco.HasValue && id_endereco > 0)
@@ -150,9 +158,9 @@ public class EquipamentoBLL
 
         var chamadalist = await ChamadaBLL.GetByStatus(Constants.STATUS_CHAMADAREJEITADA);
 
-        var atividadesId = atividadeList.Select(a => a.Codigo).ToList();
+        var atividadesId = atividadeList.Select(a => a.IdAtividade).ToList();
 
-        var areaChamadas = chamadalist.Where(c => atividadesId.Contains(c.AtividadeId));
+        var areaChamadas = chamadalist.Where(c => atividadesId.Contains(c.IdAtividade));
 
         var bilateraisAtivas = await GetActiveEquipByModel(Constants.EQUIPAMENTO_EMPILHADEIRABILATERAL);
 
@@ -167,22 +175,22 @@ public class EquipamentoBLL
     {
         return new()
         {
-            Codigo = equipamento.Codigo,
-            ModeloId = equipamento.ModeloId,
-            SetorId = equipamento.SetorId,
-            OperadorId = equipamento.OperadorId,
-            Descricao = equipamento.Descricao,
-            DescricaoAbreviada = equipamento.DescricaoAbreviada,
-            Identificador = equipamento.Identificador,
-            Status = equipamento.Status,
-            DataInclusao = equipamento.DataInclusao,
-            DataManutencao = equipamento.DataManutencao,
-            DataUltimaLeitura = equipamento.DataUltimaLeitura,
-            EnderecoTrabalho = equipamento.EnderecoTrabalho,
-            IP = equipamento.IP,
-            StatusTrocaCaracol = equipamento.StatusTrocaCaracol,
-            LeituraPendete = equipamento.LeituraPendete,
-            UltimaLeitura = equipamento.UltimaLeitura,
+            IdEquipamento = equipamento.IdEquipamento,
+            IdEquipamentoModelo = equipamento.IdEquipamentoModelo,
+            IdSetorTrabalho = equipamento.IdSetorTrabalho,
+            IdOperador = equipamento.IdOperador,
+            NmEquipamento = equipamento.NmEquipamento,
+            NmAbreviadoEquipamento = equipamento.NmAbreviadoEquipamento,
+            NmIdentificador = equipamento.NmIdentificador,
+            FgStatus = equipamento.FgStatus,
+            DtInclusao = equipamento.DtInclusao,
+            DtManutencao = equipamento.DtManutencao,
+            DtUltimaLeitura = equipamento.DtUltimaLeitura,
+            IdEndereco = equipamento.IdEndereco,
+            NmIP = equipamento.NmIP,
+            FgStatusTrocaCaracol = equipamento.FgStatusTrocaCaracol,
+            CdLeituraPendente = equipamento.CdLeituraPendente,
+            CdUltimaLeitura = equipamento.CdUltimaLeitura,
             Observacao = equipamento.Observacao,
         };
     }

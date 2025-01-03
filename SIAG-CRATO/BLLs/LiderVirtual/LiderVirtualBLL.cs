@@ -42,13 +42,13 @@ public class LiderVirtualBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(LiderVirtualQuery.INSERT, new
         {
-            liderVirtual.IdOperador,
-            liderVirtual.IdEquipamentoOrigem,
-            liderVirtual.IdEquipamentoDestino,
-            liderVirtual.DataLogin,
-            liderVirtual.DataLogoff,
-            liderVirtual.IdOperadorLogin,
-            liderVirtual.DataLoginLimite,
+            idOperador = liderVirtual.IdOperador,
+            idEquipamentoOrigem = liderVirtual.IdEquipamentoOrigem,
+            idEquipamentoDestino = liderVirtual.IdEquipamentoDestino,
+            dtLogin = liderVirtual.DtLogin,
+            dtLogoff = liderVirtual.DtLogoff,
+            idOperadorLogin = liderVirtual.IdOperadorLogin,
+            dtLoginLimite = liderVirtual.DtLoginLimite,
         });
 
         return id;
@@ -59,14 +59,14 @@ public class LiderVirtualBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(LiderVirtualQuery.UPDATE, new
         {
-            liderVirtual.IdOperador,
-            liderVirtual.IdEquipamentoOrigem,
-            liderVirtual.IdEquipamentoDestino,
-            liderVirtual.DataLogin,
-            liderVirtual.DataLogoff,
-            liderVirtual.IdOperadorLogin,
-            liderVirtual.DataLoginLimite,
-            liderVirtual.IdLiderVirtual,
+            idOperador = liderVirtual.IdOperador,
+            idEquipamentoOrigem = liderVirtual.IdEquipamentoOrigem,
+            idEquipamentoDestino = liderVirtual.IdEquipamentoDestino,
+            dtLogin = liderVirtual.DtLogin,
+            dtLogoff = liderVirtual.DtLogoff,
+            idOperadorLogin = liderVirtual.IdOperadorLogin,
+            dtLoginLimite = liderVirtual.DtLoginLimite,
+            idLiderVirtual = liderVirtual.IdLiderVirtual,
         });
 
         return id;
@@ -76,14 +76,14 @@ public class LiderVirtualBLL
     {
         return new()
         {
-            LiderVirtualId = lider.IdLiderVirtual,
-            OperadorId = lider.IdOperador,
-            EquipamentoOrigemId = lider.IdEquipamentoOrigem,
-            EquipamentoDestinoId = lider.IdEquipamentoDestino,
-            DataLogin = lider.DataLogin,
-            DataLogoff = lider.DataLogoff,
-            OperadorLoginId = lider.IdOperadorLogin,
-            DataLoginLimite = lider.DataLoginLimite,
+            IdLiderVirtual = lider.IdLiderVirtual,
+            IdOperador = lider.IdOperador,
+            IdEquipamentoOrigem = lider.IdEquipamentoOrigem,
+            IdEquipamentoDestino = lider.IdEquipamentoDestino,
+            DtLogin = lider.DtLogin,
+            DtLogoff = lider.DtLogoff,
+            IdOperadorLogin = lider.IdOperadorLogin,
+            DtLoginLimite = lider.DtLoginLimite,
         };
     }
 }

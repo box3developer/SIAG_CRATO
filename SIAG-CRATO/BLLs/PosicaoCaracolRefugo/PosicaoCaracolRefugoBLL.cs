@@ -41,7 +41,7 @@ public class PosicaoCaracolRefugoBLL
     {
         return new()
         {
-            PosicaoCaracolRefugoId = posicao.IdPosicaoCaracolRefugo,
+            IdPosicaoCaracolRefugo = posicao.IdPosicaoCaracolRefugo,
             Descricao = posicao.Descricao,
             Posicao = posicao.Posicao,
             Tipo = posicao.Tipo,

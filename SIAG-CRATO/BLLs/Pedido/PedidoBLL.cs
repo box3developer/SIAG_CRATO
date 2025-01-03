@@ -21,11 +21,11 @@ public class PedidoBLL
     {
         return new()
         {
-            IdPedido = pedido.Id_pedido,
-            CodigoPedido = pedido.Cd_pedido ?? "",
-            CodigoLote = pedido.Cd_lote ?? "",
-            Box = pedido.Cd_box ?? "",
-            QuantidadeCaixas = 0,
+            IdPedido = pedido.IdPedido,
+            CdPedido = pedido.CdPedido ?? "",
+            CdLote = pedido.CdLote ?? "",
+            CdBox = pedido.CdBox ?? "",
+            NrCaixas = 0,
         };
     }
 }

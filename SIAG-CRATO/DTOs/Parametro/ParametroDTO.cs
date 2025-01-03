@@ -2,12 +2,12 @@
 
 public class ParametroDTO
 {
-    public int Id { get; set; }
-    public string? Parametro { get; set; }
-    public string? Valor { get; set; }
-    public string? TipoParametro { get; set; }
-    public string? Unidade { get; set; }
-    public string? Tipo { get; set; }
-    public bool? Visivel { get; set; }
-    public int? Ativo { get; set; }
+    public int IdParametro { get; set; }
+    public string? NmParametro { get; set; }
+    public string? NmValor { get; set; }
+    public string? FgTipoParametro { get; set; }
+    public string? NmUnidadeMedida { get; set; }
+    public string? NmTipo { get; set; }
+    public bool? FgVisivel { get; set; }
+    public int? FgAtivo { get; set; }
 }

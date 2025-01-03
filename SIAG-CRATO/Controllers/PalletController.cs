@@ -13,7 +13,7 @@ namespace SIAG_CRATO.Controllers
         public async Task<IActionResult> Create(PalletModel pallet)
         {
             await PalletBLL.InsertAsync(pallet);
-            return CreatedAtAction("GetById", new { id = pallet.Id_pallet }, pallet);
+            return CreatedAtAction("GetById", new { id = pallet.IdPallet }, pallet);
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@ namespace SIAG_CRATO.Controllers
         }
 
         [HttpGet("area/{areaArmazenagem}")]
-        public async Task<IActionResult> GetByAreaArmazenagem(string areaArmazenagem)
+        public async Task<IActionResult> GetByAreaArmazenagem(long areaArmazenagem)
         {
             var pallets = await PalletBLL.GetByAreaArmazenagemAsync(areaArmazenagem);
             return Ok(pallets);
@@ -76,7 +76,7 @@ namespace SIAG_CRATO.Controllers
         [HttpPut("vincular-agrupador")]
         public async Task<IActionResult> VincularAgrupadorReservado(AreaArmazenagemModel areaAtual)
         {
-            var sucesso = await PalletBLL.VincularAgrupadorAreaReservadaAsync(areaAtual.Id_caracol, areaAtual);
+            var sucesso = await PalletBLL.VincularAgrupadorAreaReservadaAsync(areaAtual.IdCaracol, areaAtual);
             if (sucesso)
             {
                 return Ok("Pallet vinculado com sucesso.");
@@ -102,7 +102,7 @@ namespace SIAG_CRATO.Controllers
         [HttpPost("vincular-disponivel")]
         public async Task<IActionResult> VincularNovoPalletDisponivel([FromBody] AreaArmazenagemModel areaAtual)
         {
-            var sucesso = await PalletBLL.VincularNovoPalletDisponivelAsync(areaAtual.Id_caracol, areaAtual);
+            var sucesso = await PalletBLL.VincularNovoPalletDisponivelAsync(areaAtual.IdCaracol, areaAtual);
             if (sucesso)
             {
                 return Ok("Pallet vinculado com sucesso.");
@@ -133,7 +133,5 @@ namespace SIAG_CRATO.Controllers
             var pallets = await PalletBLL.GetQtyPallets(idEndereco, idPallet);
             return Ok(pallets);
         }
-
-
     }
 }

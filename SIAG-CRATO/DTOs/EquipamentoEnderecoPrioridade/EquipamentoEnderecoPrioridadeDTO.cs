@@ -2,7 +2,7 @@
 
 public class EquipamentoEnderecoPrioridadeDTO
 {
-    public long Codigo { get; set; }
-    public long EnderecoId { get; set; }
+    public long IdEquipamentoEnderecoPrioridade { get; set; }
+    public long IdEquipamentoEndereco { get; set; }
     public int Prioridade { get; set; }
 }

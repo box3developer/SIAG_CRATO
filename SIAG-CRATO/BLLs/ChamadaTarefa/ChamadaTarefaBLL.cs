@@ -46,10 +46,10 @@ public class ChamadaTarefaBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(sql, new
         {
-            dataInicio = tarefa.DataInicio,
-            dataFim = tarefa.DataFim,
-            idTarefa = tarefa.TarefaId,
-            idChamada = tarefa.ChamadaId,
+            dataInicio = tarefa.DtInicio,
+            dataFim = tarefa.DtFim,
+            idTarefa = tarefa.IdTarefa,
+            idChamada = tarefa.IdChamada,
         });
 
         return id > 0;
@@ -59,10 +59,10 @@ public class ChamadaTarefaBLL
     {
         return new()
         {
-            TarefaId = chamada.TarefaId,
-            ChamadaId = chamada.ChamadaId,
-            DataInicio = chamada.DataInicio,
-            DataFim = chamada.DataFim,
+            IdTarefa = chamada.IdTarefa,
+            IdChamada = chamada.IdChamada,
+            DtInicio = chamada.DtInicio,
+            DtFim = chamada.DtFim,
         };
     }
 }

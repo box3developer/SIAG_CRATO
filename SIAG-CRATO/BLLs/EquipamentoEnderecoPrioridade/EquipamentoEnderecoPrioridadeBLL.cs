@@ -1,9 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.EquipamentoEndereco;
 using SIAG_CRATO.DTOs.EquipamentoEnderecoPrioridade;
 using SIAG_CRATO.Models;
 
-namespace SIAG_CRATO.BLLs.EquipamentoEndereco;
+namespace SIAG_CRATO.BLLs.EquipamentoEnderecoPrioridade;
 
 public class EquipamentoEnderecoPrioridadeBLL
 {
@@ -19,8 +20,8 @@ public class EquipamentoEnderecoPrioridadeBLL
     {
         return new()
         {
-            Codigo = prioridade.Codigo,
-            EnderecoId = prioridade.EnderecoId,
+            IdEquipamentoEnderecoPrioridade = prioridade.IdEquipamentoEnderecoPrioridade,
+            IdEquipamentoEndereco = prioridade.IdEquipamentoEndereco,
             Prioridade = prioridade.Prioridade,
         };
     }

@@ -2,9 +2,9 @@
 
 public class EquipamentoManutencaoDTO
 {
-    public int Id { get; set; }
-    public int EquipamentoId { get; set; }
-    public int TipoManutencao { get; set; }
-    public int DataInicio { get; set; }
-    public int DataFim { get; set; }
+    public int IdEquipamentoManutencao { get; set; }
+    public int IdEquipamento { get; set; }
+    public int FgTipoManutencao { get; set; }
+    public int DtInicio { get; set; }
+    public int DtFim { get; set; }
 }

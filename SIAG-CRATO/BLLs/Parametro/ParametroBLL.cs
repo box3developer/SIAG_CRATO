@@ -33,14 +33,14 @@ namespace SIAG_CRATO.BLLs.Parametro
         {
             return new()
             {
-                Id = parametro.Id,
-                Parametro = parametro.Parametro,
-                Valor = parametro.Valor,
-                TipoParametro = parametro.TipoParametro,
-                Unidade = parametro.Unidade,
-                Tipo = parametro.Tipo,
-                Visivel = parametro.Visivel,
-                Ativo = parametro.Ativo,
+                IdParametro = parametro.IdParametro,
+                NmParametro = parametro.NmParametro,
+                NmValor = parametro.NmValor,
+                FgTipoParametro = parametro.FgTipoParametro,
+                NmUnidadeMedida = parametro.NmUnidadeMedida,
+                NmTipo = parametro.NmTipo,
+                FgVisivel = parametro.FgVisivel,
+                FgAtivo = parametro.FgAtivo,
             };
         }
     }

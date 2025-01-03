@@ -35,15 +35,15 @@ namespace SIAG_CRATO.Controllers
             return Ok(caixas);
         }
 
-        [HttpGet("fabricante-caixa/{idCaixa}")]
-        public async Task<IActionResult> GetFabricaAsync(string idCaixa)
+        [HttpGet("fabrica-caixa/{idCaixa}")]
+        public async Task<IActionResult> GetFabricaAsync (string idCaixa)
         {
             var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
             return Ok(caixas);
         }
 
         [HttpGet("quantidade-pedido")]
-        public async Task<IActionResult> GetFabricaAsync(int idPedido, long codigoPedido, long idPallet)
+        public async Task<IActionResult> GetQuantidadeByPedido(int idPedido, long codigoPedido, long idPallet)
         {
             var caixas = await CaixaBLL.GetQuantidadeByPedido(idPedido, codigoPedido, idPallet);
             return Ok(caixas);
@@ -67,6 +67,34 @@ namespace SIAG_CRATO.Controllers
         public async Task<IActionResult> GetPendentesByLiderAsync()
         {
             var pendentes = await CaixaBLL.GetPendentesByLiderAsync();
+            return Ok(pendentes);
+        }
+
+        [HttpPatch("estufar")]
+        public async Task<IActionResult> EstufaCaixaAsync(string idCaixa, Guid? id_requisicao)
+        {
+            var pendentes = await CaixaBLL.EstufarCaixa(idCaixa,id_requisicao);
+            return Ok(pendentes);
+        }
+
+        [HttpPatch("emitir-estufamento")]
+        public async Task<IActionResult> EmitirEstufamentoAsync(string identificadorCaracol, Guid? id_requisicao)
+        {
+            var pendentes = await CaixaBLL.EmitirEstufamento(identificadorCaracol,id_requisicao);
+            return Ok(pendentes);
+        }
+
+        [HttpPatch("grava-leitura")]
+        public async Task<IActionResult> GravarLeituraAsync(string idCaixa, int idArea, int idPallet)
+        {
+            var pendentes = await CaixaBLL.GravarLeitura(idCaixa,idArea,idPallet);
+            return Ok(pendentes);
+        }
+
+        [HttpPatch("remove-estufamento/{id_caixa}")]
+        public async Task<IActionResult> RemoverEstufamentoCaixaAsync(string id_caixa)
+        {
+            var pendentes = await CaixaBLL.RemoverEstufamentoCaixa(id_caixa);
             return Ok(pendentes);
         }
     }

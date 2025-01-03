@@ -56,7 +56,7 @@ public class OperadorBLL
         }
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR_LOGOFF, new { id_equipamento = getEquip.Codigo });
+        var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR_LOGOFF, new { id_equipamento = getEquip.IdEquipamento });
 
         //....sp_siag_alocacaoautomaticabilaterais
         return result > 0;
@@ -66,14 +66,14 @@ public class OperadorBLL
     {
         return new()
         {
-            Codigo = operador.Codigo,
+            IdOperador = operador.IdOperador,
             NFC = operador.NFC,
-            CPF = operador.CPF,
-            Descricao = operador.Descricao,
-            DataLogin = operador.DataLogin,
-            Localidade = operador.Localidade,
-            FuncaoOperador = operador.FuncaoOperador,
-            ResponsavelId = operador.ResponsavelId,
+            NmCpf = operador.NmCpf,
+            NmOperador = operador.NmOperador,
+            DtLogin = operador.DtLogin,
+            NrLocalidade = operador.NrLocalidade,
+            FgFuncao = operador.FgFuncao,
+            IdResponsavel = operador.IdResponsavel,
         };
     }
 }

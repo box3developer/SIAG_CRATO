@@ -2,16 +2,16 @@
 
 public class CaixaLeituraDTO
 {
-    public string? CaixaLeituraId { get; set; }
-    public string? CaixaId { get; set; }
-    public DateTime DataLeitura { get; set; }
-    public int? Tipo { get; set; }
-    public int? Status { get; set; }
-    public string? OperadorId { get; set; }
-    public string? EquipamentoId { get; set; }
-    public string? PalletId { get; set; }
-    public string? AreaArmazenagemId { get; set; }
-    public string? EnderecoId { get; set; }
-    public int? Cancelado { get; set; }
-    public string? Ordem { get; set; }
+    public int? IdCaixaLeitura { get; set; }
+    public string? IdCaixa { get; set; }
+    public DateTime DtLeitura { get; set; }
+    public int? FgTipo { get; set; }
+    public int? FgStatus { get; set; }
+    public int? IdOperador { get; set; }
+    public int? IdEquipamento { get; set; }
+    public int? IdPallet { get; set; }
+    public long? IdAreaArmazenagem { get; set; }
+    public int? IdEndereco { get; set; }
+    public int? FgCancelado { get; set; }
+    public int? IdOrdem { get; set; }
 }

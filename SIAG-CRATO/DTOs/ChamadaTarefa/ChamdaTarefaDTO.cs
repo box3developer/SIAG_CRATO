@@ -2,8 +2,8 @@
 
 public class ChamdaTarefaDTO
 {
-    public int TarefaId { get; set; }
-    public Guid ChamadaId { get; set; }
-    public DateTime? DataInicio { get; set; }
-    public DateTime? DataFim { get; set; }
+    public int IdTarefa { get; set; }
+    public Guid IdChamada { get; set; }
+    public DateTime? DtInicio { get; set; }
+    public DateTime? DtFim { get; set; }
 }

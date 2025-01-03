@@ -1,22 +1,21 @@
 ﻿namespace SIAG_CRATO.DTOs.Caixa;
-
 public class CaixaDTO
 {
-    public string CaixaId { get; set; } = string.Empty;
-    public Guid? AgrupadorId { get; set; }
-    public string? PalletId { get; set; }
-    public int? ProgramaId { get; set; }
-    public string? PedidoId { get; set; }
-    public string? CodigoProduto { get; set; }
-    public string? CodigoCor { get; set; }
-    public string? CodigoGradeTamanho { get; set; }
-    public int? NumeroCaixa { get; set; }
-    public int? Pares { get; set; }
-    public bool? RFID { get; set; }
-    public int? Status { get; set; }
-    public DateTime? DataEmbalagem { get; set; }
-    public DateTime? DataExpedicao { get; set; }
-    public DateTime? DataSorter { get; set; }
-    public DateTime? DataEstufamento { get; set; }
-    public DateTime DataLeitura { get; set; }
+    public string IdCaixa { get; set; } = string.Empty;
+    public Guid? IdAgrupador { get; set; }
+    public int? IdPallet { get; set; }
+    public int? IdPrograma { get; set; }
+    public string? IdPedido { get; set; }
+    public string? CdProduto { get; set; }
+    public string? CdCor { get; set; }
+    public string? CdGradeTamanho { get; set; }
+    public int? NrCaixa { get; set; }
+    public int? NrPares { get; set; }
+    public bool? FgRFID { get; set; }
+    public int? FgStatus { get; set; }
+    public DateTime? DtEmbalagem { get; set; }
+    public DateTime? DtExpedicao { get; set; }
+    public DateTime? DtSorter { get; set; }
+    public DateTime? DtEstufamento { get; set; }
+    public DateTime DtLeitura { get; set; }
 }

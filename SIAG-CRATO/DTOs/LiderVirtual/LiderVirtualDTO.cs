@@ -2,12 +2,12 @@
 
 public class LiderVirtualDTO
 {
-    public string? LiderVirtualId { get; set; }
-    public string? OperadorId { get; set; }
-    public string? EquipamentoOrigemId { get; set; }
-    public string? EquipamentoDestinoId { get; set; }
-    public DateTime? DataLogin { get; set; }
-    public DateTime? DataLogoff { get; set; }
-    public string? OperadorLoginId { get; set; }
-    public DateTime? DataLoginLimite { get; set; }
+    public string? IdLiderVirtual { get; set; }
+    public string? IdOperador { get; set; }
+    public string? IdEquipamentoOrigem { get; set; }
+    public string? IdEquipamentoDestino { get; set; }
+    public DateTime? DtLogin { get; set; }
+    public DateTime? DtLogoff { get; set; }
+    public string? IdOperadorLogin { get; set; }
+    public DateTime? DtLoginLimite { get; set; }
 }

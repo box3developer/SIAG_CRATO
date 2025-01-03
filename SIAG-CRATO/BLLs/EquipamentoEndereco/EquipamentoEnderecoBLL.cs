@@ -18,7 +18,7 @@ public class EquipamentoEnderecoBLL
 
     public static async Task<List<EquipamentoEnderecoModel>> GetByEquipamentoAsync(int idEquipamento)
     {
-        var sql = $"{EquipamentoEnderecoPrioridadeQuery.SELECT} WHERE id_equipamento = @id_equipamento";
+        var sql = $"{EquipamentoEnderecoPrioridadeQuery.SELECT} WHERE id_equipamento = @idEquipamento";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamentos = await conexao.QueryAsync<EquipamentoEnderecoModel>(sql, new { idEquipamento });
@@ -42,7 +42,7 @@ public class EquipamentoEnderecoBLL
         {
             idEquipamentoModelo,
             idSetorTrabalho,
-            StatusEquipamento.Ativo,
+            status = StatusEquipamento.Ativo,
             idEquipamento,
             dataMovimentacaoAtiva,
             dataMovimentacaoInativa
@@ -55,9 +55,9 @@ public class EquipamentoEnderecoBLL
     {
         return new()
         {
-            EquipamentoEnderecoId = endereco.EquipamentoEnderecoId,
-            EquipamentoId = endereco.EquipamentoId,
-            EnderecoId = endereco.EnderecoId,
+            IdEquipamentoEndereco = endereco.IdEquipamentoEndereco,
+            IdEquipamento = endereco.IdEquipamento,
+            IdEndereco = endereco.IdEndereco,
         };
     }
 }

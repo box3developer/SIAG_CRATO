@@ -1,33 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SIAG_CRATO.Models;
+﻿namespace SIAG_CRATO.Models;
 
 public class AtividadeTarefaModel
 {
-    [Column("id_tarefa")]
-    public int Codigo { get; set; }
-
-    [Column("nm_tarefa")]
-    public string Descricao { get; set; } = string.Empty;
-
-    [Column("nm_mensagem")]
-    public string Mensagem { get; set; } = string.Empty;
-
-    [Column("id_atividade")]
-    public int AtividadeId { get; set; }
-
-    [Column("cd_sequencia")]
-    public int Sequencia { get; set; }
-
-    [Column("fg_recurso")]
-    public int? Recursos { get; set; }
-
-    [Column("id_atividaderotina")]
-    public int AtividadeRotinaId { get; set; }
-
-    [Column("qt_potencianormal")]
-    public int PotenciaNormal { get; set; }
-
-    [Column("qt_potenciaaumentada")]
-    public int PotenciaAumentada { get; set; }
+    public int IdTarefa { get; set; }
+    public string NmTarefa { get; set; } = string.Empty;
+    public string NmMensagem { get; set; } = string.Empty;
+    public int IdAtividade { get; set; }
+    public int CdSequencia { get; set; }
+    public int? FgRecurso { get; set; }
+    public int IdAtividadeRotina { get; set; }
+    public int QtPotenciaNormal { get; set; }
+    public int QtPotenciaAumentada { get; set; }
 }

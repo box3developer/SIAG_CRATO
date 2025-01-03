@@ -19,22 +19,44 @@ public class CaixaLeituraBLL
         return caixa;
     }
 
+    public static async Task<bool> CreateCaixaLeitura(CaixaLeituraModel caixaLeitura)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var result = await conexao.ExecuteAsync(CaixaLeituraQuery.INSERT, new
+        {
+            idCaixa = caixaLeitura.IdCaixa,
+            dtLeitura = caixaLeitura.DtLeitura,
+            fgTipo = caixaLeitura.FgTipo,
+            fgStatus = caixaLeitura.FgStatus,
+            idOperador = caixaLeitura.IdOperador,
+            idEquipamento = caixaLeitura.IdEquipamento,
+            idPallet = caixaLeitura.IdPallet,
+            idAreaArmazenagem = caixaLeitura.IdAreaArmazenagem,
+            idEndereco = caixaLeitura.IdEndereco,
+            fgCancelado = caixaLeitura.FgCancelado,
+            idOrdem = caixaLeitura.IdOrdem
+        });
+
+        return result > 0;
+    }
+
     private static CaixaLeituraDTO ConvertToDTO(CaixaLeituraModel caixaLeitura)
     {
         return new()
         {
-            CaixaLeituraId = caixaLeitura.IdCaixaLeitura,
-            CaixaId = caixaLeitura.IdCaixa,
-            DataLeitura = caixaLeitura.DtLeitura,
-            Tipo = caixaLeitura.FgTipo,
-            Status = caixaLeitura.FgStatus,
-            OperadorId = caixaLeitura.IdOperador,
-            EquipamentoId = caixaLeitura.IdEquipamento,
-            PalletId = caixaLeitura.IdPallet,
-            AreaArmazenagemId = caixaLeitura.IdAreaArmazenagem,
-            EnderecoId = caixaLeitura.IdEndereco,
-            Cancelado = caixaLeitura.FgCancelado,
-            Ordem = caixaLeitura.IdOrdem,
+            IdCaixaLeitura = caixaLeitura.IdCaixaLeitura,
+            IdCaixa = caixaLeitura.IdCaixa,
+            DtLeitura = caixaLeitura.DtLeitura,
+            FgTipo = caixaLeitura.FgTipo,
+            FgStatus = caixaLeitura.FgStatus,
+            IdOperador = caixaLeitura.IdOperador,
+            IdEquipamento = caixaLeitura.IdEquipamento,
+            IdPallet = caixaLeitura.IdPallet,
+            IdAreaArmazenagem = caixaLeitura.IdAreaArmazenagem,
+            IdEndereco = caixaLeitura.IdEndereco,
+            FgCancelado = caixaLeitura.FgCancelado,
+            IdOrdem = caixaLeitura.IdOrdem,
         };
     }
 }

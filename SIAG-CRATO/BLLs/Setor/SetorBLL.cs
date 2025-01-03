@@ -22,16 +22,16 @@ public class SetorBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var setores = await conexao.QueryAsync<SetorModel>(SetorQuery.SELECT);
 
-        return setores.Select(x => new SetorSelectDTO() { Id = x.Id_setortrabalho, Descricao = x.Nm_setortrabalho }).ToList();
+        return setores.Select(x => new SetorSelectDTO() { Id = x.IdSetorTrabalho, Descricao = x.NmSetorTrabalho }).ToList();
     }
 
     private static SetorDTO ConvertToDTO(SetorModel setor)
     {
         return new()
         {
-            SetorId = setor.Id_setortrabalho,
-            DepositoId = setor.Id_deposito,
-            NomeSetor = setor.Nm_setortrabalho,
+            IdSetorTrabalho = setor.IdSetorTrabalho,
+            IdDeposito = setor.IdDeposito,
+            NmSetorTrabalho = setor.NmSetorTrabalho,
         };
     }
 }

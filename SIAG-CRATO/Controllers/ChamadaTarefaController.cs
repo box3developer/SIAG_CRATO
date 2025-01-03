@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
 using SIAG_CRATO.Models;
 
@@ -26,7 +25,7 @@ namespace SIAG_CRATO.Controllers
         [HttpPost]
         public async Task<IActionResult> SetTarefaAsync(ChamadaTarefaModel chamadaTarefa)
         {
-            var sucesso = await ChamadaTarefaBLL.SetTarefaAsync(chamadaTarefa.ChamadaId, chamadaTarefa.TarefaId);
+            var sucesso = await ChamadaTarefaBLL.SetTarefaAsync(chamadaTarefa.IdChamada, chamadaTarefa.IdTarefa);
             return sucesso ? Ok() : BadRequest("Não foi possível associar a chamada à tarefa");
         }
 

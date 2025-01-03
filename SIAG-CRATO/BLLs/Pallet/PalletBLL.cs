@@ -13,13 +13,13 @@ public class PalletBLL
     {
         var parametros = new Dictionary<string, object>
         {
-            { "@Codigo", pallet.Id_pallet },
-            { "@Status", pallet.Fg_status },
-            { "@QtdUtilizacao", pallet.Qt_utilizacao },
-            { "@AreaArmazenagem", pallet.Id_areaarmazenagem == 0 ? pallet.Id_areaarmazenagem : DBNull.Value},
-            { "@Agrupador", pallet.Id_agrupador == Guid.Empty ? pallet.Id_agrupador : DBNull.Value },
-            { "@DataUltimaMovimentacao", pallet.Dt_ultimamovimentacao != null ? pallet.Dt_ultimamovimentacao : DBNull.Value },
-            { "@Identificacao", pallet.Cd_identificacao != null ? pallet.Cd_identificacao : DBNull.Value},
+            { "@Codigo", pallet.IdPallet },
+            { "@Status", pallet.FgStatus },
+            { "@QtdUtilizacao", pallet.QtUtilizacao },
+            { "@AreaArmazenagem", pallet.IdAreaArmazenagem == null? DBNull.Value: pallet.IdAreaArmazenagem},
+            { "@Agrupador", pallet.IdAgrupador == Guid.Empty ? pallet.IdAgrupador : DBNull.Value },
+            { "@DataUltimaMovimentacao", pallet.DtUltimaMovimentacao != null ? pallet.DtUltimaMovimentacao : DBNull.Value },
+            { "@Identificacao", pallet.CdIdentificacao != null ? pallet.CdIdentificacao : DBNull.Value},
         };
 
         using var conexao = new SqlConnection(Global.Conexao);
@@ -57,7 +57,7 @@ public class PalletBLL
         return pallets;
     }
 
-    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(string idAreaArmazenagem)
+    public static async Task<PalletModel?> GetByAreaArmazenagemAsync(long idAreaArmazenagem)
     {
         string sql = $"{PalletQuery.SELECT} WHERE id_areaarmazenagem = @idAreaArmazenagem";
 
@@ -97,7 +97,7 @@ public class PalletBLL
                             ORDER BY nr_posicaoy";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.Id_agrupador });
+        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.IdAgrupador });
 
         if (palletNovo == null)
         {
@@ -108,10 +108,10 @@ public class PalletBLL
         {
             idAgrupador = DBNull.Value,
             status = 1,
-            idAreaArmazenagem = areaAtual.Id_areaarmazenagem
+            idAreaArmazenagem = areaAtual.IdAreaArmazenagem
         });
 
-        if (palletNovo.Id_agrupador == Guid.Empty)
+        if (palletNovo.IdAgrupador == Guid.Empty)
         {
             throw new Exception("Pallet novo ser agrupador.");
         }
@@ -120,20 +120,20 @@ public class PalletBLL
                                     SET id_areaarmazenagem = null, fg_status = 2 
                                     WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.Id_agrupador });
+        await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.IdAgrupador });
 
         await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Id_agrupador,
+            idAgrupador = areaAtual.IdAgrupador,
             status = 2,
-            idAreaArmazenagem = palletNovo.Id_areaarmazenagem,
+            idAreaArmazenagem = palletNovo.IdAreaArmazenagem,
         });
 
         var sqlAgrupadorOrigem = @"UPDATE agrupadorativo 
                                    SET id_areaarmazenagem = @idAreaArmazenagem
                                    WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.Id_areaarmazenagem, idAgrupador = areaAtual.Id_agrupador });
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.IdAreaArmazenagem, idAgrupador = areaAtual.IdAgrupador });
 
         return true;
     }
@@ -151,7 +151,7 @@ public class PalletBLL
                             ORDER BY nr_posicaoy";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.Id_agrupador });
+        var palletNovo = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sqlReserva, new { identificadorCaracol, idAgrupadorReservado = areaAtual.IdAgrupador });
 
         if (palletNovo == null)
         {
@@ -197,7 +197,7 @@ public class PalletBLL
         {
             idAgrupador = DBNull.Value,
             status = 1,
-            idAreaArmazenagem = areaAtual.Id_areaarmazenagem
+            idAreaArmazenagem = areaAtual.IdAreaArmazenagem
         });
 
         if (!livreSemPrioridade)
@@ -206,21 +206,21 @@ public class PalletBLL
                                         SET id_areaarmazenagem = null, fg_status = 2 
                                         WHERE id_agrupador = @idAgrupador";
 
-            await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.Id_agrupador });
+            await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.IdAgrupador });
         }
 
         await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Id_agrupador,
+            idAgrupador = areaAtual.IdAgrupador,
             status = 2,
-            idAreaArmazenagem = palletNovo.Id_areaarmazenagem,
+            idAreaArmazenagem = palletNovo.IdAreaArmazenagem,
         });
 
         var sqlAgrupadorOrigem = @"UPDATE agrupadorativo 
                                    SET id_areaarmazenagem = @idAreaArmazenagem
                                    WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.Id_areaarmazenagem, idAgrupador = areaAtual.Id_agrupador });
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.IdAreaArmazenagem, idAgrupador = areaAtual.IdAgrupador });
 
         return true;
     }
@@ -247,23 +247,23 @@ public class PalletBLL
 
         var linhasArea = await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Id_agrupador,
+            idAgrupador = areaAtual.IdAgrupador,
             status = 2,
-            idAreaArmazenagem = areaAtual.Id_areaarmazenagem
+            idAreaArmazenagem = areaAtual.IdAreaArmazenagem
         });
 
         var linhasAreaAntiga = await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
             idAgrupador = DBNull.Value,
             status = 1,
-            idAreaArmazenagem = areaAtual.Id_areaarmazenagem
+            idAreaArmazenagem = areaAtual.IdAreaArmazenagem
         });
 
         var sqlAgrupador = @"UPDATE agrupadorativo 
                              SET id_areaarmazenagem = @idAreaArmazenagem 
                              WHERE id_agrupador = @idAgrupador";
 
-        var linhasAgrupador = await conexao.ExecuteAsync(sqlAgrupador, new { idAreaArmazenagem = areaAtual.Id_areaarmazenagem, idAgrupador = areaAtual.Id_agrupador });
+        var linhasAgrupador = await conexao.ExecuteAsync(sqlAgrupador, new { idAreaArmazenagem = areaAtual.IdAreaArmazenagem, idAgrupador = areaAtual.IdAgrupador });
 
         return linhasArea > 0 && linhasAreaAntiga > 0 && linhasAgrupador > 0;
     }
@@ -343,7 +343,7 @@ public class PalletBLL
         {
             idAgrupador = DBNull.Value,
             status = 1,
-            idAreaArmazenagem = areaAtual.Id_areaarmazenagem
+            idAreaArmazenagem = areaAtual.IdAreaArmazenagem
         });
 
         if (!reservadaSemAgrupador)
@@ -352,21 +352,21 @@ public class PalletBLL
                                         SET id_areaarmazenagem = null, fg_status = 2 
                                         WHERE id_agrupador = @idAgrupador";
 
-            await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.Id_agrupador });
+            await conexao.ExecuteAsync(sqlAgrupadorDestino, new { idAgrupador = palletNovo.IdAgrupador });
         }
 
         await conexao.ExecuteAsync(PalletQuery.UPDATE_AREAARMAZENAGEM, new
         {
-            idAgrupador = areaAtual.Id_agrupador,
+            idAgrupador = areaAtual.IdAgrupador,
             status = 2,
-            idAreaArmazenagem = palletNovo.Id_areaarmazenagem
+            idAreaArmazenagem = palletNovo.IdAreaArmazenagem
         });
 
         var sqlAgrupadorOrigem = @"UPDATE agrupadorativo 
                                    SET id_areaarmazenagem = @idAreaArmazenagem 
                                    WHERE id_agrupador = @idAgrupador";
 
-        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.Id_areaarmazenagem, idAgrupador = areaAtual.Id_agrupador });
+        await conexao.ExecuteAsync(sqlAgrupadorOrigem, new { idAreaArmazenagem = palletNovo.IdAreaArmazenagem, idAgrupador = areaAtual.IdAgrupador });
 
         return true;
     }
@@ -376,7 +376,7 @@ public class PalletBLL
     {
         var pallet = await GetByIdAsync(id_pallet);
         var caixa = await CaixaBLL.GetByPalletAsync(id_pallet);
-        var idAgrupador = pallet?.Id_agrupador ?? caixa.FirstOrDefault()?.Id_agrupador ??
+        var idAgrupador = pallet?.IdAgrupador ?? caixa.FirstOrDefault()?.IdAgrupador ??
             throw new Exception("Erro ao executar GetQtyPallets");
 
 
@@ -393,13 +393,13 @@ public class PalletBLL
     {
         return new()
         {
-            PalletId = pallet.Id_pallet,
-            CodigoIdentificacao = pallet.Cd_identificacao,
-            QuantidadeUtilizacao = pallet.Qt_utilizacao,
-            AreaArmazenagemId = pallet.Id_areaarmazenagem,
-            AgrupadorId = pallet.Id_agrupador,
-            Status = pallet.Fg_status,
-            DataUltimaMovimentacao = pallet.Dt_ultimamovimentacao,
+            IdPallet = pallet.IdPallet,
+            CdIdentificacao = pallet.CdIdentificacao,
+            QtUtilizacao = pallet.QtUtilizacao,
+            IdAreaArmazenagem = pallet.IdAreaArmazenagem,
+            IdAgrupador = pallet.IdAgrupador,
+            FgStatus = pallet.FgStatus,
+            DtUltimaMovimentacao = pallet.DtUltimaMovimentacao,
         };
     }
 }

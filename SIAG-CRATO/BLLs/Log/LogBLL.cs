@@ -15,7 +15,7 @@ public class LogBLL
         await conexao.ExecuteAsync(sql, new
         {
             idRequisicao = log.IdRequisicao,
-            nomeIdentificador = log.NomeIdentificador,
+            nomeIdentificador = log.NmIdentificador,
             idCaixa = log.IdCaixa,
             data = DateTime.Now,
             mensagem = log.Mensagem,

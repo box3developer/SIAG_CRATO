@@ -68,25 +68,23 @@ public class ChamadaBLL
 
     public static async Task<Guid> SetChamadaAsync(ChamadaInsertDTO chamada)
     {
-        chamada.Codigo = Guid.NewGuid();
-        chamada.Status = StatusChamada.Dependente;
-
-        object chamadaInsert = new
-        {
-            id_chamada = chamada.Codigo,
-            id_palletorigem = chamada.PalletOrigemId,
-            id_palletdestino = chamada.PalletDestinoId,
-            id_areaarmazenagemorigem = chamada.AreaArmazenagemOrigemId,
-            id_areaarmazenagemdestino = chamada.AreaArmazenagemDestinoId,
-            id_atividade = chamada.AtividadeId,
-            fg_status = chamada.Status,
-            priorizar = chamada.Priorizar,
-        };
+        chamada.IdChamada = Guid.NewGuid();
+        chamada.FgStatus = StatusChamada.Dependente;
 
         using var conexao = new SqlConnection(Global.Conexao);
-        await conexao.ExecuteAsync(ChamadaQuery.INSERT, chamadaInsert);
+        await conexao.ExecuteAsync(ChamadaQuery.INSERT, new
+        {
+            idChamada = chamada.IdChamada,
+            idPalletOrigem = chamada.IdPalletOrigem,
+            idPalletDestino = chamada.IdPalletDestino,
+            idAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+            idAreaArmazenagemDestino = chamada.IdAreaArmazenagemDestino,
+            idAtividade = chamada.IdAtividade,
+            statusChamada = chamada.FgStatus,
+            priorizar = chamada.FgPriorizar,
+        });
 
-        return chamada.Codigo;
+        return chamada.IdChamada;
     }
 
     public static async Task<bool> SetStatusAsync(Guid idChamada, StatusChamada status)
@@ -163,25 +161,25 @@ public class ChamadaBLL
     {
         return new()
         {
-            Codigo = chamada.Codigo,
-            PalletOrigemId = chamada.PalletLeituraId,
-            PalletDestinoId = chamada.PalletDestinoId,
-            PalletLeituraId = chamada.PalletLeituraId,
-            AreaArmazenagemOrigemId = chamada.AreaArmazenagemOrigemId,
-            AreaArmazenagemDestinoId = chamada.AreaArmazenagemDestinoId,
-            AreaArmazenagemLeituraId = chamada.AreaArmazenagemLeituraId,
-            OperadorId = chamada.OperadorId,
-            EquipamentoId = chamada.EquipamentoId,
-            AtividadeRejeicaoId = chamada.AtividadeRejeicaoId,
-            AtividadeId = chamada.AtividadeId,
-            Status = chamada.Status,
-            DataChamada = chamada.DataChamada,
-            DataRecebida = chamada.DataRecebida,
-            DataAtendida = chamada.DataAtendida,
-            DataFinalizada = chamada.DataFinalizada,
-            DataRejeitada = chamada.DataRejeitada,
-            DataSuspensa = chamada.DataSuspensa,
-            CodigoChamadaSuspensa = chamada.CodigoChamadaSuspensa,
+            IdChamada = chamada.IdChamada,
+            IdPalletOrigem = chamada.IdPalletOrigem,
+            IdPalletLeitura = chamada.IdPalletLeitura,
+            IdPalletDestino = chamada.IdPalletDestino,
+            IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+            IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemDestino,
+            IdAreaArmazenagemLeitura = chamada.IdAreaArmazenagemLeitura,
+            IdOperador = chamada.IdOperador,
+            IdEquipamento = chamada.IdEquipamento,
+            IdAtividadeRejeicao = chamada.IdAtividadeRejeicao,
+            IdAtividade = chamada.IdAtividade,
+            FgStatus = chamada.FgStatus,
+            DtChamada = chamada.DtChamada,
+            DtRecebida = chamada.DtRecebida,
+            DtAtendida = chamada.DtAtendida,
+            DtFinalizada = chamada.DtFinalizada,
+            DtRejeitada = chamada.DtRejeitada,
+            DtSuspensa = chamada.DtSuspensa,
+            IdChamadaSuspensa = chamada.IdChamadaSuspensa,
         };
     }
 }

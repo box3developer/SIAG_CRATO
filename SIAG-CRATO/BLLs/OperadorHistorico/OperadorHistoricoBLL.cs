@@ -11,7 +11,7 @@ namespace SIAG_CRATO.BLLs.OperadorHistorico
 
             var sql = $@"{OperadorHistoricoQuery.INSERT}";
 
-            var result = await conexao.ExecuteAsync(sql, new { id_operador,evento = 1, id_equipamento });
+            var result = await conexao.ExecuteAsync(sql, new { id_operador, evento = 1, id_equipamento });
             return result > 0;
         }
     }

@@ -37,11 +37,11 @@ public class EquipamentoManutencaoBLL
     {
         return new()
         {
-            Id = equipamento.Id,
-            EquipamentoId = equipamento.IdEquipamento,
-            TipoManutencao = equipamento.TipoManutencao,
-            DataInicio = equipamento.DtInicio,
-            DataFim = equipamento.DtFim,
+            IdEquipamentoManutencao = equipamento.IdEquipamentoManutencao,
+            IdEquipamento = equipamento.IdEquipamento,
+            FgTipoManutencao = equipamento.FgTipoManutencao,
+            DtInicio = equipamento.DtInicio,
+            DtFim = equipamento.DtFim,
         };
     }
 }

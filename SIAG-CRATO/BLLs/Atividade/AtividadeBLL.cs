@@ -55,15 +55,15 @@ public class AtividadeBLL
     {
         return new()
         {
-            Codigo = atividade.Codigo,
-            Descricao = atividade.Descricao,
-            EquipamentoModeloId = atividade.EquipamentoModeloId,
-            AtividadeRotinaValidacaoId = atividade.AtividadeRotinaValidacaoId,
-            AtividadeAnteriorId = atividade.AtividadeAnteriorId,
-            SetorTrabalhoId = atividade.SetorTrabalhoId,
-            PermiteRejeitar = atividade.PermiteRejeitar,
-            TipoAtribuicaoAutomatica = atividade.TipoAtribuicaoAutomatica,
-            EvitarConflitoEndereco = atividade.EvitarConflitoEndereco,
+            IdAtividade = atividade.IdAtividade,
+            NmAtividade = atividade.NmAtividade,
+            IdEquipamentoModelo = atividade.IdEquipamentoModelo,
+            IdAtividadeRotinaValidacao = atividade.IdAtividadeRotinaValidacao,
+            IdAtividadeAnterior = atividade.IdAtividadeAnterior,
+            IdSetorTrabalho = atividade.IdSetorTrabalho,
+            FgPermiteRejeitar = atividade.FgPermiteRejeitar,
+            FgTipoAtribuicaoAutomatica = atividade.FgTipoAtribuicaoAutomatica,
+            FgEvitaConflitoEndereco = atividade.FgEvitaConflitoEndereco,
         };
     }
 }

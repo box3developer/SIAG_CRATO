@@ -40,12 +40,12 @@ public class EquipamentoChecklistBLL
         var modelo = await EquipamentoBLL.GetByidentificadorAsync(nm_identificador);
 
 
-        if (modelo == null || modelo.ModeloId == 0)
+        if (modelo == null || modelo.IdEquipamentoModelo == 0)
         {
             return [];
         }
 
-        var checklists = await GetByModeloAsync(modelo.ModeloId);
+        var checklists = await GetByModeloAsync(modelo.IdEquipamentoModelo);
 
         return checklists ?? [];
     }
@@ -54,11 +54,11 @@ public class EquipamentoChecklistBLL
     {
         return new()
         {
-            EquipamentoChecklistId = checklist.IdEquipamentoChecklist,
-            EquipamentoModeloId = checklist.IdEquipamentoModelo,
-            NomeDescricao = checklist.NmDescricao,
-            Critico = checklist.FgCritico,
-            Status = checklist.FgStatus,
+            IdEquipamentoChecklist = checklist.IdEquipamentoChecklist,
+            IdEquipamentoModelo = checklist.IdEquipamentoModelo,
+            NmDescricao = checklist.NmDescricao,
+            FgCritico = checklist.FgCritico,
+            FgStatus = checklist.FgStatus,
         };
     }
 }

@@ -15,24 +15,24 @@ public class AtividadeRejeicaoBLL
 
         if (atividadeRejeicao != null)
         {
-            if (atividadeRejeicao.Codigo != 0)
+            if (atividadeRejeicao.IdAtividadeRejeicao != 0)
             {
                 sql += " AND id_atividaderejeicao = @codigo ";
             }
-            if (!atividadeRejeicao.Descricao.IsNullOrEmpty())
+            if (!atividadeRejeicao.NmAtividadeRejeicao.IsNullOrEmpty())
             {
                 sql += " AND nm_atividaderejeicao like @nome ";
             }
-            if (!atividadeRejeicao.Email.IsNullOrEmpty())
+            if (!atividadeRejeicao.NmEmailAlerta.IsNullOrEmpty())
             {
                 sql += " AND nm_email_alerta = @email ";
             }
 
             filtro = new
             {
-                codigo = atividadeRejeicao.Codigo,
-                nome = atividadeRejeicao.Descricao,
-                email = atividadeRejeicao.Email,
+                codigo = atividadeRejeicao.IdAtividadeRejeicao,
+                nome = atividadeRejeicao.NmAtividadeRejeicao,
+                email = atividadeRejeicao.NmEmailAlerta,
             };
         }
 
@@ -46,9 +46,9 @@ public class AtividadeRejeicaoBLL
     {
         return new()
         {
-            Codigo = atividadeRejeicao.Codigo,
-            Descricao = atividadeRejeicao.Descricao,
-            Email = atividadeRejeicao.Email,
+            IdAtividadeRejeicao = atividadeRejeicao.IdAtividadeRejeicao,
+            NmAtividadeRejeicao = atividadeRejeicao.NmAtividadeRejeicao,
+            NmEmailAlerta = atividadeRejeicao.NmEmailAlerta,
         };
     }
 }

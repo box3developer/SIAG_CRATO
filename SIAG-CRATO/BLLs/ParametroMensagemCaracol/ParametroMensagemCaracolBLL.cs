@@ -21,7 +21,7 @@ public class ParametroMensagemCaracolBLL
     {
         return new()
         {
-            ParametroMensagemCaracolId = parametro.IdParametroMensagemCaracol,
+            IdParametroMensagemCaracol = parametro.IdParametroMensagemCaracol,
             Descricao = parametro.Descricao,
             Mensagem = parametro.Mensagem,
             Cor = parametro.Cor,

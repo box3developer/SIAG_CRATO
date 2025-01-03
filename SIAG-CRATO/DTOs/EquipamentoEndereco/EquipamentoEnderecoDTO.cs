@@ -2,7 +2,7 @@
 
 public class EquipamentoEnderecoDTO
 {
-    public long EquipamentoEnderecoId { get; set; }
-    public int EquipamentoId { get; set; }
-    public long EnderecoId { get; set; }
+    public long IdEquipamentoEndereco { get; set; }
+    public int IdEquipamento { get; set; }
+    public long IdEndereco { get; set; }
 }

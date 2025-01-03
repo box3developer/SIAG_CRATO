@@ -21,9 +21,9 @@ public class TurnoBLL
     {
         return new()
         {
-            CodigoTurno = turno.CodTurno,
-            DataInicio = turno.DtInicio,
-            DataFim = turno.DtFim,
+            CdTurno = turno.CdTurno,
+            DtInicio = turno.DtInicio,
+            DtFim = turno.DtFim,
         };
     }
 }

@@ -7,5 +7,5 @@ public class StatusLeitorDTO
     public bool Configurado { get; set; }
     public bool Conectado { get; set; }
     public bool Executando { get; set; }
-    public DateTime DataStatus { get; set; }
+    public DateTime DtStatus { get; set; }
 }

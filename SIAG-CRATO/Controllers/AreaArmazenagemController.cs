@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIAG_CRATO.BLLs.AreaArmzenagem;
+using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.Data;
 
 namespace SIAG_CRATO.Controllers

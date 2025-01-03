@@ -4,8 +4,8 @@ namespace SIAG_CRATO.DTOs.AtividadeRotina;
 
 public class AtividadeRotinaDTO
 {
-    public int Codigo { get; set; }
-    public string Nome { get; set; } = string.Empty;
-    public string Procedure { get; set; } = string.Empty;
-    public TipoRotina Tipo { get; set; }
+    public int IdAtividadeRotina { get; set; }
+    public string NmAtividadeRotina { get; set; } = string.Empty;
+    public string NmProcedure { get; set; } = string.Empty;
+    public TipoRotina FgTipo { get; set; }
 }

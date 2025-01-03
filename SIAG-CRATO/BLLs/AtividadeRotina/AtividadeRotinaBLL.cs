@@ -22,10 +22,10 @@ public class AtividadeRotinaBLL
     {
         return new()
         {
-            Codigo = atividade.Codigo,
-            Nome = atividade.Nome,
-            Procedure = atividade.Procedure,
-            Tipo = atividade.Tipo,
+            IdAtividadeRotina = atividade.IdAtividadeRotina,
+            NmAtividadeRotina = atividade.NmAtividadeRotina,
+            NmProcedure = atividade.NmProcedure,
+            FgTipo = atividade.FgTipo,
         };
     }
 }

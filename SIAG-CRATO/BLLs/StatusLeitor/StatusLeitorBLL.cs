@@ -28,7 +28,7 @@ public class StatusLeitorBLL
             configurado = statusLeitor.Configurado,
             conectado = statusLeitor.Conectado,
             executando = statusLeitor.Executando,
-            dataStatus = statusLeitor.DataStatus,
+            dataStatus = statusLeitor.DtStatus,
         });
 
         return id;
@@ -40,12 +40,12 @@ public class StatusLeitorBLL
 
         var id = await conexao.ExecuteAsync(StatusLeitorQuery.UPDATE, new
         {
-            equipamento = statusLeitor.Equipamento,
-            leitor = statusLeitor.Leitor,
+            idEquipamento = statusLeitor.Equipamento,
+            idLeitor = statusLeitor.Leitor,
             configurado = statusLeitor.Configurado,
             conectado = statusLeitor.Conectado,
             executando = statusLeitor.Executando,
-            dataStatus = statusLeitor.DataStatus,
+            dataStatus = statusLeitor.DtStatus,
         });
 
         return id;
@@ -60,7 +60,7 @@ public class StatusLeitorBLL
             Configurado = status.Configurado,
             Conectado = status.Conectado,
             Executando = status.Executando,
-            DataStatus = status.DataStatus,
+            DtStatus = status.DtStatus,
         };
     }
 }

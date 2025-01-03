@@ -37,4 +37,12 @@ public class CaixaQuery
                                                                                      AND operadorhistorico.id_equipamento = equipamento.id_equipamento)
                                                    GROUP BY CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2)
                                                    ORDER BY CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) DESC";
+
+    public const string UPDATE_CAIXA_PENDENTE = @"UPDATE equipamento
+                                                    SET   cd_leitura_pendente = @id_caixa
+                                                    WHERE id_equipamento = @id_equipamento";
+
+    public const string UPDATE_REMOVE_DT_ESTUFAMENTO = @$"UPDATE caixa SET dt_estufamento = null WHERE id_caixa = @id_caixa";
+
+    public const string UPDATE_SET_DT_ESTUFAMENTO_BY_CAIXA = $@"UPDATE caixa SET dt_estufamento = @dt_estufamento WHERE id_caixa = @id_caixa";
 }

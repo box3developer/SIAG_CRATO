@@ -95,15 +95,15 @@ public class AtividadeTarefaBLL
     {
         return new()
         {
-            Codigo = atividade.Codigo,
-            Descricao = atividade.Descricao,
-            Mensagem = atividade.Mensagem,
-            AtividadeId = atividade.AtividadeId,
-            Sequencia = atividade.Sequencia,
-            Recursos = atividade.Recursos,
-            AtividadeRotinaId = atividade.AtividadeRotinaId,
-            PotenciaNormal = atividade.PotenciaNormal,
-            PotenciaAumentada = atividade.PotenciaAumentada,
+            IdTarefa = atividade.IdTarefa,
+            NmTarefa = atividade.NmTarefa,
+            NmMensagem = atividade.NmMensagem,
+            IdAtividade = atividade.IdAtividade,
+            CdSequencia = atividade.CdSequencia,
+            FgRecurso = atividade.FgRecurso,
+            IdAtividadeRotina = atividade.IdAtividadeRotina,
+            QtPotenciaNormal = atividade.QtPotenciaNormal,
+            QtPotenciaAumentada = atividade.QtPotenciaAumentada,
         };
     }
 }

@@ -12,11 +12,11 @@ public class EquipamentoCheckListOperadorBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var id = await conexao.ExecuteAsync(EquipamentoCheckListOperadorQuery.INSERT, new
         {
-            idEquipamento = checklistOperador.EquipamentoId,
-            idOperador = checklistOperador.OperadorId,
-            idChecklist = checklistOperador.ChecklistId,
-            resposta = checklistOperador.Resposta,
-            data = checklistOperador.Data
+            idEquipamento = checklistOperador.IdEquipamento,
+            idOperador = checklistOperador.IdOperador,
+            idChecklist = checklistOperador.IdEquipamentoChecklist,
+            resposta = checklistOperador.FgResposta,
+            data = checklistOperador.DtChecklist
         });
 
         return id > 0;
@@ -26,11 +26,11 @@ public class EquipamentoCheckListOperadorBLL
     {
         return new()
         {
-            EquipamentoId = checklist.EquipamentoId,
-            OperadorId = checklist.OperadorId,
-            ChecklistId = checklist.ChecklistId,
-            Resposta = checklist.Resposta,
-            Data = checklist.Data,
+            IdEquipamento = checklist.IdEquipamento,
+            IdOperador = checklist.IdOperador,
+            IdEquipamentoChecklist = checklist.IdEquipamentoChecklist,
+            FgResposta = checklist.FgResposta,
+            DtChecklist = checklist.DtChecklist,
         };
     }
 }

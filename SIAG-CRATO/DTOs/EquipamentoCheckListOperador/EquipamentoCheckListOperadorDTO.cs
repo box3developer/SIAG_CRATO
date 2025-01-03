@@ -2,9 +2,9 @@
 
 public class EquipamentoCheckListOperadorDTO
 {
-    public int EquipamentoId { get; set; }
-    public long OperadorId { get; set; }
-    public int ChecklistId { get; set; }
-    public bool Resposta { get; set; }
-    public DateTime? Data { get; set; }
+    public int IdEquipamento { get; set; }
+    public long IdOperador { get; set; }
+    public int IdEquipamentoChecklist { get; set; }
+    public bool FgResposta { get; set; }
+    public DateTime? DtChecklist { get; set; }
 }

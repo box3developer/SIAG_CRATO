@@ -2,7 +2,7 @@
 
 public class PosicaoCaracolRefugoDTO
 {
-    public int PosicaoCaracolRefugoId { get; set; }
+    public int IdPosicaoCaracolRefugo { get; set; }
     public string? Descricao { get; set; }
     public int Posicao { get; set; }
     public string? Tipo { get; set; }

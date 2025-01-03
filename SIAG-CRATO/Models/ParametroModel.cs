@@ -1,31 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace SIAG_CRATO.Models;
 
-namespace SIAG_CRATO.Models
+public class ParametroModel
 {
-    public class ParametroModel
-    {
-        [Column("id_parametro")]
-        public int Id { get; set;}
-
-        [Column("nm_parametro")]
-        public string? Parametro { get; set;}
-
-        [Column("nm_valor")]
-        public string? Valor { get; set; }
-
-        [Column("fg_tipoparametro")]
-        public string? TipoParametro { get; set; }
-
-        [Column("nm_unidademedida")]
-        public string? Unidade { get; set; }
-
-        [Column("nm_tipo")]
-        public string? Tipo { get; set; }
-
-        [Column("fg_visivel")]
-        public bool? Visivel { get; set; }
-
-        [Column("fg_ativo")]
-        public int? Ativo { get; set; }
-    }
+    public int IdParametro { get; set; }
+    public string? NmParametro { get; set; }
+    public string? NmValor { get; set; }
+    public string? FgTipoParametro { get; set; }
+    public string? NmUnidadeMedida { get; set; }
+    public string? NmTipo { get; set; }
+    public bool? FgVisivel { get; set; }
+    public int? FgAtivo { get; set; }
 }

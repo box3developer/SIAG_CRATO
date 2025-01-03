@@ -2,7 +2,7 @@
 
 public class AtividadeRejeicaoDTO
 {
-    public int Codigo { get; set; }
-    public string Descricao { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
+    public int IdAtividadeRejeicao { get; set; }
+    public string NmAtividadeRejeicao { get; set; } = string.Empty;
+    public string NmEmailAlerta { get; set; } = string.Empty;
 }

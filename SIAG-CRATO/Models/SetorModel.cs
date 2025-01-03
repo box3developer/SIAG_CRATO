@@ -2,7 +2,7 @@
 
 public class SetorModel
 {
-    public int Id_setortrabalho { get; set; }
-    public int Id_deposito { get; set; }
-    public string Nm_setortrabalho { get; set; } = string.Empty;
+    public int IdSetorTrabalho { get; set; }
+    public int IdDeposito { get; set; }
+    public string NmSetorTrabalho { get; set; } = string.Empty;
 }

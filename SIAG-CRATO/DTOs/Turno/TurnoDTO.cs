@@ -2,7 +2,7 @@
 
 public class TurnoDTO
 {
-    public string? CodigoTurno { get; set; }
-    public DateTime DataInicio { get; set; }
-    public DateTime DataFim { get; set; }
+    public string? CdTurno { get; set; }
+    public DateTime DtInicio { get; set; }
+    public DateTime DtFim { get; set; }
 }

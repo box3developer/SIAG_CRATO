@@ -49,15 +49,15 @@ namespace SIAG_CRATO.BLLs.Endereco
         {
             return new()
             {
-                EnderecoId = endereco.Id_endereco,
-                RegiaoTrabalhoId = endereco.Id_regiaotrabalho,
-                SetorId = endereco.Id_setortrabalho,
-                TipoEnderecoId = endereco.Id_tipoendereco,
-                NomeEndereco = endereco.Nm_endereco,
-                EstoqueMinimo = endereco.Qt_estoqueminimo,
-                EstoqueMaximo = endereco.Qt_estoquemaximo,
-                Status = endereco.Fg_status,
-                TipoPreenchimento = endereco.Tp_preenchimento,
+                IdEndereco = endereco.IdEndereco,
+                IdRegiaoTrabalho = endereco.IdRegiaoTrabalho,
+                IdSetorTrabalho = endereco.IdSetorTrabalho,
+                IdTipoEndereco = endereco.IdTipoEndereco,
+                NmEndereco = endereco.NmEndereco,
+                QtEstoqueMinimo = endereco.QtEstoqueMinimo,
+                QtEstoqueMaximo = endereco.QtEstoqueMaximo,
+                FgStatus = endereco.FgStatus,
+                TpPreenchimento = endereco.TpPreenchimento,
             };
         }
     }

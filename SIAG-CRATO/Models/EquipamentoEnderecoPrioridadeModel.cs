@@ -1,15 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SIAG_CRATO.Models;
+﻿namespace SIAG_CRATO.Models;
 
 public class EquipamentoEnderecoPrioridadeModel
 {
-    [Column("id_equipamentoenderecoprioridade")]
-    public long Codigo { get; set; }
-
-    [Column("id_equipamentoendereco")]
-    public long EnderecoId { get; set; }
-
-    [Column("prioridade")]
+    public long IdEquipamentoEnderecoPrioridade { get; set; }
+    public long IdEquipamentoEndereco { get; set; }
     public int Prioridade { get; set; }
 }

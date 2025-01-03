@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.AreaArmzenagem;
 using SIAG_CRATO.BLLs.Endereco;
 using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.BLLs.Parametro;
@@ -7,7 +8,7 @@ using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.Models;
 
-namespace SIAG_CRATO.BLLs.AreaArmzenagem;
+namespace SIAG_CRATO.BLLs.AreaArmazenagem;
 
 public class AreaArmazenagemBLL
 {
@@ -19,7 +20,7 @@ public class AreaArmazenagemBLL
         return areasArmazenagem.ToList();
     }
 
-    public static async Task<AreaArmazenagemModel?> GetByIdAsync(int id)
+    public static async Task<AreaArmazenagemModel?> GetByIdAsync(long id)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_areaarmazenagem = @id";
 
@@ -87,7 +88,7 @@ public class AreaArmazenagemBLL
         ??
             throw new Exception("Erro ao executar StageInLivre");
 
-        var nmValor = Int16.Parse(parametroEntity.Valor ?? "");
+        var nmValor = short.Parse(parametroEntity.NmValor ?? "");
 
         var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
 		                                            and id_tipoarea = @nmValor
@@ -149,7 +150,7 @@ public class AreaArmazenagemBLL
     {
         var retorno = new StatusAreaArmazenagemDTO();
 
-        switch (areaArmazenagem.Fg_status)
+        switch (areaArmazenagem.FgStatus)
         {
             case StatusAreaArmazenagem.Bloqueado:
                 {
@@ -189,25 +190,25 @@ public class AreaArmazenagemBLL
                 }
         }
 
-        if (areaArmazenagem.Fg_status == StatusAreaArmazenagem.Bloqueado ||
-            areaArmazenagem.Fg_status == StatusAreaArmazenagem.Desabilitado ||
-            areaArmazenagem.Fg_status == StatusAreaArmazenagem.Manutencao)
+        if (areaArmazenagem.FgStatus == StatusAreaArmazenagem.Bloqueado ||
+            areaArmazenagem.FgStatus == StatusAreaArmazenagem.Desabilitado ||
+            areaArmazenagem.FgStatus == StatusAreaArmazenagem.Manutencao)
         {
             return retorno;
         }
 
-        var pallet = pallets.Where(x => x.Id_areaarmazenagem == areaArmazenagem.Id_areaarmazenagem).FirstOrDefault();
+        var pallet = pallets.Where(x => x.IdAreaArmazenagem == areaArmazenagem.IdAreaArmazenagem).FirstOrDefault();
 
         if (pallet == null)
         {
             retorno.SemPallet = true;
         }
-        else if (pallet.Fg_status == StatusPallet.Cheio)
+        else if (pallet.FgStatus == StatusPallet.Cheio)
         {
             retorno.Cor = CorStatusAreaArmazenagem.Estufado;
         }
 
-        retorno.Pallet = pallet?.Id_pallet ?? 0;
+        retorno.Pallet = pallet?.IdPallet ?? 0;
 
         return retorno;
     }
@@ -229,9 +230,9 @@ public class AreaArmazenagemBLL
 
         foreach (var endereco in enderecos)
         {
-            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.Id_endereco });
+            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.IdEndereco });
 
-            var listaAreasArmazenagem = areasArmazenagem.GroupBy(x => x.Nr_posicaox).Select(x => x.ToList()).ToList();
+            var listaAreasArmazenagem = areasArmazenagem.GroupBy(x => x.NrPosicaoX).Select(x => x.ToList()).ToList();
             var listaCaracol = new List<List<StatusAreaArmazenagemDTO>>();
 
             foreach (var areaArmazenagem in listaAreasArmazenagem)
@@ -241,14 +242,15 @@ public class AreaArmazenagemBLL
                 foreach (var gaiola in areaArmazenagem)
                 {
                     var statusGaiola = GetStatusGaiola(gaiola, pallets);
-                    statusGaiola.Caracol = gaiola.Nr_posicaox;
-                    statusGaiola.Gaiola = gaiola.Nr_posicaoy;
-                    statusGaiola.Codigo = gaiola.Id_areaarmazenagem;
+                    statusGaiola.Caracol = gaiola.NrPosicaoX;
+                    statusGaiola.Gaiola = gaiola.NrPosicaoY;
+                    statusGaiola.Codigo = gaiola.IdAreaArmazenagem;
 
                     listaGaiolas.Add(statusGaiola);
                 }
 
                 listaGaiolas = listaGaiolas.OrderBy(x => x.Gaiola).ToList();
+
                 if (listaGaiolas.Count == 0)
                 {
                     continue;
@@ -267,16 +269,16 @@ public class AreaArmazenagemBLL
     {
         return new()
         {
-            AreaArmazenagemId = areaArmazenagem.Id_areaarmazenagem,
-            TipoAreaId = areaArmazenagem.Id_tipoarea,
-            EnderecoId = areaArmazenagem.Id_endereco,
-            AgrupadorId = areaArmazenagem.Id_agrupador,
-            CaracolId = areaArmazenagem.Id_caracol,
-            PosicaoX = areaArmazenagem.Nr_posicaox,
-            PosicaoY = areaArmazenagem.Nr_posicaoy,
-            Lado = areaArmazenagem.Nr_lado,
-            Status = areaArmazenagem.Fg_status,
-            Identificacao = areaArmazenagem.Cd_identificacao,
+            IdAreaArmazenagem = areaArmazenagem.IdAreaArmazenagem,
+            IdTipoArea = areaArmazenagem.IdTipoArea,
+            IdEndereco = areaArmazenagem.IdEndereco,
+            IdAgrupador = areaArmazenagem.IdAgrupador,
+            IdCaracol = areaArmazenagem.IdCaracol,
+            NrPosicaoX = areaArmazenagem.NrPosicaoX,
+            NrPosicaoY = areaArmazenagem.NrPosicaoY,
+            NrLado = areaArmazenagem.NrLado,
+            FgStatus = areaArmazenagem.FgStatus,
+            CdIdentificacao = areaArmazenagem.CdIdentificacao,
         };
     }
 }

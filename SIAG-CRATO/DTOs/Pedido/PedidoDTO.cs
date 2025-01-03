@@ -2,9 +2,9 @@
 
 public class PedidoDTO
 {
-    public string? IdPedido { get; set; } = string.Empty;
-    public string CodigoPedido { get; set; } = string.Empty;
-    public string CodigoLote { get; set; } = string.Empty;
-    public string Box { get; set; } = string.Empty;
-    public int QuantidadeCaixas { get; set; }
+    public string? IdPedido { get; set; }
+    public string? CdPedido { get; set; }
+    public string? CdLote { get; set; }
+    public string? CdBox { get; set; }
+    public int NrCaixas { get; set; }
 }

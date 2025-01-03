@@ -2,14 +2,14 @@
 
 public class AtividadeTarefaDTO
 {
-    public int Codigo { get; set; }
-    public string Descricao { get; set; } = string.Empty;
-    public string Mensagem { get; set; } = string.Empty;
-    public int AtividadeId { get; set; }
-    public int Sequencia { get; set; }
-    public int? Recursos { get; set; }
-    public int AtividadeRotinaId { get; set; }
-    public int PotenciaNormal { get; set; }
-    public int PotenciaAumentada { get; set; }
+    public int IdTarefa { get; set; }
+    public string NmTarefa { get; set; } = string.Empty;
+    public string NmMensagem { get; set; } = string.Empty;
+    public int IdAtividade { get; set; }
+    public int CdSequencia { get; set; }
+    public int? FgRecurso { get; set; }
+    public int IdAtividadeRotina { get; set; }
+    public int QtPotenciaNormal { get; set; }
+    public int QtPotenciaAumentada { get; set; }
 
 }
