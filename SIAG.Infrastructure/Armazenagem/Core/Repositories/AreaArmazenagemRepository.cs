@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
+namespace SIAG.Infrastructure.Armazenagem.Core.Repositorios
 {
     public class AreaArmazenagemRepository: IAreaArmazenagemRepository
     {

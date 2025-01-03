@@ -12,4 +12,8 @@
     <Folder Include="Chamada\Core\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SIAG.CrossCutting\SIAG.CrossCutting.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,34 +1,50 @@
-﻿using SIAG.CrossCutting.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using SIAG.Application.Armazenagem.Cadastro.DTOs;
+using SIAG.CrossCutting.DTOs;
+using SIAG.CrossCutting.Interfaces;
+using SIAG.CrossCutting.Logging;
+using SIAG.CrossCutting.Utils;
+using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SIAG.Application.Armazenagem.Cadastro.Services
 {
-    public class AreaArmazenagemService
+    public class AreaArmazenagemService : BaseService<IAreaArmazenagemRepository, AreaArmazenagem, AreaArmazenagemDTO, int>
     {
-        private readonly ILogService _logService;
-
-        public AreaArmazenagemService(ILogService logService)
+        public AreaArmazenagemService(
+            IAreaArmazenagemRepository repository,
+            IMappingService mappingService)
+            : base(repository, mappingService)
         {
-            _logService = logService;
         }
 
-        public void ProcessarAreas()
+        public async Task<DadosPaginadosDTO<AreaArmazenagemDTO>> GetListAsync(FiltroPaginacaoDTO dto)
         {
-            _logService.LogDebug("Iniciando processamento de áreas...");
+            var paginatedData = await _areaArmazenagemRepository.GetListAsync(dto);
 
-            try
+            return new DadosPaginadosDTO<AreaArmazenagemDTO>
             {
-                // Simulação de lógica
-                _logService.LogInfo("Processamento concluído com sucesso.");
-            }
-            catch (Exception ex)
+                Dados = paginatedData.Select(ConvertToDTO).ToList(),
+                TotalPages = paginatedData.TotalPages,
+                CurrentPage = paginatedData.CurrentPage,
+                PageSize = paginatedData.PageSize,
+                TotalRegisters = paginatedData.TotalRegisters
+            };
+        }
+
+        public async Task<List<SelectDTO<int>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
+        {
+            var lista = await _areaArmazenagemRepository.GetListAsync(filtro);
+
+            return lista.Select(x => new SelectDTO<int>
             {
-                _logService.LogError("Erro durante o processamento de áreas.", ex);
-            }
+                Id = x.AreaArmazenagemId,
+                Descricao = $"Identificação: {x.CdIdentificacao} - Status: {x.FgStatus} - X: {x.NrPosicaoX} - Y: {x.NrPosicaoY}"
+            }).ToList();
         }
     }
 }

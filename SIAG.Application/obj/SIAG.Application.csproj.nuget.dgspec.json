@@ -120,6 +120,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CoreEx.AutoMapper": {
+              "target": "Package",
+              "version": "[3.30.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[4.2.0, )"
@@ -180,7 +188,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\SIAG.CrossCutting.csproj": {
+                "projectPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\SIAG.CrossCutting.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
