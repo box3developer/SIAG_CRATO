@@ -6,9 +6,9 @@ namespace SIAG.API.Controllers.Armazenagem.Cadastro
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaArmazenagemController : BaseController<AreaArmazenagemService, AreaArmazenagemDTO, int>
+    public class PalletController : BaseController<PalletService, PalletDTO, int>
     {
-        public AreaArmazenagemController(AreaArmazenagemService service) : base(service)
+        public PalletController(PalletService service) : base(service)
         {
         }
     }

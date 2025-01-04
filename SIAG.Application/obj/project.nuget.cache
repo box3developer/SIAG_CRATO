@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8OYw6+2MXrpeN7Ru8HJ5J2WaealN+uh2/G3grYy3ERlHDdI3+40g+ajQHer018Ehzzg3Hrw1HNHiUQuN9eE7Vw==",
+  "dgSpecHash": "HOvnxTXb6kOT/YoMpBH1ZNNzzx4caE+FtrZS/WdAfB2htomUYlNlF3wBLrImLPJ9d5kMhs6yfD4JGSrJwNluGA==",
   "success": true,
   "projectFilePath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Application\\SIAG.Application.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "C:\\Users\\crist\\.nuget\\packages\\cloudnative.cloudevents.systemtextjson\\2.8.0\\cloudnative.cloudevents.systemtextjson.2.8.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\coreex\\3.30.2\\coreex.3.30.2.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\coreex.automapper\\3.30.2\\coreex.automapper.3.30.2.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.11\\microsoft.entityframeworkcore.8.0.11.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.11\\microsoft.entityframeworkcore.abstractions.8.0.11.nupkg.sha512",

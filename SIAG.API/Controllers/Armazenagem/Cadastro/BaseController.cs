@@ -135,7 +135,7 @@ namespace SIAG.API.Controllers.Armazenagem.Cadastro
         }
 
         [HttpPost("Select")]
-        public virtual async Task<ActionResult> GetSelect([FromBody] FiltroSelectDTO dto)
+        public virtual async Task<ActionResult> GetSelect([FromBody] FiltroPaginacaoDTO dto)
         {
             try
             {

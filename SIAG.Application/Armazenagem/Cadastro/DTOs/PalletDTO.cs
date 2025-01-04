@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace SIAG.Domain.Armazenagem.Cadastro.Models
+namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class PalletDTO
     {

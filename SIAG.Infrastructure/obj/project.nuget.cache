@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YK8Xwy1SFqNUJVdGaGiim9/psuYtUDBFDJtukcXWhTs/NCQhP3sGPrDylkNVmdD0vvFYyCP+AF3qo6VSid/izA==",
+  "dgSpecHash": "sb5ME3qzBOLDbU/Yi3Jr2AyJMX6/p3F9nBQmnmPQ1NHVBeqfc0oj1Yu+lDH0ZgT42qeH/g7yGURhZid/st1k6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\SIAG.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,9 @@
     "C:\\Users\\crist\\.nuget\\packages\\coreex\\3.30.2\\coreex.3.30.2.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\coreex.automapper\\3.30.2\\coreex.automapper.3.30.2.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

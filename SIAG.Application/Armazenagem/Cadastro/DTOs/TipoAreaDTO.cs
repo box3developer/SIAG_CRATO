@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace SIAG.Domain.Armazenagem.Cadastro.Models
+namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class TipoAreaDTO
     {

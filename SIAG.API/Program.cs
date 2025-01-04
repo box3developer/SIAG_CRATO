@@ -10,6 +10,8 @@ using System.Data;
 using SIAG.Application.Armazenagem.Cadastro.Shared.Mappings;
 using SIAG.CrossCutting.Interfaces;
 using SIAG.CrossCutting.Services;
+using FluentValidation.AspNetCore;
+using SIAG.Application.Armazenagem.Cadastro.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,9 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters(); ;
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
