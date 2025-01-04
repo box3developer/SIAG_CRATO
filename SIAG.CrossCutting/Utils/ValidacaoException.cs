@@ -13,4 +13,3 @@ namespace SIAG.CrossCutting.Utils
         }
     }
 }
-}

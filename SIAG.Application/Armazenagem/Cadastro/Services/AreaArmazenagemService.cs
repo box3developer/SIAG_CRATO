@@ -27,9 +27,6 @@ namespace SIAG.Application.Armazenagem.Cadastro.Services
 
         public async Task<DadosPaginadosDTO<AreaArmazenagemDTO>> GetListAsync(FiltroPaginacaoDTO dto)
         {
-            if (dto == null)
-                throw new ArgumentNullException(nameof(dto));
-
             var lista = await _repository.GetListAsync(dto);
 
             var listaFormatada = lista.Dados.Select(x => _mappingService.Map<AreaArmazenagem, AreaArmazenagemDTO>(x)).ToList();
@@ -46,9 +43,6 @@ namespace SIAG.Application.Armazenagem.Cadastro.Services
 
         public async Task<List<SelectDTO<int>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
         {
-            if (filtro == null)
-                throw new ArgumentNullException(nameof(filtro));
-
             var lista = await _repository.GetSelectAsync(filtro);
 
             return lista;

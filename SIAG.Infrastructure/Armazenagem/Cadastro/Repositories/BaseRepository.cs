@@ -1,15 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SIAG.Application.Armazenagem.Cadastro.DTOs;
-using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
-using SIAG.Domain.Armazenagem.Cadastro.Models;
 using SIAG.Infrastructure.Configuracao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {

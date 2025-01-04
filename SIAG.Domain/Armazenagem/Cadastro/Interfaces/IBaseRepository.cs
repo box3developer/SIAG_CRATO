@@ -1,6 +1,4 @@
-﻿using SIAG.CrossCutting.DTOs;
-
-namespace SIAG.Domain.Armazenagem.Cadastro.Interfaces
+﻿namespace SIAG.Domain.Armazenagem.Cadastro.Interfaces
 {
     public interface IBaseRepository<TEntity, TKey>
     {

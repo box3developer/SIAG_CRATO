@@ -1,38 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SIAG.Application.Armazenagem.Cadastro.DTOs;
+using SIAG.Application.Armazenagem.Cadastro.Services;
+using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Logging;
+using SIAG.CrossCutting.Utils;
+using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.API.Controllers.Armazenagem.Cadastro
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaArmazenagemController : ControllerBase
+    public class AreaArmazenagemController : BaseController<AreaArmazenagemService, AreaArmazenagemDTO, int>
     {
-        private readonly ILogService _logService;
-
-        public AreaArmazenagemController(ILogService logService)
+        public AreaArmazenagemController(AreaArmazenagemService service) : base(service)
         {
-            _logService = logService;
-        }
-
-        [HttpGet]
-        public IActionResult ObterAreas()
-        {
-            _logService.LogInfo("Iniciando consulta de áreas de armazenagem.");
-
-            try
-            {
-                // Simulação de operação
-                var areas = new List<string> { "Área 1", "Área 2" };
-                _logService.LogInfo($"Consulta finalizada com {areas.Count} áreas encontradas.");
-
-                return Ok(areas);
-            }
-            catch (Exception ex)
-            {
-                _logService.LogError("Erro ao consultar áreas de armazenagem.", ex);
-                return StatusCode(500, "Erro interno do servidor.");
-            }
         }
     }
 }
