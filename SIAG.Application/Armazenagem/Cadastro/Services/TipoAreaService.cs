@@ -1,4 +1,5 @@
-﻿using SIAG.CrossCutting.DTOs;
+﻿using SIAG.Application.Armazenagem.Cadastro.DTOs;
+using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Models;

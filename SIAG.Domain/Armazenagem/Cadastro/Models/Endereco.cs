@@ -1,18 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class Endereco
     {
+        [Key]
         public int EnderecoId { get; set; }
 
+        [ForeignKey("RegiaoTrabalhoModel")]
         public int RegiaoTrabalhoId { get; set; }
         public RegiaoTrabalho RegiaoTrabalho { get; set; }
 
+        [ForeignKey("SetorTrabalhoModel")]
         public int SetorTrabalhoId { get; set; }
         public SetorTrabalho SetorTrabalho { get; set; }
 
+        [ForeignKey("TipoEnderecoModel")]
         public int TipoEnderecoId { get; set; }
         public TipoEndereco TipoEndereco { get; set; }
 

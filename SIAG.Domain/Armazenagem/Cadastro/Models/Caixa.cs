@@ -1,12 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class Caixa
     {
+        [Key]
         public string CaixaId { get; set; }
 
+        [ForeignKey("agrupadorativo")]
         public Guid AgrupadorId { get; set; }
         public AgrupadorAtivo Agrupador { get; set; }
 

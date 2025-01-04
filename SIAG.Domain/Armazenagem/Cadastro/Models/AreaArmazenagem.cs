@@ -5,15 +5,20 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class AreaArmazenagem
     {
+        [Key]
         public int AreaArmazenagemId { get; set; }
 
+        [ForeignKey("TipoAreaModel")]
         public int TipoAreaId { get; set; }
         public TipoArea TipoArea { get; set; }
 
+        [ForeignKey("EnderecoModel")]
         public int EnderecoId { get; set; }
         public Endereco Endereco { get; set; }
 
-        public int AgrupadorId { get; set; }
+        [ForeignKey("Agrupador")]
+        [InverseProperty("AreaArmazenagemPrincipal")]
+        public Guid AgrupadorId { get; set; }
         public AgrupadorAtivo Agrupador { get; set; }
 
         public int NrPosicaoX { get; set; }
@@ -26,7 +31,9 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 
         public string CdIdentificacao { get; set; }
 
-        public int AgrupadorReservadoId { get; set; }
+        [ForeignKey("AgrupadorReservado")]
+        [InverseProperty("AreaArmazenagemReservada")]
+        public Guid AgrupadorReservadoId { get; set; }
         public AgrupadorAtivo AgrupadorReservado { get; set; }
     }
 }

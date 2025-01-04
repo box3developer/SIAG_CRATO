@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class AgrupadorAtivo
     {
+        [Key]
         public Guid AgrupadorId { get; set; }
 
         public int TpAgrupamento { get; set; }

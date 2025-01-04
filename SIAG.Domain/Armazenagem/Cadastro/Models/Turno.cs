@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class Turno
     {
+        [Key]
         public int TurnoId { get; set; }
 
         public int CdTurno { get; set; }

@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class Equipamento
     {
+        [Key]
         public int EquipamentoId { get; set; }
 
         public int EquipamentoModeloId { get; set; }

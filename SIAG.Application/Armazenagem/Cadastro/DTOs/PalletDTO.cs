@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Models;
 
 namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
@@ -11,7 +10,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
         public AreaArmazenagem AreaArmazenagem { get; set; }
 
         public Guid AgrupadorAtivoId { get; set; }
-        public AgrupadorAtivoDTO AgrupadorAtivo { get; set; }
+        public AgrupadorAtivo AgrupadorAtivo { get; set; }
 
         public int FgStatus { get; set; }
 

@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     public class Pedido
     {
+        [Key]
         public int PedidoId { get; set; }
 
         public int TransportadoraId { get; set; }
