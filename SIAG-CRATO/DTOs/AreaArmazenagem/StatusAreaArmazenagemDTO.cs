@@ -1,6 +1,4 @@
-﻿using SIAG_CRATO.Data;
-
-namespace SIAG_CRATO.DTOs.AreaArmazenagem;
+﻿namespace SIAG_CRATO.DTOs.AreaArmazenagem;
 
 public class StatusAreaArmazenagemDTO
 {
@@ -12,5 +10,6 @@ public class StatusAreaArmazenagemDTO
     public int Caracol { get; set; }
     public int Gaiola { get; set; }
     public int Quantidade { get; set; }
-    public StatusLuz Status { get; set; }
+    public bool StatusVerde { get; set; }
+    public bool StatusVermelho { get; set; }
 }
