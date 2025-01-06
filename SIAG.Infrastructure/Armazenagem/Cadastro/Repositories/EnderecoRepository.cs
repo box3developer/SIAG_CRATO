@@ -18,7 +18,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
                 pesquisa = SqlUtil.GetStringTratadaWhere(pesquisa);
-                query = query.Where(x => EF.Functions.Like(x.EnderecoId.ToString(), pesquisa) ||
+                query = query.Where(x => EF.Functions.Like(x.IdEndereco.ToString(), pesquisa) ||
                                             EF.Functions.Like(x.NmEndereco.ToLower(), pesquisa)
                                        );
             }
@@ -31,7 +31,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             var query = _dbContext.Endereco.AsQueryable();
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            var lista = await query.OrderByDescending(x => x.EnderecoId)
+            var lista = await query.OrderByDescending(x => x.IdEndereco)
                                    .GetPaged(dto.CurrentPage, dto.PageSize, dto.Impressao);
 
             var listaFormatada = lista.Dados.Select(x => x).ToList();
@@ -54,13 +54,13 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            query = query.OrderBy(x => x.EnderecoId)
+            query = query.OrderBy(x => x.IdEndereco)
                          .Take(30);
 
             var dados = await query
                 .Select(x => new SelectDTO<int>
                 {
-                    Id = x.EnderecoId,
+                    Id = x.IdEndereco,
                     Descricao = $"{x.NmEndereco}",
                 })
                 .ToListAsync();

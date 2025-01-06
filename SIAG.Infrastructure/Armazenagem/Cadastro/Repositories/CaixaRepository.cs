@@ -18,7 +18,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
                 pesquisa = SqlUtil.GetStringTratadaWhere(pesquisa);
-                query = query.Where(x => EF.Functions.Like(x.CaixaId.ToString(), pesquisa) ||
+                query = query.Where(x => EF.Functions.Like(x.IdCaixa.ToString(), pesquisa) ||
                                             EF.Functions.Like(x.CdProduto.ToLower(), pesquisa)
                                        );
             }
@@ -31,7 +31,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             var query = _dbContext.Caixa.AsQueryable();
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            var lista = await query.OrderByDescending(x => x.CaixaId)
+            var lista = await query.OrderByDescending(x => x.IdCaixa)
                                    .GetPaged(dto.CurrentPage, dto.PageSize, dto.Impressao);
 
             var listaFormatada = lista.Dados.Select(x => x).ToList();
@@ -54,13 +54,13 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            query = query.OrderBy(x => x.CaixaId)
+            query = query.OrderBy(x => x.IdCaixa)
                          .Take(30);
 
             var dados = await query
                 .Select(x => new SelectDTO<string>
                 {
-                    Id = x.CaixaId,
+                    Id = x.IdCaixa,
                     Descricao = $"{x.CdCor}",
                 })
                 .ToListAsync();

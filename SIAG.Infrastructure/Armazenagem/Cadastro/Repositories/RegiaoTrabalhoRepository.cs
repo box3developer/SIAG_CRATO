@@ -18,7 +18,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
                 pesquisa = SqlUtil.GetStringTratadaWhere(pesquisa);
-                query = query.Where(x => EF.Functions.Like(x.RegiaoTrabalhoId.ToString(), pesquisa) ||
+                query = query.Where(x => EF.Functions.Like(x.IdRegiaoTrabalho.ToString(), pesquisa) ||
                                             EF.Functions.Like(x.NmRegiaoTrabalho.ToLower(), pesquisa)
                                        );
             }
@@ -31,7 +31,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             var query = _dbContext.RegiaoTrabalho.AsQueryable();
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            var lista = await query.OrderByDescending(x => x.RegiaoTrabalhoId)
+            var lista = await query.OrderByDescending(x => x.IdRegiaoTrabalho)
                                    .GetPaged(dto.CurrentPage, dto.PageSize, dto.Impressao);
 
             var listaFormatada = lista.Dados.Select(x => x).ToList();
@@ -54,14 +54,14 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            query = query.OrderBy(x => x.RegiaoTrabalhoId)
+            query = query.OrderBy(x => x.IdRegiaoTrabalho)
                          .Take(30);
 
             var dados = await query
                 .Select(x => new SelectDTO<int>
                 {
-                    Id = x.RegiaoTrabalhoId,
-                    Descricao = $"{x.NmRegiaoTrabalho} - Depósito: {x.DepositoId}",
+                    Id = x.IdRegiaoTrabalho,
+                    Descricao = $"{x.NmRegiaoTrabalho} - Depósito: {x.IdDeposito}",
                 })
                 .ToListAsync();
 

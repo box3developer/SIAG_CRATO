@@ -18,7 +18,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
                 pesquisa = SqlUtil.GetStringTratadaWhere(pesquisa);
-                query = query.Where(x => EF.Functions.Like(x.AreaArmazenagemId.ToString(), pesquisa) ||
+                query = query.Where(x => EF.Functions.Like(x.IdAreaArmazenagem.ToString(), pesquisa) ||
                                             EF.Functions.Like(x.CdIdentificacao.ToLower(), pesquisa) ||
                                             EF.Functions.Like(x.FgStatus.ToString(), pesquisa)
                                        );
@@ -32,7 +32,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             var query = _dbContext.AreaArmazenagem.AsQueryable();
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            var lista = await query.OrderByDescending(x => x.AreaArmazenagemId)
+            var lista = await query.OrderByDescending(x => x.IdAreaArmazenagem)
                                    .GetPaged(dto.CurrentPage, dto.PageSize, dto.Impressao);
 
             var listaFormatada = lista.Dados.Select(x => x).ToList();
@@ -55,13 +55,13 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 
             query = FiltroPesquisa(query, dto.Pesquisa);
 
-            query = query.OrderBy(x => x.AreaArmazenagemId)
+            query = query.OrderBy(x => x.IdAreaArmazenagem)
                          .Take(30);
 
             var dados = await query
                 .Select(x => new SelectDTO<int>
                 {
-                    Id = x.AreaArmazenagemId,
+                    Id = x.IdAreaArmazenagem,
                     Descricao = $"Identificação: {x.CdIdentificacao} - Status: {x.FgStatus} - X: {x.NrPosicaoX} - Y: {x.NrPosicaoY}",
                 })
                 .ToListAsync();

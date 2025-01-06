@@ -1,20 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [Table("turno")]
     public class Turno
     {
         [Key]
-        public int TurnoId { get; set; }
+        [Column("id_turno")]
+        public int IdTurno { get; set; }
 
+        [Column("cd_turno")]
         public int CdTurno { get; set; }
 
+        [Column("dt_inicio")]
         public DateTime DtInicio { get; set; }
 
+        [Column("dt_fim")]
         public DateTime DtFim { get; set; }
 
+        [Column("dia_anterior")]
         public bool DiaAnterior { get; set; }
 
+        [Column("dia_sucessor")]
         public bool DiaSucessor { get; set; }
     }
 }

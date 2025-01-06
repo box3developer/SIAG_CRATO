@@ -1,72 +1,107 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+
+    [Table("pedido")]
     public class Pedido
     {
         [Key]
-        public int PedidoId { get; set; }
+        [Column("id_pedido")]
+        public int IdPedido { get; set; }
 
-        public int TransportadoraId { get; set; }
+        [Column("id_transportadora")]
+        public int IdTransportadora { get; set; }
 
+        [Column("cd_pedido")]
         public int CdPedido { get; set; }
 
+        [Column("cd_lote")]
         public int CdLote { get; set; }
 
+        [Column("cd_box")]
         public int CdBox { get; set; }
 
+        [Column("cd_cliente")]
         public int CdCliente { get; set; }
 
-        public string CdEstabelecimento { get; set; }
+        [Column("cd_estabelecimento")]
+        public string CdEstabelecimento { get; set; } = string.Empty;
 
-        public int NotaFiscalId { get; set; }
+        [Column("id_nota_fiscal")]
+        public int IdNotaFiscal { get; set; }
 
+        [Column("cd_canal")]
         public int CdCanal { get; set; }
 
+        [Column("cd_ordem_exportacao")]
         public int CdOrdemExportacao { get; set; }
 
+        [Column("cd_veiculo_exportacao")]
         public int CdVeiculoExportacao { get; set; }
 
-        public string TpCarga { get; set; }
+        [Column("tp_carga")]
+        public string TpCarga { get; set; } = string.Empty;
 
-        public string TpCargaAglutinado { get; set; }
+        [Column("tp_carga_aglutinado")]
+        public string TpCargaAglutinado { get; set; } = string.Empty;
 
-        public string CdRota { get; set; }
+        [Column("cd_rota")]
+        public string CdRota { get; set; } = string.Empty;
 
+        [Column("qt_caixa")]
         public int QtCaixa { get; set; }
 
+        [Column("qt_cubagem_caixa")]
         public decimal QtCubagemCaixa { get; set; }
 
+        [Column("qt_acessorio")]
         public int QtAcessorio { get; set; }
 
+        [Column("qt_cubagem_acessorio")]
         public decimal QtCubagemAcessorio { get; set; }
 
+        [Column("qt_display")]
         public int QtDisplay { get; set; }
 
+        [Column("qt_cubagem_display")]
         public decimal QtCubagemDisplay { get; set; }
 
+        [Column("qt_expositores")]
         public int QtExpositores { get; set; }
 
+        [Column("qt_cubagem_expositores")]
         public decimal QtCubagemExpositores { get; set; }
 
+        [Column("fg_status")]
         public int FgStatus { get; set; }
 
+        [Column("dt_importacao")]
         public DateTime DtImportacao { get; set; }
 
+        [Column("cd_ordem_exportacao_definitiva")]
         public int CdOrdemExportacaoDefinitiva { get; set; }
 
+        [Column("cd_veiculo_exportacao_definitiva")]
         public int CdVeiculoExportacaoDefinitiva { get; set; }
 
+        [Column("dt_previsao_exportacao")]
         public DateTime DtPrevisaoExportacao { get; set; }
 
+        [Column("dt_implantacao")]
         public DateTime DtImplantacao { get; set; }
 
+        [Column("dt_atualizacao")]
         public DateTime DtAtualizacao { get; set; }
 
+        [Column("dt_predata")]
         public DateTime DtPredata { get; set; }
 
+        [Column("fg_sku")]
         public int FgSku { get; set; }
 
+        [Column("cd_sequencia_expedicao")]
         public int CdSequenciaExpedicao { get; set; }
     }
 }
