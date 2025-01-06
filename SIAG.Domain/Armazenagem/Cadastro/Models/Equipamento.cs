@@ -11,14 +11,14 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("id_equipamento")]
         public int IdEquipamento { get; set; }
 
-        [Column("id_equipamento_modelo")]
+        [Column("id_equipamentomodelo")]
         public int IdEquipamentoModelo { get; set; }
 
-        [Column("id_setor_trabalho")]
+        [Column("id_setortrabalho")]
         public int IdSetorTrabalho { get; set; }
 
         [Column("id_operador")]
-        public int IdOperador { get; set; }
+        public int? IdOperador { get; set; }
 
         [Column("nm_equipamento")]
         public string NmEquipamento { get; set; } = string.Empty;
@@ -33,33 +33,33 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public DateTime DtInclusao { get; set; }
 
         [Column("dt_manutencao")]
-        public DateTime DtManutencao { get; set; }
+        public DateTime? DtManutencao { get; set; }
 
         [Column("nm_observacao")]
         public string NmObservacao { get; set; } = string.Empty;
 
-        [Column("cd_ultima_leitura")]
-        public string CdUltimaLeitura { get; set; } = string.Empty;
+        [Column("cd_ultimaleitura")]
+        public string? CdUltimaLeitura { get; set; } = string.Empty;
 
-        [Column("dt_ultima_leitura")]
+        [Column("dt_ultimaleitura")]
         public DateTime DtUltimaLeitura { get; set; }
 
-        [Column("endereco_id")]
-        public int EnderecoId { get; set; }
+        [Column("id_endereco")]
+        public int IdEndereco { get; set; }
 
         [Column("nm_ip")]
-        public string NmIp { get; set; } = string.Empty;
+        public string? NmIp { get; set; } = string.Empty;
 
-        [Column("fg_status_troca_caracol")]
+        [Column("fg_statustrocacaracol")]
         public int FgStatusTrocaCaracol { get; set; }
 
         [Column("nm_abreviado_equipamento")]
-        public string NmAbreviadoEquipamento { get; set; } = string.Empty;
+        public string? NmAbreviadoEquipamento { get; set; } = string.Empty;
 
         [Column("cd_leitura_pendente")]
-        public string CdLeituraPendente { get; set; } = string.Empty;
+        public string? CdLeituraPendente { get; set; } = string.Empty;
 
         [Column("nm_usuario_liberacao")]
-        public string NmUsuarioLiberacao { get; set; } = string.Empty;
+        public string? NmUsuarioLiberacao { get; set; } = string.Empty;
     }
 }

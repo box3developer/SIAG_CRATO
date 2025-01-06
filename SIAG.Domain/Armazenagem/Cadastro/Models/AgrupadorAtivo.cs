@@ -14,13 +14,13 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int TpAgrupamento { get; set; }
 
         [Column("codigo1")]
-        public string Codigo1 { get; set; } = string.Empty;
+        public string? Codigo1 { get; set; } = string.Empty;
 
         [Column("codigo2")]
-        public string Codigo2 { get; set; } = string.Empty;
+        public string? Codigo2 { get; set; } = string.Empty;
 
         [Column("codigo3")]
-        public string Codigo3 { get; set; } = string.Empty;
+        public string? Codigo3 { get; set; } = string.Empty;
 
         [Column("cd_sequencia")]
         public int CdSequencia { get; set; }
@@ -28,8 +28,8 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("dt_agrupador")]
         public DateTime DtAgrupador { get; set; }
 
-        [Column("id_area_armazenagem")]
-        public int IdAreaArmazenagem { get; set; }
+        [Column("id_areaarmazenagem")]
+        public int? IdAreaArmazenagem { get; set; }
 
         [Column("fg_status")]
         public int FgStatus { get; set; }

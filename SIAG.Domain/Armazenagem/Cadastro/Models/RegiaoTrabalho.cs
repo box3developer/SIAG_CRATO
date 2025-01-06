@@ -8,15 +8,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
     public class RegiaoTrabalho
     {
         [Key]
-        [Column("id_regiao_trabalho")]
+        [Column("id_regiaotrabalho")]
         public int IdRegiaoTrabalho { get; set; }
 
-        [ForeignKey("Deposito")]
+        [ForeignKey("deposito")]
         [Column("id_deposito")]
         public int IdDeposito { get; set; }
         public Deposito? Deposito { get; set; }
 
-        [Column("nm_regiao_trabalho")]
+        [Column("nm_regiaotrabalho")]
         public string NmRegiaoTrabalho { get; set; }
     }
 }

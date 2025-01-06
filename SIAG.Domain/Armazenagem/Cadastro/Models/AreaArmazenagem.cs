@@ -7,29 +7,29 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
     public class AreaArmazenagem
     {
         [Key]
-        [Column("idarea_armazenagem")]
+        [Column("id_areaarmazenagem")]
         public int IdAreaArmazenagem { get; set; }
 
-        [ForeignKey("TipoArea")]
-        [Column("id_tipo_area")]
+        [ForeignKey("tipoarea")]
+        [Column("id_tipoarea")]
         public int IdTipoArea { get; set; }
         public TipoArea? TipoArea { get; set; }
 
-        [ForeignKey("Endereco")]
+        [ForeignKey("endereco")]
         [Column("id_endereco")]
         public int IdEndereco { get; set; }
         public Endereco? Endereco { get; set; }
 
-        [ForeignKey("Agrupador")]
-        [InverseProperty("AreaArmazenagemPrincipal")]
-        [Column("agrupador_id")]
-        public Guid AgrupadorId { get; set; }
+        [ForeignKey("agrupador")]
+        [InverseProperty("areaarmazenagemprincipal")]
+        [Column("id_agrupador")]
+        public Guid? IdAgrupador { get; set; }
         public AgrupadorAtivo? Agrupador { get; set; }
 
-        [Column("nr_posicao_x")]
+        [Column("nr_posicaox")]
         public int NrPosicaoX { get; set; }
 
-        [Column("nr_posicao_y")]
+        [Column("nr_posicaoy")]
         public int NrPosicaoY { get; set; }
 
         [Column("nr_lado")]
@@ -39,12 +39,12 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int FgStatus { get; set; }
 
         [Column("cd_identificacao")]
-        public string CdIdentificacao { get; set; } = string.Empty;
+        public string? CdIdentificacao { get; set; } = string.Empty;
 
-        [ForeignKey("AgrupadorReservado")]
-        [InverseProperty("AreaArmazenagemReservada")]
-        [Column("id_agrupador_reservado")]
-        public Guid IdAgrupadorReservado { get; set; }
+        [ForeignKey("agrupadorreservado")]
+        [InverseProperty("areaarmazenagemreservada")]
+        [Column("id_agrupadorreservado")]
+        public Guid? IdAgrupadorReservado { get; set; }
         public AgrupadorAtivo? AgrupadorReservado { get; set; }
     }
 }

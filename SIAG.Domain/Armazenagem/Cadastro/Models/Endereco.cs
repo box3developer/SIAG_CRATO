@@ -10,28 +10,28 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("id_endereco")]
         public int IdEndereco { get; set; }
 
-        [ForeignKey("RegiaoTrabalho")]
-        [Column("id_regiao_trabalho")]
+        [ForeignKey("regiaotrabalho")]
+        [Column("id_regiaotrabalho")]
         public int IdRegiaoTrabalho { get; set; }
         public RegiaoTrabalho? RegiaoTrabalho { get; set; }
 
-        [ForeignKey("SetorTrabalho")]
-        [Column("id_setor_trabalho")]
+        [ForeignKey("setortrabalho")]
+        [Column("id_setortrabalho")]
         public int IdSetorTrabalho { get; set; }
         public SetorTrabalho? SetorTrabalho { get; set; }
 
-        [ForeignKey("TipoEndereco")]
-        [Column("id_tipo_endereco")]
+        [ForeignKey("tipoendereco")]
+        [Column("id_tipoendereco")]
         public int IdTipoEndereco { get; set; }
         public TipoEndereco? TipoEndereco { get; set; }
 
         [Column("nm_endereco")]
         public string NmEndereco { get; set; }
 
-        [Column("qt_estoque_minimo")]
+        [Column("qt_estoqueminimo")]
         public int QtEstoqueMinimo { get; set; }
 
-        [Column("qt_estoque_maximo")]
+        [Column("qt_estoquemaximo")]
         public int QtEstoqueMaximo { get; set; }
 
         [Column("fg_status")]

@@ -7,10 +7,10 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
     public class TipoArea
     {
         [Key]
-        [Column("id_tipo_area")]
+        [Column("id_tipoarea")]
         public int IdTipoArea { get; set; }
 
-        [Column("nm_tipo_area")]
+        [Column("nm_tipoarea")]
         public string NmTipoArea { get; set; } = string.Empty;
     }
 }

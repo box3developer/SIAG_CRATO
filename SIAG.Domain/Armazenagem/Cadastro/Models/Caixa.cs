@@ -11,12 +11,12 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public string IdCaixa { get; set; }
 
         [ForeignKey("agrupadorativo")]
-        [Column("agrupador_id")]
-        public Guid AgrupadorId { get; set; }
+        [Column("id_agrupador")]
+        public Guid IdAgrupador { get; set; }
         public AgrupadorAtivo? Agrupador { get; set; }
 
         [Column("id_pallet")]
-        public int IdPallet { get; set; }
+        public int? IdPallet { get; set; }
 
         [Column("id_programa")]
         public int IdPrograma { get; set; }
@@ -30,8 +30,8 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("cd_cor")]
         public string CdCor { get; set; } = string.Empty;
 
-        [Column("cd_grude_tamanho")]
-        public string CdGrudeTamanho { get; set; } = string.Empty;
+        [Column("cd_gradetamanho")]
+        public string CdGradeTamanho { get; set; } = string.Empty;
 
         [Column("nr_caixa")]
         public int NrCaixa { get; set; }
@@ -39,23 +39,23 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("nr_pares")]
         public int NrPares { get; set; }
 
-        [Column("id_fg_rf")]
+        [Column("fg_rfid")]
         public bool IdFgRf { get; set; }
 
         [Column("fg_status")]
         public int FgStatus { get; set; }
 
         [Column("dt_embalagem")]
-        public DateTime DtEmbalagem { get; set; }
+        public DateTime? DtEmbalagem { get; set; }
 
         [Column("dt_sorter")]
-        public DateTime DtSorter { get; set; }
+        public DateTime? DtSorter { get; set; }
 
         [Column("dt_estufamento")]
-        public DateTime DtEstufamento { get; set; }
+        public DateTime? DtEstufamento { get; set; }
 
         [Column("dt_expedicao")]
-        public DateTime DtExpedicao { get; set; }
+        public DateTime? DtExpedicao { get; set; }
 
         [Column("qt_peso")]
         public decimal QtPeso { get; set; }

@@ -29,22 +29,22 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("cd_estabelecimento")]
         public string CdEstabelecimento { get; set; } = string.Empty;
 
-        [Column("id_nota_fiscal")]
-        public int IdNotaFiscal { get; set; }
+        [Column("id_notafiscal")]
+        public int? IdNotaFiscal { get; set; }
 
         [Column("cd_canal")]
         public int CdCanal { get; set; }
 
-        [Column("cd_ordem_exportacao")]
-        public int CdOrdemExportacao { get; set; }
+        [Column("cd_ordemexportacao")]
+        public int? CdOrdemExportacao { get; set; }
 
-        [Column("cd_veiculo_exportacao")]
-        public int CdVeiculoExportacao { get; set; }
+        [Column("cd_veiculoexportacao")]
+        public int? CdVeiculoExportacao { get; set; }
 
         [Column("tp_carga")]
         public string TpCarga { get; set; } = string.Empty;
 
-        [Column("tp_carga_aglutinado")]
+        [Column("tp_cargaaglutinado")]
         public string TpCargaAglutinado { get; set; } = string.Empty;
 
         [Column("cd_rota")]
@@ -53,25 +53,25 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("qt_caixa")]
         public int QtCaixa { get; set; }
 
-        [Column("qt_cubagem_caixa")]
+        [Column("qt_cubagemcaixa")]
         public decimal QtCubagemCaixa { get; set; }
 
         [Column("qt_acessorio")]
         public int QtAcessorio { get; set; }
 
-        [Column("qt_cubagem_acessorio")]
+        [Column("qt_cubagemacessorio")]
         public decimal QtCubagemAcessorio { get; set; }
 
         [Column("qt_display")]
         public int QtDisplay { get; set; }
 
-        [Column("qt_cubagem_display")]
+        [Column("qt_cubagemdisplay")]
         public decimal QtCubagemDisplay { get; set; }
 
         [Column("qt_expositores")]
         public int QtExpositores { get; set; }
 
-        [Column("qt_cubagem_expositores")]
+        [Column("qt_cubagemexpositores")]
         public decimal QtCubagemExpositores { get; set; }
 
         [Column("fg_status")]
@@ -80,14 +80,14 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("dt_importacao")]
         public DateTime DtImportacao { get; set; }
 
-        [Column("cd_ordem_exportacao_definitiva")]
-        public int CdOrdemExportacaoDefinitiva { get; set; }
+        [Column("cd_ordemexportacaodefinitiva")]
+        public int? CdOrdemExportacaoDefinitiva { get; set; }
 
-        [Column("cd_veiculo_exportacao_definitiva")]
-        public int CdVeiculoExportacaoDefinitiva { get; set; }
+        [Column("cd_veiculoexportacaodefinitiva")]
+        public int? CdVeiculoExportacaoDefinitiva { get; set; }
 
-        [Column("dt_previsao_exportacao")]
-        public DateTime DtPrevisaoExportacao { get; set; }
+        [Column("dt_previsaoexportacao")]
+        public DateTime? DtPrevisaoExportacao { get; set; }
 
         [Column("dt_implantacao")]
         public DateTime DtImplantacao { get; set; }
@@ -96,12 +96,12 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public DateTime DtAtualizacao { get; set; }
 
         [Column("dt_predata")]
-        public DateTime DtPredata { get; set; }
+        public DateTime? DtPredata { get; set; }
 
         [Column("fg_sku")]
         public int FgSku { get; set; }
 
-        [Column("cd_sequencia_expedicao")]
-        public int CdSequenciaExpedicao { get; set; }
+        [Column("cd_sequenciaexpedicao")]
+        public int? CdSequenciaExpedicao { get; set; }
     }
 }

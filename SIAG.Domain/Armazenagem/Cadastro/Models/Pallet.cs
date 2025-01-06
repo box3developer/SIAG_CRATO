@@ -3,21 +3,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
-    [Table("Pallet")]
+    [Table("pallet")]
     public class Pallet
     {
         [Key]
         [Column("id_pallet")]
         public int IdPallet { get; set; }
 
-        [ForeignKey("AreaArmazenagem")]
-        [Column("id_area_armazenagem")]
+        [ForeignKey("areaArmazenagem")]
+        [Column("id_areaarmazenagem")]
         public int IdAreaArmazenagem { get; set; }
         public AreaArmazenagem? AreaArmazenagem { get; set; }
 
-        [ForeignKey("AgrupadorAtivo")]
-        [Column("agrupador_ativo_id")]
-        public Guid AgrupadorAtivoId { get; set; }
+        [ForeignKey("agrupadorativo")]
+        [Column("id_agrupadorativo")]
+        public Guid IdAgrupadorAtivo { get; set; }
         public AgrupadorAtivo? AgrupadorAtivo { get; set; }
 
         [Column("fg_status")]
@@ -26,7 +26,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("qt_utilizacao")]
         public int QtUtilizacao { get; set; }
 
-        [Column("dt_ultima_movimentacao")]
+        [Column("dt_ultimamovimentacao")]
         public DateTime DtUltimaMovimentacao { get; set; }
 
         [Column("cd_identificacao")]

@@ -19,10 +19,10 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("dt_fim")]
         public DateTime DtFim { get; set; }
 
-        [Column("dia_anterior")]
+        [Column("diaanterior")]
         public bool DiaAnterior { get; set; }
 
-        [Column("dia_sucessor")]
+        [Column("diasucessor")]
         public bool DiaSucessor { get; set; }
     }
 }

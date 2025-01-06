@@ -32,15 +32,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int FgTipo { get; set; }
 
         [Column("cd_deposito")]
-        public string CdDeposito { get; set; }
+        public string? CdDeposito { get; set; } = string.Empty;
 
-        [Column("qt_altura_caixa")]
-        public decimal QtAlturaCaixa { get; set; }
+        [Column("qt_alturacaixa")]
+        public decimal? QtAlturaCaixa { get; set; }
 
-        [Column("qt_largura_caixa")]
-        public decimal QtLarguraCaixa { get; set; }
+        [Column("qt_larguracaixa")]
+        public decimal? QtLarguraCaixa { get; set; }
 
-        [Column("qt_comprimento_caixa")]
-        public decimal QtComprimentoCaixa { get; set; }
+        [Column("qt_comprimentocaixa")]
+        public decimal? QtComprimentoCaixa { get; set; }
     }
 }

@@ -7,15 +7,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
     public class SetorTrabalho
     {
         [Key]
-        [Column("id_setor_trabalho")]
+        [Column("id_setortrabalho")]
         public int IdSetorTrabalho { get; set; }
 
-        [ForeignKey("Deposito")]
+        [ForeignKey("deposito")]
         [Column("id_deposito")]
         public int IdDeposito { get; set; }
         public Deposito? Deposito { get; set; }
 
-        [Column("nm_setor_trabalho")]
+        [Column("nm_setortrabalho")]
         public string? NmSetorTrabalho { get; set; }
     }
 }
