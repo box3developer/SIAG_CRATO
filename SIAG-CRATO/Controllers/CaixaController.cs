@@ -35,8 +35,8 @@ public class CaixaController : ControllerBase
         return Ok(caixas);
     }
 
-        [HttpGet("fabrica-caixa/{idCaixa}")]
-        public async Task<IActionResult> GetFabricaAsync (string idCaixa)
+    [HttpGet("fabrica-caixa/{idCaixa}")]
+    public async Task<IActionResult> GetFabricaAsync (string idCaixa)
         {
             var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
             return Ok(caixas);

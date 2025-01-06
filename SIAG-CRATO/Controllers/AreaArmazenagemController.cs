@@ -30,22 +30,17 @@ public class AreaArmazenagemController : Controller
     [HttpGet("identificador/{identificador}")]
     public async Task<IActionResult> GetByIdentificadorAsync(string identificador)
     {
-        try
-        {
-            var result = await AreaArmazenagemBLL.GetByIdentificadorAsync(identificador);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
+        var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificador);
 
-        [HttpGet("agrupador/{idAgrupador}")]
-        public async Task<IActionResult> GetByAgrupadorAsync(Guid idAgrupador)
+        if (result == null)
         {
-            var result = await AreaArmazenagemBLL.GetByAgrupadorAsync(idAgrupador);
-            if (result == null) return NotFound();
-            return Ok(result);
+            return NotFound();
         }
+
+        return Ok(result);
+     }
+         
 
     [HttpGet("posicao")]
     public async Task<IActionResult> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
