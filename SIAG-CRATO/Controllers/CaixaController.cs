@@ -37,11 +37,11 @@ public class CaixaController : ControllerCustom
     }
 
     [HttpGet("fabrica-caixa/{idCaixa}")]
-    public async Task<IActionResult> GetFabricaAsync(string idCaixa)
-    {
-        var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
-        return Ok(caixas);
-    }
+    public async Task<IActionResult> GetFabricaAsync (string idCaixa)
+        {
+            var caixas = await CaixaBLL.GetFabricaAsync(idCaixa);
+            return Ok(caixas);
+        }
 
     [HttpGet("quantidade-pedido")]
     public async Task<IActionResult> GetQuantidadeByPedido(int idPedido, long codigoPedido, long idPallet)
@@ -69,6 +69,14 @@ public class CaixaController : ControllerCustom
     {
         var pendentes = await CaixaBLL.GetPendentesAsync();
         return Ok(pendentes);
+    }
+
+    [HttpGet("existe-pendentes/{idAgrupador}")]
+    public async Task<IActionResult> GetTemPendentesAsync(Guid idAgrupador)
+    {
+        var result = await CaixaBLL.TemCaixaPendente(idAgrupador);
+
+        return Ok(result);
     }
 
     [HttpGet("pendentes-lider")]
@@ -104,5 +112,37 @@ public class CaixaController : ControllerCustom
     {
         var pendentes = await CaixaBLL.RemoverEstufamentoCaixa(id_caixa);
         return Ok(pendentes);
+    }
+
+    [HttpPatch("vincula-caixa-pallet")]
+    public async Task<IActionResult> VinculaCaixaPalletAsync(string identificadorCaracol, int posicaoY, string idCaixa, Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var response = await CaixaBLL.VinculaCaixaPallet(identificadorCaracol, posicaoY, idCaixa, idAgrupador, id_requisicao);
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
+
+    [HttpPatch("desvincula-caixa-pallet")]
+    public async Task<IActionResult> DesvinculaCaixaPalletAsync(string identificadorCaracol, int posicaoY, string idCaixa, Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var response = await CaixaBLL.DesvinculaCaixaPallet(identificadorCaracol, posicaoY, idCaixa, idAgrupador, id_requisicao);
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 }

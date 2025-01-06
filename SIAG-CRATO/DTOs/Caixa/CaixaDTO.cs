@@ -1,4 +1,6 @@
-﻿namespace SIAG_CRATO.DTOs.Caixa;
+﻿using SIAG_CRATO.Data;
+
+namespace SIAG_CRATO.DTOs.Caixa;
 public class CaixaDTO
 {
     public string IdCaixa { get; set; } = string.Empty;
@@ -12,7 +14,7 @@ public class CaixaDTO
     public int? NrCaixa { get; set; }
     public int? NrPares { get; set; }
     public bool? FgRFID { get; set; }
-    public int? FgStatus { get; set; }
+    public StatusCaixa? FgStatus { get; set; }
     public DateTime? DtEmbalagem { get; set; }
     public DateTime? DtExpedicao { get; set; }
     public DateTime? DtSorter { get; set; }

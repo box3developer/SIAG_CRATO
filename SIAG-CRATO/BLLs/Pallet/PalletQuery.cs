@@ -27,4 +27,6 @@ public class PalletQuery
                                                 ON pallet.id_areaarmazenagem = areaarmazenagem.id_areaarmazenagem
                                                 AND pallet.id_agrupador = @id_agrupador
                                             WHERE areaarmazenagem.id_endereco = @id_endereco";
+
+    public const string UPDATE_AGRUPADOR_STATUS_BY_ID = @"UPDATE pallet SET id_agrupador = @idAgrupador, fg_status = @status WHERE id_pallet = @idPallet";
 }

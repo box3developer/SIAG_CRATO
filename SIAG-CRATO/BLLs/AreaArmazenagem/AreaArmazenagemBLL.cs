@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.AreaArmzenagem;
 using SIAG_CRATO.BLLs.Endereco;
+using SIAG_CRATO.BLLs.Log;
 using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.BLLs.Parametro;
 using SIAG_CRATO.Data;
@@ -37,21 +38,6 @@ public class AreaArmazenagemBLL
         return ConvertToDTO(areasArmazenagem);
     }
 
-    public static async Task<AreaArmazenagemDTO?> GetByIdentificadorAsync(string identificador)
-    {
-        var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE cd_identificacao = @identificador";
-
-        using var conexao = new SqlConnection(Global.Conexao);
-        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { identificador });
-
-        if (areasArmazenagem == null)
-        {
-            return null;
-        }
-
-        return ConvertToDTO(areasArmazenagem);
-    }
-
     public static async Task<AreaArmazenagemDTO?> GetByAgrupadorAsync(int idAgrupador)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_agrupador = @idAgrupador";
@@ -65,6 +51,51 @@ public class AreaArmazenagemBLL
         }
 
         return ConvertToDTO(areasArmazenagem);
+    }
+
+    public static async Task<bool> LiberarAreaArmazenagem(Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var logInitial = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NmIdentificador = "",
+                IdCaixa = "",
+                Data = DateTime.Now,
+                Mensagem = $"Liberando áreas de armazenagem do agrupador {idAgrupador}",
+                Metodo = "FinalizarAgrupador",
+                IdOperador = "",
+                Tipo = "info",
+            };
+
+            await LogBLL.CreateLogCaracol(logInitial);
+
+            using var conexao = new SqlConnection(Global.Conexao);
+
+            var qtdLinhas = await conexao.ExecuteAsync(AreaArmazenagemQuery.UPDATE_LIBERA, new { idAgrupador });
+
+            return qtdLinhas > 0;
+
+        }
+        catch (Exception ex)
+        {
+            var logError = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NmIdentificador = "",
+                IdCaixa = "",
+                Data = DateTime.Now,
+                Mensagem = $"Erro ao liberar áreas de armazenagem do agrupador {idAgrupador}",
+                Metodo = "LiberarAreaArmazenagem",
+                IdOperador = "",
+                Tipo = "erro",
+            };
+
+            await LogBLL.CreateLogCaracol(logError);
+
+            throw new Exception($"Erro ao liberar áreas de armazenagem do agrupador {idAgrupador}", ex);
+        }
     }
 
     public static async Task<AreaArmazenagemDTO?> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
@@ -171,7 +202,7 @@ public class AreaArmazenagemBLL
         return listaTipos;
     }
 
-    public static StatusAreaArmazenagemDTO GetStatusGaiola(AreaArmazenagemModel areaArmazenagem, List<PalletDTO> pallets)
+    public static StatusAreaArmazenagemDTO GetStatusGaiola(AreaArmazenagemDTO areaArmazenagem, List<PalletDTO> pallets)
     {
         var retorno = new StatusAreaArmazenagemDTO();
 
@@ -259,7 +290,7 @@ public class AreaArmazenagemBLL
         var avenida = 100;
         foreach (var endereco in enderecos)
         {
-            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.IdEndereco });
+            var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemDTO>(sql, new { idEndereco = endereco.IdEndereco });
 
             var listaAreasArmazenagem = areasArmazenagem.GroupBy(x => x.NrPosicaoX).Select(x => x.ToList()).ToList();
             var listaCaracol = new List<List<StatusAreaArmazenagemDTO>>();

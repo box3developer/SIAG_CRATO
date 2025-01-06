@@ -35,12 +35,7 @@ public class AreaArmazenagemController : ControllerCustom
     {
         try
         {
-            var result = await AreaArmazenagemBLL.GetByIdentificadorAsync(identificador);
-
-            if (result == null)
-            {
-                return NotFound();
-            }
+            var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificador);
 
             return Ok(result);
         }
@@ -138,6 +133,23 @@ public class AreaArmazenagemController : ControllerCustom
         }
 
         return Ok(result);
+    }
+
+    [HttpGet("liberar/agrupador/{idAgrupador}/requisição/{id_requisicao}")]
+    public async Task<IActionResult> LiberarAreaArmazenagemAsync(Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var result = await AreaArmazenagemBLL.LiberarAreaArmazenagem(idAgrupador, id_requisicao);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+
+
     }
 
 }

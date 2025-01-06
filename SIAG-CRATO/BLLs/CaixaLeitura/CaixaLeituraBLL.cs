@@ -24,7 +24,7 @@ public class CaixaLeituraBLL
         return ConvertToDTO(caixa);
     }
 
-    public static async Task<bool> CreateCaixaLeitura(CaixaLeituraModel caixaLeitura)
+    public static async Task<bool> CreateCaixaLeitura(CaixaLeituraDTO caixaLeitura)
     {
         using var conexao = new SqlConnection(Global.Conexao);
 
@@ -46,6 +46,25 @@ public class CaixaLeituraBLL
         return result > 0;
     }
 
+    public static async Task<CaixaLeituraDTO?> GetUltimaLeituraByIdStatusTypeAsync(int idEquipamento, int fgStatus, int fgTipo)
+    {
+        var sql = $@"{CaixaLeituraQuery.SELECT}
+                     WHERE id_equipamento = @idEquipamento
+                                AND fg_status = @fgStatus
+                                AND fg_tipo = @fgTipo
+                            ORDER BY id_caixaleitura DESC";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var caixa = await conexao.QueryFirstOrDefaultAsync<CaixaLeituraModel>(sql, new { idEquipamento, fgStatus, fgTipo });
+
+        if (caixa == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(caixa);
+    }
+    
     private static CaixaLeituraDTO ConvertToDTO(CaixaLeituraModel caixaLeitura)
     {
         return new()
