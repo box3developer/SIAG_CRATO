@@ -19,6 +19,14 @@ public class CaixaQuery
                                              GROUP BY CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2)
                                              ORDER BY CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) desc";
 
+    public const string COUNT_PENDENTES = @"
+    SELECT CASE WHEN EXISTS (
+        SELECT 1
+        FROM caixa WITH(NOLOCK)
+        WHERE id_agrupador = @idAgrupador AND (fg_status < 4 OR fg_status = 8)
+    ) THEN 1 ELSE 0 END
+";
+
     public const string SELECT_PENDENTES_LIDER = @"SELECT 
                                                         CAST(areaarmazenagem.id_endereco AS varchar(10)) + RIGHT('00' + CAST(nr_posicaox AS varchar(10)), 2) AS Item1, 
                                                         COUNT(*) AS Item2
@@ -45,4 +53,6 @@ public class CaixaQuery
     public const string UPDATE_REMOVE_DT_ESTUFAMENTO = @$"UPDATE caixa SET dt_estufamento = null WHERE id_caixa = @id_caixa";
 
     public const string UPDATE_SET_DT_ESTUFAMENTO_BY_CAIXA = $@"UPDATE caixa SET dt_estufamento = @dt_estufamento WHERE id_caixa = @id_caixa";
+
+    public const string UPDATE_PALLET_STATUS = @"UPDATE caixa SET id_pallet = @idPallet, fg_status = @status WHERE id_caixa = @idCaixa";
 }

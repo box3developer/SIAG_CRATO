@@ -30,14 +30,14 @@ namespace SIAG_CRATO.BLLs.AgrupadorAtivo
             }
         }
 
-        public static async Task<bool> FinalizaAgrupador(Guid idAgrupador, Guid idRequisição)
+        public static async Task<bool> FinalizaAgrupador(Guid idAgrupador, Guid idRequisicao)
         {
             try
             {
                 var logInitial = new LogModel
                 {
-                    IdRequisicao = idRequisição,
-                    NomeIdentificador = "",
+                    IdRequisicao = idRequisicao,
+                    NmIdentificador = "",
                     IdCaixa = "",
                     Data = DateTime.Now,
                     Mensagem = $"Finalizando agrupador {idAgrupador}. Troca status do agrupador para 4",
@@ -58,8 +58,8 @@ namespace SIAG_CRATO.BLLs.AgrupadorAtivo
             {
                 var logError = new LogModel
                 {
-                    IdRequisicao = idRequisição,
-                    NomeIdentificador = "",
+                    IdRequisicao = idRequisicao,
+                    NmIdentificador = "",
                     IdCaixa = "",
                     Data = DateTime.Now,
                     Mensagem = $"Erro ao finalizar agrupador {idAgrupador}",
@@ -75,15 +75,14 @@ namespace SIAG_CRATO.BLLs.AgrupadorAtivo
            
         }
 
-
-        public static async Task<bool> LiberarAgrupador(Guid idAgrupador, Guid idRequisição)
+        public static async Task<bool> LiberarAgrupador(Guid idAgrupador, Guid idRequisicao)
         {
             try
             {
                 var logInitial = new LogModel
                 {
-                    IdRequisicao = idRequisição,
-                    NomeIdentificador = "",
+                    IdRequisicao = idRequisicao,
+                    NmIdentificador = "",
                     IdCaixa = "",
                     Data = DateTime.Now,
                     Mensagem = $"Removendo vínculo com área de armazenagem do agrupador {idAgrupador}",
@@ -104,8 +103,8 @@ namespace SIAG_CRATO.BLLs.AgrupadorAtivo
             {
                 var logError = new LogModel
                 {
-                    IdRequisicao = idRequisição,
-                    NomeIdentificador = "",
+                    IdRequisicao = idRequisicao,
+                    NmIdentificador = "",
                     IdCaixa = "",
                     Data = DateTime.Now,
                     Mensagem = $"Erro ao remover vínculo com área de armazenagem do agrupador {idAgrupador}",

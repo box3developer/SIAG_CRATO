@@ -134,4 +134,19 @@ public class PalletController : ControllerBase
         var pallets = await PalletBLL.GetQtyPallets(idEndereco, idPallet);
         return Ok(pallets);
     }
+
+    [HttpPut("encher-pallet/pallet/{idPallet}/requisicao/{id_requisicao}")]
+    public async Task<IActionResult> EncherPallet(int idPallet, Guid? id_requisicao)
+    {
+        try
+        {
+            var response = await PalletBLL.SetPalletCheio(idPallet, id_requisicao);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
 }

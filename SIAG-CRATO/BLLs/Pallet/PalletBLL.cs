@@ -1,10 +1,12 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Caixa;
+using SIAG_CRATO.BLLs.Log;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.DTOs.Pallet;
 using SIAG_CRATO.Models;
+using System.Runtime.InteropServices;
 
 namespace SIAG_CRATO.BLLs.Pallet;
 
@@ -52,7 +54,6 @@ public class PalletBLL
         return ConvertToDTO(pallet);
     }
 
-
     public static async Task<PalletDTO?> GetByIdentificadorAsync(string identificador)
     {
         string sql = $"{PalletQuery.SELECT} WHERE cd_identificacao = @identificador";
@@ -83,6 +84,51 @@ public class PalletBLL
         return ConvertToDTO(pallet);
     }
 
+    public static async Task<bool> SetPalletCheio(int idPallet, Guid? id_requisicao)
+    {
+        try
+        {
+            var logInitial = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NmIdentificador = "",
+                IdCaixa = "",
+                Data = DateTime.Now,
+                Mensagem = $"Trocando status do pallet {idPallet} para cheio",
+                Metodo = "SetPalletCheito",
+                IdOperador = "",
+                Tipo = "info",
+            };
+
+            await LogBLL.CreateLogCaracol(logInitial);
+
+            var result = await SeStatusAsync(idPallet, StatusPallet.Cheio);
+
+            return result > 0;
+
+
+        }
+        catch (Exception ex)
+        {
+            var logError = new LogModel
+            {
+                IdRequisicao = id_requisicao,
+                NmIdentificador = "",
+                IdCaixa = "",
+                Data = DateTime.Now,
+                Mensagem = $"Erro ao trocar status do pallet {idPallet} para cheio",
+                Metodo = "SetPalletCheio",
+                IdOperador = "",
+                Tipo = "erro",
+            };
+
+            await LogBLL.CreateLogCaracol(logError);
+
+            throw new Exception(ex.Message);
+        }
+
+    }
+
     public static async Task<int> GetQuantidadeCaixasAsync(int idPallet)
     {
         string query = $"{PalletQuery.SELECT_COUNT_CAIXAS} WHERE id_pallet = @idPallet";
@@ -92,7 +138,7 @@ public class PalletBLL
 
         return 0;
     }
-
+    
     public static async Task<int> SeStatusAsync(int id, StatusPallet status)
     {
         using var conexao = new SqlConnection(Global.Conexao);
@@ -101,6 +147,14 @@ public class PalletBLL
         return pallet;
     }
 
+    public static async Task<bool> SetStatusAndAgrupadorById(int idPallet, StatusPallet status, Guid idAgrupador)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var qtd = await conexao.ExecuteAsync(PalletQuery.UPDATE_AGRUPADOR_STATUS_BY_ID, new { idPallet, status = (int)status, idAgrupador });
+
+        return qtd > 0;
+    }
     public static async Task<bool> VincularAgrupadorAreaReservadaAsync(string? identificadorCaracol, AreaArmazenagemDTO areaAtual)
     {
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 

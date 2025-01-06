@@ -15,5 +15,7 @@ public class AreaArmazenagemQuery
                                         nr_posicaoy 
                                    FROM areaarmazenagem WITH(NOLOCK)";
 
-    public const string UPDATE_STATUS = "UPDATE areaarmazenagem SET fg_status = @status WHERE id_areaarmazenagem = @id";
+    public const string UPDATE_STATUS = @"UPDATE areaarmazenagem SET fg_status = @status WHERE id_areaarmazenagem = @id";
+
+    public const string UPDATE_LIBERA = @"UPDATE areaarmazenagem SET id_agrupador = NULL, fg_status = 1 WHERE id_agrupador = @idAgrupador";
 }

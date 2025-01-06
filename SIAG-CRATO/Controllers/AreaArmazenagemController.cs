@@ -40,7 +40,6 @@ public class AreaArmazenagemController : Controller
 
         return Ok(result);
      }
-         
 
     [HttpGet("posicao")]
     public async Task<IActionResult> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
@@ -88,6 +87,23 @@ public class AreaArmazenagemController : Controller
         }
 
         return Ok(result);
+    }
+
+    [HttpGet("liberar/agrupador/{idAgrupador}/requisição/{id_requisicao}")]
+    public async Task<IActionResult> LiberarAreaArmazenagemAsync(Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var result = await AreaArmazenagemBLL.LiberarAreaArmazenagem(idAgrupador, id_requisicao);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        
+
+       
     }
 
 }

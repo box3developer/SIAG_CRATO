@@ -63,6 +63,14 @@ public class CaixaController : ControllerBase
         return Ok(pendentes);
     }
 
+    [HttpGet("existe-pendentes/{idAgrupador}")]
+    public async Task<IActionResult> GetTemPendentesAsync(Guid idAgrupador)
+    {
+        var result = await CaixaBLL.TemCaixaPendente(idAgrupador);
+
+        return Ok(result);
+    }
+
     [HttpGet("pendentes-lider")]
     public async Task<IActionResult> GetPendentesByLiderAsync()
     {
@@ -96,5 +104,37 @@ public class CaixaController : ControllerBase
     {
         var pendentes = await CaixaBLL.RemoverEstufamentoCaixa(id_caixa);
         return Ok(pendentes);
+    }
+
+    [HttpPatch("vincula-caixa-pallet")]
+    public async Task<IActionResult> VinculaCaixaPalletAsync(string identificadorCaracol, int posicaoY, string idCaixa, Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var response = await CaixaBLL.VinculaCaixaPallet(identificadorCaracol, posicaoY, idCaixa, idAgrupador, id_requisicao);
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+    }
+
+    [HttpPatch("desvincula-caixa-pallet")]
+    public async Task<IActionResult> DesvinculaCaixaPalletAsync(string identificadorCaracol, int posicaoY, string idCaixa, Guid idAgrupador, Guid? id_requisicao)
+    {
+        try
+        {
+            var response = await CaixaBLL.DesvinculaCaixaPallet(identificadorCaracol, posicaoY, idCaixa, idAgrupador, id_requisicao);
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 }
