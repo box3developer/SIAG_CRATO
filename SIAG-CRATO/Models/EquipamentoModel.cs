@@ -14,7 +14,7 @@ public class EquipamentoModel
     public DateTime? DtInclusao { get; set; }
     public DateTime? DtManutencao { get; set; }
     public DateTime? DtUltimaLeitura { get; set; }
-    public EnderecoModel? IdEndereco { get; set; }
+    public int? IdEndereco { get; set; }
     public string NmIP { get; set; } = string.Empty;
     public Ativo FgStatusTrocaCaracol { get; set; }
     public string CdLeituraPendente { get; set; } = string.Empty;

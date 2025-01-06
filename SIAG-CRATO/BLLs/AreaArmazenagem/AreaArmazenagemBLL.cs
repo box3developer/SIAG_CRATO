@@ -6,6 +6,8 @@ using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.BLLs.Parametro;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
+using SIAG_CRATO.DTOs.Pallet;
+using SIAG_CRATO.Integration;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.AreaArmazenagem;
@@ -169,7 +171,7 @@ public class AreaArmazenagemBLL
         return listaTipos;
     }
 
-    public static StatusAreaArmazenagemDTO GetStatusGaiola(AreaArmazenagemModel areaArmazenagem, List<PalletModel> pallets)
+    public static StatusAreaArmazenagemDTO GetStatusGaiola(AreaArmazenagemModel areaArmazenagem, List<PalletDTO> pallets)
     {
         var retorno = new StatusAreaArmazenagemDTO();
 
@@ -251,6 +253,10 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var sql = $"{AreaArmazenagemQuery.SELECT} WHERE id_endereco = @idEndereco ORDER BY nr_posicaox";
 
+        var luzesVerdes = await NodeRedIntegration.GetAllLuzesVerdes();
+        var luzesVermelhas = await NodeRedIntegration.GetAllLuzesVermelhas();
+
+        var avenida = 100;
         foreach (var endereco in enderecos)
         {
             var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemModel>(sql, new { idEndereco = endereco.IdEndereco });
@@ -269,6 +275,16 @@ public class AreaArmazenagemBLL
                     statusGaiola.Gaiola = gaiola.NrPosicaoY;
                     statusGaiola.Codigo = gaiola.IdAreaArmazenagem;
 
+                    var luzes = luzesVermelhas.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").First();
+                    var luzVerde = luzesVerdes.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").First();
+
+                    statusGaiola.Status = luzes.LuzesVM[statusGaiola.Gaiola] == 0 ? StatusLuz.Desligado : StatusLuz.LuzVermelha;
+
+                    if (luzVerde.LuzVerde != 0)
+                    {
+                        statusGaiola.Status = StatusLuz.LuzVerde;
+                    }
+
                     listaGaiolas.Add(statusGaiola);
                 }
 
@@ -283,6 +299,7 @@ public class AreaArmazenagemBLL
             }
 
             lista.Add(listaCaracol);
+            avenida += 100;
         }
 
         return lista;

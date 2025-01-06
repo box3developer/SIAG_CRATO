@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Caixa;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CaixaController : ControllerBase
+public class CaixaController : ControllerCustom
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(string id)
@@ -52,8 +53,15 @@ public class CaixaController : ControllerBase
     [HttpGet("caixa-pedido/{idPallet}")]
     public async Task<IActionResult> GetCaixasPedidos(long idPallet)
     {
-        var caixas = await CaixaBLL.GetCaixasPedidos(idPallet);
-        return Ok(caixas);
+        try
+        {
+            var caixas = await CaixaBLL.GetCaixasPedidos(idPallet);
+            return OkResponse(caixas);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
     }
 
     [HttpGet("pendentes")]

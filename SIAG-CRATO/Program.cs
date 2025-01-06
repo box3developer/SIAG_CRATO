@@ -1,3 +1,5 @@
+using SIAG_CRATO;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +20,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+Global.Conexao = builder.Configuration.GetConnectionString("siagDB") ?? "";
+Global.NodeRedAPI = builder.Configuration.GetConnectionString("nodeAPI") ?? "";
 
 var app = builder.Build();
 

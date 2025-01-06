@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.Data;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
-public class AreaArmazenagemController : Controller
+[Route("api/[controller]")]
+[ApiController]
+public class AreaArmazenagemController : ControllerCustom
 {
 
     [HttpGet("{id}")]
@@ -44,6 +47,36 @@ public class AreaArmazenagemController : Controller
         catch (Exception ex)
         {
             return BadRequest(ex);
+        }
+    }
+
+    [HttpGet("{id}/status")]
+    public async Task<ActionResult> GetStatusCaracol(int id)
+    {
+        try
+        {
+            var response = await AreaArmazenagemBLL.GetStatusGaiolas(id);
+
+            return OkResponse(response);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+    [HttpGet("status")]
+    public ActionResult GetListaTiposStatusGaiolas()
+    {
+        try
+        {
+            var response = AreaArmazenagemBLL.GetTiposStatusGaiolas();
+
+            return OkResponse(response);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
         }
     }
 
