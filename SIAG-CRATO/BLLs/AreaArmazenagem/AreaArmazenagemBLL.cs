@@ -8,7 +8,6 @@ using SIAG_CRATO.BLLs.Parametro;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.DTOs.Pallet;
-using SIAG_CRATO.Integration;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.AreaArmazenagem;
@@ -284,8 +283,10 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var sql = $"{AreaArmazenagemQuery.SELECT} WHERE id_endereco = @idEndereco ORDER BY nr_posicaox";
 
-        var luzesVerdes = await NodeRedIntegration.GetAllLuzesVerdes();
-        var luzesVermelhas = await NodeRedIntegration.GetAllLuzesVermelhas();
+        //var luzesVerdes = await NodeRedIntegration.GetAllLuzesVerdes();
+        //var luzesVermelhas = await NodeRedIntegration.GetAllLuzesVermelhas();
+        var luzesVerdes = new List<StatusLuzVerde>();
+        var luzesVermelhas = new List<StatusLuzVermelha>();
 
         var avenida = 100;
         foreach (var endereco in enderecos)
@@ -305,13 +306,17 @@ public class AreaArmazenagemBLL
                     statusGaiola.Caracol = gaiola.NrPosicaoX;
                     statusGaiola.Gaiola = gaiola.NrPosicaoY;
                     statusGaiola.Codigo = gaiola.IdAreaArmazenagem;
+                    statusGaiola.Status = StatusLuz.Desligado;
 
-                    var luzes = luzesVermelhas.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").First();
-                    var luzVerde = luzesVerdes.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").First();
+                    var luzes = luzesVermelhas.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").FirstOrDefault();
+                    var luzVerde = luzesVerdes.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").FirstOrDefault();
 
-                    statusGaiola.Status = luzes.LuzesVM[statusGaiola.Gaiola] == 0 ? StatusLuz.Desligado : StatusLuz.LuzVermelha;
+                    if (luzes != null && luzes.LuzesVM.Count != 0)
+                    {
+                        statusGaiola.Status = luzes.LuzesVM[statusGaiola.Gaiola - 1] == 0 ? StatusLuz.Desligado : StatusLuz.LuzVermelha;
+                    }
 
-                    if (luzVerde.LuzVerde != 0)
+                    if (luzVerde != null && luzVerde.LuzVerde == statusGaiola.Gaiola)
                     {
                         statusGaiola.Status = StatusLuz.LuzVerde;
                     }

@@ -52,7 +52,7 @@ public class NodeRedIntegration
     {
         try
         {
-            await client.GetAsync($"{url}/vm/{caracol}/{gaiola}");
+            await client.GetAsync($"{url}/vm/{caracol}/{gaiola - 1}");
             return true;
         }
         catch (Exception ex)
@@ -78,7 +78,7 @@ public class NodeRedIntegration
     {
         try
         {
-            await client.GetAsync($"{url}/apagaluzvm/{caracol}/{gaiola}");
+            await client.GetAsync($"{url}/apagaluzvm/{caracol}/{gaiola - 1}");
             return true;
         }
         catch (Exception ex)

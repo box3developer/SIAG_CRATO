@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.DTOs.Luzes;
 using SIAG_CRATO.Integration;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class LuzesController : ControllerBase
+public class LuzesController : ControllerCustom
 {
     [HttpGet("sincronizar")]
     public async Task<IActionResult> Sincronizar()
@@ -14,11 +15,41 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.Sincronizar();
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
+        }
+    }
+
+    [HttpGet("luzVerde")]
+    public async Task<IActionResult> GetLuzesVerdes()
+    {
+        try
+        {
+            var result = await NodeRedIntegration.GetAllLuzesVerdes();
+
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+    [HttpGet("luzVermelha")]
+    public async Task<IActionResult> GetLuzesVermelhas()
+    {
+        try
+        {
+            var result = await NodeRedIntegration.GetAllLuzesVermelhas();
+
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
         }
     }
 
@@ -29,11 +60,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.AcenderLuzVerde(filtro.Caracol, filtro.Gaiola);
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 
@@ -44,11 +75,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.AcenderLuzVermelha(filtro.Caracol, filtro.Gaiola);
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 
@@ -59,11 +90,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.ApagarLuzVermelha(filtro.Caracol, filtro.Gaiola);
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 
@@ -74,11 +105,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.DesligarTodasLuzVerdes();
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 
@@ -89,11 +120,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.LigarTodasLuzVermelha();
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 
@@ -104,11 +135,11 @@ public class LuzesController : ControllerBase
         {
             var result = await NodeRedIntegration.DesligarTodasLuzVermelha();
 
-            return Ok(true);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
-            return BadRequest(ex);
+            return HandleException(ex);
         }
     }
 }
