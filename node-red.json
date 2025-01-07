@@ -27,7 +27,7 @@
         "env": [
             {
                 "name": "BASE_URL",
-                "value": "http://gra-lxsobcaracol.sob.ad-grendene.com:6030/api",
+                "value": "",
                 "type": "str"
             },
             {
@@ -14693,6 +14693,7 @@
         "id": "9a627f9ef173b17c",
         "type": "s7 in",
         "z": "8e629a061f9ccc7e",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "mode": "all",
         "variable": "",
@@ -14761,6 +14762,7 @@
         "id": "9afb8296be62d0fa",
         "type": "s7 out",
         "z": "c0964713dae5349d",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "variable": "",
         "name": "",
@@ -14988,6 +14990,7 @@
         "id": "dc7532836f9d5d8f",
         "type": "s7 control",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "function": "trigger",
         "name": "CLP - READ",
@@ -15095,6 +15098,7 @@
         "id": "0b4209b5c6b064de",
         "type": "s7 out",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "variable": "",
         "name": "CLP - WRITE",
@@ -15144,6 +15148,7 @@
         "id": "bcb7a3321feb8b3a",
         "type": "s7 out",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "variable": "",
         "name": "CLP - WHITE",
@@ -15188,6 +15193,7 @@
         "id": "a39f4c577695d736",
         "type": "s7 out",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "variable": "",
         "name": "CLP - WRITE",
@@ -15312,6 +15318,7 @@
         "id": "5a77c486a7e6e960",
         "type": "s7 control",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "function": "trigger",
         "name": "CLP - READ",
@@ -15395,6 +15402,7 @@
         "id": "61e6ec2aedd32848",
         "type": "s7 out",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "variable": "",
         "name": "CLP - WRITE",
@@ -15406,6 +15414,7 @@
         "id": "6b8eecdff847f79e",
         "type": "s7 control",
         "z": "00737f8535cc37e8",
+        "d": true,
         "endpoint": "cc72a67df238dfbc",
         "function": "trigger",
         "name": "CLP - READ",
@@ -15788,7 +15797,8 @@
         "y": 620,
         "wires": [
             [
-                "d128734d97543296"
+                "d128734d97543296",
+                "1a2a8fac9c41dba5"
             ]
         ]
     },
@@ -15825,7 +15835,8 @@
         "y": 1040,
         "wires": [
             [
-                "34c58bf5fe25c8e7"
+                "34c58bf5fe25c8e7",
+                "1060fdfb95b00cd6"
             ]
         ]
     },
@@ -16037,7 +16048,8 @@
         "y": 720,
         "wires": [
             [
-                "3ceb6e07e75b3e45"
+                "3ceb6e07e75b3e45",
+                "2898e13d20349320"
             ]
         ]
     },
@@ -16067,9 +16079,7 @@
             [
                 "292d91c3190c25be"
             ],
-            [
-                "0c5c8ab4be82f914"
-            ]
+            []
         ]
     },
     {
@@ -16378,8 +16388,7 @@
         "y": 100,
         "wires": [
             [
-                "80212b0e42465ef3",
-                "1f896e225b7c7618"
+                "80212b0e42465ef3"
             ]
         ]
     },
@@ -16400,7 +16409,7 @@
         ]
     },
     {
-        "id": "1f896e225b7c7618",
+        "id": "1a2a8fac9c41dba5",
         "type": "debug",
         "z": "d6e07669c102b86f",
         "name": "debug 2",
@@ -16412,7 +16421,39 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 640,
-        "y": 140,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2898e13d20349320",
+        "type": "debug",
+        "z": "d6e07669c102b86f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "1060fdfb95b00cd6",
+        "type": "debug",
+        "z": "d6e07669c102b86f",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1080,
         "wires": []
     }
 ]
