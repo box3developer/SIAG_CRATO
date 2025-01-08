@@ -2,9 +2,9 @@
 
 public class PedidoDTO
 {
-    public string? IdPedido { get; set; }
-    public string? CdPedido { get; set; }
-    public string? CdLote { get; set; }
-    public string? CdBox { get; set; }
+    public long? IdPedido { get; set; }
+    public int? CdPedido { get; set; }
+    public int? CdLote { get; set; }
+    public int? CdBox { get; set; }
     public int NrCaixas { get; set; }
 }
