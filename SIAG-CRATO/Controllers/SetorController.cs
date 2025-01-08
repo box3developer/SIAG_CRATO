@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Setor;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class SetorController : ControllerBase
+public class SetorController : ControllerCustom
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
@@ -13,5 +14,20 @@ public class SetorController : ControllerBase
         var result = await SetorBLL.GetById(id);
 
         return Ok(result);
+    }
+
+    [HttpGet("Select")]
+    public async Task<ActionResult> GetListSelect()
+    {
+        try
+        {
+            var response = await SetorBLL.GetListSelectsAsync();
+
+            return OkResponse(response);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
     }
 }

@@ -10,4 +10,6 @@ public class StatusAreaArmazenagemDTO
     public int Caracol { get; set; }
     public int Gaiola { get; set; }
     public int Quantidade { get; set; }
+    public bool StatusVerde { get; set; }
+    public bool StatusVermelho { get; set; }
 }

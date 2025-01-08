@@ -8,6 +8,7 @@ using SIAG_CRATO.BLLs.Parametro;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.DTOs.Pallet;
+using SIAG_CRATO.Integration;
 using SIAG_CRATO.Models;
 
 namespace SIAG_CRATO.BLLs.AreaArmazenagem;
@@ -283,6 +284,10 @@ public class AreaArmazenagemBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var sql = $"{AreaArmazenagemQuery.SELECT} WHERE id_endereco = @idEndereco ORDER BY nr_posicaox";
 
+        var luzesVerdes = await NodeRedIntegration.GetAllLuzesVerdes();
+        var luzesVermelhas = await NodeRedIntegration.GetAllLuzesVermelhas();
+
+        var avenida = 100;
         foreach (var endereco in enderecos)
         {
             var areasArmazenagem = await conexao.QueryAsync<AreaArmazenagemDTO>(sql, new { idEndereco = endereco.IdEndereco });
@@ -301,6 +306,19 @@ public class AreaArmazenagemBLL
                     statusGaiola.Gaiola = gaiola.NrPosicaoY;
                     statusGaiola.Codigo = gaiola.IdAreaArmazenagem;
 
+                    var luzes = luzesVermelhas.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").FirstOrDefault();
+                    var luzVerde = luzesVerdes.Where(x => x.Caracol == $"{avenida + statusGaiola.Caracol}").FirstOrDefault();
+
+                    if (luzes != null && luzes.LuzesVM.Count != 0)
+                    {
+                        statusGaiola.StatusVermelho = luzes.LuzesVM[statusGaiola.Gaiola - 1] == 0;
+                    }
+
+                    if (luzVerde != null && luzVerde.LuzVerde == statusGaiola.Gaiola)
+                    {
+                        statusGaiola.StatusVerde = true;
+                    }
+
                     listaGaiolas.Add(statusGaiola);
                 }
 
@@ -315,6 +333,7 @@ public class AreaArmazenagemBLL
             }
 
             lista.Add(listaCaracol);
+            avenida += 100;
         }
 
         return lista;

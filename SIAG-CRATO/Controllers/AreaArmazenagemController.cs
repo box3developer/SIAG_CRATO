@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.Data;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
-public class AreaArmazenagemController : Controller
+[Route("api/[controller]")]
+[ApiController]
+public class AreaArmazenagemController : ControllerCustom
 {
 
     [HttpGet("{id}")]
@@ -30,16 +33,59 @@ public class AreaArmazenagemController : Controller
     [HttpGet("identificador/{identificador}")]
     public async Task<IActionResult> GetByIdentificadorAsync(string identificador)
     {
+        try
+        {
+            var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificador);
 
-        var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificador);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex);
+        }
+    }
 
+    [HttpGet("{id}/status")]
+    public async Task<ActionResult> GetStatusCaracol(int id)
+    {
+        try
+        {
+            var response = await AreaArmazenagemBLL.GetStatusGaiolas(id);
+
+            return OkResponse(response);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+    [HttpGet("status")]
+    public ActionResult GetListaTiposStatusGaiolas()
+    {
+        try
+        {
+            var response = AreaArmazenagemBLL.GetTiposStatusGaiolas();
+
+            return OkResponse(response);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+    [HttpGet("agrupador/{idAgrupador}")]
+    public async Task<IActionResult> GetByAgrupadorAsync(int idAgrupador)
+    {
+        var result = await AreaArmazenagemBLL.GetByAgrupadorAsync(idAgrupador);
         if (result == null)
         {
             return NotFound();
         }
 
         return Ok(result);
-     }
+    }
 
     [HttpGet("posicao")]
     public async Task<IActionResult> GetByPosicaoAsync(string identificadorCaracol, int posicaoY)
@@ -101,9 +147,9 @@ public class AreaArmazenagemController : Controller
         {
             return BadRequest(ex.Message);
         }
-        
 
-       
+
+
     }
 
 }
