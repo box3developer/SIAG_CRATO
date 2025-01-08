@@ -592,9 +592,9 @@ public class CaixaBLL
             listaPedidos.Add(new()
             {
                 IdPedido = pedidoAux.IdPedido,
-                CdPedido = pedidoAux.CdPedido ?? "",
-                CdLote = pedidoAux.CdLote ?? "",
-                CdBox = pedidoAux.CdBox ?? "",
+                CdPedido = pedidoAux.CdPedido,
+                CdLote = pedidoAux.CdLote ,
+                CdBox = pedidoAux.CdBox,
                 NrCaixas = caixas.Where(x => x.IdPedido == pedido).Count()
             });
         }
