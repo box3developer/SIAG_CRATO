@@ -311,7 +311,7 @@ public class AreaArmazenagemBLL
 
                     if (luzes != null && luzes.LuzesVM.Count != 0)
                     {
-                        statusGaiola.StatusVermelho = luzes.LuzesVM[statusGaiola.Gaiola - 1] == 0;
+                        statusGaiola.StatusVermelho = luzes.LuzesVM[statusGaiola.Gaiola - 1] == 1;
                     }
 
                     if (luzVerde != null && luzVerde.LuzVerde == statusGaiola.Gaiola)
