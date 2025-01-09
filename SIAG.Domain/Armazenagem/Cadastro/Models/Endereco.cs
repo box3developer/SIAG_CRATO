@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [BasicEntity]
     [Table("endereco")]
     public class Endereco
     {
@@ -10,23 +12,30 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("id_endereco")]
         public int IdEndereco { get; set; }
 
-        [ForeignKey("regiaotrabalho")]
         [Column("id_regiaotrabalho")]
         public int IdRegiaoTrabalho { get; set; }
+
+        [ForeignKey(nameof(IdRegiaoTrabalho))]
         public RegiaoTrabalho? RegiaoTrabalho { get; set; }
 
-        [ForeignKey("setortrabalho")]
+
         [Column("id_setortrabalho")]
         public int IdSetorTrabalho { get; set; }
+
+        [ForeignKey(nameof(IdSetorTrabalho))]
         public SetorTrabalho? SetorTrabalho { get; set; }
 
-        [ForeignKey("tipoendereco")]
+
         [Column("id_tipoendereco")]
         public int IdTipoEndereco { get; set; }
+
+        [ForeignKey(nameof(IdTipoEndereco))]
         public TipoEndereco? TipoEndereco { get; set; }
 
+
+
         [Column("nm_endereco")]
-        public string NmEndereco { get; set; }
+        public string NmEndereco { get; set; } = string.Empty;
 
         [Column("qt_estoqueminimo")]
         public int QtEstoqueMinimo { get; set; }

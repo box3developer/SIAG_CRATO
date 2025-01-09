@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 
 {
+    [BasicEntity]
     [Table("status_leitor")]
     public class Status_leitor
     {
@@ -12,22 +14,22 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int IdStatusLeitor { get; set; }
 
         [Column("conectado")]
-        public int Conectado { get; set; }
+        public int? Conectado { get; set; }
 
         [Column("configurado")]
-        public int Configurado { get; set; }
+        public int? Configurado { get; set; }
 
         [Column("dt_status")]
-        public DateTime DtStatus { get; set; }
+        public DateTime? DtStatus { get; set; }
 
         [Column("equipamento")]
         public string Equipamento { get; set; } = string.Empty;
 
         [Column("executando")]
-        public int Executando { get; set; }
+        public int? Executando { get; set; }
 
         [Column("leitor")]
-        public string Leitor { get; set; } = string.Empty;
+        public string? Leitor { get; set; } = string.Empty;
 
     }
 

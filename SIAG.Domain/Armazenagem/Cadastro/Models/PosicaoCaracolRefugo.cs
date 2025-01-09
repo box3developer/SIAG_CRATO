@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [BasicEntity]
     [Table("posicaocaracolrefugo")]
     public class Posicaocaracolrefugo
     {
@@ -11,15 +13,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int IdPosicaocaracolrefugo { get; set; }
 
         [Column("descricao")]
-        public string Descricao { get; set; } = string.Empty;
+        public string? Descricao { get; set; } = string.Empty;
 
         [Column("fabrica")]
         public string? Fabrica { get; set; } = string.Empty;
 
         [Column("posicao")]
-        public int Posicao { get; set; }
+        public int? Posicao { get; set; }
 
         [Column("tipo")]
-        public string Tipo { get; set; } = string.Empty;
+        public string? Tipo { get; set; } = string.Empty;
     }
 }

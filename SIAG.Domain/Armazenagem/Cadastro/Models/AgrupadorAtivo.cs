@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [CustomKeyEntity]
     [Table("agrupadorativo")]
     public class AgrupadorAtivo
     {
@@ -11,7 +13,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public Guid IdAgrupador { get; set; }
 
         [Column("tp_agrupamento")]
-        public int TpAgrupamento { get; set; }
+        public int? TpAgrupamento { get; set; }
 
         [Column("codigo1")]
         public string? Codigo1 { get; set; } = string.Empty;
@@ -23,15 +25,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public string? Codigo3 { get; set; } = string.Empty;
 
         [Column("cd_sequencia")]
-        public int CdSequencia { get; set; }
+        public int? CdSequencia { get; set; }
 
         [Column("dt_agrupador")]
-        public DateTime DtAgrupador { get; set; }
+        public DateTime? DtAgrupador { get; set; }
 
         [Column("id_areaarmazenagem")]
         public int? IdAreaArmazenagem { get; set; }
 
         [Column("fg_status")]
-        public int FgStatus { get; set; }
+        public int? FgStatus { get; set; }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
-
 {
+    [CustomKeyEntity]
     [Table("niveisagrupadores")]
     public class Niveisagrupadores
     {

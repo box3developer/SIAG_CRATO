@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [BasicEntity]
     [Table("turno")]
     public class Turno
     {
@@ -14,15 +16,15 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int CdTurno { get; set; }
 
         [Column("dt_inicio")]
-        public DateTime DtInicio { get; set; }
+        public DateTime? DtInicio { get; set; }
 
         [Column("dt_fim")]
-        public DateTime DtFim { get; set; }
+        public DateTime? DtFim { get; set; }
 
         [Column("diaanterior")]
-        public bool DiaAnterior { get; set; }
+        public bool? DiaAnterior { get; set; }
 
         [Column("diasucessor")]
-        public bool DiaSucessor { get; set; }
+        public bool? DiaSucessor { get; set; }
     }
 }

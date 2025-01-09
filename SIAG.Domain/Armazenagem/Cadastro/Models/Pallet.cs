@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using SIAG.Domain.Armazenagem.Cadastro.Attributes;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [CustomKeyEntity]
     [Table("pallet")]
     public class Pallet
     {
@@ -10,26 +13,28 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("id_pallet")]
         public int IdPallet { get; set; }
 
-        [ForeignKey("areaArmazenagem")]
         [Column("id_areaarmazenagem")]
-        public int IdAreaArmazenagem { get; set; }
+        public long? IdAreaArmazenagem { get; set; }
+
+        [ForeignKey(nameof(IdAreaArmazenagem))]
         public AreaArmazenagem? AreaArmazenagem { get; set; }
 
-        [ForeignKey("agrupadorativo")]
-        [Column("id_agrupadorativo")]
-        public Guid IdAgrupadorAtivo { get; set; }
+        [Column("id_agrupador")]
+        public Guid? IdAgrupadorAtivo { get; set; }
+
+        [ForeignKey(nameof(IdAgrupadorAtivo))]
         public AgrupadorAtivo? AgrupadorAtivo { get; set; }
 
         [Column("fg_status")]
-        public int FgStatus { get; set; }
+        public int? FgStatus { get; set; }
 
         [Column("qt_utilizacao")]
-        public int QtUtilizacao { get; set; }
+        public int? QtUtilizacao { get; set; }
 
         [Column("dt_ultimamovimentacao")]
-        public DateTime DtUltimaMovimentacao { get; set; }
+        public DateTime? DtUltimaMovimentacao { get; set; }
 
         [Column("cd_identificacao")]
-        public string CdIdentificacao { get; set; } = string.Empty;
+        public string? CdIdentificacao { get; set; } = string.Empty;
     }
 }

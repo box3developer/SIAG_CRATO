@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class AreaArmazenagemRepository : BaseRepository<AreaArmazenagem, int>, IAreaArmazenagemRepository
+    public class AreaArmazenagemRepository : BaseRepository<AreaArmazenagem, long>, IAreaArmazenagemRepository
     {
         public AreaArmazenagemRepository(SiagDbContext context) : base(context)
         {
@@ -49,7 +49,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             return dadosPaginados;
         }
 
-        public async Task<List<SelectDTO<int>>> GetSelectAsync(FiltroPaginacaoDTO dto)
+        public async Task<List<SelectDTO<long>>> GetSelectAsync(FiltroPaginacaoDTO dto)
         {
             var query = _dbContext.AreaArmazenagem.AsQueryable();
 
@@ -59,7 +59,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
                          .Take(30);
 
             var dados = await query
-                .Select(x => new SelectDTO<int>
+                .Select(x => new SelectDTO<long>
                 {
                     Id = x.IdAreaArmazenagem,
                     Descricao = $"Identificação: {x.CdIdentificacao} - Status: {x.FgStatus} - X: {x.NrPosicaoX} - Y: {x.NrPosicaoY}",

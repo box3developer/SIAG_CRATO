@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [CustomKeyEntity]
     [Table("programa")]
     public class Programa
     {
@@ -11,10 +13,10 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int IdPrograma { get; set; }
 
         [Column("cd_programa")]
-        public int CdPrograma { get; set; }
+        public int? CdPrograma { get; set; }
 
         [Column("cd_documento")]
-        public int CdDocumento { get; set; }
+        public int? CdDocumento { get; set; }
 
         [Column("cd_fabrica")]
         public int CdFabrica { get; set; }

@@ -1,49 +1,66 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [CustomKeyEntity]
     [Table("caixa")]
     public class Caixa
     {
         [Key]
         [Column("id_caixa")]
-        public string IdCaixa { get; set; }
+        public string IdCaixa { get; set; } = string.Empty;
 
-        [ForeignKey("agrupadorativo")]
+
         [Column("id_agrupador")]
-        public Guid IdAgrupador { get; set; }
+        public Guid? IdAgrupador { get; set; }
+
+        [ForeignKey(nameof(IdAgrupador))]
         public AgrupadorAtivo? Agrupador { get; set; }
+
 
         [Column("id_pallet")]
         public int? IdPallet { get; set; }
 
+        [ForeignKey(nameof(IdPallet))]
+        public Pallet? Pallet { get; set; }
+
+
         [Column("id_programa")]
-        public int IdPrograma { get; set; }
+        public int? IdPrograma { get; set; }
+
+        [ForeignKey(nameof(IdPrograma))]
+        public Programa? Programa { get; set; }
+
 
         [Column("id_pedido")]
-        public int IdPedido { get; set; }
+        public int? IdPedido { get; set; }
+
+        [ForeignKey(nameof(IdPedido))]
+        public Pedido? Pedido { get; set; }
+
 
         [Column("cd_produto")]
-        public string CdProduto { get; set; } = string.Empty;
+        public string? CdProduto { get; set; } = string.Empty;
 
         [Column("cd_cor")]
-        public string CdCor { get; set; } = string.Empty;
+        public string? CdCor { get; set; } = string.Empty;
 
         [Column("cd_gradetamanho")]
-        public string CdGradeTamanho { get; set; } = string.Empty;
+        public string? CdGradeTamanho { get; set; } = string.Empty;
 
         [Column("nr_caixa")]
-        public int NrCaixa { get; set; }
+        public int? NrCaixa { get; set; }
 
         [Column("nr_pares")]
-        public int NrPares { get; set; }
+        public int? NrPares { get; set; }
 
         [Column("fg_rfid")]
-        public bool IdFgRf { get; set; }
+        public bool? IdFgRf { get; set; }
 
         [Column("fg_status")]
-        public int FgStatus { get; set; }
+        public int? FgStatus { get; set; }
 
         [Column("dt_embalagem")]
         public DateTime? DtEmbalagem { get; set; }
@@ -58,6 +75,6 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public DateTime? DtExpedicao { get; set; }
 
         [Column("qt_peso")]
-        public decimal QtPeso { get; set; }
+        public decimal? QtPeso { get; set; }
     }
 }

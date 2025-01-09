@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace SIAG.Application.Armazenagem.Cadastro.Services
 {
-    public class AreaArmazenagemService : BaseService<IAreaArmazenagemRepository, AreaArmazenagem, AreaArmazenagemDTO, int>
+    public class AreaArmazenagemService : BaseService<IAreaArmazenagemRepository, AreaArmazenagem, AreaArmazenagemDTO, long>
     {
         private readonly IAreaArmazenagemRepository _repository;
         private readonly IMappingService _mappingService;
@@ -41,7 +41,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.Services
             };
         }
 
-        public async Task<List<SelectDTO<int>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
+        public async Task<List<SelectDTO<long>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
         {
             var lista = await _repository.GetSelectAsync(filtro);
 

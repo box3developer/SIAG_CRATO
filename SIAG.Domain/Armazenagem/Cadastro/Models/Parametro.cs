@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
-
+    [BasicEntity]
     [Table("parametro")]
     public class Parametro
     {
@@ -15,13 +16,13 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int? FgAtivo { get; set; }
 
         [Column("fg_tipoparametro")]
-        public int FgTipoparametro { get; set; }
+        public int? FgTipoparametro { get; set; }
 
         [Column("fg_visivel")]
-        public bool FgVisivel { get; set; }
+        public bool? FgVisivel { get; set; }
 
         [Column("nm_parametro")]
-        public string NmParametro { get; set; } = string.Empty;
+        public string? NmParametro { get; set; } = string.Empty;
 
         [Column("nm_tipo")]
         public string? NmTipo { get; set; } = string.Empty;

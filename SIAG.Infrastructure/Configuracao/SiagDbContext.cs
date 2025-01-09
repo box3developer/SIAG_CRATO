@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SIAG.Domain.Armazenagem.Cadastro.Attributes;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.Reflection;
 
@@ -31,11 +32,12 @@ namespace SIAG.Infrastructure.Configuracao
         public DbSet<Desempenhocaixa> Desempenhocaixa { get; set; }
         public DbSet<Operadorhistorico> Operadorhistorico { get; set; }
         public DbSet<Parametro> Parametro { get; set; }
-        public DbSet<Posicaocaracolrefugo> Posicaocaracolrefugo  { get; set; }
+        public DbSet<Posicaocaracolrefugo> Posicaocaracolrefugo { get; set; }
         public DbSet<Parametromensagemcaracol> Parametromensagemcaracol { get; set; }
         public DbSet<Status_leitor> Status_leitor { get; set; }
         public DbSet<Lidervirtual> Lidervirtual { get; set; }
         public DbSet<Niveisagrupadores> Niveisagrupadores { get; set; }
+        public DbSet<EquipamentoModelo> EquipamentoModelo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,29 +46,54 @@ namespace SIAG.Infrastructure.Configuracao
             SetDeleteNoRestrict(modelBuilder);
             SetIdentity(modelBuilder);
 
-            modelBuilder.Entity<Operador>()
-                .Property(o => o.IdOperador)
-                .ValueGeneratedNever();
-
             base.OnModelCreating(modelBuilder);
         }
 
         private void SetIdentity(ModelBuilder modelBuilder)
         {
-            var primaryKeys = modelBuilder.Model.GetEntityTypes()
-                                               .Select(entity => entity.FindPrimaryKey())
-                                               .Where(pk => pk != null);
+            // Configurações para tabelas básicas
+            var basicEntities = modelBuilder.Model.GetEntityTypes()
+                .Where(e => e.ClrType.GetCustomAttributes(typeof(BasicEntityAttribute), true).Any());
 
-            foreach (var primaryKey in primaryKeys)
+            foreach (var entityType in basicEntities)
             {
+                var primaryKey = entityType.FindPrimaryKey();
+
                 if (primaryKey != null)
                 {
                     foreach (var property in primaryKey.Properties)
                     {
                         property.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+                        property.IsNullable = false; // Garante que a chave não aceita valores nulos
+                    }
+                }
+            }
+
+            // Configurações para tabelas com chave personalizável
+            var customKeyEntities = modelBuilder.Model.GetEntityTypes()
+                .Where(e => e.ClrType.GetCustomAttributes(typeof(CustomKeyEntityAttribute), true).Any());
+
+            foreach (var entityType in customKeyEntities)
+            {
+                var primaryKey = entityType.FindPrimaryKey();
+
+                if (primaryKey != null)
+                {
+                    foreach (var property in primaryKey.Properties)
+                    {
+                        property.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.Never;
                         property.IsNullable = false;
                     }
                 }
+            }
+
+            // Configurações para tabelas sem chave
+            var keylessEntities = modelBuilder.Model.GetEntityTypes()
+                .Where(e => e.ClrType.GetCustomAttributes(typeof(KeylessEntityAttribute), true).Any());
+
+            foreach (var entityType in keylessEntities)
+            {
+                modelBuilder.Entity(entityType.ClrType).HasNoKey();
             }
         }
 

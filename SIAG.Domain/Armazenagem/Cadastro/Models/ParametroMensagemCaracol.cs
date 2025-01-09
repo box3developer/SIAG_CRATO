@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [BasicEntity]
     [Table("parametromensagemcaracol")]
     public class Parametromensagemcaracol
     {
@@ -11,7 +13,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public int IdParametromensagemcaracol { get; set; }
 
         [Column("cor")]
-        public string Cor { get; set; } = string.Empty;
+        public string? Cor { get; set; } = string.Empty;
 
         [Column("descricao")]
         public string Descricao { get; set; } = string.Empty;

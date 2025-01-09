@@ -1,32 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
+    [CustomKeyEntity]
     [Table("operador")]
     public class Operador
     {
         [Key]
         [Column("id_operador")]
-        public int IdOperador { get; set; }
+        public long IdOperador { get; set; }
 
         [Column("nm_operador")]
-        public string NmOperador { get; set; } = string.Empty;
+        public string? NmOperador { get; set; } = string.Empty;
 
         [Column("nm_cpf")]
-        public string NmCpf { get; set; } = string.Empty;
+        public string? NmCpf { get; set; } = string.Empty;
 
         [Column("nr_localidade")]
-        public int NrLocalidade { get; set; }
+        public int? NrLocalidade { get; set; }
 
         [Column("dt_login")]
         public DateTime? DtLogin { get; set; }
 
         [Column("fg_funcao")]
-        public int FgFuncao { get; set; }
+        public int? FgFuncao { get; set; }
 
         [Column("id_responsavel")]
-        public int? IdResponsavel { get; set; }
+        public long? IdResponsavel { get; set; }
 
         [Column("nm_login")]
         public string? NmLogin { get; set; } = string.Empty;

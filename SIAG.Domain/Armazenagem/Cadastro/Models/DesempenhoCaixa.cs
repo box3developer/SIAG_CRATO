@@ -1,37 +1,46 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 
 {
+    [KeylessEntity]
     [Table("desempenhocaixa")]
     public class Desempenhocaixa
     {
-        [Key]
-        [Column("id_desempenhocaixa")]
-        public string IdDesempenhocaixa { get; set; } = string.Empty;
-
         [Column("id_caixa")]
-        public string IdCaixa { get; set; } = string.Empty;
+        public string? IdCaixa { get; set; } = string.Empty;
 
         [Column("dt_leituracaixa")]
-        public DateTime DtLeituracaixa { get; set; }
+        public DateTime? DtLeituracaixa { get; set; }
 
         [Column("fg_erroclassificacao")]
-        public int FgErroclassificacao { get; set; }
+        public int? FgErroclassificacao { get; set; }
+
 
         [Column("id_areaarmazenagem")]
-        public long IdAreaarmazenagem { get; set; }
+        public long? IdAreaArmazenagem { get; set; }
+
+        [ForeignKey(nameof(IdAreaArmazenagem))]
+        public AreaArmazenagem? AreaArmazenagem { get; set; }
+
 
         [Column("id_equipamento")]
-        public int IdEquipamento { get; set; }
+        public int? IdEquipamento { get; set; }
+
+        [ForeignKey(nameof(IdEquipamento))]
+        public Equipamento? Equipamento { get; set; }
+
 
         [Column("id_operador")]
-        public long IdOperador { get; set; }
+        public long? IdOperador { get; set; }
+
+        [ForeignKey(nameof(IdOperador))]
+        public Operador? Operador { get; set; }
+
 
         [Column("nr_tempoestimado")]
-        public int NrTempoestimado { get; set; }
-
+        public int? NrTempoestimado { get; set; }
     }
-
 }
