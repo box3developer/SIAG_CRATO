@@ -6,7 +6,6 @@ using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.DTOs.Pallet;
 using SIAG_CRATO.Models;
-using System.Runtime.InteropServices;
 
 namespace SIAG_CRATO.BLLs.Pallet;
 
@@ -54,12 +53,17 @@ public class PalletBLL
         return ConvertToDTO(pallet);
     }
 
-    public static async Task<PalletDTO?> GetByIdentificadorAsync(string identificador)
+    public static async Task<PalletDTO?> GetByIdentificadorAsync(string identificador, int id = 0)
     {
         string sql = $"{PalletQuery.SELECT} WHERE cd_identificacao = @identificador";
 
+        if (id == 0)
+        {
+            sql = $"{sql} AND id_pallet <> @id";
+        }
+
         using var conexao = new SqlConnection(Global.Conexao);
-        var pallet = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sql, new { identificador });
+        var pallet = await conexao.QueryFirstOrDefaultAsync<PalletModel>(sql, new { identificador, id });
 
         if (pallet == null)
         {
@@ -138,7 +142,7 @@ public class PalletBLL
 
         return 0;
     }
-    
+
     public static async Task<int> SeStatusAsync(int id, StatusPallet status)
     {
         using var conexao = new SqlConnection(Global.Conexao);

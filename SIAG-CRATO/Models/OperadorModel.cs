@@ -4,7 +4,7 @@ namespace SIAG_CRATO.Models;
 public class OperadorModel
 {
     public long IdOperador { get; set; }
-    public string NFC { get; set; } = string.Empty;
+    public string NmNfcOperador { get; set; } = string.Empty;
     public string NmCpf { get; set; } = string.Empty;
     public string NmOperador { get; set; } = string.Empty;
     public DateTime? DtLogin { get; set; }

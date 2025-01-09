@@ -32,7 +32,7 @@ public class EquipamentoChecklistBLL
 
     public static async Task<List<EquipamentoChecklistDTO>> GetByModeloAsync(int id_equipamentomodelo)
     {
-        var sql = $@"{EquipamentoChecklistQuery.SELECT}WHERE id_equipamentomodelo = @id_equipamentomodelo";
+        var sql = $@"{EquipamentoChecklistQuery.SELECT} WHERE id_equipamentomodelo = @id_equipamentomodelo";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var EquipamentoChecklist = await conexao.QueryAsync<EquipamentoChecklistModel>(sql, new { id_equipamentomodelo });

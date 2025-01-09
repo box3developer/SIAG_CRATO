@@ -134,11 +134,11 @@ public class EquipamentoController : ControllerBase
         return BadRequest("Nenhum registro foi alterado");
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateEquipamento(int id, int id_endereco)
+    [HttpPut]
+    public async Task<IActionResult> UpdateEquipamento([FromBody] EquipamentoUpdateDTO update)
     {
 
-        var sucesso = await EquipamentoBLL.UpdateEquipamento(id, id_endereco);
+        var sucesso = await EquipamentoBLL.UpdateEquipamento(update.IdEquipamento, update.IdEndereco);
         if (sucesso > 0)
         {
             return Ok(sucesso);

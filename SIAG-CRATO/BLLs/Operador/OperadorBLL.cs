@@ -25,6 +25,21 @@ public class OperadorBLL
         return ConvertToDTO(operador);
     }
 
+    public static async Task<OperadorDTO?> GetByNFCAsync(string nfc)
+    {
+        var sql = $"{OperadorQuery.SELECT} WHERE nm_nfcoperador = @nfc";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var operador = await conexao.QueryFirstOrDefaultAsync<OperadorModel>(sql, new { nfc });
+
+        if (operador == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(operador);
+    }
+
     public static async Task<int> GetMetaAsync()
     {
         var sql = $"{OperadorQuery.SELECT_PARAMETRO} WHERE nm_parametro = 'Caixa hora operador sorter'";
@@ -72,7 +87,7 @@ public class OperadorBLL
         return new()
         {
             IdOperador = operador.IdOperador,
-            NFC = operador.NFC,
+            NFC = operador.NmNfcOperador,
             NmCpf = operador.NmCpf,
             NmOperador = operador.NmOperador,
             DtLogin = operador.DtLogin,

@@ -11,7 +11,7 @@ namespace SIAG_CRATO.Controllers;
 public class PalletController : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> Create(PalletDTO pallet)
+    public async Task<IActionResult> Create([FromBody] PalletDTO pallet)
     {
         await PalletBLL.InsertAsync(pallet);
         return CreatedAtAction("GetById", new { id = pallet.IdPallet }, pallet);
@@ -40,6 +40,18 @@ public class PalletController : ControllerBase
     public async Task<IActionResult> GetByIdentificador(string identificador)
     {
         var pallet = await PalletBLL.GetByIdentificadorAsync(identificador);
+        if (pallet == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(pallet);
+    }
+
+    [HttpPost("identificador")]
+    public async Task<IActionResult> GetByIdentificadorOnly([FromBody] PalletFiltroDTO filtro)
+    {
+        var pallet = await PalletBLL.GetByIdentificadorAsync(filtro.CdIdentificador, filtro.IdPallet);
         if (pallet == null)
         {
             return NotFound();

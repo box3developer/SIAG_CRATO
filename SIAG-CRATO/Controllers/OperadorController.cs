@@ -19,6 +19,17 @@ public class OperadorController : ControllerBase
         return Ok(operador);
     }
 
+    [HttpGet("nfc/{nfc}")]
+    public async Task<ActionResult<OperadorDTO>> GetByNFC(string nfc)
+    {
+        var operador = await OperadorBLL.GetByNFCAsync(nfc);
+        if (operador == null)
+        {
+            return NotFound();
+        }
+        return Ok(operador);
+    }
+
     [HttpGet("meta")]
     public async Task<ActionResult<int>> GetMeta()
     {
@@ -27,9 +38,9 @@ public class OperadorController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(int idOperador, int idEquipamento)
+    public async Task<IActionResult> Login([FromBody] OperadorLoginDTO login)
     {
-        var sucesso = await OperadorBLL.Login(idOperador, idEquipamento);
+        var sucesso = await OperadorBLL.Login(login.IdOperador, login.IdEquipamento);
         if (sucesso)
         {
             return Ok("Login realizado com sucesso.");
@@ -41,9 +52,9 @@ public class OperadorController : ControllerBase
     }
 
     [HttpPost("logoff")]
-    public async Task<IActionResult> LogOff(int idOperador, int idEquipamento)
+    public async Task<IActionResult> LogOff([FromBody] OperadorLoginDTO login)
     {
-        var sucesso = await OperadorBLL.LogOff(idOperador, idEquipamento);
+        var sucesso = await OperadorBLL.LogOff(login.IdOperador, login.IdEquipamento);
         if (sucesso)
         {
             return Ok("Logout realizado com sucesso.");

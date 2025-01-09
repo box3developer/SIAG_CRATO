@@ -37,4 +37,8 @@ public class ChamadaQuery
     public const string UPDATE_REJEITAR = @"UPDATE chamada
 		                                    SET fg_status = @statusRejeicao, dt_rejeitada = GETDATE(), id_atividaderejeicao = @idAtividadeRejeicao
 		                                    WHERE id_chamada = @idChamada";
+
+    public const string UPDATE_ATRIBUIR = @"UPDATE chamada
+		                                    SET fg_status = @status, id_operador = @idOperador, id_equipamento = @idEquipamento, dt_recebida = GETDATE()
+		                                    WHERE id_chamada = @idChamada";
 }
