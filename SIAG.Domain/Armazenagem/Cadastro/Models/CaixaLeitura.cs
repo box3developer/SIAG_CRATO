@@ -5,7 +5,7 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
-    [CustomKeyEntity]
+    [BasicEntity]
     [Table("caixaleitura")]
     public class Caixaleitura
     {

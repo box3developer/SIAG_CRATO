@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Armazenagem\Core\" />
     <Folder Include="Controllers\Chamada\Cadastro\" />
     <Folder Include="Controllers\Chamada\Core\" />
   </ItemGroup>

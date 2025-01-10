@@ -3,68 +3,100 @@
   "WorkspaceRootPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.crosscutting\\dtos\\statusdynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|solutionrelative:siag.crosscutting\\dtos\\statusdynamicservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.api\\controllers\\armazenagem\\core\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|solutionrelative:siag.api\\controllers\\armazenagem\\core\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\pallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\pallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.api\\controllers\\armazenagem\\core\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|solutionrelative:siag.api\\controllers\\armazenagem\\core\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.crosscutting\\status\\statusclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|solutionrelative:siag.crosscutting\\status\\statusclasses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.crosscutting\\utils\\statusutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|solutionrelative:siag.crosscutting\\utils\\statusutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|solutionrelative:siag.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E5966E9E-E389-46FD-AE22-E4933A570D50}|SIAG.Infrastructure\\SIAG.Infrastructure.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.infrastructure\\configuracao\\siagdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5966E9E-E389-46FD-AE22-E4933A570D50}|SIAG.Infrastructure\\SIAG.Infrastructure.csproj|solutionrelative:siag.infrastructure\\configuracao\\siagdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.crosscutting\\status\\statusativo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|solutionrelative:siag.crosscutting\\status\\statusativo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{4884559C-E3A8-4342-878D-BAA34A0043A3}|SIAG.API\\SIAG.API.csproj|solutionrelative:siag.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.crosscutting\\dtos\\statusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A90DEF8-23C4-43BF-AF9C-2E14BBF4B2AD}|SIAG.CrossCutting\\SIAG.CrossCutting.csproj|solutionrelative:siag.crosscutting\\dtos\\statusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E5966E9E-E389-46FD-AE22-E4933A570D50}|SIAG.Infrastructure\\SIAG.Infrastructure.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.infrastructure\\armazenagem\\cadastro\\repositories\\pedidorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E5966E9E-E389-46FD-AE22-E4933A570D50}|SIAG.Infrastructure\\SIAG.Infrastructure.csproj|solutionrelative:siag.infrastructure\\armazenagem\\cadastro\\repositories\\pedidorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{50B07219-BDDA-42A3-9385-5139FDEA1A5D}|SIAG.Application\\SIAG.Application.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.application\\armazenagem\\cadastro\\services\\areaarmazenagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{50B07219-BDDA-42A3-9385-5139FDEA1A5D}|SIAG.Application\\SIAG.Application.csproj|solutionrelative:siag.application\\armazenagem\\cadastro\\services\\areaarmazenagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\areaarmazenagem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\areaarmazenagem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\equipamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\equipamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\equipamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\operador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\operador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\chamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\chamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\desempenho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\desempenho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\operadorhistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\atividade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\atividade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\caixaleitura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\caixaleitura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\caixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\operadorhistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\operadorhistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\operador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\operador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\pallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\pallet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|c:\\users\\crist\\documents\\box3\\grendene_crato\\siag\\siag.domain\\armazenagem\\cadastro\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50B07219-BDDA-42A3-9385-5139FDEA1A5D}|SIAG.Application\\SIAG.Application.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.application\\armazenagem\\cadastro\\services\\areaarmazenagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50B07219-BDDA-42A3-9385-5139FDEA1A5D}|SIAG.Application\\SIAG.Application.csproj|solutionrelative:siag.application\\armazenagem\\cadastro\\services\\areaarmazenagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\chamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\chamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E5966E9E-E389-46FD-AE22-E4933A570D50}|SIAG.Infrastructure\\SIAG.Infrastructure.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.infrastructure\\armazenagem\\cadastro\\repositories\\areaarmazenagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,14 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\interfaces\\iareaarmazenagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\interfaces\\iareaarmazenagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\caixaleitura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\caixaleitura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\desempenho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|solutionrelative:siag.domain\\armazenagem\\cadastro\\models\\desempenho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9DEE0E88-7210-4DD7-978C-33E3DF58732A}|SIAG.Domain\\SIAG.Domain.csproj|C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\siag.domain\\armazenagem\\cadastro\\models\\equipamentomodelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -114,145 +138,249 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PedidoRepository.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\PedidoRepository.cs",
-              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\PedidoRepository.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\PedidoRepository.cs",
-              "RelativeToolTip": "SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\PedidoRepository.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAmwDgAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:43:45.58Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20250109100938_Teste6.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs",
-              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs",
-              "RelativeToolTip": "SIAG.Infrastructure\\Migrations\\20250109100938_Teste6.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:09:38.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Caixa.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAIwCgAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:06:48.188Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "20250109100115_Teste5.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs",
-              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs",
-              "RelativeToolTip": "SIAG.Infrastructure\\Migrations\\20250109100115_Teste5.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:01:15.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Programa.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:49:59.543Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Pedido.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAAFAAAA",
+              "DocumentIndex": 1,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Controllers\\Armazenagem\\Core\\BaseController.cs",
+              "RelativeDocumentMoniker": "SIAG.API\\Controllers\\Armazenagem\\Core\\BaseController.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Controllers\\Armazenagem\\Core\\BaseController.cs",
+              "RelativeToolTip": "SIAG.API\\Controllers\\Armazenagem\\Core\\BaseController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:43:00.963Z",
+              "WhenOpened": "2025-01-10T03:18:11.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StatusDynamicService.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\DTOs\\StatusDynamicService.cs",
+              "RelativeDocumentMoniker": "SIAG.CrossCutting\\DTOs\\StatusDynamicService.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\DTOs\\StatusDynamicService.cs",
+              "RelativeToolTip": "SIAG.CrossCutting\\DTOs\\StatusDynamicService.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBcAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:13:21.832Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StatusDTO.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\DTOs\\StatusDTO.cs",
+              "RelativeDocumentMoniker": "SIAG.CrossCutting\\DTOs\\StatusDTO.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\DTOs\\StatusDTO.cs",
+              "RelativeToolTip": "SIAG.CrossCutting\\DTOs\\StatusDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:06:50.694Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "AreaArmazenagemService.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
-              "RelativeDocumentMoniker": "SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
-              "RelativeToolTip": "SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAABAAAA",
+              "Title": "Equipamento.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:40:38.348Z",
+              "WhenOpened": "2025-01-09T20:05:28.893Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\appsettings.json",
-              "RelativeDocumentMoniker": "SIAG.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\appsettings.json",
-              "RelativeToolTip": "SIAG.API\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-09T03:47:24.151Z",
+              "DocumentIndex": 12,
+              "Title": "Atividade.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Atividade.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Atividade.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Atividade.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Atividade.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T11:34:46.813Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "AreaArmazenagem.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\AreaArmazenagem.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\AreaArmazenagem.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\AreaArmazenagem.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\AreaArmazenagem.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAIwDgAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:15:06.657Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "Endereco.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Endereco.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Endereco.cs",
               "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Endereco.cs",
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Endereco.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAZAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:55:24.183Z"
+              "WhenOpened": "2025-01-09T02:55:24.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CaixaLeitura.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T13:02:56.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SiagDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
+              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
+              "RelativeToolTip": "SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAqwFoAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T02:32:15.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Program.cs",
+              "RelativeDocumentMoniker": "SIAG.API\\Program.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Program.cs",
+              "RelativeToolTip": "SIAG.API\\Program.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAAAEsAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T11:37:41.92Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "StatusController.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Controllers\\Armazenagem\\Core\\StatusController.cs",
+              "RelativeDocumentMoniker": "SIAG.API\\Controllers\\Armazenagem\\Core\\StatusController.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\Controllers\\Armazenagem\\Core\\StatusController.cs",
+              "RelativeToolTip": "SIAG.API\\Controllers\\Armazenagem\\Core\\StatusController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:19:04.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StatusClasses.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Status\\StatusClasses.cs",
+              "RelativeDocumentMoniker": "SIAG.CrossCutting\\Status\\StatusClasses.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Status\\StatusClasses.cs",
+              "RelativeToolTip": "SIAG.CrossCutting\\Status\\StatusClasses.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:22:36.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StatusUtils.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Utils\\StatusUtils.cs",
+              "RelativeDocumentMoniker": "SIAG.CrossCutting\\Utils\\StatusUtils.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Utils\\StatusUtils.cs",
+              "RelativeToolTip": "SIAG.CrossCutting\\Utils\\StatusUtils.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:31:33.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StatusAtivo.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Status\\StatusAtivo.cs",
+              "RelativeDocumentMoniker": "SIAG.CrossCutting\\Status\\StatusAtivo.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\Status\\StatusAtivo.cs",
+              "RelativeToolTip": "SIAG.CrossCutting\\Status\\StatusAtivo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T03:27:33.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Desempenho.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T02:58:28.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20250109122438_Teste10.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs",
+              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs",
+              "RelativeToolTip": "SIAG.Infrastructure\\Migrations\\20250109122438_Teste10.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T12:24:39.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "OperadorHistorico.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T12:18:16.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "20250109113918_Teste8.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs",
+              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs",
+              "RelativeToolTip": "SIAG.Infrastructure\\Migrations\\20250109113918_Teste8.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAzwBsAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T11:39:18.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Caixa.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Caixa.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAwCIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T10:06:48.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "Pallet.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pallet.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pallet.cs",
@@ -265,7 +393,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
+              "Title": "Programa.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Programa.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T09:49:59.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Operador.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T02:32:35.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Pedido.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
+              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
+              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Pedido.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T09:43:00.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AreaArmazenagemService.cs",
+              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
+              "RelativeDocumentMoniker": "SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
+              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
+              "RelativeToolTip": "SIAG.Application\\Armazenagem\\Cadastro\\Services\\AreaArmazenagemService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T03:40:38.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "Chamada.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Chamada.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Chamada.cs",
@@ -273,72 +453,25 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Chamada.cs",
               "ViewState": "AQIAAGcAAAAAAAAAAAAawGkAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:38:17.005Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Operador.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Operador.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:32:35.296Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SiagDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
-              "RelativeDocumentMoniker": "SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
-              "RelativeToolTip": "SIAG.Infrastructure\\Configuracao\\SiagDbContext.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAmwFEAAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:32:15.25Z",
+              "WhenOpened": "2025-01-09T02:38:17.005Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "OperadorHistorico.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\OperadorHistorico.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAowCEAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:47:50.142Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Equipamento.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Equipamento.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAtwCUAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:52:07.834Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 24,
               "Title": "AreaArmazenagemRepository.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\AreaArmazenagemRepository.cs",
               "RelativeDocumentMoniker": "SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\AreaArmazenagemRepository.cs",
               "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\AreaArmazenagemRepository.cs",
               "RelativeToolTip": "SIAG.Infrastructure\\Armazenagem\\Cadastro\\Repositories\\AreaArmazenagemRepository.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAuwDMAAAAtAAAA",
+              "ViewState": "AQIAADMAAAAAAAAAAAAxwDMAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:39:35.053Z"
+              "WhenOpened": "2025-01-09T03:39:35.053Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 25,
               "Title": "IAreaArmazenagemRepository.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Interfaces\\IAreaArmazenagemRepository.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Interfaces\\IAreaArmazenagemRepository.cs",
@@ -346,47 +479,25 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Interfaces\\IAreaArmazenagemRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAUAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:39:57.331Z"
+              "WhenOpened": "2025-01-09T03:39:57.331Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "EquipamentoModelo.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\EquipamentoModelo.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\EquipamentoModelo.cs",
               "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\EquipamentoModelo.cs",
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\EquipamentoModelo.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAgAAAAiAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAIBJwAgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:27:04.448Z"
+              "WhenOpened": "2025-01-09T03:27:04.448Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Desempenho.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Desempenho.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAASwDYAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:58:28.675Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "CaixaLeitura.cs",
-              "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
-              "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
-              "ToolTip": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
-              "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\CaixaLeitura.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAASwEAAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T03:10:24.759Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "Turno.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Turno.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Turno.cs",
@@ -394,11 +505,12 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\Turno.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:21:24.279Z"
+              "WhenOpened": "2025-01-09T02:21:24.279Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "DesempenhoCaixa.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\DesempenhoCaixa.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\DesempenhoCaixa.cs",
@@ -406,11 +518,12 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\DesempenhoCaixa.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAAQwB0AAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:56:34.45Z"
+              "WhenOpened": "2025-01-09T02:56:34.45Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "LiderVirtual.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\LiderVirtual.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\LiderVirtual.cs",
@@ -418,11 +531,12 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\LiderVirtual.cs",
               "ViewState": "AQIAABEAAAAAAAAAAAAuwBcAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:49:08.088Z"
+              "WhenOpened": "2025-01-09T02:49:08.088Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "RegiaoTrabalho.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\RegiaoTrabalho.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\RegiaoTrabalho.cs",
@@ -430,11 +544,12 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\RegiaoTrabalho.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAuwA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:46:10.439Z"
+              "WhenOpened": "2025-01-09T02:46:10.439Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "SetorTrabalho.cs",
               "DocumentMoniker": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\Armazenagem\\Cadastro\\Models\\SetorTrabalho.cs",
               "RelativeDocumentMoniker": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\SetorTrabalho.cs",
@@ -442,7 +557,8 @@
               "RelativeToolTip": "SIAG.Domain\\Armazenagem\\Cadastro\\Models\\SetorTrabalho.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAuwBEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T02:45:13.755Z"
+              "WhenOpened": "2025-01-09T02:45:13.755Z",
+              "EditorCaption": ""
             }
           ]
         }

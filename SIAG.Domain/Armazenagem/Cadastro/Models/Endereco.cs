@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
-    [BasicEntity]
+    [CustomKeyEntity]
     [Table("endereco")]
     public class Endereco
     {
         [Key]
         [Column("id_endereco")]
         public int IdEndereco { get; set; }
+
 
         [Column("id_regiaotrabalho")]
         public int IdRegiaoTrabalho { get; set; }

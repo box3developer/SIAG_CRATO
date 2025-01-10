@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SIAG.Application.Armazenagem.Cadastro.Services;
 using SIAG.Application.Armazenagem.Cadastro.Shared.Mappings;
+using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Interfaces;
 using SIAG.CrossCutting.Logging;
 using SIAG.CrossCutting.Services;
@@ -72,6 +73,7 @@ builder.Services.AddScoped<SetorTrabalhoService>();
 builder.Services.AddScoped<TipoAreaService>();
 builder.Services.AddScoped<TipoEnderecoService>();
 builder.Services.AddScoped<TurnoService>();
+builder.Services.AddScoped<StatusDynamicService>();
 
 // Configuração de CORS
 builder.Services.AddCors(options =>

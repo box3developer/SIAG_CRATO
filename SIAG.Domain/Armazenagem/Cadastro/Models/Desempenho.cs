@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
-    [CustomKeyEntity]
+    [BasicEntity]
     [Table("desempenho")]
     public class Desempenho
     {

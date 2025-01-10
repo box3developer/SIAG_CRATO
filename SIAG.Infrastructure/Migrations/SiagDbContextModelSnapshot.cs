@@ -256,8 +256,11 @@ namespace SIAG.Infrastructure.Migrations
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Caixaleitura", b =>
                 {
                     b.Property<long>("IdCaixaleitura")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id_caixaleitura");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdCaixaleitura"));
 
                     b.Property<DateTime?>("DtLeitura")
                         .HasColumnType("datetime2")
@@ -453,8 +456,11 @@ namespace SIAG.Infrastructure.Migrations
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Desempenho", b =>
                 {
                     b.Property<long>("IdDesempenho")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id_desempenho");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdDesempenho"));
 
                     b.Property<DateTime>("DtCadastro")
                         .HasColumnType("datetime2")
@@ -557,11 +563,8 @@ namespace SIAG.Infrastructure.Migrations
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Endereco", b =>
                 {
                     b.Property<int>("IdEndereco")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id_endereco");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEndereco"));
 
                     b.Property<int>("FgStatus")
                         .HasColumnType("int")
@@ -864,8 +867,6 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasIndex("IdEndereco");
 
                     b.HasIndex("IdEquipamento");
-
-                    b.HasIndex("IdOperador");
 
                     b.ToTable("operadorhistorico");
                 });
@@ -1707,15 +1708,9 @@ namespace SIAG.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("IdEquipamento");
 
-                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Operador", "Operador")
-                        .WithMany()
-                        .HasForeignKey("IdOperador");
-
                     b.Navigation("Endereco");
 
                     b.Navigation("Equipamento");
-
-                    b.Navigation("Operador");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Pallet", b =>

@@ -11,15 +11,13 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         [Column("id_operador")]
         public long? IdOperador { get; set; }
 
-        [ForeignKey(nameof(IdOperador))]
-        public Operador? Operador { get; set; }
-
 
         [Column("cd_evento")]
         public int? CdEvento { get; set; }
 
         [Column("dt_evento")]
         public DateTime? DtEvento { get; set; }
+
 
         [Column("id_endereco")]
         public int? IdEndereco { get; set; }
