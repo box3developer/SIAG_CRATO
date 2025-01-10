@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using SIAG.Domain.Armazenagem.Attributes;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.Reflection;
 

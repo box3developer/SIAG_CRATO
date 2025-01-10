@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-using SIAG.Domain.Armazenagem.Cadastro.Attributes;
+using SIAG.Domain.Armazenagem.Attributes;
 
 namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {

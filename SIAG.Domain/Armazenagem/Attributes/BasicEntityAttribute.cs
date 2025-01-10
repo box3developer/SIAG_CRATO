@@ -1,4 +1,4 @@
-﻿namespace SIAG.Domain.Armazenagem.Cadastro.Attributes
+﻿namespace SIAG.Domain.Armazenagem.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class BasicEntityAttribute : Attribute
