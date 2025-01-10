@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EowONFwNJ84fCRnG/GiMxfmA5rtDuWnF6nFZXLubAT0/Ujh0WL2u6lR2b8eltIjJ1jJVXngQvVtBk4Tvz4E1lQ==",
+  "dgSpecHash": "P90+S2/fB6+ItoZ2IzVOy74P4IijWhmedeT9IsxCeKYy8zWVo/+xNrzFAphuyDPrMqMXqbD0cch5BGxHf5m3CA==",
   "success": true,
   "projectFilePath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.API\\SIAG.API.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\crist\\.nuget\\packages\\coreex\\3.30.2\\coreex.3.30.2.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\coreex.automapper\\3.30.2\\coreex.automapper.3.30.2.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\dapper.sqlbuilder\\2.0.78\\dapper.sqlbuilder.2.0.78.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
