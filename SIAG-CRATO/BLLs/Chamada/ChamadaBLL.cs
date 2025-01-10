@@ -283,10 +283,7 @@ public class ChamadaBLL
 
         foreach (var chamadaParada in chamadasParadas)
         {
-            var prioridade = 0;
-            /**
-             * Chamadar procedure que calcula prioridade e armazena valor na variavel prioridade;
-             **/
+            var prioridade = await GetPrioridadeAsync(chamadaParada.ChamadaId, selecao.EquipamentoId);
 
             foreach (var chamadaUpdate in chamadasPendentes.Where(x => x.ChamadaId == chamadaParada.ChamadaId).ToList())
             {
@@ -296,6 +293,56 @@ public class ChamadaBLL
         }
 
         return chamada.IdChamada;
+    }
+
+    public static async Task<int> GetPrioridadeAsync(Guid idChamada, int idEquipamento)
+    {
+        try
+        {
+            var chamada = await GetByIdAsync(idChamada);
+
+            if (chamada == null || chamada.IdAtividade == 0)
+            {
+                return 0;
+            }
+
+            using var conexao = new SqlConnection(Global.Conexao);
+
+            var listaPrioridade = await AtividadeBLL.GetListAtividadePrioridade(chamada.IdAtividade);
+            var valorPrioridade = 0;
+
+
+            foreach (var prioridade in listaPrioridade)
+            {
+                try
+                {
+                    string sql = $"EXEC @rc = {prioridade.NmProcedure} @idChamada, @idEquipamento";
+
+                    var refPrioridade = await conexao.ExecuteScalarAsync<int>(sql, new
+                    {
+                        idChamada,
+                        idEquipamento,
+                    });
+
+                    if (refPrioridade == 0)
+                    {
+                        prioridade.QtPontuacao = 0;
+                    }
+                }
+                catch
+                {
+                    prioridade.QtPontuacao = 0;
+                }
+
+                valorPrioridade += prioridade.QtPontuacao;
+            }
+
+            return 1;
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
     }
 
     public static async Task<bool> AtualizarLeitura(Guid idChamada, long? idAreaArmazenagem, int? idPallet)

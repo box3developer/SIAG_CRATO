@@ -60,6 +60,15 @@ public class AtividadeBLL
         return lista.Select(ConvertToDTO).ToList();
     }
 
+    public static async Task<List<AtividadePrioridadeModel>> GetListAtividadePrioridade(int idAtividade)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var lista = await conexao.QueryAsync<AtividadePrioridadeModel>(AtividadeQuery.SELECT_PRIORIDADE, new { idAtividade });
+
+        return lista.ToList();
+    }
+
     private static AtividadeDTO ConvertToDTO(AtividadeModel atividade)
     {
         return new()
