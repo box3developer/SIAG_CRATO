@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class PalletRepository : BaseRepository<Pallet, int>, IPalletRepository
+    public class PalletRepository : BaseRepository<Pallet>, IPalletRepository
     {
         public PalletRepository(SiagDbContext context) : base(context)
         {

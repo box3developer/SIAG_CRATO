@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class RegiaoTrabalhoRepository : BaseRepository<RegiaoTrabalho, int>, IRegiaoTrabalhoRepository
+    public class RegiaoTrabalhoRepository : BaseRepository<RegiaoTrabalho>, IRegiaoTrabalhoRepository
     {
         public RegiaoTrabalhoRepository(SiagDbContext context) : base(context)
         {

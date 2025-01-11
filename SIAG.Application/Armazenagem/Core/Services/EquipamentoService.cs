@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class EquipamentoService : BaseService<IEquipamentoRepository, Equipamento, EquipamentoDTO, int>
+    public class EquipamentoService : BaseService<IEquipamentoRepository, Equipamento, EquipamentoDTO>
     {
         private readonly IEquipamentoRepository _repository;
         private readonly IMappingService _mappingService;

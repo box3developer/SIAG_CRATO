@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class CaixaService : BaseService<ICaixaRepository, Caixa, CaixaDTO, string>
+    public class CaixaService : BaseService<ICaixaRepository, Caixa, CaixaDTO>
     {
         private readonly ICaixaRepository _repository;
         private readonly IMappingService _mappingService;

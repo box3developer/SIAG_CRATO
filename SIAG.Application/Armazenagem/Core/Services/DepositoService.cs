@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class DepositoService : BaseService<IDepositoRepository, Deposito, DepositoDTO, int>
+    public class DepositoService : BaseService<IDepositoRepository, Deposito, DepositoDTO>
     {
         private readonly IDepositoRepository _repository;
         private readonly IMappingService _mappingService;

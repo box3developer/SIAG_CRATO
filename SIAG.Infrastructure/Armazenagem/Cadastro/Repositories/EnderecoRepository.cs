@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class EnderecoRepository : BaseRepository<Endereco, int>, IEnderecoRepository
+    public class EnderecoRepository : BaseRepository<Endereco>, IEnderecoRepository
     {
         public EnderecoRepository(SiagDbContext context) : base(context)
         {

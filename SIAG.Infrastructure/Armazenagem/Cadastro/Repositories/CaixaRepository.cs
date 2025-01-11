@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class CaixaRepository : BaseRepository<Caixa, string>, ICaixaRepository
+    public class CaixaRepository : BaseRepository<Caixa>, ICaixaRepository
     {
         public CaixaRepository(SiagDbContext context) : base(context)
         {

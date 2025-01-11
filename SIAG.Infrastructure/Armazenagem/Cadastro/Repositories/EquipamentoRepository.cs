@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class EquipamentoRepository : BaseRepository<Equipamento, int>, IEquipamentoRepository
+    public class EquipamentoRepository : BaseRepository<Equipamento>, IEquipamentoRepository
     {
         public EquipamentoRepository(SiagDbContext context) : base(context)
         {

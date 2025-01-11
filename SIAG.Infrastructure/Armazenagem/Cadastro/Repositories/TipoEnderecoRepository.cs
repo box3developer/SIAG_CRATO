@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class TipoEnderecoRepository : BaseRepository<TipoEndereco, int>, ITipoEnderecoRepository
+    public class TipoEnderecoRepository : BaseRepository<TipoEndereco>, ITipoEnderecoRepository
     {
         public TipoEnderecoRepository(SiagDbContext context) : base(context)
         {

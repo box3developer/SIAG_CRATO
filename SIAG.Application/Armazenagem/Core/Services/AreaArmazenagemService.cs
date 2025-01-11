@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class AreaArmazenagemService : BaseService<IAreaArmazenagemRepository, AreaArmazenagem, AreaArmazenagemDTO, long>
+    public class AreaArmazenagemService : BaseService<IAreaArmazenagemRepository, AreaArmazenagem, AreaArmazenagemDTO>
     {
         private readonly IAreaArmazenagemRepository _repository;
         private readonly IMappingService _mappingService;

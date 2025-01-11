@@ -1,4 +1,6 @@
-﻿namespace SIAG.Domain.Armazenagem.Cadastro.Interfaces
+﻿using SIAG.CrossCutting.DTOs;
+
+namespace SIAG.Domain.Armazenagem.Cadastro.Interfaces
 {
     public interface IBaseRepository<TEntity, TKey>
     {
@@ -6,5 +8,7 @@
         Task<TEntity> GetByIdAsync(TKey id);
         Task<bool> UpdateAsync(TEntity dto);
         Task<bool> DeleteAsync(TKey id);
+        Task<DadosPaginadosDTO<TEntity>> GetListAsync(FiltroPaginacaoDTO dto);
+        Task<List<SelectDTO<TKey>>> GetSelectAsync(FiltroPaginacaoDTO filtro);
     }
 }

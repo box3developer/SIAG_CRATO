@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class EnderecoService : BaseService<IEnderecoRepository, Endereco, EnderecoDTO, int>
+    public class EnderecoService : BaseService<IEnderecoRepository, Endereco, EnderecoDTO>
     {
         private readonly IEnderecoRepository _repository;
         private readonly IMappingService _mappingService;

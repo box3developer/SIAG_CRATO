@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SIAG.Application\SIAG.Application.csproj" />
+    <ProjectReference Include="..\SIAG.Domain\SIAG.Domain.csproj" />
     <ProjectReference Include="..\SIAG.Infrastructure\SIAG.Infrastructure.csproj" />
     <ProjectReference Include="..\SIAG.CrossCutting\SIAG.CrossCutting.csproj" />
   </ItemGroup>

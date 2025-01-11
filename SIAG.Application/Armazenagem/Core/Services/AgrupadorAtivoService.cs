@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class AgrupadorAtivoService : BaseService<IAgrupadorAtivoRepository, AgrupadorAtivo, AgrupadorAtivoDTO, string>
+    public class AgrupadorAtivoService : BaseService<IAgrupadorAtivoRepository, AgrupadorAtivo, AgrupadorAtivoDTO>
     {
         private readonly IAgrupadorAtivoRepository _repository;
         private readonly IMappingService _mappingService;

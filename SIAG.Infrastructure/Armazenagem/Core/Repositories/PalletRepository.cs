@@ -1,15 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using SIAG.CrossCutting.DTOs;
-using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Core.Interfaces;
 using SIAG.Domain.Armazenagem.Core.Models;
-using SIAG.Infrastructure.Configuracao;
+using System.Data;
 
 namespace SIAG.Infrastructure.Armazenagem.Core.Repositorios
 {
-    public class PalletRepository : BaseRepository<Pallet, int>, IPalletRepository
+    public class PalletRepository : BaseRepository<Pallet>, IPalletRepository
     {
-        public PalletRepository(SiagDbContext context) : base(context)
+        public PalletRepository(IDbConnection connection) : base(connection)
         {
         }
 

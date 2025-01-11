@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class ProgramaRepository : BaseRepository<Programa, int>, IProgramaRepository
+    public class ProgramaRepository : BaseRepository<Programa>, IProgramaRepository
     {
         public ProgramaRepository(SiagDbContext context) : base(context)
         {

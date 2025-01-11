@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class DepositoRepository : BaseRepository<Deposito, int>, IDepositoRepository
+    public class DepositoRepository : BaseRepository<Deposito>, IDepositoRepository
     {
         public DepositoRepository(SiagDbContext context) : base(context)
         {

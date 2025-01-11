@@ -5947,6 +5947,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.0.11",
       "SIAG.Application >= 1.0.0",
       "SIAG.CrossCutting >= 1.0.0",
+      "SIAG.Domain >= 1.0.0",
       "SIAG.Infrastructure >= 1.0.0",
       "Serilog.AspNetCore >= 8.0.0",
       "Serilog.Enrichers.Environment >= 3.0.1",
@@ -5990,6 +5991,9 @@
             },
             "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\SIAG.CrossCutting.csproj": {
               "projectPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.CrossCutting\\SIAG.CrossCutting.csproj"
+            },
+            "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\SIAG.Domain.csproj": {
+              "projectPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Domain\\SIAG.Domain.csproj"
             },
             "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\SIAG.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\crist\\Documents\\BOX3\\GRENDENE_CRATO\\SIAG\\SIAG.Infrastructure\\SIAG.Infrastructure.csproj"

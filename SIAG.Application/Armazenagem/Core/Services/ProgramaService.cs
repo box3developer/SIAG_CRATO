@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class ProgramaService : BaseService<IProgramaRepository, Programa, ProgramaDTO, int>
+    public class ProgramaService : BaseService<IProgramaRepository, Programa, ProgramaDTO>
     {
         private readonly IProgramaRepository _repository;
         private readonly IMappingService _mappingService;

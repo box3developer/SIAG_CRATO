@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class PedidoService : BaseService<IPedidoRepository, Pedido, PedidoDTO, int>
+    public class PedidoService : BaseService<IPedidoRepository, Pedido, PedidoDTO>
     {
         private readonly IPedidoRepository _repository;
         private readonly IMappingService _mappingService;

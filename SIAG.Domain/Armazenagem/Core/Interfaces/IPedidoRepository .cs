@@ -3,7 +3,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Domain.Armazenagem.Core.Interfaces
 {
-    public interface IPedidoRepository : IBaseRepository<Pedido, int>
+    public interface IPedidoRepository : IBaseRepository<Pedido>
     {
     }
 }

@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class TipoAreaService : BaseService<ITipoAreaRepository, TipoArea, TipoAreaDTO, int>
+    public class TipoAreaService : BaseService<ITipoAreaRepository, TipoArea, TipoAreaDTO>
     {
         private readonly ITipoAreaRepository _repository;
         private readonly IMappingService _mappingService;

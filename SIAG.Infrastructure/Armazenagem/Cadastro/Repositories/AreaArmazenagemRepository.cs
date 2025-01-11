@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class AreaArmazenagemRepository : BaseRepository<AreaArmazenagem, long>, IAreaArmazenagemRepository
+    public class AreaArmazenagemRepository : BaseRepository<AreaArmazenagem>, IAreaArmazenagemRepository
     {
         public AreaArmazenagemRepository(SiagDbContext context) : base(context)
         {

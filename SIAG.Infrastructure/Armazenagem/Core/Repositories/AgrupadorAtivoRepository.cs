@@ -1,15 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using SIAG.CrossCutting.DTOs;
-using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Core.Interfaces;
 using SIAG.Domain.Armazenagem.Core.Models;
-using SIAG.Infrastructure.Configuracao;
+using System.Data;
 
 namespace SIAG.Infrastructure.Armazenagem.Core.Repositorios
 {
-    public class AgrupadorAtivoRepository : BaseRepository<AgrupadorAtivo, string>, IAgrupadorAtivoRepository
+    public class AgrupadorAtivoRepository : BaseRepository<AgrupadorAtivo>, IAgrupadorAtivoRepository
     {
-        public AgrupadorAtivoRepository(SiagDbContext context) : base(context)
+        public AgrupadorAtivoRepository(IDbConnection connection) : base(connection)
         {
         }
     }

@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class TipoAreaRepository : BaseRepository<TipoArea, int>, ITipoAreaRepository
+    public class TipoAreaRepository : BaseRepository<TipoArea>, ITipoAreaRepository
     {
         public TipoAreaRepository(SiagDbContext context) : base(context)
         {

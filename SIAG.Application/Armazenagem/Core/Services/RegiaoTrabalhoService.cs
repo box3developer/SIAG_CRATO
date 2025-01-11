@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class RegiaoTrabalhoService : BaseService<IRegiaoTrabalhoRepository, RegiaoTrabalho, RegiaoTrabalhoDTO, int>
+    public class RegiaoTrabalhoService : BaseService<IRegiaoTrabalhoRepository, RegiaoTrabalho, RegiaoTrabalhoDTO>
     {
         private readonly IRegiaoTrabalhoRepository _repository;
         private readonly IMappingService _mappingService;

@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class PedidoRepository : BaseRepository<Pedido, int>, IPedidoRepository
+    public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {
         public PedidoRepository(SiagDbContext context) : base(context)
         {

@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class PalletService : BaseService<IPalletRepository, Pallet, PalletDTO, int>
+    public class PalletService : BaseService<IPalletRepository, Pallet, PalletDTO>
     {
         private readonly IPalletRepository _repository;
         private readonly IMappingService _mappingService;

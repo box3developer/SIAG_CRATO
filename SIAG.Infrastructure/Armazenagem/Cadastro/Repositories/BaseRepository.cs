@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey> where TEntity : class
+    public class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
+        where TEntity : class
+        where TKey : class
     {
         protected readonly SiagDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
@@ -50,6 +53,15 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
             await _dbContext.SaveChangesAsync();
             return true;
         }
+        
+        public virtual async Task<DadosPaginadosDTO<TEntity>> GetListAsync(FiltroPaginacaoDTO dto)
+        {
+            return new DadosPaginadosDTO<TEntity> { };
+        }
 
+        public virtual async Task<List<SelectDTO<TKey>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
+        {
+            return new List<SelectDTO<TKey>> { };
+        }
     }
 }

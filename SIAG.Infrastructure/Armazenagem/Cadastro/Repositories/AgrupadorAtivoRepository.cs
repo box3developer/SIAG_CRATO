@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class AgrupadorAtivoRepository : BaseRepository<AgrupadorAtivo, string>, IAgrupadorAtivoRepository
+    public class AgrupadorAtivoRepository : BaseRepository<AgrupadorAtivo>, IAgrupadorAtivoRepository
     {
         public AgrupadorAtivoRepository(SiagDbContext context) : base(context)
         {

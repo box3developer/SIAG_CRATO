@@ -5,7 +5,7 @@ using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class TurnoService : BaseService<ITurnoRepository, Turno, TurnoDTO, int>
+    public class TurnoService : BaseService<ITurnoRepository, Turno, TurnoDTO>
     {
         private readonly ITurnoRepository _repository;
         private readonly IMappingService _mappingService;

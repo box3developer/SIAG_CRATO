@@ -1,15 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using SIAG.CrossCutting.DTOs;
-using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Core.Interfaces;
 using SIAG.Domain.Armazenagem.Core.Models;
-using SIAG.Infrastructure.Configuracao;
+using System.Data;
 
 namespace SIAG.Infrastructure.Armazenagem.Core.Repositorios
 {
-    public class DepositoRepository : BaseRepository<Deposito, int>, IDepositoRepository
+    public class DepositoRepository : BaseRepository<Deposito>, IDepositoRepository
     {
-        public DepositoRepository(SiagDbContext context) : base(context)
+        public DepositoRepository(IDbConnection connection) : base(connection)
         {
         }
 

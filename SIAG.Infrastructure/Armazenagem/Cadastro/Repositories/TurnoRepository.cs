@@ -7,7 +7,7 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class TurnoRepository : BaseRepository<Turno, int>, ITurnoRepository
+    public class TurnoRepository : BaseRepository<Turno>, ITurnoRepository
     {
         public TurnoRepository(SiagDbContext context) : base(context)
         {

@@ -3,8 +3,8 @@ using SIAG.Domain.Armazenagem.Core.Interfaces;
 
 namespace SIAG.Application.Armazenagem.Core.Services
 {
-    public class BaseService<TRepository, TEntity, TDto, TKey>
-        where TRepository : IBaseRepository<TEntity, TKey>
+    public class BaseService<TRepository, TEntity, TDto>
+        where TRepository : IBaseRepository<TEntity>
         where TEntity : class
         where TDto : class
     {
