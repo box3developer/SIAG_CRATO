@@ -5,7 +5,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class AgrupadorAtivoDTO
     {
-        public Guid AgrupadorId { get; set; }
+        public Guid IdAgrupador { get; set; }
 
         public int TpAgrupamento { get; set; }
 
@@ -19,7 +19,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 
         public DateTime DtAgrupador { get; set; }
 
-        public int AreaArmazenagemId { get; set; }
+        public int IdAreaArmazenagem { get; set; }
 
         public int FgStatus { get; set; }
     }

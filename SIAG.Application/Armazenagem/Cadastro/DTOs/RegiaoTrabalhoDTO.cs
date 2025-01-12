@@ -6,9 +6,9 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class RegiaoTrabalhoDTO
     {
-        public int RegiaoTrabalhoId { get; set; }
+        public int IdRegiaoTrabalho { get; set; }
 
-        public int DepositoId { get; set; }
+        public int IdDeposito { get; set; }
 
         public string NmRegiaoTrabalho { get; set; }
     }

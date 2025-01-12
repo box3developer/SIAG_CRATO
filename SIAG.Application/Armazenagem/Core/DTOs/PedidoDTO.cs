@@ -6,9 +6,9 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class PedidoDTO
     {
-        public int PedidoId { get; set; }
+        public int IdPedido { get; set; }
 
-        public int TransportadoraId { get; set; }
+        public int IdTransportadora { get; set; }
 
         public int CdPedido { get; set; }
 
@@ -20,7 +20,7 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 
         public string CdEstabelecimento { get; set; }
 
-        public int NotaFiscalId { get; set; }
+        public int IdNotaFiscal { get; set; }
 
         public int CdCanal { get; set; }
 

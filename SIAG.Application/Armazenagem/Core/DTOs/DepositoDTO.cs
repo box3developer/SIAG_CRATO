@@ -6,7 +6,7 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class DepositoDTO
     {
-        public int DepositoId { get; set; }
+        public int IdDeposito { get; set; }
 
         public string NmDeposito { get; set; }
     }

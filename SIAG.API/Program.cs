@@ -2,30 +2,22 @@ using FluentValidation.AspNetCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using SIAG.Application.Armazenagem.Cadastro.Services;
+using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
 using SIAG.Application.Armazenagem.Cadastro.Shared.Mappings;
 using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Interfaces;
 using SIAG.CrossCutting.Logging;
 using SIAG.CrossCutting.Services;
-using SIAG.Infrastructure.Configuracao;
-using System.Data;
-
-using CadastroInterfaces = SIAG.Domain.Armazenagem.Cadastro.Interfaces;
-using CoreInterfaces = SIAG.Domain.Armazenagem.Core.Interfaces;
-using CadastroRepos = SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios;
-using CoreRepos = SIAG.Infrastructure.Armazenagem.Core.Repositorios;
-using CadastroServices = SIAG.Application.Armazenagem.Cadastro.Services;
-using CoreServices = SIAG.Application.Armazenagem.Core.Services;
-using SIAG.Application.Armazenagem.Cadastro.Services.Implementations;
-using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios;
-using SIAG.Application.Armazenagem.Cadastro.Services;
+using SIAG.Infrastructure.Configuracao;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Config DbContext
-builder.Services.AddDbContext<SiagDbContext>(options => 
+builder.Services.AddDbContext<SiagDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerSIAGCrato")));
 
 // Automapper

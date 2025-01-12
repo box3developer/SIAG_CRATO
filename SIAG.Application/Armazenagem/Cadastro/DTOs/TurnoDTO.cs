@@ -6,7 +6,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class TurnoDTO
     {
-        public int TurnoId { get; set; }
+        public int IdTurno { get; set; }
 
         public int CdTurno { get; set; }
 

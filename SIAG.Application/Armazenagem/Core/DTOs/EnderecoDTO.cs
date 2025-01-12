@@ -5,15 +5,15 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class EnderecoDTO
     {
-        public int EnderecoId { get; set; }
+        public int IdEndereco { get; set; }
 
-        public int RegiaoTrabalhoId { get; set; }
+        public int IdRegiaoTrabalho { get; set; }
         public RegiaoTrabalhoDTO RegiaoTrabalho { get; set; }
 
-        public int SetorTrabalhoId { get; set; }
+        public int IdSetorTrabalho { get; set; }
         public SetorTrabalhoDTO SetorTrabalho { get; set; }
 
-        public int TipoEnderecoId { get; set; }
+        public int IdTipoEndereco { get; set; }
         public TipoEnderecoDTO TipoEndereco { get; set; }
 
         public string NmEndereco { get; set; }

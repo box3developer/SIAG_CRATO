@@ -5,13 +5,13 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class EquipamentoDTO
     {
-        public int EquipamentoId { get; set; }
+        public int IdEquipamento { get; set; }
 
-        public int EquipamentoModeloId { get; set; }
+        public int IdEquipamentoModelo { get; set; }
 
-        public int SetorTrabalhoId { get; set; }
+        public int IdSetorTrabalho { get; set; }
 
-        public int OperadorId { get; set; }
+        public int IdOperador { get; set; }
 
         public string NmEquipamento { get; set; }
 
@@ -29,7 +29,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 
         public DateTime DtUltimaLeitura { get; set; }
 
-        public int EnderecoId { get; set; }
+        public int IdEndereco { get; set; }
 
         public string NmIp { get; set; }
 

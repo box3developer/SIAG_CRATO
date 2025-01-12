@@ -6,7 +6,7 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class ProgramaDTO
     {
-        public int ProgramaId { get; set; }
+        public int IdPrograma { get; set; }
 
         public int CdPrograma { get; set; }
 

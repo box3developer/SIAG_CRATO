@@ -4,12 +4,12 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class PalletDTO
     {
-        public int PalletId { get; set; }
+        public int IdPallet { get; set; }
 
-        public int AreaArmazenagemId { get; set; }
+        public int IdAreaArmazenagem { get; set; }
         public AreaArmazenagem AreaArmazenagem { get; set; }
 
-        public Guid AgrupadorAtivoId { get; set; }
+        public Guid IdAgrupadorAtivo { get; set; }
         public AgrupadorAtivo AgrupadorAtivo { get; set; }
 
         public int FgStatus { get; set; }

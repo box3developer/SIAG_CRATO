@@ -5,17 +5,17 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class CaixaDTO
     {
-        public string CaixaId { get; set; }
+        public string IdCaixa { get; set; }
 
-        public Guid AgrupadorId { get; set; }
+        public Guid IdAgrupador { get; set; }
 
         public AgrupadorAtivoDTO Agrupador { get; set; }
 
-        public int PalletId { get; set; }
+        public int IdPallet { get; set; }
 
-        public int ProgramaId { get; set; }
+        public int IdPrograma { get; set; }
 
-        public int PedidoId { get; set; }
+        public int IdPedido { get; set; }
 
         public string CdProduto { get; set; }
 

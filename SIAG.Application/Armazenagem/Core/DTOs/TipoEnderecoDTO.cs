@@ -6,7 +6,7 @@ namespace SIAG.Application.Armazenagem.Core.DTOs
 {
     public class TipoEnderecoDTO
     {
-        public int TipoEnderecoId { get; set; }
+        public int IdTipoEndereco { get; set; }
 
         public string NmTipoEndereco { get; set; }
     }
