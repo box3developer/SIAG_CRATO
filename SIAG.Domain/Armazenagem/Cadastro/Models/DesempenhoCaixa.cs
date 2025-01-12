@@ -7,7 +7,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [KeylessEntity]
     [Table("desempenhocaixa")]
-    public class Desempenhocaixa
+    public class DesempenhoCaixa
     {
         [Column("id_caixa")]
         public string? IdCaixa { get; set; } = string.Empty;

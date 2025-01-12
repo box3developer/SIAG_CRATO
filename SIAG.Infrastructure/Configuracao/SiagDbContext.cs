@@ -26,17 +26,17 @@ namespace SIAG.Infrastructure.Configuracao
         public DbSet<Operador> Operador { get; set; }
 
         public DbSet<Atividade> Atividade { get; set; }
-        public DbSet<Caixaleitura> Caixaleitura { get; set; }
+        public DbSet<CaixaLeitura> Caixaleitura { get; set; }
         public DbSet<Chamada> Chamada { get; set; }
         public DbSet<Desempenho> Desempenho { get; set; }
-        public DbSet<Desempenhocaixa> Desempenhocaixa { get; set; }
-        public DbSet<Operadorhistorico> Operadorhistorico { get; set; }
+        public DbSet<DesempenhoCaixa> Desempenhocaixa { get; set; }
+        public DbSet<OperadorHistorico> Operadorhistorico { get; set; }
         public DbSet<Parametro> Parametro { get; set; }
-        public DbSet<Posicaocaracolrefugo> Posicaocaracolrefugo { get; set; }
-        public DbSet<Parametromensagemcaracol> Parametromensagemcaracol { get; set; }
-        public DbSet<Status_leitor> Status_leitor { get; set; }
-        public DbSet<Lidervirtual> Lidervirtual { get; set; }
-        public DbSet<Niveisagrupadores> Niveisagrupadores { get; set; }
+        public DbSet<PosicaoCaracolRefugo> Posicaocaracolrefugo { get; set; }
+        public DbSet<ParametroMensagemCaracol> Parametromensagemcaracol { get; set; }
+        public DbSet<StatusLeitor> Status_leitor { get; set; }
+        public DbSet<LiderVirtual> Lidervirtual { get; set; }
+        public DbSet<NiveisAgrupadores> Niveisagrupadores { get; set; }
         public DbSet<EquipamentoModelo> EquipamentoModelo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,13 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace SIAG.Application.Armazenagem.Cadastro.DTOs
+﻿namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class DepositoDTO
     {
         public int IdDeposito { get; set; }
 
-        public string NmDeposito { get; set; }
+        public string NmDeposito { get; set; } = string.Empty;
     }
 }

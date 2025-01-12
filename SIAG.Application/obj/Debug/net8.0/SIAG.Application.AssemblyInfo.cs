@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SIAG.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+928f004a12cd73e348e26bb85c6504e911fa2a40")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7fbaf5a3c1d6bd74efa8df9229654d271c684def")]
 [assembly: System.Reflection.AssemblyProductAttribute("SIAG.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SIAG.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

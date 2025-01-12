@@ -8,20 +8,20 @@ namespace SIAG.Application.Armazenagem.Cadastro.Shared.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<AreaArmazenagem, AreaArmazenagemDTO>().ReverseMap();
+            CreateMap<AreaArmazenagemDTO, AreaArmazenagemDTO>().ReverseMap();
             CreateMap<Deposito, DepositoDTO>().ReverseMap();
-            CreateMap<TipoEndereco, TipoEnderecoDTO>().ReverseMap();
-            CreateMap<SetorTrabalho, SetorTrabalhoDTO>().ReverseMap();
-            CreateMap<RegiaoTrabalho, RegiaoTrabalhoDTO>().ReverseMap();
+            CreateMap<TipoEnderecoDTO, TipoEnderecoDTO>().ReverseMap();
+            CreateMap<SetorTrabalhoDTO, SetorTrabalhoDTO>().ReverseMap();
+            CreateMap<RegiaoTrabalhoDTO, RegiaoTrabalhoDTO>().ReverseMap();
             CreateMap<Endereco, EnderecoDTO>().ReverseMap();
-            CreateMap<TipoArea, TipoAreaDTO>().ReverseMap();
-            CreateMap<AgrupadorAtivo, AgrupadorAtivoDTO>().ReverseMap();
-            CreateMap<Pallet, PalletDTO>().ReverseMap();
-            CreateMap<Programa, ProgramaDTO>().ReverseMap();
-            CreateMap<Pedido, PedidoDTO>().ReverseMap();
+            CreateMap<TipoAreaDTO, TipoAreaDTO>().ReverseMap();
+            CreateMap<AgrupadorAtivoDTO, AgrupadorAtivoDTO>().ReverseMap();
+            CreateMap<PalletDTO, PalletDTO>().ReverseMap();
+            CreateMap<ProgramaDTO, ProgramaDTO>().ReverseMap();
+            CreateMap<PedidoDTO, PedidoDTO>().ReverseMap();
             CreateMap<Caixa, CaixaDTO>().ReverseMap();
             CreateMap<Equipamento, EquipamentoDTO>().ReverseMap();
-            CreateMap<Turno, TurnoDTO>().ReverseMap();
+            CreateMap<TurnoDTO, TurnoDTO>().ReverseMap();
             // Adicione outros mapeamentos aqui
         }
     }

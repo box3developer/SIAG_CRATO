@@ -253,7 +253,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("caixa");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Caixaleitura", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.CaixaLeitura", b =>
                 {
                     b.Property<long>("IdCaixaleitura")
                         .ValueGeneratedOnAdd()
@@ -521,7 +521,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("desempenho");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Desempenhocaixa", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.DesempenhoCaixa", b =>
                 {
                     b.Property<DateTime?>("DtLeituracaixa")
                         .HasColumnType("datetime2")
@@ -729,7 +729,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("equipamentomodelo");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Lidervirtual", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.LiderVirtual", b =>
                 {
                     b.Property<long>("IdLidervirtual")
                         .HasColumnType("bigint")
@@ -776,7 +776,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("lidervirtual");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Niveisagrupadores", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.NiveisAgrupadores", b =>
                 {
                     b.Property<long>("IdNiveisagrupadores")
                         .HasColumnType("bigint")
@@ -842,7 +842,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("operador");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Operadorhistorico", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.OperadorHistorico", b =>
                 {
                     b.Property<int?>("CdEvento")
                         .HasColumnType("int")
@@ -952,7 +952,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("parametro");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Parametromensagemcaracol", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.ParametroMensagemCaracol", b =>
                 {
                     b.Property<int>("IdParametromensagemcaracol")
                         .ValueGeneratedOnAdd()
@@ -1115,7 +1115,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("pedido");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Posicaocaracolrefugo", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.PosicaoCaracolRefugo", b =>
                 {
                     b.Property<int>("IdPosicaocaracolrefugo")
                         .ValueGeneratedOnAdd()
@@ -1250,7 +1250,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("setortrabalho");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Status_leitor", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.StatusLeitor", b =>
                 {
                     b.Property<int>("IdStatusLeitor")
                         .ValueGeneratedOnAdd()
@@ -1419,7 +1419,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("Programa");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Caixaleitura", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.CaixaLeitura", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", "Areaarmazenagem")
                         .WithMany()
@@ -1590,7 +1590,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("SetorTrabalho");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Desempenhocaixa", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.DesempenhoCaixa", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", "AreaArmazenagem")
                         .WithMany()
@@ -1671,7 +1671,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("SetorTrabalho");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Lidervirtual", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.LiderVirtual", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Equipamento", "EquipamentoDestino")
                         .WithMany()
@@ -1698,7 +1698,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("OperadorLogin");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Operadorhistorico", b =>
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.OperadorHistorico", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Endereco", "Endereco")
                         .WithMany()

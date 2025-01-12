@@ -1,44 +1,52 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace SIAG.Application.Armazenagem.Cadastro.DTOs
+﻿namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class CaixaDTO
     {
-        public string IdCaixa { get; set; }
+        public string IdCaixa { get; set; } = string.Empty;
 
-        public Guid IdAgrupador { get; set; }
 
-        public AgrupadorAtivoDTO Agrupador { get; set; }
+        public Guid? IdAgrupador { get; set; }
 
-        public int IdPallet { get; set; }
+        public AgrupadorAtivoDTO? Agrupador { get; set; }
 
-        public int IdPrograma { get; set; }
 
-        public int IdPedido { get; set; }
+        public int? IdPallet { get; set; }
 
-        public string CdProduto { get; set; }
+        public PalletDTO? Pallet { get; set; }
 
-        public string CdCor { get; set; }
 
-        public string CdGrudeTamanho { get; set;}
+        public int? IdPrograma { get; set; }
 
-        public int NrCaixa { get; set; }
+        public ProgramaDTO? Programa { get; set; }
 
-        public int NrPares { get; set; }
 
-        public bool FgRfid { get; set; }
+        public int? IdPedido { get; set; }
 
-        public int FgStatus { get; set; }
+        public PedidoDTO? Pedido { get; set; }
 
-        public DateTime DtEmbalagem { get; set; }
 
-        public DateTime DtSorter { get; set; }
+        public string? CdProduto { get; set; } = string.Empty;
 
-        public DateTime DtEstufamento { get; set; }
+        public string? CdCor { get; set; } = string.Empty;
 
-        public DateTime DtExpedicao { get; set; }
+        public string? CdGradeTamanho { get; set; } = string.Empty;
 
-        public decimal QtPeso { get; set; }
+        public int? NrCaixa { get; set; }
+
+        public int? NrPares { get; set; }
+
+        public bool? IdFgRf { get; set; }
+
+        public int? FgStatus { get; set; }
+
+        public DateTime? DtEmbalagem { get; set; }
+
+        public DateTime? DtSorter { get; set; }
+
+        public DateTime? DtEstufamento { get; set; }
+
+        public DateTime? DtExpedicao { get; set; }
+
+        public decimal? QtPeso { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [CustomKeyEntity]
     [Table("niveisagrupadores")]
-    public class Niveisagrupadores
+    public class NiveisAgrupadores
     {
         [Key]
         [Column("id_niveisagrupadores")]

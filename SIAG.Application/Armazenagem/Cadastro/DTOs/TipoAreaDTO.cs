@@ -1,13 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace SIAG.Application.Armazenagem.Cadastro.DTOs
+﻿namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class TipoAreaDTO
     {
         public int IdTipoArea { get; set; }
 
-        public string NmTipoArea { get; set; }
-   }
+        public string NmTipoArea { get; set; } = string.Empty;
+    }
 }

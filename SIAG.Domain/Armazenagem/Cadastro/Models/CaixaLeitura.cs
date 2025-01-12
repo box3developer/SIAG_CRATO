@@ -7,7 +7,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [BasicEntity]
     [Table("caixaleitura")]
-    public class Caixaleitura
+    public class CaixaLeitura
     {
         [Key]
         [Column("id_caixaleitura")]

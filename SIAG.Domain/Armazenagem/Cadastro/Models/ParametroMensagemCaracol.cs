@@ -6,7 +6,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [BasicEntity]
     [Table("parametromensagemcaracol")]
-    public class Parametromensagemcaracol
+    public class ParametroMensagemCaracol
     {
         [Key]
         [Column("id_parametromensagemcaracol")]

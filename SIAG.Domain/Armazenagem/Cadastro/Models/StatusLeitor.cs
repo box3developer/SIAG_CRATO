@@ -7,7 +7,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [BasicEntity]
     [Table("status_leitor")]
-    public class Status_leitor
+    public class StatusLeitor
     {
         [Key]
         [Column("id_status_leitor")]

@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace SIAG.Application.Armazenagem.Cadastro.DTOs
+﻿namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class TurnoDTO
     {
@@ -10,12 +6,12 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 
         public int CdTurno { get; set; }
 
-        public DateTime DtInicio { get; set; }
+        public DateTime? DtInicio { get; set; }
 
-        public DateTime DtFim { get; set; }
+        public DateTime? DtFim { get; set; }
 
-        public bool DiaAnterior { get; set; }
+        public bool? DiaAnterior { get; set; }
 
-        public bool DiaSucessor { get; set; }
+        public bool? DiaSucessor { get; set; }
     }
 }

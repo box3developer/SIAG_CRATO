@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace SIAG.Application.Armazenagem.Cadastro.DTOs
+﻿namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 {
     public class RegiaoTrabalhoDTO
     {
@@ -10,6 +6,8 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
 
         public int IdDeposito { get; set; }
 
-        public string NmRegiaoTrabalho { get; set; }
+        public DepositoDTO? Deposito { get; set; }
+
+        public string NmRegiaoTrabalho { get; set; } = string.Empty;
     }
 }

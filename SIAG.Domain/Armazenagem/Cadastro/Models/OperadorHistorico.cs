@@ -6,7 +6,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [KeylessEntity]
     [Table("operadorhistorico")]
-    public class Operadorhistorico
+    public class OperadorHistorico
     {
         [Column("id_operador")]
         public long? IdOperador { get; set; }

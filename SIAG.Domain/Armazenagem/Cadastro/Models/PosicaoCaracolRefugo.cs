@@ -6,7 +6,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [BasicEntity]
     [Table("posicaocaracolrefugo")]
-    public class Posicaocaracolrefugo
+    public class PosicaoCaracolRefugo
     {
         [Key]
         [Column("id_posicaocaracolrefugo")]

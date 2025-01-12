@@ -6,7 +6,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 {
     [CustomKeyEntity]
     [Table("lidervirtual")]
-    public class Lidervirtual
+    public class LiderVirtual
     {
         [Key]
         [Column("id_lidervirtual")]

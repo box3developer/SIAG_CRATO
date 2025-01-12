@@ -1,35 +1,54 @@
-﻿# Caminho das pastas
+﻿# Caminhos das pastas
 $modelFolder = "C:\Users\crist\Documents\BOX3\GRENDENE_CRATO\SIAG\SIAG.Domain\Armazenagem\Cadastro\Models"
 $controllerFolder = "C:\Users\crist\Documents\BOX3\GRENDENE_CRATO\SIAG\SIAG.API\Controllers\Armazenagem\Cadastro"
 
-# Função para determinar o tipo da chave primária
-function Get-PrimaryKeyType {
+# Função para extrair a chave primária do modelo
+function Get-PrimaryKey {
     param (
         [string]$modelPath
     )
-    $content = Get-Content -Path $modelPath -Raw
-    if ($content -match "\[Key\]\s*public\s+([a-zA-Z0-9]+)\??\s+([a-zA-Z0-9]+)") {
-        return $matches[1]
+
+    $modelContent = Get-Content -Path $modelPath
+
+    # Procurar a propriedade marcada com [Key]
+    $primaryKeyLine = $modelContent | Select-String -Pattern '\[Key\]' -Context 0, 2
+
+    if ($primaryKeyLine) {
+        # Pegar o tipo e o nome da propriedade
+        $propertyLine = $primaryKeyLine.Context.PostContext | Select-String -Pattern '^\s*public\s+([\w\?]+)\s+(\w+)' | ForEach-Object {
+            [PSCustomObject]@{
+                Type = $_.Matches.Groups[1].Value
+                Name = $_.Matches.Groups[2].Value
+            }
+        }
+        return $propertyLine
     } else {
-        return "Guid" # Valor padrão se não encontrar [Key]
+        Write-Host "[WARN] Nenhuma chave primária encontrada no modelo: $modelPath"
+        return $null
     }
 }
 
-# Gerar controllers
-Get-ChildItem -Path $modelFolder -Filter *.cs | ForEach-Object {
-    $modelName = $_.BaseName
-    $controllerName = "${modelName}Controller.cs"
-    $controllerPath = Join-Path -Path $controllerFolder -ChildPath $controllerName
+# Criar o controller com base no modelo
+function Create-Controller {
+    param (
+        [string]$modelPath,
+        [string]$controllerPath
+    )
 
-    # Verificar se o controller já existe
-    if (-Not (Test-Path -Path $controllerPath)) {
-        Write-Host "Criando o controller para o modelo: $modelName"
+    $modelName = [System.IO.Path]::GetFileNameWithoutExtension($modelPath)
+    $dtoName = "${modelName}DTO"
 
-        # Determinar o tipo da chave primária
-        $primaryKeyType = Get-PrimaryKeyType -modelPath $_.FullName
+    # Obter a chave primária
+    $primaryKey = Get-PrimaryKey -modelPath $modelPath
 
-        # Gerar o conteúdo do controller
-        $controllerContent = @"
+    if (-not $primaryKey) {
+        Write-Host "[ERROR] Não foi possível determinar a chave primária para o modelo: $modelName"
+        return
+    }
+
+    $primaryKeyType = $primaryKey.Type
+
+    $controllerContent = @"
 using Microsoft.AspNetCore.Mvc;
 using SIAG.Application.Armazenagem.Cadastro.DTOs;
 using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
@@ -41,25 +60,34 @@ namespace SIAG.API.Controllers.Armazenagem.Cadastro
     [Route("api/[controller]")]
     [ApiController]
     public class ${modelName}Controller : BaseController<
-            IBaseService<IBaseRepository<${modelName}, $primaryKeyType>, ${modelName}, $primaryKeyType, ${modelName}DTO>,
-            IBaseRepository<${modelName}, $primaryKeyType>,
+            IBaseService<IBaseRepository<${modelName}, ${primaryKeyType}>, ${modelName}, ${primaryKeyType}, ${dtoName}>,
+            IBaseRepository<${modelName}, ${primaryKeyType}>,
             ${modelName},
-            $primaryKeyType,
-            ${modelName}DTO
+            ${primaryKeyType},
+            ${dtoName}
         >
     {
-        public ${modelName}Controller(IBaseService<IBaseRepository<${modelName}, $primaryKeyType>, ${modelName}, $primaryKeyType, ${modelName}DTO> service) : base(service)
+        public ${modelName}Controller(IBaseService<IBaseRepository<${modelName}, ${primaryKeyType}>, ${modelName}, ${primaryKeyType}, ${dtoName}> service) : base(service)
         {
         }
     }
 }
 "@
 
-        # Salvar o arquivo do controller
-        $controllerContent | Set-Content -Path $controllerPath
-    } else {
-        Write-Host "O controller para o modelo $modelName já existe. Pulando..."
-    }
+    Set-Content -Path $controllerPath -Value $controllerContent
+    Write-Host "[INFO] Controller criado: $controllerPath"
 }
 
-Write-Host "Script concluído!"
+# Iterar sobre os modelos
+Get-ChildItem -Path $modelFolder -Filter "*.cs" | ForEach-Object {
+    $modelPath = $_.FullName
+    $modelName = $_.BaseName
+    $controllerPath = Join-Path -Path $controllerFolder -ChildPath "${modelName}Controller.cs"
+
+    if (-Not (Test-Path -Path $controllerPath)) {
+        Write-Host "[INFO] Criando controller para o modelo: $modelName"
+        Create-Controller -modelPath $modelPath -controllerPath $controllerPath
+    } else {
+        Write-Host "[INFO] Controller já existe para o modelo: $modelName"
+    }
+}
