@@ -45,9 +45,9 @@ namespace SIAG.Application.Armazenagem.Cadastro.Services
             return dto;
         }
 
-        public virtual async Task<DadosPaginadosDTO<TEntity>> GetListAsync(FiltroPaginacaoDTO dto)
+        public virtual async Task<DadosPaginadosDTO<TDto>> GetListAsync(FiltroPaginacaoDTO dto)
         {
-            return new DadosPaginadosDTO<TEntity> { };
+            return new DadosPaginadosDTO<TDto> { };
         }
   
         public virtual async Task<List<SelectDTO<TKey>>> GetSelectAsync(FiltroPaginacaoDTO filtro)

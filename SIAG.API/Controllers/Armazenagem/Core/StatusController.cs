@@ -7,9 +7,9 @@ namespace SIAG.API.Controllers.Armazenagem.Core
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusController : BaseController<PedidoService, PedidoDTO, int>
+    public class StatusController : BaseController<StatusDynamicService, StatusDTO, int>
     {
-        public StatusController(PedidoService service) : base(service)
+        public StatusController(StatusDynamicService service) : base(service)
         {
         }
 

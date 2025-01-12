@@ -8,7 +8,7 @@ namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
     public class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, TKey>
         where TEntity : class
-        where TKey : class
+        where TKey : notnull
     {
         protected readonly SiagDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;

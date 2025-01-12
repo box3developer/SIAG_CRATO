@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SIAG.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b96400b2c98bf5a5d45f9ee95b3010190407da04")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70edbf7bb7968de6afca02b8ef906116f8d129ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SIAG.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SIAG.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

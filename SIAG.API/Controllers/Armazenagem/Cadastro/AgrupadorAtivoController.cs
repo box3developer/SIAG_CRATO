@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SIAG.Application.Armazenagem.Cadastro.DTOs;
 using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
-using SIAG.Domain.Armazenagem.Cadastro.Models;
 
 namespace SIAG.API.Controllers.Armazenagem.Cadastro
 {
@@ -15,7 +13,7 @@ namespace SIAG.API.Controllers.Armazenagem.Cadastro
         TKey,
         TDTO
     > : BaseController<
-            IAgrupadorAtivoService<TRepository, TEntity, TKey, TDTO>,
+            IBaseService<TRepository, TEntity, TKey, TDTO>,
             TRepository,
             TEntity,
             TKey,
@@ -27,7 +25,7 @@ namespace SIAG.API.Controllers.Armazenagem.Cadastro
         where TDTO : class
     {
         public AgrupadorAtivoController(
-            IAgrupadorAtivoService<TRepository, TEntity, TKey, TDTO> service
+            IBaseService<TRepository, TEntity, TKey, TDTO> service
         ) : base(service)
         {
         }

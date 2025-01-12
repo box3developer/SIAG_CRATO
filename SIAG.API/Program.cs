@@ -20,6 +20,7 @@ using SIAG.Application.Armazenagem.Cadastro.Services.Implementations;
 using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios;
+using SIAG.Application.Armazenagem.Cadastro.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

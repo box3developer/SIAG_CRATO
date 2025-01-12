@@ -35,7 +35,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.Services.Implementations
             };
         }
 
-        public async Task<List<SelectDTO<TKe>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
+        public async Task<List<SelectDTO<TKey>>> GetSelectAsync(FiltroPaginacaoDTO filtro)
         {
             var lista = await _repository.GetSelectAsync(filtro);
 

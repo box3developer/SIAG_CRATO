@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SIAG.Application.Armazenagem.Cadastro.Services;
 using SIAG.CrossCutting.DTOs;
+using SIAG.CrossCutting.Interfaces;
 using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
@@ -7,8 +9,11 @@ using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios
 {
-    public class AgrupadorAtivoRepository : BaseRepository<AgrupadorAtivo>, IAgrupadorAtivoRepository
+    public class AgrupadorAtivoRepository<TEntity, TKey> : BaseRepository<TEntity, TKey>
+        where TEntity : class
+        where TKey : notnull
     {
+
         public AgrupadorAtivoRepository(SiagDbContext context) : base(context)
         {
         }
