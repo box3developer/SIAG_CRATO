@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.DTOs.ChamadaTarefa;
 using SIAG_CRATO.Models;
 
@@ -18,7 +17,7 @@ public class ChamadaTarefaBLL
 
     public static async Task<List<ChamadaTarefaDTO>> GetByIdAsync(Guid idChamada, int idTarefa)
     {
-        string sql = $"{ChamadaQuery.SELECT} WHERE id_tarefa = @idTarefa AND id_chamada = @idChamada";
+        string sql = $"{ChamadaTarefaQuery.SELECT} WHERE id_tarefa = @idTarefa AND id_chamada = @idChamada";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<ChamadaTarefaModel>(sql, new { idTarefa, idChamada });
