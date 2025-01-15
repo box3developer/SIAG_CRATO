@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.DTOs.Equipamento;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EquipamentoController : ControllerBase
+public class EquipamentoController : ControllerCustom
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EquipamentoDTO>>> GetListAsync()
@@ -44,13 +45,16 @@ public class EquipamentoController : ControllerBase
     [HttpGet("identificador/{identificador}")]
     public async Task<ActionResult> GetByIdentificadorAsync(string identificador)
     {
-        var equipamento = await EquipamentoBLL.GetByidentificadorAsync(identificador);
-        if (equipamento == null)
+        try
         {
-            return NotFound();
-        }
+            var equipamento = await EquipamentoBLL.GetByidentificadorAsync(identificador);
 
-        return Ok(equipamento);
+            return OkResponse(equipamento);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("caracol/{identificadorCaracol}")]
@@ -134,16 +138,31 @@ public class EquipamentoController : ControllerBase
         return BadRequest("Nenhum registro foi alterado");
     }
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateEquipamento([FromBody] EquipamentoUpdateDTO update)
+    [HttpPut("endereco")]
+    public async Task<IActionResult> UpdateEnderecoEquipamento([FromBody] EquipamentoUpdateDTO update)
     {
 
-        var sucesso = await EquipamentoBLL.UpdateEquipamento(update.IdEquipamento, update.IdEndereco);
+        var sucesso = await EquipamentoBLL.UpdateEnderecoEquipamento(update.IdEquipamento, update.IdEndereco);
         if (sucesso > 0)
         {
             return Ok(sucesso);
         }
 
         return BadRequest("Nenhum registro foi alterado");
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateEquipamento([FromBody] EquipamentoDTO update)
+    {
+        try
+        {
+            await EquipamentoBLL.UpdateEquipamento(update);
+
+            return Ok(true);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

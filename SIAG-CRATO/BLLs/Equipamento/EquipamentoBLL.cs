@@ -157,23 +157,40 @@ public class EquipamentoBLL
         return id > 0;
     }
 
-    public static async Task<int> UpdateEquipamento(int id_equipamento, int? id_endereco)
+    public static async Task<int> UpdateEnderecoEquipamento(int id_equipamento, int? id_endereco)
     {
+        using var conexao = new SqlConnection(Global.Conexao);
+
         if (id_endereco.HasValue && id_endereco > 0)
         {
-            var sqlEndereco = $@"{EquipamentoQuery.UPDATE_ENDERECO} where id_equipamento = @id_equipamento";
-            using var conexaoEndereco = new SqlConnection(Global.Conexao);
-            var returnEndereco = await conexaoEndereco.ExecuteAsync(sqlEndereco, new { id_equipamento, id_endereco });
+            var returnEndereco = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_ENDERECO, new { id_equipamento, id_endereco });
 
             return returnEndereco;
         }
 
-        var sqlEquipamento = $@"{EquipamentoQuery.UPDATE_DATE} where id_equipamento = @id_equipamento";
-        using var conexao = new SqlConnection(Global.Conexao);
-        var returnEquipamento = await conexao.ExecuteAsync(sqlEquipamento, new { id_equipamento });
+        var returnEquipamento = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_DATE, new { id_equipamento });
 
         return returnEquipamento;
+    }
 
+    public static async Task<bool> UpdateEquipamento(EquipamentoDTO equipamento)
+    {
+        using var conexaoEndereco = new SqlConnection(Global.Conexao);
+        var returnEndereco = await conexaoEndereco.ExecuteAsync(EquipamentoQuery.UPDATE, new
+        {
+            setor = equipamento.IdSetorTrabalho,
+            descricao = equipamento.NmEquipamento,
+            modelo = equipamento.IdEquipamentoModelo,
+            status = (int)equipamento.FgStatus,
+            dataInclusao = equipamento.DtInclusao,
+            dataManutencao = equipamento.DtManutencao,
+            identificador = equipamento.NmIdentificador,
+            ip = equipamento.NmIP,
+            descricaoAbreviada = equipamento.NmAbreviadoEquipamento,
+            idEquipamento = equipamento.IdEquipamento,
+        });
+
+        return returnEndereco > 0;
     }
 
     public static async Task<bool> AlocacaoAutomaticaBilateral()
