@@ -28,7 +28,7 @@ public class ControllerCustom : ControllerBase
     }
 
     [NonAction]
-    public ActionResult OkResponse(object dados, string mensagem = "")
+    public ActionResult OkResponse(object? dados, string mensagem = "")
     {
         var result = new APIResultDTO
         {

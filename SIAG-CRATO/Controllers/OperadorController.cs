@@ -1,33 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Operador;
 using SIAG_CRATO.DTOs.Operador;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class OperadorController : ControllerBase
+public class OperadorController : ControllerCustom
 {
     [HttpGet("{cracha}")]
     public async Task<ActionResult<OperadorDTO>> GetByCracha(string cracha)
     {
-        var operador = await OperadorBLL.GetByCrachaAsync(cracha);
-        if (operador == null)
+        try
         {
-            return NotFound();
+            var operador = await OperadorBLL.GetByCrachaAsync(cracha);
+
+            return OkResponse(operador);
         }
-        return Ok(operador);
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("nfc/{nfc}")]
     public async Task<ActionResult<OperadorDTO>> GetByNFC(string nfc)
     {
-        var operador = await OperadorBLL.GetByNFCAsync(nfc);
-        if (operador == null)
+        try
         {
-            return NotFound();
+            var operador = await OperadorBLL.GetByNFCAsync(nfc);
+
+            return OkResponse(operador);
         }
-        return Ok(operador);
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+
     }
 
     [HttpGet("meta")]

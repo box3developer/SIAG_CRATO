@@ -33,7 +33,7 @@ public class ChamadaController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPost("listar")]
     public async Task<ActionResult> ListaChamadas([FromBody] ChamadaFiltroDTO filtro)
     {
         try
