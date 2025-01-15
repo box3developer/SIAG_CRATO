@@ -2,12 +2,13 @@
 using SIAG_CRATO.BLLs.Endereco;
 using SIAG_CRATO.DTOs.Endereco;
 using SIAG_CRATO.Models;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class EnderecoController : ControllerBase
+public class EnderecoController : ControllerCustom
 {
     [HttpGet]
     public async Task<ActionResult<List<EnderecoDTO>>> GetListAsync()
@@ -19,8 +20,16 @@ public class EnderecoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<EnderecoDTO>> GetByIdAsync(int id)
     {
-        var endereco = await EnderecoBLL.GetByIdAsync(id);
-        return endereco == null ? NotFound() : Ok(endereco);
+        try
+        {
+            var endereco = await EnderecoBLL.GetByIdAsync(id);
+
+            return OkResponse(endereco);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("setor-status")]

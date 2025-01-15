@@ -4,11 +4,12 @@ using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class ChamadaController : ControllerBase
+public class ChamadaController : ControllerCustom
 {
     [HttpPost]
     public async Task<ActionResult> CriarChamada([FromBody] ChamadaInsertDTO chamada)
@@ -67,7 +68,7 @@ public class ChamadaController : ControllerBase
         try
         {
             var chamada = await ChamadaBLL.GetByIdAsync(id);
-            return Ok(chamada);
+            return OkResponse(chamada);
         }
         catch (Exception ex)
         {
@@ -177,7 +178,7 @@ public class ChamadaController : ControllerBase
         {
             var id = await ChamadaBLL.Selecionar(selecao);
 
-            return Ok(id);
+            return OkResponse(id);
         }
         catch (Exception ex)
         {
