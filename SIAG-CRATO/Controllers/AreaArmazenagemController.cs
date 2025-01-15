@@ -30,14 +30,44 @@ public class AreaArmazenagemController : ControllerCustom
         }
     }
 
+    [HttpGet("{id}/chamada")]
+    public async Task<IActionResult> GetByIdToChamadaAsync(int id)
+    {
+        try
+        {
+            var result = await AreaArmazenagemBLL.GetByIdAsync(id);
+
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex);
+        }
+    }
+
     [HttpGet("identificador/{identificador}")]
     public async Task<IActionResult> GetByIdentificadorAsync(string identificador)
     {
         try
         {
-            var result = await AreaArmazenagemBLL.GetByIdentificadorCaracolAsync(identificador);
+            var result = await AreaArmazenagemBLL.GetByIdentificadorAsync(identificador);
 
             return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex);
+        }
+    }
+
+    [HttpGet("identificador/{identificador}/chamada")]
+    public async Task<IActionResult> GetByIdentificadorToChamadaAsync(string identificador)
+    {
+        try
+        {
+            var result = await AreaArmazenagemBLL.GetByIdentificadorAsync(identificador);
+
+            return OkResponse(result);
         }
         catch (Exception ex)
         {

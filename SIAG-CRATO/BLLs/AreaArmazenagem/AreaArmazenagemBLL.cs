@@ -38,6 +38,21 @@ public class AreaArmazenagemBLL
         return ConvertToDTO(areasArmazenagem);
     }
 
+    public static async Task<AreaArmazenagemDTO?> GetByIdentificadorAsync(string identificador)
+    {
+        var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE cd_identificacao = @identificador";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { identificador });
+
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
+    }
+
     public static async Task<AreaArmazenagemDTO?> GetByAgrupadorAsync(int idAgrupador)
     {
         var sql = $@"{AreaArmazenagemQuery.SELECT} WHERE id_agrupador = @idAgrupador";
