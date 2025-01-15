@@ -1,35 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Atividade;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AtividadeController : ControllerBase
+public class AtividadeController : ControllerCustom
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetAtividadeList(int id)
+    public async Task<IActionResult> GetAtividadeList()
     {
-        var result = await AtividadeBLL.GetListAsync();
-        if (result == null)
+        try
         {
-            return NotFound();
-        }
+            var result = await AtividadeBLL.GetListAsync();
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetAtividadeByIdAsync(int id)
     {
-        var result = await AtividadeBLL.GetByIdAsync(id);
-        if (result == null)
+        try
         {
-            return NotFound();
-        }
+            var atividade = await AtividadeBLL.GetByIdAsync(id);
 
-        return Ok(result);
+            return OkResponse(atividade);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("nome/{nome}")]

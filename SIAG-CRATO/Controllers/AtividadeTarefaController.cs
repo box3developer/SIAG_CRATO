@@ -6,30 +6,36 @@ namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AtividadeTarefa : ControllerBase
+public class AtividadeTarefaController : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetListAsync()
     {
-        var result = await AtividadeTarefaBLL.GetListAsync();
-        if (result == null || result.Count == 0)
+        try
         {
-            return NotFound();
-        }
+            var atividades = await AtividadeTarefaBLL.GetListAsync();
 
-        return Ok(result);
+            return Ok(atividades);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost("filtro")]
     public async Task<IActionResult> GetListAsync([FromBody] AtividadeTarefaFiltroDTO filtro)
     {
-        var result = await AtividadeTarefaBLL.GetListAsync(filtro);
-        if (result == null || result.Count == 0)
+        try
         {
-            return NotFound();
-        }
+            var result = await AtividadeTarefaBLL.GetListAsync(filtro);
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("{id}")]
