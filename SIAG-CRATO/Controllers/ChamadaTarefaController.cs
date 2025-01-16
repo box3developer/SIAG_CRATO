@@ -32,7 +32,15 @@ public class ChamadaTarefaController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateTarefaAsync(ChamadaTarefaDTO chamadaTarefa)
     {
-        var sucesso = await ChamadaTarefaBLL.UpdateTarefaAsync(chamadaTarefa);
-        return sucesso ? Ok() : BadRequest("Não foi possível atualizar a associação");
+        try
+        {
+            var sucesso = await ChamadaTarefaBLL.UpdateTarefaAsync(chamadaTarefa);
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
