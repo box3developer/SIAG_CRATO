@@ -8,20 +8,36 @@ namespace SIAG.Application.Armazenagem.Cadastro.Shared.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<AreaArmazenagemDTO, AreaArmazenagemDTO>().ReverseMap();
-            CreateMap<Deposito, DepositoDTO>().ReverseMap();
-            CreateMap<TipoEnderecoDTO, TipoEnderecoDTO>().ReverseMap();
-            CreateMap<SetorTrabalhoDTO, SetorTrabalhoDTO>().ReverseMap();
-            CreateMap<RegiaoTrabalhoDTO, RegiaoTrabalhoDTO>().ReverseMap();
-            CreateMap<Endereco, EnderecoDTO>().ReverseMap();
-            CreateMap<TipoAreaDTO, TipoAreaDTO>().ReverseMap();
-            CreateMap<AgrupadorAtivoDTO, AgrupadorAtivoDTO>().ReverseMap();
-            CreateMap<PalletDTO, PalletDTO>().ReverseMap();
-            CreateMap<ProgramaDTO, ProgramaDTO>().ReverseMap();
-            CreateMap<PedidoDTO, PedidoDTO>().ReverseMap();
-            CreateMap<Caixa, CaixaDTO>().ReverseMap();
-            CreateMap<Equipamento, EquipamentoDTO>().ReverseMap();
-            CreateMap<TurnoDTO, TurnoDTO>().ReverseMap();
+            CreateMap<AgrupadorAtivoDTO, AgrupadorAtivo>().ReverseMap();
+            CreateMap<AreaArmazenagemDTO, AreaArmazenagem>().ReverseMap();
+            CreateMap<AtividadeDTO, Atividade>().ReverseMap();
+            CreateMap<CaixaDTO, Caixa>().ReverseMap();
+            CreateMap<CaixaLeituraDTO, CaixaLeitura>().ReverseMap();
+            CreateMap<ChamadaDTO, Chamada>().ReverseMap();
+            CreateMap<DepositoDTO, Deposito>().ReverseMap();
+            CreateMap<DesempenhoDTO, Desempenho>().ReverseMap();
+            CreateMap<DesempenhoCaixaDTO, DesempenhoCaixa>().ReverseMap();
+            CreateMap<EnderecoDTO, Endereco>().ReverseMap();
+            CreateMap<EquipamentoDTO, Equipamento>().ReverseMap();
+            CreateMap<EquipamentoModeloDTO, EquipamentoModelo>().ReverseMap();
+            CreateMap<LiderVirtualDTO, LiderVirtual>().ReverseMap();
+            CreateMap<NiveisAgrupadoresDTO, NiveisAgrupadores>().ReverseMap();
+            CreateMap<OperadorDTO, Operador>().ReverseMap();
+            CreateMap<OperadorHistoricoDTO, OperadorHistorico>().ReverseMap();
+            CreateMap<PalletDTO, Pallet>().ReverseMap();
+            CreateMap<ParametroDTO, Parametro>().ReverseMap();
+            CreateMap<ParametroMensagemCaracolDTO, ParametroMensagemCaracol>().ReverseMap();
+            CreateMap<PedidoDTO, Pedido>().ReverseMap();
+            CreateMap<PosicaoCaracolRefugoDTO, PosicaoCaracolRefugo>().ReverseMap();
+            CreateMap<ProgramaDTO, Programa>().ReverseMap();
+            CreateMap<RegiaoTrabalhoDTO, RegiaoTrabalho>().ReverseMap();
+            CreateMap<SetorTrabalhoDTO, SetorTrabalho>().ReverseMap();
+            CreateMap<StatusLeitorDTO, StatusLeitor>().ReverseMap();
+            CreateMap<TipoAreaDTO, TipoArea>().ReverseMap();
+            CreateMap<TipoEnderecoDTO, TipoEndereco>().ReverseMap();
+            CreateMap<TurnoDTO, Turno>().ReverseMap();
+            CreateMap<LogCaracolDTO, LogCaracol>().ReverseMap();
+            CreateMap<TempoAtividadeDTO, TempoAtividade>().ReverseMap();
             // Adicione outros mapeamentos aqui
         }
     }

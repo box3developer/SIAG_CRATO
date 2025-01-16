@@ -7,7 +7,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.DTOs
     {
         public long IdAreaArmazenagem { get; set; }
 
-      public int IdTipoArea { get; set; }
+        public int IdTipoArea { get; set; }
 
         public TipoAreaDTO? TipoArea { get; set; }
 

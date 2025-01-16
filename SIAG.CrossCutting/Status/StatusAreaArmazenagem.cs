@@ -9,5 +9,4 @@ namespace SIAG.CrossCutting.Status
         public const int Desabilitado = 5;
         public const int Bloqueado = 6;
     }
-
 }

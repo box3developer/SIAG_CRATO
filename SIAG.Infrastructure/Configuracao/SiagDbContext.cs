@@ -38,6 +38,8 @@ namespace SIAG.Infrastructure.Configuracao
         public DbSet<LiderVirtual> Lidervirtual { get; set; }
         public DbSet<NiveisAgrupadores> Niveisagrupadores { get; set; }
         public DbSet<EquipamentoModelo> EquipamentoModelo { get; set; }
+        public DbSet<LogCaracol> LogCaracol { get; set; }
+        public DbSet<TempoAtividade> TempoAtividade { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
