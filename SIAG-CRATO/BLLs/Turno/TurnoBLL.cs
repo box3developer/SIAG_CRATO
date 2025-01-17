@@ -17,6 +17,13 @@ public class TurnoBLL
         return turnos.Select(ConvertToDTO).ToList();
     }
 
+    public static async Task<List<TurnoDTO>> GetListPerformance()
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var turnos = await conexao.QueryAsync<TurnoModel>(TurnoQuery.SELECT_PERFORMANCE);
+
+        return turnos.Select(ConvertToDTO).ToList();
+    }
     private static TurnoDTO ConvertToDTO(TurnoModel turno)
     {
         return new()

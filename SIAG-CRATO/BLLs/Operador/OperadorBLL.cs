@@ -1,8 +1,12 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Desempenho;
 using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.BLLs.EquipamentoManutencao;
 using SIAG_CRATO.BLLs.OperadorHistorico;
+using SIAG_CRATO.BLLs.Parametro;
+using SIAG_CRATO.BLLs.Turno;
+using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Operador;
 using SIAG_CRATO.Models;
 
@@ -38,6 +42,73 @@ public class OperadorBLL
         }
 
         return ConvertToDTO(operador);
+    }
+
+    public static async Task<int> GetPerformance(long idOperador)
+    {
+        var turnos = await TurnoBLL.GetListPerformance();
+
+        var turno = turnos.Where(x => x.DtInicio <= DateTime.Now && x.DtInicio >= DateTime.Now).LastOrDefault();
+
+        if (turno == null)
+        {
+            turno = new()
+            {
+                DtInicio = DateTime.Now.AddHours(-6),
+                DtFim = DateTime.Now,
+            };
+        }
+
+        double caixaHora = await ParametroBLL.GetParametroValorByParametro(Parametros.CAIXA_HORA);
+        double patinhaHora = await ParametroBLL.GetParametroValorByParametro(Parametros.PATINHA_HORA);
+        double retratilHora = await ParametroBLL.GetParametroValorByParametro(Parametros.RETRATIL_HORA);
+        double bilateralHora = await ParametroBLL.GetParametroValorByParametro(Parametros.BILATERAL_HORA);
+
+        var equipamento = await EquipamentoBLL.GetByOperadorAsync(idOperador.ToString());
+
+        if (equipamento == null || equipamento.IdEquipamentoModelo == 0 || (equipamento.IdSetorTrabalho ?? 0) == 0)
+        {
+            return 1;
+        }
+
+        var desempenhos = await DesempenhoBLL.GetByPerformance(idOperador, equipamento.IdSetorTrabalho ?? 0, equipamento.IdEquipamentoModelo);
+
+        var quantidadeEstimada = desempenhos.Select(x =>
+        {
+            double fatorHora = (double)x.NrPeriodo / 3600;
+            double parametro = x.IdSetorTrabalho switch
+            {
+                1 when x.IdEquipamentoModelo == 1 => caixaHora,
+                1 when x.IdEquipamentoModelo == 2 => patinhaHora,
+                2 when x.IdEquipamentoModelo == 3 => retratilHora,
+                3 when x.IdEquipamentoModelo == 4 => bilateralHora,
+                4 when x.IdEquipamentoModelo == 3 => retratilHora,
+                _ => 0
+            };
+
+            return fatorHora * parametro;
+        }).LastOrDefault();
+
+        var quantidadeOperacoes = desempenhos.Select(x => (double)x.NrOperacoesRealizadas).LastOrDefault();
+
+        var calculo = quantidadeOperacoes / quantidadeEstimada * 100;
+
+        if (calculo == 0)
+        {
+            return 0;
+        }
+
+        if (calculo < await ParametroBLL.GetParametroValorByParametro(Parametros.EFICIENCIA_REGULAR))
+        {
+            return 0;
+        }
+
+        if (calculo < await ParametroBLL.GetParametroValorByParametro(Parametros.EFICIENCIA_FELIZ))
+        {
+            return 1;
+        }
+
+        return 2;
     }
 
     public static async Task<int> GetMetaAsync()

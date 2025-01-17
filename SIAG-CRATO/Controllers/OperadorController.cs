@@ -37,41 +37,79 @@ public class OperadorController : ControllerCustom
         {
             throw new Exception(ex.Message);
         }
-
     }
 
     [HttpGet("meta")]
     public async Task<ActionResult<int>> GetMeta()
     {
-        var meta = await OperadorBLL.GetMetaAsync();
-        return Ok(meta);
+        try
+        {
+            var meta = await OperadorBLL.GetMetaAsync();
+
+            return Ok(meta);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("{id}/performance")]
+    public async Task<IActionResult> GetPerformance(long id)
+    {
+        try
+        {
+            var performance = await OperadorBLL.GetPerformance(id);
+
+            return OkResponse(performance);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] OperadorLoginDTO login)
     {
-        var sucesso = await OperadorBLL.Login(login.IdOperador, login.IdEquipamento);
-        if (sucesso)
+        try
         {
-            return Ok("Login realizado com sucesso.");
+            var sucesso = await OperadorBLL.Login(login.IdOperador, login.IdEquipamento);
+
+            if (sucesso)
+            {
+                return Ok("Login realizado com sucesso.");
+            }
+            else
+            {
+                return Unauthorized("Credenciais inválidas ou usuário não autorizado.");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return Unauthorized("Credenciais inválidas ou usuário não autorizado.");
+            return BadRequest(ex.Message);
         }
     }
 
     [HttpPost("logoff")]
     public async Task<IActionResult> LogOff([FromBody] OperadorLoginDTO login)
     {
-        var sucesso = await OperadorBLL.LogOff(login.IdOperador, login.IdEquipamento);
-        if (sucesso)
+        try
         {
-            return Ok("Logout realizado com sucesso.");
+            var sucesso = await OperadorBLL.LogOff(login.IdOperador, login.IdEquipamento);
+
+            if (sucesso)
+            {
+                return Ok("Logout realizado com sucesso.");
+            }
+            else
+            {
+                return BadRequest("Erro ao realizar o logout.");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            return BadRequest("Erro ao realizar o logout.");
+            return BadRequest(ex.Message);
         }
     }
 }
