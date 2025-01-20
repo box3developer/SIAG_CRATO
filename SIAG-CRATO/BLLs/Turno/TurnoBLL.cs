@@ -24,6 +24,7 @@ public class TurnoBLL
 
         return turnos.Select(ConvertToDTO).ToList();
     }
+
     private static TurnoDTO ConvertToDTO(TurnoModel turno)
     {
         return new()

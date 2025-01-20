@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.AtividadeTarefa;
 using SIAG_CRATO.DTOs.AtividadeTarefa;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AtividadeTarefaController : ControllerBase
+public class AtividadeTarefaController : ControllerCustom
 {
     [HttpGet]
     public async Task<IActionResult> GetListAsync()
@@ -45,12 +46,7 @@ public class AtividadeTarefaController : ControllerBase
         {
             var result = await AtividadeTarefaBLL.GetByIdAsync(id);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
+            return OkResponse(result);
 
         }
         catch (Exception ex)

@@ -11,9 +11,16 @@ public class SetorController : ControllerCustom
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var result = await SetorBLL.GetById(id);
+        try
+        {
+            var result = await SetorBLL.GetById(id);
 
-        return Ok(result);
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
     }
 
     [HttpGet("Select")]

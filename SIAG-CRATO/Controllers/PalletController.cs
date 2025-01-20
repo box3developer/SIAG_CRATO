@@ -3,12 +3,13 @@ using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.AreaArmazenagem;
 using SIAG_CRATO.DTOs.Pallet;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PalletController : ControllerBase
+public class PalletController : ControllerCustom
 {
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] PalletDTO pallet)
@@ -27,13 +28,16 @@ public class PalletController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var pallet = await PalletBLL.GetByIdAsync(id);
-        if (pallet == null)
+        try
         {
-            return NotFound();
-        }
+            var pallet = await PalletBLL.GetByIdAsync(id);
 
-        return Ok(pallet);
+            return OkResponse(pallet);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("identificador/{identificador}")]
@@ -51,13 +55,16 @@ public class PalletController : ControllerBase
     [HttpPost("identificador")]
     public async Task<IActionResult> GetByIdentificadorOnly([FromBody] PalletFiltroDTO filtro)
     {
-        var pallet = await PalletBLL.GetByIdentificadorAsync(filtro.CdIdentificador, filtro.IdPallet);
-        if (pallet == null)
+        try
         {
-            return NotFound();
-        }
+            var pallet = await PalletBLL.GetByIdentificadorAsync(filtro.CdIdentificador, filtro.IdPallet);
 
-        return Ok(pallet);
+            return OkResponse(pallet);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpGet("area/{areaArmazenagem}")]

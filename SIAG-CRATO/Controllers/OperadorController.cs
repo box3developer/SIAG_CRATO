@@ -54,7 +54,7 @@ public class OperadorController : ControllerCustom
         }
     }
 
-    [HttpPost("{id}/performance")]
+    [HttpGet("{id}/performance")]
     public async Task<IActionResult> GetPerformance(long id)
     {
         try

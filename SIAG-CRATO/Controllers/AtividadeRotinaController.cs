@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.AtividadeRotina;
+using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AtividadeRotinaController : ControllerBase
+public class AtividadeRotinaController : ControllerCustom
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var result = await AtividadeRotinaBLL.GetById(id);
-        if (result == null)
+        try
         {
-            return NotFound();
-        }
+            var result = await AtividadeRotinaBLL.GetById(id);
 
-        return Ok(result);
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
