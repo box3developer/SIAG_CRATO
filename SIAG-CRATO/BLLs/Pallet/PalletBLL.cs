@@ -159,6 +159,7 @@ public class PalletBLL
 
         return qtd > 0;
     }
+
     public static async Task<bool> VincularAgrupadorAreaReservadaAsync(string? identificadorCaracol, AreaArmazenagemDTO areaAtual)
     {
         var sqlReserva = $@"{PalletQuery.SELECT_RESERVA} 

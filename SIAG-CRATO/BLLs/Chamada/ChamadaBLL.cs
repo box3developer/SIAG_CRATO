@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using SIAG_CRATO.BLLs.Atividade;
 using SIAG_CRATO.BLLs.Equipamento;
@@ -462,6 +463,55 @@ public class ChamadaBLL
         });
 
         return chamadas.Select(ConvertToDTO).ToList();
+    }
+
+    public static async Task<ValidaLeituraChamadaRetornoDTO> ValidarLeituraChamada(ValidaLeituraChamadaDTO filtro)
+    {
+        if (filtro.AtividadeRotina == null)
+        {
+            return new()
+            {
+                Valido = false,
+                Mensagem = "Deve ser informado a atividade referente."
+            };
+        }
+
+        if (filtro.AtividadeRotina.FgTipo == TipoRotina.MetodoClasse)
+        {
+            return new()
+            {
+                Valido = false
+            };
+        }
+        else
+        {
+            if (filtro.Chamada == null)
+            {
+                throw new Exception("Deve ser informado a chamada referente.");
+            }
+
+            var filtros = new Dictionary<string, object>
+            {
+                { "@id_chamada", filtro.Chamada.IdChamada }
+            };
+
+            var parametros = new DynamicParameters(filtros);
+            parametros.Add("@mensagem", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+            parametros.Add("@RetVal", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+
+            using var conexao = new SqlConnection(Global.Conexao);
+
+            var linhas = await conexao.ExecuteAsync(filtro.AtividadeRotina.NmProcedure, parametros, commandType: CommandType.StoredProcedure);
+
+            var outputMsg = parametros.Get<string?>("@mensagem");
+            var outputIdParam = parametros.Get<int?>("@RetVal");
+
+            return new()
+            {
+                Valido = (outputIdParam ?? 0) > 0,
+                Mensagem = outputMsg ?? ""
+            };
+        }
     }
 
     private static ChamadaDTO ConvertToDTO(ChamadaModel chamada)

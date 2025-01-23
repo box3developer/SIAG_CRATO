@@ -146,7 +146,7 @@ public class ChamadaController : ControllerCustom
                 return BadRequest("Chamada não encontrada!");
             }
 
-            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, chamada.IdAtividadeRejeicao);
+            await ChamadaBLL.SetStatusAsync(chamada.IdChamada, status);
 
             return Ok();
         }
@@ -179,6 +179,21 @@ public class ChamadaController : ControllerCustom
             var id = await ChamadaBLL.Selecionar(selecao);
 
             return OkResponse(id);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("valida-leitura")]
+    public async Task<ActionResult> ValidaLeituraChamada([FromBody] ValidaLeituraChamadaDTO filtro)
+    {
+        try
+        {
+            var result = await ChamadaBLL.ValidarLeituraChamada(filtro);
+
+            return OkResponse(result);
         }
         catch (Exception ex)
         {

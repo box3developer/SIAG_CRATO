@@ -15,9 +15,29 @@ public class ChamadaTarefaBLL
         return tarefas.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<List<ChamadaTarefaDTO>> GetByIdAsync(Guid idChamada, int idTarefa)
+    public static async Task<List<ChamadaTarefaDTO>> GetByIdAsync(int idTarefa)
     {
-        string sql = $"{ChamadaTarefaQuery.SELECT} WHERE id_tarefa = @idTarefa AND id_chamada = @idChamada";
+        string sql = $"{ChamadaTarefaQuery.SELECT} WHERE id_tarefa = @idTarefa";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var tarefas = await conexao.QueryAsync<ChamadaTarefaModel>(sql, new { idTarefa });
+
+        return tarefas.Select(ConvertToDTO).ToList();
+    }
+
+    public static async Task<List<ChamadaTarefaDTO>> GetAsync(Guid idChamada, int idTarefa)
+    {
+        string sql = @$"{ChamadaTarefaQuery.SELECT} WHERE 1=1";
+
+        if (idTarefa > 0)
+        {
+            sql = $"{sql} AND id_tarefa = @idTarefa";
+        }
+
+        if (idChamada != Guid.Empty)
+        {
+            sql = $"{sql} AND id_chamada = @idChamada";
+        }
 
         using var conexao = new SqlConnection(Global.Conexao);
         var tarefas = await conexao.QueryAsync<ChamadaTarefaModel>(sql, new { idTarefa, idChamada });

@@ -15,11 +15,34 @@ public class ChamadaTarefaController : ControllerBase
         return Ok(chamadasTarefas);
     }
 
-    [HttpGet("{idChamada}/{idTarefa}")]
-    public async Task<ActionResult<ChamadaTarefaDTO>> GetByIdAsync(Guid idChamada, int idTarefa)
+    [HttpGet("{idTarefa}")]
+    public async Task<ActionResult> GetByIdAsync(int idTarefa)
     {
-        var chamadaTarefa = await ChamadaTarefaBLL.GetByIdAsync(idChamada, idTarefa);
-        return chamadaTarefa == null ? NotFound() : Ok(chamadaTarefa);
+        try
+        {
+            var chamadaTarefa = await ChamadaTarefaBLL.GetByIdAsync(idTarefa);
+
+            return Ok(chamadaTarefa);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("{idChamada}/{idTarefa}")]
+    public async Task<ActionResult> GetByIdAsync(Guid idChamada, int idTarefa)
+    {
+        try
+        {
+            var chamadaTarefa = await ChamadaTarefaBLL.GetAsync(idChamada, idTarefa);
+
+            return Ok(chamadaTarefa);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost]
