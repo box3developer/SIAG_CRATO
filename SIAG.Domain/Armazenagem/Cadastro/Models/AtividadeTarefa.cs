@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SIAG.Domain.Armazenagem.Cadastro.Models;
 
 [CustomKeyEntity]
-[Table("atividade_tarefa")]
+[Table("atividadetarefa")]
 public class AtividadeTarefa
 {
     [Key]

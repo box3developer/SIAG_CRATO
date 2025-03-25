@@ -12,8 +12,8 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    [Migration("20250112171736_Inicial")]
-    partial class Inicial
+    [Migration("20250325184751_CorrecaoAtividadeRejeicao")]
+    partial class CorrecaoAtividadeRejeicao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,6 +171,123 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasKey("IdAtividade");
 
                     b.ToTable("atividade");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadePrioridade", b =>
+                {
+                    b.Property<int>("IdAtividadePrioridade")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividadeprioridade");
+
+                    b.Property<int>("FgTipo")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_tipo");
+
+                    b.Property<string>("NmProcedure")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_procedure");
+
+                    b.Property<int>("QtPontuacao")
+                        .HasColumnType("int")
+                        .HasColumnName("qt_pontuacao");
+
+                    b.HasKey("IdAtividadePrioridade");
+
+                    b.ToTable("atividadeprioridade");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRejeicao", b =>
+                {
+                    b.Property<int>("IdAtividadeRejeicao")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividaderejeicao");
+
+                    b.Property<string>("NmAtividadeRejeicao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_atividaderejeicao");
+
+                    b.Property<string>("NmEmailAlerta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_email_alerta");
+
+                    b.HasKey("IdAtividadeRejeicao");
+
+                    b.ToTable("atividaderejeicao");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRotina", b =>
+                {
+                    b.Property<int>("IdAtividadeRotina")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividaderotina");
+
+                    b.Property<int>("FgTipo")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_tipo");
+
+                    b.Property<string>("NmAtividadeRotina")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_atividaderotina");
+
+                    b.Property<string>("NmProcedure")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_procedure");
+
+                    b.HasKey("IdAtividadeRotina");
+
+                    b.ToTable("atividaderotina");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", b =>
+                {
+                    b.Property<int>("IdTarefa")
+                        .HasColumnType("int")
+                        .HasColumnName("id_tarefa");
+
+                    b.Property<int>("CdSequencia")
+                        .HasColumnType("int")
+                        .HasColumnName("cd_sequencia");
+
+                    b.Property<int?>("FgRecurso")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_recurso");
+
+                    b.Property<int>("IdAtividade")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividade");
+
+                    b.Property<int>("IdAtividadeRotina")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividaderotina");
+
+                    b.Property<string>("NmMensagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_mensagem");
+
+                    b.Property<string>("NmTarefa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_tarefa");
+
+                    b.Property<int>("QtPotenciaAumentada")
+                        .HasColumnType("int")
+                        .HasColumnName("qt_potenciaaumentada");
+
+                    b.Property<int>("QtPotenciaNormal")
+                        .HasColumnType("int")
+                        .HasColumnName("qt_potencianormal");
+
+                    b.HasKey("IdTarefa");
+
+                    b.HasIndex("IdAtividadeRotina");
+
+                    b.ToTable("atividadetarefa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Caixa", b =>
@@ -437,6 +554,31 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("chamada");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.ChamadaTarefa", b =>
+                {
+                    b.Property<DateTime>("DtFim")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_fim");
+
+                    b.Property<DateTime>("DtInicio")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_inicio");
+
+                    b.Property<Guid>("IdChamada")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id_chamada");
+
+                    b.Property<int>("IdTarefa")
+                        .HasColumnType("int")
+                        .HasColumnName("id_tarefa");
+
+                    b.HasIndex("IdChamada");
+
+                    b.HasIndex("IdTarefa");
+
+                    b.ToTable("chamadatarefa");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Deposito", b =>
                 {
                     b.Property<int>("IdDeposito")
@@ -561,6 +703,56 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasIndex("IdOperador");
 
                     b.ToTable("desempenhocaixa");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.DesempenhoOnline", b =>
+                {
+                    b.Property<int>("IdDesempenhoonline")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_desempenhoonline");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDesempenhoonline"));
+
+                    b.Property<DateTime>("DtRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_registro");
+
+                    b.Property<int>("IdEquipamentomodelo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentomodelo");
+
+                    b.Property<int>("IdOperador")
+                        .HasColumnType("int")
+                        .HasColumnName("id_operador");
+
+                    b.Property<int>("IdSetortrabalho")
+                        .HasColumnType("int")
+                        .HasColumnName("id_setortrabalho");
+
+                    b.Property<int>("NrTempologado")
+                        .HasColumnType("int")
+                        .HasColumnName("nr_tempologado");
+
+                    b.Property<int>("NrTempoprevisto")
+                        .HasColumnType("int")
+                        .HasColumnName("nr_tempoprevisto");
+
+                    b.Property<int>("NrTemporealizado")
+                        .HasColumnType("int")
+                        .HasColumnName("nr_temporealizado");
+
+                    b.Property<int>("QtPrevista")
+                        .HasColumnType("int")
+                        .HasColumnName("qt_prevista");
+
+                    b.Property<int>("QtRealizada")
+                        .HasColumnType("int")
+                        .HasColumnName("qt_realizada");
+
+                    b.HasKey("IdDesempenhoonline");
+
+                    b.ToTable("desempenhoonline");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Endereco", b =>
@@ -709,6 +901,141 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("equipamento");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoCheckListOperador", b =>
+                {
+                    b.Property<int>("IdEquipamentoCheckListOperador")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentochecklistoperador");
+
+                    b.Property<DateTime?>("DtChecklist")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_checklist");
+
+                    b.Property<bool>("FgResposta")
+                        .HasColumnType("bit")
+                        .HasColumnName("fg_resposta");
+
+                    b.Property<int>("IdEquipamento")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamento");
+
+                    b.Property<int>("IdEquipamentoChecklist")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentochecklist");
+
+                    b.Property<long>("IdOperador")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_operador");
+
+                    b.HasKey("IdEquipamentoCheckListOperador");
+
+                    b.HasIndex("IdEquipamento");
+
+                    b.HasIndex("IdEquipamentoChecklist");
+
+                    b.HasIndex("IdOperador");
+
+                    b.ToTable("equipamentochecklistoperador");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoChecklist", b =>
+                {
+                    b.Property<int>("IdEquipamentoChecklist")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentochecklist");
+
+                    b.Property<bool?>("FgCritico")
+                        .HasColumnType("bit")
+                        .HasColumnName("fg_critico");
+
+                    b.Property<int?>("FgStatus")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_status");
+
+                    b.Property<int>("IdEquipamentoModelo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentomodelo");
+
+                    b.Property<string>("NmDescricao")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_descricao");
+
+                    b.HasKey("IdEquipamentoChecklist");
+
+                    b.HasIndex("IdEquipamentoModelo");
+
+                    b.ToTable("equipamentochecklist");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoEndereco", b =>
+                {
+                    b.Property<long>("IdEquipamentoEndereco")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_equipamentoendereco");
+
+                    b.Property<long>("IdEndereco")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_endereco");
+
+                    b.Property<int>("IdEquipamento")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamento");
+
+                    b.HasKey("IdEquipamentoEndereco");
+
+                    b.HasIndex("IdEquipamento");
+
+                    b.ToTable("equipamentoendereco");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoEnderecoPrioridade", b =>
+                {
+                    b.Property<long>("IdEquipamentoEnderecoPrioridade")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_equipamentoenderecoprioridade");
+
+                    b.Property<long>("IdEquipamentoEndereco")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id_equipamento_endereco");
+
+                    b.Property<int>("Prioridade")
+                        .HasColumnType("int")
+                        .HasColumnName("prioridade");
+
+                    b.HasKey("IdEquipamentoEnderecoPrioridade");
+
+                    b.ToTable("equipamentoenderecoprioridade");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoManutencao", b =>
+                {
+                    b.Property<int>("IdEquipamentoManutencao")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentomanutencao");
+
+                    b.Property<int>("DtFim")
+                        .HasColumnType("int")
+                        .HasColumnName("dt_fim");
+
+                    b.Property<int>("DtInicio")
+                        .HasColumnType("int")
+                        .HasColumnName("dt_inicio");
+
+                    b.Property<int>("FgTipoManutencao")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_tipo_manutencao");
+
+                    b.Property<int>("IdEquipamento")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamento");
+
+                    b.HasKey("IdEquipamentoManutencao");
+
+                    b.HasIndex("IdEquipamento");
+
+                    b.ToTable("equipamentomanutencao");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoModelo", b =>
                 {
                     b.Property<int>("IdEquipamentoModelo")
@@ -777,6 +1104,92 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasIndex("IdOperadorlogin");
 
                     b.ToTable("lidervirtual");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Log", b =>
+                {
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data");
+
+                    b.Property<string>("IdCaixa")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("id_caixa");
+
+                    b.Property<string>("IdOperador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("id_operador");
+
+                    b.Property<Guid?>("IdRequisicao")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id_requisicao");
+
+                    b.Property<string>("Mensagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("mensagem");
+
+                    b.Property<string>("Metodo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("metodo");
+
+                    b.Property<string>("NmIdentificador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_identificador");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tipo");
+
+                    b.ToTable("log");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.LogCaracol", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("Data")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data");
+
+                    b.Property<string>("IdCaixa")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("id_caixa");
+
+                    b.Property<string>("IdOperador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("id_operador");
+
+                    b.Property<string>("IdRequisicao")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("id_requisicao");
+
+                    b.Property<string>("Mensagem")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("mensagem");
+
+                    b.Property<string>("Metodo")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("metodo");
+
+                    b.Property<string>("NmIdentificador")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_identificador");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tipo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("logcaracol");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.NiveisAgrupadores", b =>
@@ -872,6 +1285,149 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasIndex("IdEquipamento");
 
                     b.ToTable("operadorhistorico");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Ordem", b =>
+                {
+                    b.Property<int>("IdTransportadora")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_transportadora");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTransportadora"));
+
+                    b.Property<string>("CdCentrocusto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cd_centrocusto");
+
+                    b.Property<DateTime>("DtEntrada")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_entrada");
+
+                    b.Property<DateTime>("DtFim")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_fim");
+
+                    b.Property<DateTime>("DtGeracao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_geracao");
+
+                    b.Property<DateTime>("DtInicio")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_inicio");
+
+                    b.Property<DateTime>("DtPrevisao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_previsao");
+
+                    b.Property<DateTime>("DtSaida")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dt_saida");
+
+                    b.Property<int>("FgControleendereco")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_controleendereco");
+
+                    b.Property<int>("FgControlesms")
+                        .HasColumnType("int")
+                        .HasColumnName("fg_controlesms");
+
+                    b.Property<int>("IdEndereco")
+                        .HasColumnType("int")
+                        .HasColumnName("id_endereco");
+
+                    b.Property<int>("IdMotivo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_motivo");
+
+                    b.Property<int>("IdMotorista")
+                        .HasColumnType("int")
+                        .HasColumnName("id_motorista");
+
+                    b.Property<int>("IdMotoristamanobrista")
+                        .HasColumnType("int")
+                        .HasColumnName("id_motoristamanobrista");
+
+                    b.Property<int>("IdSolicitante")
+                        .HasColumnType("int")
+                        .HasColumnName("id_solicitante");
+
+                    b.Property<int>("IdVeiculo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_veiculo");
+
+                    b.Property<decimal>("NrCustovalor")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_custovalor");
+
+                    b.Property<bool>("Priorizar")
+                        .HasColumnType("bit")
+                        .HasColumnName("priorizar");
+
+                    b.Property<decimal>("QtCubagem")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("qt_cubagem");
+
+                    b.HasKey("IdTransportadora");
+
+                    b.ToTable("ordem");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.OrdemCarga", b =>
+                {
+                    b.Property<int>("IdOrdemcarga")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_ordemcarga");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrdemcarga"));
+
+                    b.Property<int>("IdOrdem")
+                        .HasColumnType("int")
+                        .HasColumnName("id_ordem");
+
+                    b.Property<int>("IdPallet")
+                        .HasColumnType("int")
+                        .HasColumnName("id_pallet");
+
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("int")
+                        .HasColumnName("id_pedido");
+
+                    b.Property<int>("IdPrograma")
+                        .HasColumnType("int")
+                        .HasColumnName("id_programa");
+
+                    b.HasKey("IdOrdemcarga");
+
+                    b.ToTable("ordemcarga");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.OrdemSequencia", b =>
+                {
+                    b.Property<int>("IdOrdemsequencia")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_ordemsequencia");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOrdemsequencia"));
+
+                    b.Property<int>("IdOrdem")
+                        .HasColumnType("int")
+                        .HasColumnName("id_ordem");
+
+                    b.Property<int>("IdTransportadoratipocarga")
+                        .HasColumnType("int")
+                        .HasColumnName("id_transportadoratipocarga");
+
+                    b.Property<int>("NrSequencia")
+                        .HasColumnType("int")
+                        .HasColumnName("nr_sequencia");
+
+                    b.HasKey("IdOrdemsequencia");
+
+                    b.ToTable("ordemsequencia");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Pallet", b =>
@@ -1292,6 +1848,170 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("status_leitor");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.StatusLuzVerde", b =>
+                {
+                    b.Property<string>("Caracol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("caracol");
+
+                    b.Property<int>("LuzVerde")
+                        .HasColumnType("int")
+                        .HasColumnName("luz_verde");
+
+                    b.ToTable("statusluzverde");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.StatusLuzVermelha", b =>
+                {
+                    b.Property<string>("Caracol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("caracol");
+
+                    b.Property<string>("LuzesVM")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("luz_vermelha");
+
+                    b.ToTable("statusluzvermelha");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TempoAtividade", b =>
+                {
+                    b.Property<int>("IdTempoAtividade")
+                        .HasColumnType("int")
+                        .HasColumnName("id_tempoatividade");
+
+                    b.Property<int?>("IdAtividade")
+                        .HasColumnType("int")
+                        .HasColumnName("id_atividade");
+
+                    b.Property<int?>("IdEquipamentoModelo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_equipamentomodelo");
+
+                    b.Property<int?>("IdSetorTrabalho")
+                        .HasColumnType("int")
+                        .HasColumnName("id_setortrabalho");
+
+                    b.Property<decimal?>("NrPercentualIneficiencia")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_percentualineficiencia");
+
+                    b.Property<decimal?>("NrPosicao1")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao1");
+
+                    b.Property<decimal?>("NrPosicao10")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao10");
+
+                    b.Property<decimal?>("NrPosicao11")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao11");
+
+                    b.Property<decimal?>("NrPosicao12")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao12");
+
+                    b.Property<decimal?>("NrPosicao13")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao13");
+
+                    b.Property<decimal?>("NrPosicao14")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao14");
+
+                    b.Property<decimal?>("NrPosicao15")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao15");
+
+                    b.Property<decimal?>("NrPosicao16")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao16");
+
+                    b.Property<decimal?>("NrPosicao17")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao17");
+
+                    b.Property<decimal?>("NrPosicao18")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao18");
+
+                    b.Property<decimal?>("NrPosicao19")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao19");
+
+                    b.Property<decimal?>("NrPosicao2")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao2");
+
+                    b.Property<decimal?>("NrPosicao20")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao20");
+
+                    b.Property<decimal?>("NrPosicao21")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao21");
+
+                    b.Property<decimal?>("NrPosicao22")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao22");
+
+                    b.Property<decimal?>("NrPosicao3")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao3");
+
+                    b.Property<decimal?>("NrPosicao4")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao4");
+
+                    b.Property<decimal?>("NrPosicao5")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao5");
+
+                    b.Property<decimal?>("NrPosicao6")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao6");
+
+                    b.Property<decimal?>("NrPosicao7")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao7");
+
+                    b.Property<decimal?>("NrPosicao8")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao8");
+
+                    b.Property<decimal?>("NrPosicao9")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_posicao9");
+
+                    b.Property<decimal?>("NrTempoAltura")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_tempoaltura");
+
+                    b.Property<decimal?>("NrTempoColuna")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_tempocoluna");
+
+                    b.Property<decimal?>("NrTempoCorredor")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_tempocorredor");
+
+                    b.Property<decimal?>("NrTempoDeslocamento")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_tempodeslocamento");
+
+                    b.Property<decimal?>("NrTempoOperacao")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("nr_tempooperacao");
+
+                    b.HasKey("IdTempoAtividade");
+
+                    b.ToTable("tempoatividade");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TipoArea", b =>
                 {
                     b.Property<int>("IdTipoArea")
@@ -1330,6 +2050,44 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("tipoendereco");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TransportadoraTipoCarga", b =>
+                {
+                    b.Property<int>("IdTransportadoraTipoCarga")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_transportadoratipocarga");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTransportadoraTipoCarga"));
+
+                    b.Property<int>("IdTransportadora")
+                        .HasColumnType("int")
+                        .HasColumnName("id_transportadora");
+
+                    b.Property<string>("NmCarga")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_carga");
+
+                    b.Property<string>("NmOrdem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_ordem");
+
+                    b.Property<string>("Observacao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("observacao");
+
+                    b.Property<string>("TpCarga")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tp_carga");
+
+                    b.HasKey("IdTransportadoraTipoCarga");
+
+                    b.ToTable("transportadoratipocarga");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Turno", b =>
                 {
                     b.Property<int>("IdTurno")
@@ -1364,6 +2122,21 @@ namespace SIAG.Infrastructure.Migrations
                     b.ToTable("turno");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Uf", b =>
+                {
+                    b.Property<string>("NmNomeuf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_nomeuf");
+
+                    b.Property<string>("NmUf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nm_uf");
+
+                    b.ToTable("uf");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AgrupadorAtivo", "Agrupador")
@@ -1393,6 +2166,17 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("Endereco");
 
                     b.Navigation("TipoArea");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRotina", "AtividadeRotina")
+                        .WithMany()
+                        .HasForeignKey("IdAtividadeRotina")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AtividadeRotina");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Caixa", b =>
@@ -1560,6 +2344,25 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("Palletorigem");
                 });
 
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.ChamadaTarefa", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Chamada", "Chamada")
+                        .WithMany()
+                        .HasForeignKey("IdChamada")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", "Tarefa")
+                        .WithMany()
+                        .HasForeignKey("IdTarefa")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Chamada");
+
+                    b.Navigation("Tarefa");
+                });
+
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Desempenho", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", "AreaArmazenagem")
@@ -1672,6 +2475,66 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("Operador2");
 
                     b.Navigation("SetorTrabalho");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoCheckListOperador", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Equipamento", "Equipamento")
+                        .WithMany()
+                        .HasForeignKey("IdEquipamento")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoChecklist", "EquipamentoChecklist")
+                        .WithMany()
+                        .HasForeignKey("IdEquipamentoChecklist")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Operador", "Operador")
+                        .WithMany()
+                        .HasForeignKey("IdOperador")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Equipamento");
+
+                    b.Navigation("EquipamentoChecklist");
+
+                    b.Navigation("Operador");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoChecklist", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoModelo", "EquipamentoModelo")
+                        .WithMany()
+                        .HasForeignKey("IdEquipamentoModelo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EquipamentoModelo");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoEndereco", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Equipamento", "Equipamento")
+                        .WithMany()
+                        .HasForeignKey("IdEquipamento")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Equipamento");
+                });
+
+            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoManutencao", b =>
+                {
+                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.Equipamento", "Equipamento")
+                        .WithMany()
+                        .HasForeignKey("IdEquipamento")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Equipamento");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.LiderVirtual", b =>

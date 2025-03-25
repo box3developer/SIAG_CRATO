@@ -52,6 +52,47 @@ namespace SIAG.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "atividadeprioridade",
+                columns: table => new
+                {
+                    id_atividadeprioridade = table.Column<int>(type: "int", nullable: false),
+                    fg_tipo = table.Column<int>(type: "int", nullable: false),
+                    nm_procedure = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    qt_pontuacao = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_atividadeprioridade", x => x.id_atividadeprioridade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "atividaderejeicao",
+                columns: table => new
+                {
+                    id_atividaderejeicao = table.Column<int>(type: "int", nullable: false),
+                    nm_atividade_rejeicao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_email_alerta = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_atividaderejeicao", x => x.id_atividaderejeicao);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "atividaderotina",
+                columns: table => new
+                {
+                    id_atividaderotina = table.Column<int>(type: "int", nullable: false),
+                    nm_atividaderotina = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_procedure = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    fg_tipo = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_atividaderotina", x => x.id_atividaderotina);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "deposito",
                 columns: table => new
                 {
@@ -62,6 +103,40 @@ namespace SIAG.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_deposito", x => x.id_deposito);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "desempenhoonline",
+                columns: table => new
+                {
+                    id_desempenhoonline = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_operador = table.Column<int>(type: "int", nullable: false),
+                    id_equipamentomodelo = table.Column<int>(type: "int", nullable: false),
+                    id_setortrabalho = table.Column<int>(type: "int", nullable: false),
+                    nr_tempologado = table.Column<int>(type: "int", nullable: false),
+                    nr_tempoprevisto = table.Column<int>(type: "int", nullable: false),
+                    nr_temporealizado = table.Column<int>(type: "int", nullable: false),
+                    qt_previstaget = table.Column<int>(name: "qt_prevista {get", type: "int", nullable: false),
+                    qt_realizadaget = table.Column<int>(name: "qt_realizada {get", type: "int", nullable: false),
+                    dt_registro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_desempenhoonline", x => x.id_desempenhoonline);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "equipamentoenderecoprioridade",
+                columns: table => new
+                {
+                    id_equipamentoenderecoprioridade = table.Column<long>(type: "bigint", nullable: false),
+                    id_equipamento_endereco = table.Column<long>(type: "bigint", nullable: false),
+                    prioridade = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_equipamentoenderecoprioridade", x => x.id_equipamentoenderecoprioridade);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,6 +151,43 @@ namespace SIAG.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_equipamentomodelo", x => x.id_equipamentomodelo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "log",
+                columns: table => new
+                {
+                    id_requisicao = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    nm_identificador = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    id_caixa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    metodo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    id_operador = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    tipo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "logcaracol",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_requisicao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nm_identificador = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    id_caixa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    data = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    mensagem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    metodo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    id_operador = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    tipo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_logcaracol", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,6 +221,67 @@ namespace SIAG.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_operador", x => x.id_operador);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ordem",
+                columns: table => new
+                {
+                    id_transportadora = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_veiculo = table.Column<int>(type: "int", nullable: false),
+                    id_motorista = table.Column<int>(type: "int", nullable: false),
+                    id_endereco = table.Column<int>(type: "int", nullable: false),
+                    qt_cubagem = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    dt_geracao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_previsao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_entrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_fim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_saida = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    fg_controleendereco = table.Column<int>(type: "int", nullable: false),
+                    fg_controlesms = table.Column<int>(type: "int", nullable: false),
+                    id_motoristamanobrista = table.Column<int>(type: "int", nullable: false),
+                    cd_centrocusto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nr_custovalor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    id_solicitante = table.Column<int>(type: "int", nullable: false),
+                    id_motivo = table.Column<int>(type: "int", nullable: false),
+                    priorizar = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ordem", x => x.id_transportadora);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ordemcarga",
+                columns: table => new
+                {
+                    id_ordemcarga = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_ordem = table.Column<int>(type: "int", nullable: false),
+                    id_pedido = table.Column<int>(type: "int", nullable: false),
+                    id_programa = table.Column<int>(type: "int", nullable: false),
+                    id_pallet = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ordemcarga", x => x.id_ordemcarga);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ordemsequencia",
+                columns: table => new
+                {
+                    id_ordemsequencia = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_ordem = table.Column<int>(type: "int", nullable: false),
+                    id_transportadoratipocarga = table.Column<int>(type: "int", nullable: false),
+                    nr_sequencia = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ordemsequencia", x => x.id_ordemsequencia);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,6 +417,70 @@ namespace SIAG.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "statusluzverde",
+                columns: table => new
+                {
+                    caracol = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    luz_verde = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "statusluzvermelha",
+                columns: table => new
+                {
+                    caracol = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    luz_vermelha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tempoatividade",
+                columns: table => new
+                {
+                    id_tempoatividade = table.Column<int>(type: "int", nullable: false),
+                    id_equipamentomodelo = table.Column<int>(type: "int", nullable: true),
+                    id_setortrabalho = table.Column<int>(type: "int", nullable: true),
+                    nr_tempooperacao = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_tempodeslocamento = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_tempocoluna = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_tempocorredor = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_tempoaltura = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao1 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao2 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao3 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao4 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao5 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao6 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao7 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao8 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao9 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao10 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao11 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao12 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao13 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao14 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao15 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao16 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao17 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao18 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao19 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao20 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao21 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_posicao22 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    nr_percentualineficiencia = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    id_atividade = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tempoatividade", x => x.id_tempoatividade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tipoarea",
                 columns: table => new
                 {
@@ -270,6 +507,23 @@ namespace SIAG.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "transportadoratipocarga",
+                columns: table => new
+                {
+                    id_transportadoratipocarga = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_transportadora = table.Column<int>(type: "int", nullable: false),
+                    tp_carga = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_carga = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_ordem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    observacao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transportadoratipocarga", x => x.id_transportadoratipocarga);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "turno",
                 columns: table => new
                 {
@@ -284,6 +538,42 @@ namespace SIAG.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_turno", x => x.id_turno);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "uf",
+                columns: table => new
+                {
+                    nm_uf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_nomeuf = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
+                name: "atividadetarefa",
+                columns: table => new
+                {
+                    id_tarefa = table.Column<int>(type: "int", nullable: false),
+                    nm_tarefa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nm_mensagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    id_atividade = table.Column<int>(type: "int", nullable: false),
+                    cd_sequencia = table.Column<int>(type: "int", nullable: false),
+                    fg_recurso = table.Column<int>(type: "int", nullable: true),
+                    id_atividaderotina = table.Column<int>(type: "int", nullable: false),
+                    qt_potencianormal = table.Column<int>(type: "int", nullable: false),
+                    qt_potenciaaumentada = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_atividadetarefa", x => x.id_tarefa);
+                    table.ForeignKey(
+                        name: "FK_atividadetarefa_atividaderotina_id_atividaderotina",
+                        column: x => x.id_atividaderotina,
+                        principalTable: "atividaderotina",
+                        principalColumn: "id_atividaderotina",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -323,6 +613,27 @@ namespace SIAG.Infrastructure.Migrations
                         column: x => x.id_deposito,
                         principalTable: "deposito",
                         principalColumn: "id_deposito",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "equipamentochecklist",
+                columns: table => new
+                {
+                    id_equipamentochecklist = table.Column<int>(type: "int", nullable: false),
+                    id_equipamento = table.Column<int>(type: "int", nullable: false),
+                    nm_descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    fg_critico = table.Column<bool>(type: "bit", nullable: true),
+                    fg_status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_equipamentochecklist", x => x.id_equipamentochecklist);
+                    table.ForeignKey(
+                        name: "FK_equipamentochecklist_equipamentomodelo_id_equipamento",
+                        column: x => x.id_equipamento,
+                        principalTable: "equipamentomodelo",
+                        principalColumn: "id_equipamentomodelo",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -564,6 +875,80 @@ namespace SIAG.Infrastructure.Migrations
                         column: x => x.id_operador,
                         principalTable: "operador",
                         principalColumn: "id_operador");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "equipamentochecklistoperador",
+                columns: table => new
+                {
+                    id_equipamentochecklistoperador = table.Column<int>(type: "int", nullable: false),
+                    id_equipamento = table.Column<int>(type: "int", nullable: false),
+                    id_operador = table.Column<long>(type: "bigint", nullable: false),
+                    id_equipamentochecklist = table.Column<int>(type: "int", nullable: false),
+                    fg_resposta = table.Column<bool>(type: "bit", nullable: false),
+                    dt_checklist = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_equipamentochecklistoperador", x => x.id_equipamentochecklistoperador);
+                    table.ForeignKey(
+                        name: "FK_equipamentochecklistoperador_equipamento_id_equipamento",
+                        column: x => x.id_equipamento,
+                        principalTable: "equipamento",
+                        principalColumn: "id_equipamento",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_equipamentochecklistoperador_equipamentochecklist_id_equipamentochecklist",
+                        column: x => x.id_equipamentochecklist,
+                        principalTable: "equipamentochecklist",
+                        principalColumn: "id_equipamentochecklist",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_equipamentochecklistoperador_operador_id_operador",
+                        column: x => x.id_operador,
+                        principalTable: "operador",
+                        principalColumn: "id_operador",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "equipamentoendereco",
+                columns: table => new
+                {
+                    id_equipamentoendereco = table.Column<long>(type: "bigint", nullable: false),
+                    id_equipamento = table.Column<int>(type: "int", nullable: false),
+                    id_endereco = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_equipamentoendereco", x => x.id_equipamentoendereco);
+                    table.ForeignKey(
+                        name: "FK_equipamentoendereco_equipamento_id_equipamento",
+                        column: x => x.id_equipamento,
+                        principalTable: "equipamento",
+                        principalColumn: "id_equipamento",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "equipamentomanutencao",
+                columns: table => new
+                {
+                    id_equipamentomanutencao = table.Column<int>(type: "int", nullable: false),
+                    id_equipamento = table.Column<int>(type: "int", nullable: false),
+                    fg_tipo_manutencao = table.Column<int>(type: "int", nullable: false),
+                    dt_inicio = table.Column<int>(type: "int", nullable: false),
+                    dt_fim = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_equipamentomanutencao", x => x.id_equipamentomanutencao);
+                    table.ForeignKey(
+                        name: "FK_equipamentomanutencao_equipamento_id_equipamento",
+                        column: x => x.id_equipamento,
+                        principalTable: "equipamento",
+                        principalColumn: "id_equipamento",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -830,6 +1215,31 @@ namespace SIAG.Infrastructure.Migrations
                         principalColumn: "id_pallet");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "chamadatarefa",
+                columns: table => new
+                {
+                    id_chamada = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id_tarefa = table.Column<int>(type: "int", nullable: false),
+                    dt_inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dt_fim = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_chamadatarefa_atividadetarefa_id_tarefa",
+                        column: x => x.id_tarefa,
+                        principalTable: "atividadetarefa",
+                        principalColumn: "id_tarefa",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_chamadatarefa_chamada_id_chamada",
+                        column: x => x.id_chamada,
+                        principalTable: "chamada",
+                        principalColumn: "id_chamada",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_areaarmazenagem_id_agrupador",
                 table: "areaarmazenagem",
@@ -849,6 +1259,11 @@ namespace SIAG.Infrastructure.Migrations
                 name: "IX_areaarmazenagem_id_tipoarea",
                 table: "areaarmazenagem",
                 column: "id_tipoarea");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_atividadetarefa_id_atividaderotina",
+                table: "atividadetarefa",
+                column: "id_atividaderotina");
 
             migrationBuilder.CreateIndex(
                 name: "IX_caixa_id_agrupador",
@@ -961,6 +1376,16 @@ namespace SIAG.Infrastructure.Migrations
                 column: "id_palletorigem");
 
             migrationBuilder.CreateIndex(
+                name: "IX_chamadatarefa_id_chamada",
+                table: "chamadatarefa",
+                column: "id_chamada");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_chamadatarefa_id_tarefa",
+                table: "chamadatarefa",
+                column: "id_tarefa");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_desempenho_id_areaarmazenagem",
                 table: "desempenho",
                 column: "id_areaarmazenagem");
@@ -1041,6 +1466,36 @@ namespace SIAG.Infrastructure.Migrations
                 column: "id_setortrabalho");
 
             migrationBuilder.CreateIndex(
+                name: "IX_equipamentochecklist_id_equipamento",
+                table: "equipamentochecklist",
+                column: "id_equipamento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_equipamentochecklistoperador_id_equipamento",
+                table: "equipamentochecklistoperador",
+                column: "id_equipamento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_equipamentochecklistoperador_id_equipamentochecklist",
+                table: "equipamentochecklistoperador",
+                column: "id_equipamentochecklist");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_equipamentochecklistoperador_id_operador",
+                table: "equipamentochecklistoperador",
+                column: "id_operador");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_equipamentoendereco_id_equipamento",
+                table: "equipamentoendereco",
+                column: "id_equipamento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_equipamentomanutencao_id_equipamento",
+                table: "equipamentomanutencao",
+                column: "id_equipamento");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_lidervirtual_id_equipamentodestino",
                 table: "lidervirtual",
                 column: "id_equipamentodestino");
@@ -1095,10 +1550,16 @@ namespace SIAG.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "atividadeprioridade");
+
+            migrationBuilder.DropTable(
+                name: "atividaderejeicao");
+
+            migrationBuilder.DropTable(
                 name: "caixaleitura");
 
             migrationBuilder.DropTable(
-                name: "chamada");
+                name: "chamadatarefa");
 
             migrationBuilder.DropTable(
                 name: "desempenho");
@@ -1107,13 +1568,43 @@ namespace SIAG.Infrastructure.Migrations
                 name: "desempenhocaixa");
 
             migrationBuilder.DropTable(
+                name: "desempenhoonline");
+
+            migrationBuilder.DropTable(
+                name: "equipamentochecklistoperador");
+
+            migrationBuilder.DropTable(
+                name: "equipamentoendereco");
+
+            migrationBuilder.DropTable(
+                name: "equipamentoenderecoprioridade");
+
+            migrationBuilder.DropTable(
+                name: "equipamentomanutencao");
+
+            migrationBuilder.DropTable(
                 name: "lidervirtual");
+
+            migrationBuilder.DropTable(
+                name: "log");
+
+            migrationBuilder.DropTable(
+                name: "logcaracol");
 
             migrationBuilder.DropTable(
                 name: "niveisagrupadores");
 
             migrationBuilder.DropTable(
                 name: "operadorhistorico");
+
+            migrationBuilder.DropTable(
+                name: "ordem");
+
+            migrationBuilder.DropTable(
+                name: "ordemcarga");
+
+            migrationBuilder.DropTable(
+                name: "ordemsequencia");
 
             migrationBuilder.DropTable(
                 name: "parametro");
@@ -1128,10 +1619,43 @@ namespace SIAG.Infrastructure.Migrations
                 name: "status_leitor");
 
             migrationBuilder.DropTable(
+                name: "statusluzverde");
+
+            migrationBuilder.DropTable(
+                name: "statusluzvermelha");
+
+            migrationBuilder.DropTable(
+                name: "tempoatividade");
+
+            migrationBuilder.DropTable(
+                name: "transportadoratipocarga");
+
+            migrationBuilder.DropTable(
                 name: "turno");
 
             migrationBuilder.DropTable(
+                name: "uf");
+
+            migrationBuilder.DropTable(
                 name: "caixa");
+
+            migrationBuilder.DropTable(
+                name: "atividadetarefa");
+
+            migrationBuilder.DropTable(
+                name: "chamada");
+
+            migrationBuilder.DropTable(
+                name: "equipamentochecklist");
+
+            migrationBuilder.DropTable(
+                name: "pedido");
+
+            migrationBuilder.DropTable(
+                name: "programa");
+
+            migrationBuilder.DropTable(
+                name: "atividaderotina");
 
             migrationBuilder.DropTable(
                 name: "atividade");
@@ -1141,12 +1665,6 @@ namespace SIAG.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "pallet");
-
-            migrationBuilder.DropTable(
-                name: "pedido");
-
-            migrationBuilder.DropTable(
-                name: "programa");
 
             migrationBuilder.DropTable(
                 name: "equipamentomodelo");

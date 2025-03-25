@@ -12,7 +12,7 @@ public class EquipamentoChecklist
     [Column("id_equipamentochecklist")]
     public int IdEquipamentoChecklist { get; set; }
 
-    [Column("id_equipamento")]
+    [Column("id_equipamentomodelo")]
     public int IdEquipamentoModelo { get; set; }
     [ForeignKey(nameof(IdEquipamentoModelo))]
     public EquipamentoModelo? EquipamentoModelo { get; set; }

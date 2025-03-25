@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325122058_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,7 +206,7 @@ namespace SIAG.Infrastructure.Migrations
                     b.Property<string>("NmAtividadeRejeicao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nm_atividaderejeicao");
+                        .HasColumnName("nm_atividade_rejeicao");
 
                     b.Property<string>("NmEmailAlerta")
                         .IsRequired()
@@ -741,11 +744,11 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.Property<int>("QtPrevista")
                         .HasColumnType("int")
-                        .HasColumnName("qt_prevista");
+                        .HasColumnName("qt_prevista {get");
 
                     b.Property<int>("QtRealizada")
                         .HasColumnType("int")
-                        .HasColumnName("qt_realizada");
+                        .HasColumnName("qt_realizada {get");
 
                     b.HasKey("IdDesempenhoonline");
 
@@ -951,7 +954,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.Property<int>("IdEquipamentoModelo")
                         .HasColumnType("int")
-                        .HasColumnName("id_equipamentomodelo");
+                        .HasColumnName("id_equipamento");
 
                     b.Property<string>("NmDescricao")
                         .HasColumnType("nvarchar(max)")

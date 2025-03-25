@@ -9,37 +9,55 @@ namespace SIAG.Infrastructure.Configuracao
     {
         public SiagDbContext(DbContextOptions<SiagDbContext> options) : base(options) { }
 
-        public DbSet<Deposito> Deposito { get; set; }
-        public DbSet<TipoEndereco> TipoEndereco { get; set; }
-        public DbSet<SetorTrabalho> SetorTrabalho { get; set; }
-        public DbSet<RegiaoTrabalho> RegiaoTrabalho { get; set; }
-        public DbSet<Endereco> Endereco { get; set; }
-        public DbSet<TipoArea> TipoArea { get; set; }
         public DbSet<AgrupadorAtivo> AgrupadorAtivo { get; set; }
         public DbSet<AreaArmazenagem> AreaArmazenagem { get; set; }
-        public DbSet<Pallet> Pallet { get; set; }
-        public DbSet<Programa> Programa { get; set; }
-        public DbSet<Pedido> Pedido { get; set; }
-        public DbSet<Caixa> Caixa { get; set; }
-        public DbSet<Equipamento> Equipamento { get; set; }
-        public DbSet<Turno> Turno { get; set; }
-        public DbSet<Operador> Operador { get; set; }
-
         public DbSet<Atividade> Atividade { get; set; }
-        public DbSet<CaixaLeitura> Caixaleitura { get; set; }
+        public DbSet<AtividadePrioridade> AtividadePrioridade { get; set; }
+        public DbSet<AtividadeRejeicao> AtividadeRejeicaoM { get; set; }
+        public DbSet<AtividadeRotina> AtividadeRotina { get; set; }
+        public DbSet<AtividadeTarefa> AtividadeTarefa { get; set; }
+        public DbSet<Caixa> Caixa { get; set; }
+        public DbSet<CaixaLeitura> CaixaLeitura { get; set; }
         public DbSet<Chamada> Chamada { get; set; }
+        public DbSet<ChamadaTarefa> ChamadaTarefa { get; set; }
+        public DbSet<Deposito> Deposito { get; set; }
         public DbSet<Desempenho> Desempenho { get; set; }
-        public DbSet<DesempenhoCaixa> Desempenhocaixa { get; set; }
-        public DbSet<OperadorHistorico> Operadorhistorico { get; set; }
-        public DbSet<Parametro> Parametro { get; set; }
-        public DbSet<PosicaoCaracolRefugo> Posicaocaracolrefugo { get; set; }
-        public DbSet<ParametroMensagemCaracol> Parametromensagemcaracol { get; set; }
-        public DbSet<StatusLeitor> Status_leitor { get; set; }
-        public DbSet<LiderVirtual> Lidervirtual { get; set; }
-        public DbSet<NiveisAgrupadores> Niveisagrupadores { get; set; }
+        public DbSet<DesempenhoCaixa> DesempenhoCaixa { get; set; }
+        public DbSet<DesempenhoOnline> DesempenhoOnline { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Equipamento> Equipamento { get; set; }
+        public DbSet<EquipamentoChecklist> EquipamentoChecklist { get; set; }
+        public DbSet<EquipamentoCheckListOperador> EquipamentoCheckListOperador { get; set; }
+        public DbSet<EquipamentoEndereco> EquipamentoEndereco { get; set; }
+        public DbSet<EquipamentoEnderecoPrioridade> EquipamentoEnderecoPrioridade { get; set; }
+        public DbSet<EquipamentoManutencao> EquipamentoManutencao { get; set; }
         public DbSet<EquipamentoModelo> EquipamentoModelo { get; set; }
+        public DbSet<LiderVirtual> LiderVirtual { get; set; }
+        public DbSet<Log> Log { get; set; }
         public DbSet<LogCaracol> LogCaracol { get; set; }
+        public DbSet<NiveisAgrupadores> NiveisAgrupadores { get; set; }
+        public DbSet<Operador> Operador { get; set; }
+        public DbSet<OperadorHistorico> OperadorHistorico { get; set; }
+        public DbSet<Ordem> Ordem { get; set; }
+        public DbSet<OrdemCarga> OrdemCarga { get; set; }
+        public DbSet<OrdemSequencia> OrdemSequencia { get; set; }
+        public DbSet<Pallet> Pallet { get; set; }
+        public DbSet<Parametro> Parametro { get; set; }
+        public DbSet<ParametroMensagemCaracol> ParametroMensagemCaracol { get; set; }
+        public DbSet<Pedido> Pedido { get; set; }
+        public DbSet<PosicaoCaracolRefugo> PosicaoCaracolRefugo { get; set; }
+        public DbSet<Programa> Programa { get; set; }
+        public DbSet<RegiaoTrabalho> RegiaoTrabalho { get; set; }
+        public DbSet<SetorTrabalho> SetorTrabalho { get; set; }
+        public DbSet<StatusLeitor> StatusLeitor { get; set; }
+        public DbSet<StatusLuzVerde> StatusLuzVerde { get; set; }
+        public DbSet<StatusLuzVermelha> StatusLuzVermelha { get; set; }
         public DbSet<TempoAtividade> TempoAtividade { get; set; }
+        public DbSet<TipoArea> TipoArea { get; set; }
+        public DbSet<TipoEndereco> TipoEndereco { get; set; }
+        public DbSet<TransportadoraTipoCarga> TransportadoraTipoCarga { get; set; }
+        public DbSet<Turno> Turno { get; set; }
+        public DbSet<Uf> Uf { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -6,13 +6,13 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models;
 
 [CustomKeyEntity]
 [Table("atividaderejeicao")]
-public class AtividadeRejeicaoM
+public class AtividadeRejeicao
 {
     [Key]
     [Column("id_atividaderejeicao")]
     public int IdAtividadeRejeicao { get; set; }
 
-    [Column("nm_atividade_rejeicao")]
+    [Column("nm_atividaderejeicao")]
     public string NmAtividadeRejeicao { get; set; } = string.Empty;
 
     [Column("nm_email_alerta")]
