@@ -233,7 +233,7 @@ public class EquipamentoBLL
             FgStatusTrocaCaracol = equipamento.FgStatusTrocaCaracol,
             CdLeituraPendente = equipamento.CdLeituraPendente,
             CdUltimaLeitura = equipamento.CdUltimaLeitura,
-            Observacao = equipamento.Observacao,
+            NmObservacao = equipamento.NmObservacao,
         };
     }
 }

@@ -19,5 +19,5 @@ public class EquipamentoModel
     public Ativo FgStatusTrocaCaracol { get; set; }
     public string CdLeituraPendente { get; set; } = string.Empty;
     public string CdUltimaLeitura { get; set; } = string.Empty;
-    public string Observacao { get; set; } = string.Empty;
+    public string NmObservacao { get; set; } = string.Empty;
 }

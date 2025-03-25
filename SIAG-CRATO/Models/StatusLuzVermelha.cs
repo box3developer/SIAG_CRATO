@@ -1,7 +1,13 @@
-﻿namespace SIAG_CRATO.Models;
+﻿using System.Text.Json.Serialization;
 
-public class StatusLuzVermelha
+namespace SIAG_CRATO.Models
 {
-    public string Caracol { get; set; } = string.Empty;
-    public List<int> LuzesVM { get; set; } = [];
+    public class StatusLuzVermelha
+    {
+        [JsonPropertyName("caracol")]
+        public string Caracol { get; set; } = string.Empty;
+
+        [JsonPropertyName("luzesVM")]
+        public List<int?> LuzesVM { get; set; } = new();
+    }
 }

@@ -3,8 +3,8 @@
 public class EquipamentoQuery
 {
     public const string SELECT = @"SELECT id_equipamento, id_equipamentomodelo, id_setortrabalho, id_operador, nm_equipamento, 
-                                          nm_abreviadoequipamento, nm_identificador, fg_status, dt_inclusao, dt_manutencao, 
-                                          dt_ultimaleitura, id_endereco, nm_ip, fg_statustrocacaracol, cd_leitura_pendente, cd_ultimaleitura, observacao
+                                          nm_abreviado_equipamento, nm_identificador, fg_status, dt_inclusao, dt_manutencao, 
+                                          dt_ultimaleitura, id_endereco, nm_ip, fg_statustrocacaracol, cd_leitura_pendente, cd_ultimaleitura, nm_observacao
                                    FROM equipamento WITH(NOLOCK)";
 
     public const string UPDATE = @"UPDATE equipamento 

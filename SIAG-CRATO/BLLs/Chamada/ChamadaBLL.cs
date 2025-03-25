@@ -77,7 +77,7 @@ public class ChamadaBLL
                      ORDER BY fg_status desc, dt_chamada desc";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, StatusChamada.Andamento });
+        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, status = StatusChamada.Andamento });
 
         if (chamada == null)
         {
