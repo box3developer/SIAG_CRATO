@@ -1,7 +1,7 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SIAG.Domain.Armazenagem.Cadastro.Models;
+namespace SIAG.Domain.Armazenagem.Core.Models;
 
 [KeylessEntity]
 [Table("statusluzverde")]

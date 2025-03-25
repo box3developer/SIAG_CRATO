@@ -1,4 +1,6 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Core.Models
@@ -6,7 +8,7 @@ namespace SIAG.Domain.Armazenagem.Core.Models
 {
     [KeylessEntity]
     [Table("desempenhocaixa")]
-    public class Desempenhocaixa
+    public class DesempenhoCaixa
     {
         [Column("id_caixa")]
         public string? IdCaixa { get; set; } = string.Empty;

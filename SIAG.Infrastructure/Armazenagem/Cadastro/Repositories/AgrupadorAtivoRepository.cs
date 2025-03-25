@@ -4,7 +4,7 @@ using SIAG.CrossCutting.DTOs;
 using SIAG.CrossCutting.Interfaces;
 using SIAG.CrossCutting.Utils;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
-using SIAG.Domain.Armazenagem.Cadastro.Models;
+using SIAG.Domain.Armazenagem.Core.Models;
 using SIAG.Infrastructure.Configuracao;
 
 namespace SIAG.Infrastructure.Armazenagem.Cadastro.Repositorios

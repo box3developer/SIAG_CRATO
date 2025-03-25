@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SIAG.Application.Armazenagem.Cadastro.DTOs;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
+using SIAG.Domain.Armazenagem.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Cadastro.Shared.Mappings
 {

@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SIAG.Domain.Armazenagem.Core.Models
+namespace SIAG.Domain.Armazenagem.Cadastro.Models
 
 {
     [BasicEntity]
     [Table("status_leitor")]
-    public class Status_leitor
+    public class StatusLeitor
     {
         [Key]
         [Column("id_status_leitor")]

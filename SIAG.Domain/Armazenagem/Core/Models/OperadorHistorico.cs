@@ -1,12 +1,12 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
-using System.ComponentModel.DataAnnotations;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Core.Models
 {
     [KeylessEntity]
     [Table("operadorhistorico")]
-    public class Operadorhistorico
+    public class OperadorHistorico
     {
         [Column("id_operador")]
         public long? IdOperador { get; set; }

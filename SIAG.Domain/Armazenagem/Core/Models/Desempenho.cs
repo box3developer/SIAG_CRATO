@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SIAG.Domain.Armazenagem.Attributes;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

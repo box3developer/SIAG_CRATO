@@ -1,10 +1,8 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace SIAG.Domain.Armazenagem.Cadastro.Models
+namespace SIAG.Domain.Armazenagem.Core.Models
 {
     [BasicEntity]
     [Table("ordemcarga")]

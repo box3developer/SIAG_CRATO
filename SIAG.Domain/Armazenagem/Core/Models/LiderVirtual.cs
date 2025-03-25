@@ -1,4 +1,5 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ namespace SIAG.Domain.Armazenagem.Core.Models
 {
     [CustomKeyEntity]
     [Table("lidervirtual")]
-    public class Lidervirtual
+    public class LiderVirtual
     {
         [Key]
         [Column("id_lidervirtual")]

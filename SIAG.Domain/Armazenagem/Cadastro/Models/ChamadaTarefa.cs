@@ -1,4 +1,5 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
+using SIAG.Domain.Armazenagem.Core.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
