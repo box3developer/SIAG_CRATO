@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SIAG.Domain.Armazenagem.Cadastro.Models;
 
 [BasicEntity]
-[Table("atividadetarefa2")]
+[Table("atividadetarefa")]
 public class AtividadeTarefa
 {
     [Key]
-    [Column("id_tarefa2")]
+    [Column("id_tarefa")]
     public int IdTarefa { get; set; }
 
     [Column("nm_tarefa")]

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250326063959_Remove2ChamadaTarefa")]
+    partial class Remove2ChamadaTarefa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,56 +198,6 @@ namespace SIAG.Infrastructure.Migrations
                     b.HasKey("IdAtividadeRotina");
 
                     b.ToTable("atividaderotina");
-                });
-
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", b =>
-                {
-                    b.Property<int>("IdTarefa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id_tarefa");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTarefa"));
-
-                    b.Property<int>("CdSequencia")
-                        .HasColumnType("int")
-                        .HasColumnName("cd_sequencia");
-
-                    b.Property<int?>("FgRecurso")
-                        .HasColumnType("int")
-                        .HasColumnName("fg_recurso");
-
-                    b.Property<int>("IdAtividade")
-                        .HasColumnType("int")
-                        .HasColumnName("id_atividade");
-
-                    b.Property<int>("IdAtividadeRotina")
-                        .HasColumnType("int")
-                        .HasColumnName("id_atividaderotina");
-
-                    b.Property<string>("NmMensagem")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nm_mensagem");
-
-                    b.Property<string>("NmTarefa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("nm_tarefa");
-
-                    b.Property<int>("QtPotenciaAumentada")
-                        .HasColumnType("int")
-                        .HasColumnName("qt_potenciaaumentada");
-
-                    b.Property<int>("QtPotenciaNormal")
-                        .HasColumnType("int")
-                        .HasColumnName("qt_potencianormal");
-
-                    b.HasKey("IdTarefa");
-
-                    b.HasIndex("IdAtividadeRotina");
-
-                    b.ToTable("atividadetarefa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.CaixaLeitura", b =>
@@ -1455,13 +1408,7 @@ namespace SIAG.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id_chamada");
 
-                    b.Property<int>("IdTarefa")
-                        .HasColumnType("int")
-                        .HasColumnName("id_tarefa");
-
                     b.HasIndex("IdChamada");
-
-                    b.HasIndex("IdTarefa");
 
                     b.ToTable("chamadatarefa");
                 });
@@ -2171,17 +2118,6 @@ namespace SIAG.Infrastructure.Migrations
                     b.Navigation("TipoArea");
                 });
 
-            modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", b =>
-                {
-                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRotina", "AtividadeRotina")
-                        .WithMany()
-                        .HasForeignKey("IdAtividadeRotina")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AtividadeRotina");
-                });
-
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.CaixaLeitura", b =>
                 {
                     b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", "Areaarmazenagem")
@@ -2446,15 +2382,7 @@ namespace SIAG.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", "Tarefa")
-                        .WithMany()
-                        .HasForeignKey("IdTarefa")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Chamada");
-
-                    b.Navigation("Tarefa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Desempenho", b =>
