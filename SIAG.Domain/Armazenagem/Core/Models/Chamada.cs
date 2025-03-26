@@ -15,70 +15,70 @@ namespace SIAG.Domain.Armazenagem.Core.Models
 
 
         [Column("id_palletorigem")]
-        public int IdPalletorigem { get; set; }
+        public int? IdPalletorigem { get; set; }
 
         [ForeignKey(nameof(IdPalletorigem))]
         public Pallet? Palletorigem { get; set; }
 
 
         [Column("id_areaarmazenagemorigem")]
-        public long IdAreaarmazenagemorigem { get; set; }
+        public long? IdAreaarmazenagemorigem { get; set; }
 
         [ForeignKey(nameof(IdAreaarmazenagemorigem))]
         public AreaArmazenagem? Areaarmazenagemorigem { get; set; }
 
 
         [Column("id_palletdestino")]
-        public int IdPalletDestino { get; set; }
+        public int? IdPalletDestino { get; set; }
 
         [ForeignKey(nameof(IdPalletDestino))]
         public Pallet? PalletDestino { get; set; }
 
 
         [Column("id_areaarmazenagemdestino")]
-        public long IdAreaarmazenagemdestino { get; set; }
+        public long? IdAreaarmazenagemdestino { get; set; }
 
         [ForeignKey(nameof(IdAreaarmazenagemdestino))]
         public AreaArmazenagem? Areaarmazenagemdestino { get; set; }
 
 
         [Column("id_palletleitura")]
-        public int IdPalletleitura { get; set; }
+        public int? IdPalletleitura { get; set; }
 
         [ForeignKey(nameof(IdPalletleitura))]
         public Pallet? Palletleitura { get; set; }
 
 
         [Column("id_areaarmazenagemleitura")]
-        public long IdAreaarmazenagemleitura { get; set; }
+        public long? IdAreaarmazenagemleitura { get; set; }
 
         [ForeignKey(nameof(IdAreaarmazenagemleitura))]
         public AreaArmazenagem? Areaarmazenagemleitura { get; set; }
 
 
         [Column("id_operador")]
-        public long IdOperador { get; set; }
+        public long? IdOperador { get; set; }
 
         [ForeignKey(nameof(IdOperador))]
         public Operador? Operador { get; set; }
 
 
         [Column("id_equipamento")]
-        public int IdEquipamento { get; set; }
+        public int? IdEquipamento { get; set; }
 
         [ForeignKey(nameof(IdEquipamento))]
         public Equipamento? Equipamento { get; set; }
 
 
         [Column("id_atividaderejeicao")]
-        public int IdAtividaderejeicao { get; set; }
+        public int? IdAtividaderejeicao { get; set; }
 
         [ForeignKey(nameof(IdAtividaderejeicao))]
         public Atividade? Atividaderejeicao { get; set; }
 
 
         [Column("id_atividade")]
-        public int IdAtividade { get; set; }
+        public int? IdAtividade { get; set; }
 
         [ForeignKey(nameof(IdAtividade))]
         public Atividade? Atividade { get; set; }
@@ -88,36 +88,36 @@ namespace SIAG.Domain.Armazenagem.Core.Models
         public int FgStatus { get; set; }
 
         [Column("dt_chamada")]
-        public DateTime DtChamada { get; set; }
+        public DateTime? DtChamada { get; set; }
 
         [Column("dt_atendida")]
-        public DateTime DtAtendida { get; set; }
+        public DateTime? DtAtendida { get; set; }
 
         [Column("dt_finalizada")]
-        public DateTime DtFinalizada { get; set; }
+        public DateTime? DtFinalizada { get; set; }
 
         [Column("dt_recebida")]
-        public DateTime DtRecebida { get; set; }
+        public DateTime? DtRecebida { get; set; }
 
         [Column("dt_rejeitada")]
-        public DateTime DtRejeitada { get; set; }
+        public DateTime? DtRejeitada { get; set; }
 
 
         [Column("id_chamadaorigem")]
-        public Guid IdChamadaorigem { get; set; }
+        public Guid? IdChamadaorigem { get; set; }
 
         [ForeignKey(nameof(IdChamadaorigem))]
         public Chamada? Chamadaorigem { get; set; }
 
 
         [Column("id_chamadasuspensa")]
-        public Guid IdChamadasuspensa { get; set; }
+        public Guid? IdChamadasuspensa { get; set; }
 
         [ForeignKey(nameof(IdChamadasuspensa))]
         public Chamada? Chamadasuspensa { get; set; }
 
 
         [Column("priorizar")]
-        public bool Priorizar { get; set; }
+        public bool? Priorizar { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250326063610_RemoveChamadaTarefa")]
+    partial class RemoveChamadaTarefa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdTipoArea");
 
-                    b.ToTable("areaarmazenagem", (string)null);
+                    b.ToTable("areaarmazenagem");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Atividade", b =>
@@ -124,7 +127,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdAtividade");
 
-                    b.ToTable("atividade", (string)null);
+                    b.ToTable("atividade");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadePrioridade", b =>
@@ -148,7 +151,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdAtividadePrioridade");
 
-                    b.ToTable("atividadeprioridade", (string)null);
+                    b.ToTable("atividadeprioridade");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRejeicao", b =>
@@ -169,7 +172,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdAtividadeRejeicao");
 
-                    b.ToTable("atividaderejeicao", (string)null);
+                    b.ToTable("atividaderejeicao");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRotina", b =>
@@ -194,7 +197,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdAtividadeRotina");
 
-                    b.ToTable("atividaderotina", (string)null);
+                    b.ToTable("atividaderotina");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeTarefa", b =>
@@ -241,7 +244,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdAtividadeRotina");
 
-                    b.ToTable("atividadetarefa", (string)null);
+                    b.ToTable("atividadetarefa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.CaixaLeitura", b =>
@@ -311,7 +314,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdPallet");
 
-                    b.ToTable("caixaleitura", (string)null);
+                    b.ToTable("caixaleitura");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Deposito", b =>
@@ -330,7 +333,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdDeposito");
 
-                    b.ToTable("deposito", (string)null);
+                    b.ToTable("deposito");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Endereco", b =>
@@ -380,7 +383,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdTipoEndereco");
 
-                    b.ToTable("endereco", (string)null);
+                    b.ToTable("endereco");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Equipamento", b =>
@@ -476,7 +479,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdSetorTrabalho");
 
-                    b.ToTable("equipamento", (string)null);
+                    b.ToTable("equipamento");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoChecklist", b =>
@@ -505,7 +508,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdEquipamentoModelo");
 
-                    b.ToTable("equipamentochecklist", (string)null);
+                    b.ToTable("equipamentochecklist");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoEndereco", b =>
@@ -526,7 +529,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdEquipamento");
 
-                    b.ToTable("equipamentoendereco", (string)null);
+                    b.ToTable("equipamentoendereco");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoEnderecoPrioridade", b =>
@@ -545,7 +548,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdEquipamentoEnderecoPrioridade");
 
-                    b.ToTable("equipamentoenderecoprioridade", (string)null);
+                    b.ToTable("equipamentoenderecoprioridade");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoManutencao", b =>
@@ -574,7 +577,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdEquipamento");
 
-                    b.ToTable("equipamentomanutencao", (string)null);
+                    b.ToTable("equipamentomanutencao");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.EquipamentoModelo", b =>
@@ -597,7 +600,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdEquipamentoModelo");
 
-                    b.ToTable("equipamentomodelo", (string)null);
+                    b.ToTable("equipamentomodelo");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.NiveisAgrupadores", b =>
@@ -620,7 +623,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdNiveisagrupadores");
 
-                    b.ToTable("niveisagrupadores", (string)null);
+                    b.ToTable("niveisagrupadores");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Operador", b =>
@@ -663,7 +666,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdOperador");
 
-                    b.ToTable("operador", (string)null);
+                    b.ToTable("operador");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Ordem", b =>
@@ -750,7 +753,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTransportadora");
 
-                    b.ToTable("ordem", (string)null);
+                    b.ToTable("ordem");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Parametro", b =>
@@ -792,7 +795,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdParametro");
 
-                    b.ToTable("parametro", (string)null);
+                    b.ToTable("parametro");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.ParametroMensagemCaracol", b =>
@@ -820,7 +823,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdParametromensagemcaracol");
 
-                    b.ToTable("parametromensagemcaracol", (string)null);
+                    b.ToTable("parametromensagemcaracol");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.PosicaoCaracolRefugo", b =>
@@ -850,7 +853,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdPosicaocaracolrefugo");
 
-                    b.ToTable("posicaocaracolrefugo", (string)null);
+                    b.ToTable("posicaocaracolrefugo");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.RegiaoTrabalho", b =>
@@ -875,7 +878,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdDeposito");
 
-                    b.ToTable("regiaotrabalho", (string)null);
+                    b.ToTable("regiaotrabalho");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.SetorTrabalho", b =>
@@ -899,7 +902,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdDeposito");
 
-                    b.ToTable("setortrabalho", (string)null);
+                    b.ToTable("setortrabalho");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.StatusLeitor", b =>
@@ -938,7 +941,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdStatusLeitor");
 
-                    b.ToTable("status_leitor", (string)null);
+                    b.ToTable("status_leitor");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TempoAtividade", b =>
@@ -1073,7 +1076,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTempoAtividade");
 
-                    b.ToTable("tempoatividade", (string)null);
+                    b.ToTable("tempoatividade");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TipoArea", b =>
@@ -1092,7 +1095,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTipoArea");
 
-                    b.ToTable("tipoarea", (string)null);
+                    b.ToTable("tipoarea");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TipoEndereco", b =>
@@ -1111,7 +1114,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTipoEndereco");
 
-                    b.ToTable("tipoendereco", (string)null);
+                    b.ToTable("tipoendereco");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.TransportadoraTipoCarga", b =>
@@ -1149,7 +1152,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTransportadoraTipoCarga");
 
-                    b.ToTable("transportadoratipocarga", (string)null);
+                    b.ToTable("transportadoratipocarga");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Turno", b =>
@@ -1183,7 +1186,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdTurno");
 
-                    b.ToTable("turno", (string)null);
+                    b.ToTable("turno");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.Uf", b =>
@@ -1198,7 +1201,7 @@ namespace SIAG.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("nm_uf");
 
-                    b.ToTable("uf", (string)null);
+                    b.ToTable("uf");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.AgrupadorAtivo", b =>
@@ -1241,7 +1244,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdAgrupador");
 
-                    b.ToTable("agrupadorativo", (string)null);
+                    b.ToTable("agrupadorativo");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Caixa", b =>
@@ -1324,7 +1327,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdPrograma");
 
-                    b.ToTable("caixa", (string)null);
+                    b.ToTable("caixa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Chamada", b =>
@@ -1435,7 +1438,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdPalletorigem");
 
-                    b.ToTable("chamada", (string)null);
+                    b.ToTable("chamada");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Desempenho", b =>
@@ -1503,7 +1506,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdSetorTrabalho");
 
-                    b.ToTable("desempenho", (string)null);
+                    b.ToTable("desempenho");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.DesempenhoCaixa", b =>
@@ -1542,7 +1545,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdOperador");
 
-                    b.ToTable("desempenhocaixa", (string)null);
+                    b.ToTable("desempenhocaixa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.DesempenhoOnline", b =>
@@ -1592,7 +1595,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdDesempenhoonline");
 
-                    b.ToTable("desempenhoonline", (string)null);
+                    b.ToTable("desempenhoonline");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.EquipamentoCheckListOperador", b =>
@@ -1632,7 +1635,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdOperador");
 
-                    b.ToTable("equipamentochecklistoperador", (string)null);
+                    b.ToTable("equipamentochecklistoperador");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.LiderVirtual", b =>
@@ -1679,7 +1682,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdOperadorlogin");
 
-                    b.ToTable("lidervirtual", (string)null);
+                    b.ToTable("lidervirtual");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Log", b =>
@@ -1719,7 +1722,7 @@ namespace SIAG.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("tipo");
 
-                    b.ToTable("log", (string)null);
+                    b.ToTable("log");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.LogCaracol", b =>
@@ -1765,7 +1768,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("logcaracol", (string)null);
+                    b.ToTable("logcaracol");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.OperadorHistorico", b =>
@@ -1794,7 +1797,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdEquipamento");
 
-                    b.ToTable("operadorhistorico", (string)null);
+                    b.ToTable("operadorhistorico");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.OrdemCarga", b =>
@@ -1824,7 +1827,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdOrdemcarga");
 
-                    b.ToTable("ordemcarga", (string)null);
+                    b.ToTable("ordemcarga");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.OrdemSequencia", b =>
@@ -1850,7 +1853,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdOrdemsequencia");
 
-                    b.ToTable("ordemsequencia", (string)null);
+                    b.ToTable("ordemsequencia");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Pallet", b =>
@@ -1889,7 +1892,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasIndex("IdAreaArmazenagem");
 
-                    b.ToTable("pallet", (string)null);
+                    b.ToTable("pallet");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Pedido", b =>
@@ -2024,7 +2027,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdPedido");
 
-                    b.ToTable("pedido", (string)null);
+                    b.ToTable("pedido");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.Programa", b =>
@@ -2080,7 +2083,7 @@ namespace SIAG.Infrastructure.Migrations
 
                     b.HasKey("IdPrograma");
 
-                    b.ToTable("programa", (string)null);
+                    b.ToTable("programa");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.StatusLuzVerde", b =>
@@ -2094,7 +2097,7 @@ namespace SIAG.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("luz_verde");
 
-                    b.ToTable("statusluzverde", (string)null);
+                    b.ToTable("statusluzverde");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.StatusLuzVermelha", b =>
@@ -2109,7 +2112,7 @@ namespace SIAG.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("luz_vermelha");
 
-                    b.ToTable("statusluzvermelha", (string)null);
+                    b.ToTable("statusluzvermelha");
                 });
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AreaArmazenagem", b =>

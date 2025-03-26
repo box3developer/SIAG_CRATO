@@ -1,9 +1,8 @@
 ﻿using SIAG.Domain.Armazenagem.Attributes;
-using SIAG.Domain.Armazenagem.Core.Models;
-using System.ComponentModel.DataAnnotations;
+using SIAG.Domain.Armazenagem.Cadastro.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SIAG.Domain.Armazenagem.Cadastro.Models
+namespace SIAG.Domain.Armazenagem.Core.Models
 {
     [KeylessEntity]
     [Table("chamadatarefa")]
@@ -17,7 +16,7 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
 
 
         [Column("id_tarefa")]
-        public int IdTarefa{ get; set; }
+        public int IdTarefa { get; set; }
 
         [ForeignKey(nameof(IdTarefa))]
         public AtividadeTarefa? Tarefa { get; set; }
@@ -27,6 +26,6 @@ namespace SIAG.Domain.Armazenagem.Cadastro.Models
         public DateTime DtInicio { get; set; }
 
         [Column("dt_fim")]
-        public DateTime DtFim{ get; set; }
+        public DateTime DtFim { get; set; }
     }
 }

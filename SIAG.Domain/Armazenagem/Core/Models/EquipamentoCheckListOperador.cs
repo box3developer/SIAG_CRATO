@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIAG.Domain.Armazenagem.Core.Models;
 
-[CustomKeyEntity]
+[BasicEntity]
 [Table("equipamentochecklistoperador")]
 public class EquipamentoCheckListOperador
 {

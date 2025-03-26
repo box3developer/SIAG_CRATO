@@ -12,7 +12,7 @@ public class EquipamentoEnderecoPrioridade
     [Column("id_equipamentoenderecoprioridade")]
     public long IdEquipamentoEnderecoPrioridade { get; set; }
 
-    [Column("id_equipamento_endereco")]
+    [Column("id_equipamentoendereco")]
     public long IdEquipamentoEndereco { get; set; }
 
     [Column("prioridade")]
