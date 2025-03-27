@@ -5,25 +5,25 @@ namespace SIAG_CRATO.DTOs.Chamada;
 public class ChamadaDisponivelDTO
 {
     [Column("id_chamada")]
-    public Guid ChamadaId { get; set; }
+    public Guid IdChamada { get; set; }
 
     [Column("dt_chamada")]
     public DateTime DataChamada { get; set; }
 
     [Column("id_atividade")]
-    public int AtividadeId { get; set; }
+    public int IdAtividade { get; set; }
 
     [Column("id_endereco_destino")]
-    public int EnderecoDestinoId { get; set; }
+    public int IdEnderecoDestino { get; set; }
 
     [Column("id_endereco_origem")]
-    public int EnderecoOrigemId { get; set; }
+    public int IdEnderecoOrigem { get; set; }
 
     [Column("qt_prioridade")]
     public int QuatidadePrioridade { get; set; }
 
     [Column("id_areaarmazenagemorigem")]
-    public long AreaAmazenagemOrigemId { get; set; }
+    public long IdAreaAmazenagemOrigem { get; set; }
 
     [Column("fg_processado")]
     public bool Processando { get; set; }

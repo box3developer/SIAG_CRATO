@@ -2,7 +2,7 @@
 
 public class ChamadaSelecionarDTO
 {
-    public int OperadorId { get; set; }
-    public int EquipamentoId { get; set; }
-    public Guid ChamdaId { get; set; }
+    public int IdOperador { get; set; }
+    public int IdEquipamento { get; set; }
+    public Guid IdChamada { get; set; }
 }

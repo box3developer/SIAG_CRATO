@@ -61,7 +61,7 @@ public class ChamadaBLL
         using var conexao = new SqlConnection(Global.Conexao);
         var chamadas = await conexao.QueryAsync<ChamadaDisponivelDTO>(sql, new
         {
-            status = StatusChamada.Andamento,
+            status = StatusChamada.Aguardando,
             idEquipamentoModelo,
             idSetorTrabalho
         });
@@ -170,14 +170,15 @@ public class ChamadaBLL
 
     public static async Task<bool> AtribuirChamadaAsync(ChamadaDTO chamada)
     {
-        var sql = $"{ChamadaQuery.UPDATE_ATRIBUIR} AND fg_status < {StatusChamada.Rejeitado}";
+        var sql = $"{ChamadaQuery.UPDATE_ATRIBUIR} AND fg_status < {(int)StatusChamada.Rejeitado}";
 
         using var conexao = new SqlConnection(Global.Conexao);
         await conexao.ExecuteAsync(sql, new
         {
-            status = chamada.FgStatus,
+            status = (int)chamada.FgStatus,
             idOperador = chamada.IdOperador,
-            idEquipamento = chamada.IdEquipamento
+            idEquipamento = chamada.IdEquipamento,
+            idChamada = chamada.IdChamada
         });
 
         return true;
@@ -209,25 +210,25 @@ public class ChamadaBLL
 
     public static async Task<Guid> Selecionar(ChamadaSelecionarDTO selecao)
     {
-        var equipamento = await EquipamentoBLL.GetByIdAsync(selecao.EquipamentoId);
+        var equipamento = await EquipamentoBLL.GetByIdAsync(selecao.IdEquipamento);
 
         if (equipamento == null)
         {
             throw new Exception("Equipamento não encontrado!");
         }
 
-        var chamada = await GetChamadaAbertaByOperadorAsync(selecao.OperadorId, selecao.EquipamentoId);
+        var chamada = await GetChamadaAbertaByOperadorAsync(selecao.IdOperador, selecao.IdEquipamento);
 
-        if (chamada == null)
+        if (chamada != null)
         {
-            throw new Exception("Chamada não encontrada!");
+            return chamada.IdChamada;
         }
 
         var chamadasPendentes = await GetChamadaDisponiveisAsync(equipamento.IdEquipamentoModelo, equipamento.IdSetorTrabalho ?? 0);
 
         var atividades = await AtividadeBLL.GetListAsync();
 
-        atividades = atividades.Where(x => chamadasPendentes.Select(y => y.AtividadeId).Distinct().Contains(x.IdAtividade)).ToList();
+        atividades = atividades.Where(x => chamadasPendentes.Select(y => y.IdAtividade).Distinct().Contains(x.IdAtividade)).ToList();
         var equipamentosEndereco = new List<EquipamentoEnderecoDTO>();
 
         if (atividades.Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.BloquearEndereco || x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco).Any())
@@ -240,8 +241,8 @@ public class ChamadaBLL
             chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
                                                                                    y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
                                                                        .Select(y => y.IdAtividade)
-                                                                       .Distinct().Contains(x.AtividadeId) &&
-                                                             equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.AreaAmazenagemOrigemId))
+                                                                       .Distinct().Contains(x.IdAtividade) &&
+                                                             equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.IdAreaAmazenagemOrigem))
                                                  .ToList();
         }
 
@@ -252,8 +253,8 @@ public class ChamadaBLL
             chamadasPendentes = chamadasPendentes.Where(x => atividades.Where(y => y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
                                                                                    y.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
                                                                        .Select(y => y.IdAtividade)
-                                                                       .Distinct().Contains(x.AtividadeId) &&
-                                                             equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.AreaAmazenagemOrigemId))
+                                                                       .Distinct().Contains(x.IdAtividade) &&
+                                                             equipamentosEndereco.Select(y => y.IdEndereco).Distinct().Contains(x.IdAreaAmazenagemOrigem))
                                                  .ToList();
         }
 
@@ -264,7 +265,7 @@ public class ChamadaBLL
         {
             chamadasComPrioridade = chamadasPendentes.Where(x => equipamentosPrioridade.Select(y => y.Prioridade.ToString())
                                                                                        .Distinct()
-                                                                                       .Contains(x.AreaAmazenagemOrigemId.ToString().Substring(4, 3)))
+                                                                                       .Contains(x.IdAreaAmazenagemOrigem.ToString().Substring(4, 3)))
                                                       .ToList();
 
             if (chamadasComPrioridade.Count != 0)
@@ -284,16 +285,16 @@ public class ChamadaBLL
 
         foreach (var chamadaParada in chamadasParadas)
         {
-            var prioridade = await GetPrioridadeAsync(chamadaParada.ChamadaId, selecao.EquipamentoId);
+            var prioridade = await GetPrioridadeAsync(chamadaParada.IdChamada, selecao.IdEquipamento);
 
-            foreach (var chamadaUpdate in chamadasPendentes.Where(x => x.ChamadaId == chamadaParada.ChamadaId).ToList())
+            foreach (var chamadaUpdate in chamadasPendentes.Where(x => x.IdChamada == chamadaParada.IdChamada).ToList())
             {
                 chamadaUpdate.Processando = true;
                 chamadaUpdate.QuatidadePrioridade = prioridade;
             }
         }
 
-        return chamada.IdChamada;
+        return chamadasParadas.Select(x => x.IdChamada).First();
     }
 
     public static async Task<int> GetPrioridadeAsync(Guid idChamada, int idEquipamento)
