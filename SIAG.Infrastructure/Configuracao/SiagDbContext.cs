@@ -2,6 +2,8 @@
 using SIAG.Domain.Armazenagem.Attributes;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
 using SIAG.Domain.Armazenagem.Core.Models;
+using SIAG.Domain.Chamada.Cadastro.Models;
+using SIAG.Domain.Chamada.Core.Models;
 using System.Reflection;
 
 namespace SIAG.Infrastructure.Configuracao

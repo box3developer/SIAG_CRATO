@@ -1,7 +1,12 @@
 ﻿using AutoMapper;
 using SIAG.Application.Armazenagem.Cadastro.DTOs;
+using SIAG.Application.Armazenagem.Core.DTOs;
+using SIAG.Application.Chamada.Cadastro.DTOs;
+using SIAG.Application.Chamada.Core.DTOs;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
 using SIAG.Domain.Armazenagem.Core.Models;
+using SIAG.Domain.Chamada.Cadastro.Models;
+using SIAG.Domain.Chamada.Core.Models;
 
 namespace SIAG.Application.Armazenagem.Cadastro.Shared.Mappings
 {
@@ -14,7 +19,7 @@ namespace SIAG.Application.Armazenagem.Cadastro.Shared.Mappings
             CreateMap<AtividadeDTO, Atividade>().ReverseMap();
             CreateMap<CaixaDTO, Caixa>().ReverseMap();
             CreateMap<CaixaLeituraDTO, CaixaLeitura>().ReverseMap();
-            CreateMap<ChamadaDTO, Chamada>().ReverseMap();
+            CreateMap<ChamadaDTO, Domain.Chamada.Core.Models.Chamada>().ReverseMap();
             CreateMap<DepositoDTO, Deposito>().ReverseMap();
             CreateMap<DesempenhoDTO, Desempenho>().ReverseMap();
             CreateMap<DesempenhoCaixaDTO, DesempenhoCaixa>().ReverseMap();

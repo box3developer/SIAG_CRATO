@@ -175,8 +175,11 @@ namespace SIAG.Infrastructure.Migrations
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Cadastro.Models.AtividadeRotina", b =>
                 {
                     b.Property<int>("IdAtividadeRotina")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("id_atividaderotina");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAtividadeRotina"));
 
                     b.Property<int>("FgTipo")
                         .HasColumnType("int")
@@ -1443,11 +1446,11 @@ namespace SIAG.Infrastructure.Migrations
 
             modelBuilder.Entity("SIAG.Domain.Armazenagem.Core.Models.ChamadaTarefa", b =>
                 {
-                    b.Property<DateTime>("DtFim")
+                    b.Property<DateTime?>("DtFim")
                         .HasColumnType("datetime2")
                         .HasColumnName("dt_fim");
 
-                    b.Property<DateTime>("DtInicio")
+                    b.Property<DateTime?>("DtInicio")
                         .HasColumnType("datetime2")
                         .HasColumnName("dt_inicio");
 

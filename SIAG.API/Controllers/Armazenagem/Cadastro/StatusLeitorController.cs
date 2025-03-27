@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SIAG.Application.Armazenagem.Cadastro.DTOs;
 using SIAG.Application.Armazenagem.Cadastro.Services.Interfaces;
+using SIAG.Application.Armazenagem.Core.DTOs;
 using SIAG.Domain.Armazenagem.Cadastro.Interfaces;
 using SIAG.Domain.Armazenagem.Cadastro.Models;
 

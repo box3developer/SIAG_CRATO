@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using SIAG.Application.Armazenagem.Cadastro.DTOs;
+using SIAG.Application.Armazenagem.Core.DTOs;
 
 namespace SIAG.Application.Armazenagem.Cadastro.Validators
 {

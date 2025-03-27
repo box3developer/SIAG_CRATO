@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Armazenagem\Core\Interfaces\" />
-    <Folder Include="Chamada\Cadastro\" />
-    <Folder Include="Chamada\Core\" />
   </ItemGroup>
 
   <ItemGroup>
