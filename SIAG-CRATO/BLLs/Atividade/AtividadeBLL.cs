@@ -82,6 +82,7 @@ public class AtividadeBLL
             FgPermiteRejeitar = atividade.FgPermiteRejeitar,
             FgTipoAtribuicaoAutomatica = atividade.FgTipoAtribuicaoAutomatica,
             FgEvitaConflitoEndereco = atividade.FgEvitaConflitoEndereco,
+            Duracao = atividade.Duracao,
         };
     }
 }

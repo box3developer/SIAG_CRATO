@@ -13,4 +13,5 @@ public class AtividadeDTO
     public RejeicaoTarefa FgPermiteRejeitar { get; set; }
     public TipoAtribuicaoAutomatica FgTipoAtribuicaoAutomatica { get; set; }
     public ConflitoDeEnderecos FgEvitaConflitoEndereco { get; set; }
+    public TimeSpan Duracao { get; set; }
 }
