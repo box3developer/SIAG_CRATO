@@ -75,11 +75,11 @@ public class ChamadaBLL
     {
         var sql = $@"{ChamadaQuery.SELECT} 
                      WHERE (id_operador = @idOperador or id_equipamento = @idEquipamento)
-                           AND fg_status > @status
+                           AND fg_status < @status
                      ORDER BY fg_status desc, dt_chamada desc";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, status = StatusChamada.Aguardando });
+        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, status = StatusChamada.Rejeitado });
 
         if (chamada == null)
         {
