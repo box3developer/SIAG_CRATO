@@ -14,7 +14,7 @@ namespace SIAG_CRATO.BLLs.Operador;
 
 public class OperadorBLL
 {
-    public static async Task<OperadorDTO?> GetByCrachaAsync(string cracha)
+    public static async Task<OperadorDTO?> GetByCrachaAsync(long cracha)
     {
         var sql = $"{OperadorQuery.SELECT} WHERE id_operador = @cracha";
 
@@ -121,19 +121,19 @@ public class OperadorBLL
         return meta;
     }
 
-    public static async Task<bool> Login(int id_operador, int id_equipamento)
+    public static async Task<bool> Login(long id_operador, int id_equipamento)
     {
 
         await LogOff(id_operador, id_equipamento);
 
         await EquipamentoBLL.SetEquipamentoOperador(id_operador, id_equipamento);
         await EquipamentoManutencaoBLL.SetDtFimByEquipamento(id_equipamento);
-        await OperadorHistoricoBLL.SetHistorico(id_operador, id_equipamento);
+        await OperadorHistoricoBLL.SetHistorico(id_operador, id_equipamento, 1);
         //....sp_siag_alocacaoautomaticabilaterais
         return true;
     }
 
-    public static async Task<bool> LogOff(int id_operador, int id_equipamento)
+    public static async Task<bool> LogOff(long id_operador, int id_equipamento)
     {
         if (id_operador == 0 || id_equipamento == 0)
         {
@@ -148,6 +148,9 @@ public class OperadorBLL
 
         using var conexao = new SqlConnection(Global.Conexao);
         var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR_LOGOFF, new { id_equipamento = getEquip.IdEquipamento });
+
+
+        await OperadorHistoricoBLL.SetHistorico(id_operador, id_equipamento, 1);
 
         //....sp_siag_alocacaoautomaticabilaterais
         return result > 0;

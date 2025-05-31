@@ -133,7 +133,7 @@ public class EquipamentoBLL
         return id > 0;
     }
 
-    public static async Task<bool> SetEquipamentoOperador(int id_operador, int id_equipamento)
+    public static async Task<bool> SetEquipamentoOperador(long id_operador, int id_equipamento)
     {
         using var conexao = new SqlConnection(Global.Conexao);
         var result = await conexao.ExecuteAsync(EquipamentoQuery.UPDATE_EQUIPAMENTO_OPERADOR, new { id_operador, id_equipamento });

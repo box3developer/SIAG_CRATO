@@ -98,13 +98,11 @@ public class ChamadaController : ControllerCustom
             var chamada = await ChamadaBLL.GetByIdAsync(id);
 
             if (chamada == null || chamada.FgStatus >= StatusChamada.Rejeitado)
-            {
-                return BadRequest("Chamada não encontrada!");
-            }
+                throw new ValidacaoException("Tarefa não encontrada");
 
             await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, chamada.IdAtividadeRejeicao);
 
-            return Ok();
+            return Ok(true);
         }
         catch (Exception ex)
         {

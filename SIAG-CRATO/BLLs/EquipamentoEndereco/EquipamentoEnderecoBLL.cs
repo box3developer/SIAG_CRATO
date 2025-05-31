@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.EquipamentoEndereco;
 using SIAG_CRATO.Models;
@@ -18,7 +19,7 @@ public class EquipamentoEnderecoBLL
 
     public static async Task<List<EquipamentoEnderecoDTO>> GetByEquipamentoAsync(int idEquipamento)
     {
-        var sql = $"{EquipamentoEnderecoPrioridadeQuery.SELECT} WHERE id_equipamento = @idEquipamento";
+        var sql = $"{EquipamentoQuery.SELECT} WHERE id_equipamento = @idEquipamento";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var equipamentos = await conexao.QueryAsync<EquipamentoEnderecoModel>(sql, new { idEquipamento });
@@ -28,7 +29,7 @@ public class EquipamentoEnderecoBLL
 
     public static async Task<List<EquipamentoEnderecoDTO>> GetOutrosEquipamentosAtivosAsync(int idEquipamento, int idEquipamentoModelo, int idSetorTrabalho, DateTime dataMovimentacaoAtiva, DateTime dataMovimentacaoInativa)
     {
-        var sql = $@"{EquipamentoEnderecoPrioridadeQuery.SELECT} 
+        var sql = $@"{EquipamentoQuery.SELECT} 
                      WHERE id_equipamentomodelo = @idEquipamentoModelo
                            AND id_setortrabalho = @idSetorTrabalho
                            AND fg_status = @status

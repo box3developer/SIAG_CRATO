@@ -10,7 +10,7 @@ namespace SIAG_CRATO.Controllers;
 public class OperadorController : ControllerCustom
 {
     [HttpGet("{cracha}")]
-    public async Task<ActionResult<OperadorDTO>> GetByCracha(string cracha)
+    public async Task<ActionResult<OperadorDTO>> GetByCracha(long cracha)
     {
         try
         {
@@ -74,16 +74,9 @@ public class OperadorController : ControllerCustom
     {
         try
         {
-            var sucesso = await OperadorBLL.Login(login.IdOperador, login.IdEquipamento);
+            var response = await OperadorBLL.Login(login.IdOperador, login.IdEquipamento);
 
-            if (sucesso)
-            {
-                return Ok("Login realizado com sucesso.");
-            }
-            else
-            {
-                return Unauthorized("Credenciais inválidas ou usuário não autorizado.");
-            }
+            return Ok(response);
         }
         catch (Exception ex)
         {
