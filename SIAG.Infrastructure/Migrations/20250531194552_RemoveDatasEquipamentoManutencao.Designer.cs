@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250531194552_RemoveDatasEquipamentoManutencao")]
+    partial class RemoveDatasEquipamentoManutencao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -386,14 +389,6 @@ namespace SIAG.Infrastructure.Migrations
                     b.Property<int>("IdEquipamentoManutencao")
                         .HasColumnType("int")
                         .HasColumnName("id_equipamentomanutencao");
-
-                    b.Property<DateTime>("DtFim")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("dt_fim");
-
-                    b.Property<DateTime>("DtInicio")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("dt_inicio");
 
                     b.Property<int>("FgTipoManutencao")
                         .HasColumnType("int")

@@ -21,8 +21,8 @@ public class EquipamentoManutencao
     public int FgTipoManutencao { get; set; }
 
     [Column("dt_inicio")]
-    public int DtInicio { get; set; }
+    public DateTime DtInicio { get; set; }
 
     [Column("dt_fim")]
-    public int DtFim { get; set; }
+    public DateTime DtFim { get; set; }
 }
