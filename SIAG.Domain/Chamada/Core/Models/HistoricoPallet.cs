@@ -56,6 +56,6 @@ namespace SIAG.Domain.Chamada.Core.Models
         public Operador? Operador { get; set; }
 
         [Column("nm_historico")]
-        public string NmHistorico { get; set; } = string.Empty;
+        public string? NmHistorico { get; set; } = string.Empty;
     }
 }
