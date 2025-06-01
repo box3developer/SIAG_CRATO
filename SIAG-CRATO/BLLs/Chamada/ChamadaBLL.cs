@@ -10,6 +10,7 @@ using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
 using SIAG_CRATO.DTOs.EquipamentoEndereco;
 using SIAG_CRATO.Models;
+using SIAG_CRATO.Repositotories.Implementations;
 using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.BLLs.Chamada;
@@ -508,43 +509,30 @@ public class ChamadaBLL
             };
         }
 
-        if (filtro.AtividadeRotina.FgTipo == TipoRotina.MetodoClasse)
+        if (filtro.Chamada == null)
         {
-            return new()
-            {
-                Valido = false
-            };
+            throw new Exception("Deve ser informado a chamada referente.");
         }
-        else
+
+        // Cria a conexão que será usada pelo repositório
+        using var conexao = new SqlConnection(Global.Conexao);
+        // Instancia o repositório e o serviço que chamam os métodos correspondentes
+        var repository = new AtividadeRotinaRepository(conexao);
+        var rotinaService = new RotinaService(repository);
+
+        // Executa a rotina mapeada a partir do enum
+        var resultado = await rotinaService.ExecutarRotinaAsync(
+            (Services.Rotina)filtro.AtividadeRotina.Value,
+            filtro.Chamada.IdChamada
+        ).ConfigureAwait(false);
+
+        return new()
         {
-            if (filtro.Chamada == null)
-            {
-                throw new Exception("Deve ser informado a chamada referente.");
-            }
-
-            var filtros = new Dictionary<string, object>
-            {
-                { "@id_chamada", filtro.Chamada.IdChamada }
-            };
-
-            var parametros = new DynamicParameters(filtros);
-            parametros.Add("@mensagem", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-            parametros.Add("@RetVal", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-
-            using var conexao = new SqlConnection(Global.Conexao);
-
-            var linhas = await conexao.ExecuteAsync(filtro.AtividadeRotina.NmProcedure, parametros, commandType: CommandType.StoredProcedure);
-
-            var outputMsg = parametros.Get<string?>("@mensagem");
-            var outputIdParam = parametros.Get<int?>("@RetVal");
-
-            return new()
-            {
-                Valido = (outputIdParam ?? 0) > 0,
-                Mensagem = outputMsg ?? ""
-            };
-        }
+            Valido = resultado.IsValid,
+            Mensagem = resultado.Mensagem
+        };
     }
+
 
     private static ChamadaDTO ConvertToDTO(ChamadaModel chamada)
     {
