@@ -24,6 +24,6 @@ namespace SIAG.Domain.Chamada.Core.Models
         public int? IdRegistro { get; set; }
 
         [Column("ds_operacao")]
-        public int? DsOperacao { get; set; }
+        public string? DsOperacao { get; set; }
     }
 }
