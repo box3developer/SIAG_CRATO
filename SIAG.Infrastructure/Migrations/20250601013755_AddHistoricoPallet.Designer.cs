@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250601013755_AddHistoricoPallet")]
+    partial class AddHistoricoPallet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2152,10 +2155,6 @@ namespace SIAG.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdHistoricoPallet"));
 
-                    b.Property<DateTime?>("DtEvento")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("dt_evento");
-
                     b.Property<long?>("IdAreaarmazenagem")
                         .HasColumnType("bigint")
                         .HasColumnName("id_areaarmazenagem");
@@ -2167,6 +2166,10 @@ namespace SIAG.Infrastructure.Migrations
                     b.Property<Guid?>("IdChamada")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id_chamada");
+
+                    b.Property<int?>("IdEvento")
+                        .HasColumnType("int")
+                        .HasColumnName("id_evento");
 
                     b.Property<long?>("IdOperador")
                         .HasColumnType("bigint")
