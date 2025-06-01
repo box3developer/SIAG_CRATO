@@ -152,6 +152,7 @@ VALUES
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -324,6 +325,7 @@ VALUES
                 };
             }
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -576,6 +578,7 @@ UPDATE caixa
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -743,6 +746,7 @@ UPDATE areaarmazenagem
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -921,6 +925,7 @@ VALUES
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -1078,6 +1083,7 @@ UPDATE chamada
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -1151,6 +1157,7 @@ UPDATE areaarmazenagem
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -1358,6 +1365,7 @@ WHERE nm_parametro = @ParamAtividade;
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -1639,6 +1647,7 @@ UPDATE chamada
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -1873,6 +1882,7 @@ UPDATE agrupadorativo
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -2089,6 +2099,7 @@ UPDATE areaarmazenagem
                 Mensagem = string.Empty
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -2284,6 +2295,7 @@ WHERE id_endereco = @IdEndereco;
                 Mensagem = mensagem
             };
         }
+        catch{return null;}
         finally
         {
             if (_dbConnection.State == ConnectionState.Open)
@@ -2499,10 +2511,11 @@ VALUES
                 Mensagem = $"O pallet {idPalletLeitura} não é o esperado!"
             };
         }
-        finally
-        {
-            if (_dbConnection.State == ConnectionState.Open)
-                _dbConnection.Close();
-        }
+        catch { return null; }
+        //finally
+        //{
+        //    if (_dbConnection.State == ConnectionState.Open)
+        //        _dbConnection.Close();
+        //}
     }
 }

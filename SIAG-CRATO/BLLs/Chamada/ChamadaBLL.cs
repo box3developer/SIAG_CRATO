@@ -524,7 +524,7 @@ public class ChamadaBLL
         var resultado = await rotinaService.ExecutarRotinaAsync(
             (Services.Rotina)filtro.AtividadeRotina.Value,
             filtro.Chamada.IdChamada
-        ).ConfigureAwait(false);
+        );
 
         return new()
         {
