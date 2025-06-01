@@ -23,6 +23,7 @@ namespace SIAG.Infrastructure.Configuracao
         public DbSet<CaixaLeitura> CaixaLeitura { get; set; }
         public DbSet<Chamada> Chamada { get; set; }
         public DbSet<ChamadaTarefa> ChamadaTarefa { get; set; }
+        public DbSet<Historico> Historico { get; set; }
         public DbSet<HistoricoPallet> HistoricoPallet { get; set; }
         public DbSet<Deposito> Deposito { get; set; }
         public DbSet<Desempenho> Desempenho { get; set; }
