@@ -4,6 +4,8 @@ using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
+using SIAG_CRATO.Repositories.Interfaces;
+using SIAG_CRATO.Services;
 using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
@@ -11,6 +13,13 @@ namespace SIAG_CRATO.Controllers;
 [ApiController]
 public class ChamadaController : ControllerCustom
 {
+    private readonly IChamadaRepository _chamadaRepository;
+
+    public ChamadaController(IChamadaRepository chamadaRepository)
+    {
+        _chamadaRepository = chamadaRepository;
+    }
+
     [HttpPost]
     public async Task<ActionResult> CriarChamada([FromBody] ChamadaInsertDTO chamada)
     {
@@ -193,6 +202,21 @@ public class ChamadaController : ControllerCustom
         try
         {
             var result = await ChamadaBLL.ValidarLeituraChamada(filtro);
+
+            return OkResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost("criar")]
+    public async Task<ActionResult> CriarChamadaAsync([FromBody] CriarChamadaDTO dto)
+    {
+        try
+        {
+            var result = await _chamadaRepository.CriarChamadaAsync(dto);
 
             return OkResponse(result);
         }
