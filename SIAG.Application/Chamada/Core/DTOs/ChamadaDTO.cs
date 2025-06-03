@@ -19,12 +19,12 @@ namespace SIAG.Application.Chamada.Core.DTOs
         public AreaArmazenagemDTO? Areaarmazenagemorigem { get; set; }
 
 
-        public int IdPalletDestino { get; set; }
+        public int? IdPalletDestino { get; set; }
 
         public PalletDTO? PalletDestino { get; set; }
 
 
-        public long IdAreaarmazenagemdestino { get; set; }
+        public long? IdAreaarmazenagemdestino { get; set; }
 
         public AreaArmazenagemDTO? Areaarmazenagemdestino { get; set; }
 
