@@ -270,7 +270,7 @@ public class ChamadaBLL
             var idsEnderecos = equipamentosEndereco.Select(x => x.IdEndereco).ToList();
 
             chamadasPendentes = chamadasPendentes.Where(x =>
-                                                    !(atividadesDeOutraZona.Contains(x.IdAtividade) &&
+                                                    (atividadesDeOutraZona.Contains(x.IdAtividade) &&
                                                     !idsEnderecos.Contains(x.IdEnderecoOrigem)))
                                                  .ToList();
         }
@@ -320,7 +320,6 @@ public class ChamadaBLL
 
         var chamadaSelecioanda = chamadasParadas
                                     .Where(x => x.QuatidadePrioridade >= 0)
-                                    .OrderBy(x => x)
                                     .OrderByDescending(x => x.QuatidadePrioridade)
                                     .OrderBy(x => x.DataChamada)
                                     .Select(x => x.IdChamada)
