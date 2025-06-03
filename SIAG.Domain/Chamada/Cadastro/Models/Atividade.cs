@@ -36,6 +36,9 @@ namespace SIAG.Domain.Chamada.Cadastro.Models
         [Column("fg_evitaconflitoendereco")]
         public int? FgEvitaconflitoendereco { get; set; }
 
+        [Column("fg_tipoatividade")]
+        public int? FgTipoAtividade { get; set; }
+
         [Column("duracao")]
         public TimeSpan? Duracao { get; set; }
     }

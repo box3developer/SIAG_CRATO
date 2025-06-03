@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIAG.Infrastructure.Configuracao;
 
@@ -11,9 +12,11 @@ using SIAG.Infrastructure.Configuracao;
 namespace SIAG.Infrastructure.Migrations
 {
     [DbContext(typeof(SiagDbContext))]
-    partial class SiagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603202631_AddColumnFgTipoAtividade")]
+    partial class AddColumnFgTipoAtividade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
