@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Atividade;
 using SIAG_CRATO.Models;
 
@@ -82,6 +83,7 @@ public class AtividadeBLL
             FgPermiteRejeitar = atividade.FgPermiteRejeitar,
             FgTipoAtribuicaoAutomatica = atividade.FgTipoAtribuicaoAutomatica,
             FgEvitaConflitoEndereco = atividade.FgEvitaConflitoEndereco,
+            FgTipoAtividade = atividade.FgTipoAtividade,
             Duracao = atividade.Duracao,
         };
     }

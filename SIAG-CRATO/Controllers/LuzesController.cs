@@ -98,6 +98,37 @@ public class LuzesController : ControllerCustom
         }
     }
 
+    [HttpPost("luzAmarela/ligar")]
+    public async Task<IActionResult> PostLuzAmarelaLigar([FromBody] LuzesFiltroDTO filtro)
+    {
+        try
+        {
+            var result = await NodeRedIntegration.AcenderLuzAmarela(filtro.Caracol, filtro.Gaiola);
+
+            return OkResponse(true);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+    [HttpPost("luzAmarela/desligar")]
+    public async Task<IActionResult> PostLuzAmarelaDesligar([FromBody] LuzesFiltroDTO filtro)
+    {
+        try
+        {
+            var result = await NodeRedIntegration.ApagarLuzAmarela(filtro.Caracol, filtro.Gaiola);
+
+            return OkResponse(true);
+        }
+        catch (Exception ex)
+        {
+            return HandleException(ex);
+        }
+    }
+
+
     [HttpGet("luzVerde/desligar")]
     public async Task<IActionResult> GetLuzVerdeDesligar()
     {

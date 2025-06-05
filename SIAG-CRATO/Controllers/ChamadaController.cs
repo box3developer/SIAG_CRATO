@@ -99,8 +99,8 @@ public class ChamadaController : ControllerCustom
         }
     }
 
-    [HttpPost("{id}/rejeitar")]
-    public async Task<ActionResult> RejeitarChamada(Guid id)
+    [HttpPost("rejeitar/{id}/{idMotivo}")]
+    public async Task<ActionResult> RejeitarChamada(Guid id, int idMotivo)
     {
         try
         {
@@ -112,7 +112,7 @@ public class ChamadaController : ControllerCustom
             if (chamada.FgStatus >= StatusChamada.Rejeitado)
                 throw new ValidacaoException("Tarefa já rejeitada");
 
-            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, chamada.IdAtividadeRejeicao);
+            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, idMotivo);
 
             return Ok(true);
         }
@@ -135,6 +135,19 @@ public class ChamadaController : ControllerCustom
             }
 
             await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
+
+            if (chamada.IdAtividade == 1)
+            {
+                await _chamadaRepository.CriarChamadaAsync(new CriarChamadaDTO
+                {
+                    IdAtividade = 2,
+                    IdPalletOrigem = chamada.IdPalletOrigem,
+                    IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+                    IdPalletDestino = chamada.IdPalletOrigem,
+                    IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemOrigem,
+                    Priorizar = false
+                });
+            }
 
             return Ok();
         }

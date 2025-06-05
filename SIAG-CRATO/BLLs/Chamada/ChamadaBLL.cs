@@ -258,7 +258,7 @@ public class ChamadaBLL
         }
 
         var atividadesDeOutraZona = atividades
-                                        .Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.BloquearEndereco ||
+                                        .Where(x => x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZona ||
                                                     x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
                                         .Select(x => x.IdAtividade)
                                         .ToList();
@@ -270,7 +270,7 @@ public class ChamadaBLL
             var idsEnderecos = equipamentosEndereco.Select(x => x.IdEndereco).ToList();
 
             chamadasPendentes = chamadasPendentes.Where(x =>
-                                                    (atividadesDeOutraZona.Contains(x.IdAtividade) &&
+                                                    !(atividadesDeOutraZona.Contains(x.IdAtividade) &&
                                                     !idsEnderecos.Contains(x.IdEnderecoOrigem)))
                                                  .ToList();
         }

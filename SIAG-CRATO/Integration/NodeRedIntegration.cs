@@ -52,7 +52,20 @@ public class NodeRedIntegration
     {
         try
         {
-            await client.GetAsync($"{url}/vm/{caracol}/{gaiola - 1}");
+            await client.GetAsync($"{url}/vm/{caracol}/{gaiola}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public static async Task<bool> AcenderLuzAmarela(int caracol, int gaiola)
+    {
+        try
+        {
+            await client.GetAsync($"{url}/am/{caracol}/{gaiola}");
             return true;
         }
         catch (Exception ex)
@@ -78,7 +91,20 @@ public class NodeRedIntegration
     {
         try
         {
-            await client.GetAsync($"{url}/apagaluzvm/{caracol}/{gaiola - 1}");
+            await client.GetAsync($"{url}/apagaluzvm/{caracol}/{gaiola}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public static async Task<bool> ApagarLuzAmarela(int caracol, int gaiola)
+    {
+        try
+        {
+            await client.GetAsync($"{url}/apagaluzam/{caracol}/{gaiola}");
             return true;
         }
         catch (Exception ex)
