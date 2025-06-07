@@ -11,6 +11,8 @@
         public int? IdPalletDestino { get; set; }
 
         public long? IdAreaArmazenagemDestino { get; set; }
+        public long? IdOperador { get; set; }
+        public int? IdEquipamento { get; set; }
 
         public bool? Priorizar { get; set; } = false;
     }

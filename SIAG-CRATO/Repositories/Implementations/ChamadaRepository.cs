@@ -27,11 +27,11 @@ namespace SIAG_CRATO.Repositories.Implementations
 INSERT INTO chamada
     (id_chamada, id_palletorigem, id_areaarmazenagemorigem,
      id_palletdestino, id_areaarmazenagemdestino, id_atividade,
-     fg_status, dt_chamada, priorizar)
+     fg_status, dt_chamada, priorizar, id_operador, id_equipamento)
 VALUES
     (@ChamadaId, @PalletOrigem, @AreaOrigem,
      @PalletDestino, @AreaDestino, @Atividade,
-     @StatusIncompleta, GETDATE(), @Priorizar);";
+     @StatusIncompleta, GETDATE(), @Priorizar, @IdOperador, @IdEquipamento);";
 
                 var insertParams = new
                 {
@@ -42,7 +42,9 @@ VALUES
                     AreaDestino = dto.IdAreaArmazenagemDestino,
                     Atividade = dto.IdAtividade,
                     StatusIncompleta = STATUS_CHAMADA_INCOMPLETA,
-                    Priorizar = dto.Priorizar
+                    Priorizar = dto.Priorizar,
+                    IdOperador = dto.IdOperador,
+                    IdEquipamento = dto.IdEquipamento
                 };
 
                 await connection.ExecuteAsync(

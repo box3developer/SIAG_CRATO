@@ -145,6 +145,8 @@ public class ChamadaController : ControllerCustom
                     IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
                     IdPalletDestino = chamada.IdPalletOrigem,
                     IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemOrigem,
+                    IdOperador = chamada.IdOperador,
+                    IdEquipamento = chamada.IdEquipamento,
                     Priorizar = false
                 });
             }
