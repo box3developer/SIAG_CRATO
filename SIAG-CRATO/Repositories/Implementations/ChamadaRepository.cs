@@ -108,6 +108,30 @@ WHERE id_chamada = @ChamadaId;";
             }
         }
 
+
+        public async Task<bool> LivraPallet(int IdPallet)
+        {
+            var sqlPallet = @"UPDATE pallet
+                   SET id_areaarmazenagem = NULL,
+                       fg_status = 1,
+                       id_agrupador = NULL
+                 WHERE id_pallet = @IdPallet
+            ";
+
+            var sqlCaixa = @"UPDATE caixa
+                SET id_pallet = NULL
+                WHERE id_pallet = @IdPallet
+            ";
+
+            using (var conexao = new SqlConnection(Global.Conexao))
+            {
+                await conexao.ExecuteAsync(sqlPallet, new { IdPallet });
+                await conexao.ExecuteAsync(sqlCaixa, new { IdPallet });
+            }
+
+            return true;
+        }
+
         private class Tarefa
         {
             public int IdTarefa { get; set; }

@@ -151,6 +151,12 @@ public class ChamadaController : ControllerCustom
                 });
             }
 
+            if(chamada.IdAtividade == 2)
+            {
+                await _chamadaRepository.LivraPallet(chamada.IdPalletLeitura);
+            }
+
+
             return Ok();
         }
         catch (Exception ex)

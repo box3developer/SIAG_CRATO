@@ -6,5 +6,6 @@ namespace SIAG_CRATO.Repositories.Interfaces
     public interface IChamadaRepository
     {
         public Task<Guid> CriarChamadaAsync(CriarChamadaDTO dto);
+        public Task<bool> LivraPallet(int IdPallet);
     }
 }
