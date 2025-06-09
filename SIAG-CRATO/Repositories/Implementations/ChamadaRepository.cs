@@ -112,8 +112,7 @@ WHERE id_chamada = @ChamadaId;";
         public async Task<bool> LivraPallet(int IdPallet)
         {
             var sqlPallet = @"UPDATE pallet
-                   SET id_areaarmazenagem = NULL,
-                       fg_status = 1,
+                   SET fg_status = 1,
                        id_agrupador = NULL
                  WHERE id_pallet = @IdPallet
             ";

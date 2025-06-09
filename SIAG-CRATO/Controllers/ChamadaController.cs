@@ -149,13 +149,9 @@ public class ChamadaController : ControllerCustom
                     IdEquipamento = chamada.IdEquipamento,
                     Priorizar = false
                 });
-            }
 
-            if(chamada.IdAtividade == 2)
-            {
                 await _chamadaRepository.LivraPallet(chamada.IdPalletLeitura);
             }
-
 
             return Ok();
         }
