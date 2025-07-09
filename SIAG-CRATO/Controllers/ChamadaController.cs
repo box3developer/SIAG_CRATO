@@ -150,7 +150,7 @@ public class ChamadaController : ControllerCustom
                     Priorizar = false
                 });
 
-                await _chamadaRepository.LivraPallet(chamada.IdPalletLeitura);
+                //await _chamadaRepository.LivraPallet(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemOrigem);
             }
 
             return Ok();

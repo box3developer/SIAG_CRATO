@@ -27,7 +27,12 @@ public class RotinaService
                 return await _repository.VerificaDesalocaPalletOrigemAsync(idChamada);
 
             case Rotina.AtribuiPalletNoEnderecoOrigem:
-                return await _repository.AlocarPalletLivreAsync(idChamada);
+                {
+                    _ = await _repository.AlocarPalletLivreAsync(idChamada);
+                    var palletStageIn = await _repository.LeituraBufferAsync(idChamada);
+
+                    return palletStageIn;
+                }
 
             case Rotina.LePalletDoBuffer:
                 return await _repository.LeituraBufferAsync(idChamada);

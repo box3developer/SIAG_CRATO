@@ -1377,18 +1377,8 @@ WHERE nm_parametro = @ParamAtividade;
     {
         // Constantes definidas na SP
         const int TIPO_ENDERECO_BUFFER = 4;
-        const long ID_AREA_LEITURA1 = 100800000;
-        const long ID_AREA_LEITURA2 = 100900000;
-        const long ID_AREA_LEITURA3 = 100801000;
-        const long ID_AREA_LEITURA4 = 100802000;
-        const long ID_AREA_LEITURA5 = 100803000;
-        const long ID_AREA_LEITURA6 = 100804000;
-        const long ID_AREA_LEITURA7 = 100805000;
-        const long ID_AREA_LEITURA8 = 100806000;
         const int STATUS_AREA_LIVRE = 1;
         const string PARAM_STAGEIN = "TIPO AREA STAGEIN";
-        const byte STATUS_CAIXA_ARMAZENADA = 4;
-        const byte STATUS_PALLET_CHEIO = 3;
         const int RESPONSABILIDADE_DEFAULT = 7508;
 
         // 1) Buscar dados iniciais da 'chamada'
@@ -1427,20 +1417,7 @@ WHERE id_chamada = @IdChamada;
             var idOperador = chamadaDados.IdOperador;
             var idAtividade = chamadaDados.IdAtividade;
 
-            // 2) Verificar se a área de leitura está entre as áreas válidas
-            var areasValidas = new HashSet<long>
-                {
-                    ID_AREA_LEITURA1,
-                    ID_AREA_LEITURA2,
-                    ID_AREA_LEITURA3,
-                    ID_AREA_LEITURA4,
-                    ID_AREA_LEITURA5,
-                    ID_AREA_LEITURA6,
-                    ID_AREA_LEITURA7,
-                    ID_AREA_LEITURA8
-                };
-
-            if (!idAreaLeitura.HasValue || !areasValidas.Contains(idAreaLeitura.Value))
+            if (!idAreaLeitura.HasValue)
             {
                 return new ValidacaoEnderecoResult
                 {

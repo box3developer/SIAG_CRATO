@@ -109,7 +109,7 @@ WHERE id_chamada = @ChamadaId;";
         }
 
 
-        public async Task<bool> LivraPallet(int IdPallet)
+        public async Task<bool> LivraPallet(int IdPallet, long IdAreaArmazenagem)
         {
             var sqlPallet = @"UPDATE pallet
                    SET fg_status = 1,
@@ -122,10 +122,15 @@ WHERE id_chamada = @ChamadaId;";
                 WHERE id_pallet = @IdPallet
             ";
 
+            var sqlArea = @"UPDATE areaarmazenagem
+                SET id_agrupador_reservado = NULL
+            ";
+
             using (var conexao = new SqlConnection(Global.Conexao))
             {
                 await conexao.ExecuteAsync(sqlPallet, new { IdPallet });
                 await conexao.ExecuteAsync(sqlCaixa, new { IdPallet });
+                await conexao.ExecuteAsync(sqlArea, new { IdAreaArmazenagem });
             }
 
             return true;
