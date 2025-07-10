@@ -17,25 +17,22 @@ public class RotinaService
             case Rotina.AlocaPallet:
                 return await _repository.AlocarPalletAsync(idChamada);
 
-            case Rotina.ValidaEnderecoExatoOrigem:
-                return await _repository.ValidarEnderecoExatoOrigemAsync(idChamada);
-
             case Rotina.ValidaEAtribuiPalletNoEnderecoDestino:
-                return await _repository.AlocarPalletEnderecoAsync(idChamada);
-
-            case Rotina.VerificaPalletOrigemERemoveAlocacao:
-                return await _repository.VerificaDesalocaPalletOrigemAsync(idChamada);
-
-            case Rotina.AtribuiPalletNoEnderecoOrigem:
                 {
-                    _ = await _repository.AlocarPalletLivreAsync(idChamada);
-                    var palletStageIn = await _repository.LeituraBufferAsync(idChamada);
+                    _ = await _repository.VerificaDesalocaPalletOrigemAsync(idChamada);
+                    var palletStageIn = await _repository.AlocarPalletEnderecoAsync(idChamada);
 
                     return palletStageIn;
                 }
 
+            case Rotina.VerificaPalletOrigemERemoveAlocacao:
+                return await _repository.LeituraAposCheioAsync(idChamada);
+
+            case Rotina.AtribuiPalletNoEnderecoOrigem:
+                return await _repository.AlocarPalletLivreAsync(idChamada);
+
             case Rotina.LePalletDoBuffer:
-                return await _repository.LeituraBufferAsync(idChamada);
+                return await _repository.LeituraAposCheioAsync(idChamada);
 
             case Rotina.LeStageIn:
                 return await _repository.LeituraStageInAsync(idChamada);
@@ -43,26 +40,8 @@ public class RotinaService
             case Rotina.ArmazenaPallet:
                 return await _repository.ArmazenarPalletAsync(idChamada);
 
-            case Rotina.DefinePosicaoStageOut:
-                return await _repository.DefinirStageOutAsync(idChamada);
-
-            case Rotina.DefinePosicaoNaExpedicao:
-                return await _repository.DefinirExpedicaoAsync(idChamada);
-
-            case Rotina.DesalocaEndereco:
-                return await _repository.DesalocarEnderecoAsync(idChamada);
-
-            case Rotina.LeDocaDeExpedicao:
-                return await _repository.LeituraDocaAsync(idChamada);
-
             case Rotina.SempreOkNenhumaValidacao:
                 return await _repository.SempreOkAsync(idChamada);
-
-            case Rotina.LeDocaDeExpedicaoParaOrdemInterna:
-                return await _repository.LeituraDocaOrdemInternaAsync(idChamada);
-
-            case Rotina.LeBufferParaOrdemDeTransferencia:
-                return await _repository.LeituraBufferOrdemTransferenciaAsync(idChamada);
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(rotina), rotina, "Rotina inválida");

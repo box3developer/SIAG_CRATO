@@ -70,6 +70,17 @@ public class AtividadeBLL
         return lista.ToList();
     }
 
+    public static async Task<List<AtividadeDTO>> GetAtividadesByAtividadeAnteriorAsync(int idAtividadeAnterior)
+    {
+        var sql = $"{AtividadeQuery.SELECT} WHERE id_atividadeanterior = @idAtividadeAnterior";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+
+        var lista = await conexao.QueryAsync<AtividadeDTO>(sql, new { idAtividadeAnterior });
+
+        return lista.ToList();
+    }
+
     private static AtividadeDTO ConvertToDTO(AtividadeModel atividade)
     {
         return new()

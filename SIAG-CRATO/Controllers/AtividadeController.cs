@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIAG_CRATO.BLLs.Atividade;
+using SIAG_CRATO.DTOs.Chamada;
 using SIAG_CRATO.Util;
 
 namespace SIAG_CRATO.Controllers;
@@ -56,6 +57,18 @@ public class AtividadeController : ControllerCustom
     {
         var result = await AtividadeBLL.GetByEquipModeloSetor(id_equipamentomodelo, id_setortrabalho);
         if (result == null || result.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(result);
+    }
+
+    [HttpGet("anterior/{idAtividadeAnterior}")]
+    public async Task<IActionResult> GetAtividadesByAtividadeAnteriorAsync(int idAtividadeAnterior)
+    {
+        var result = await AtividadeBLL.GetAtividadesByAtividadeAnteriorAsync(idAtividadeAnterior);
+        if (result == null)
         {
             return NotFound();
         }

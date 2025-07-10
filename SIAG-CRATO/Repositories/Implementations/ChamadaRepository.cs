@@ -108,7 +108,6 @@ WHERE id_chamada = @ChamadaId;";
             }
         }
 
-
         public async Task<bool> LivraPallet(int IdPallet, long IdAreaArmazenagem)
         {
             var sqlPallet = @"UPDATE pallet

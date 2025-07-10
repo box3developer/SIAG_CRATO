@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SIAG_CRATO.BLLs.Atividade;
 using SIAG_CRATO.BLLs.AtividadeTarefa;
 using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
@@ -130,27 +131,77 @@ public class ChamadaController : ControllerCustom
             var chamada = await ChamadaBLL.GetByIdAsync(id);
 
             if (chamada == null || chamada.FgStatus >= StatusChamada.Rejeitado)
-            {
-                return BadRequest("Chamada não encontrada!");
-            }
+                return BadRequest("Chamada não encontrada");
+
+            var atividade = await AtividadeBLL.GetByIdAsync(chamada.IdAtividade);
+
+            if (atividade == null)
+                return BadRequest("Atividade não encontrada");
 
             await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
 
-            if (chamada.IdAtividade == 1)
-            {
-                await _chamadaRepository.CriarChamadaAsync(new CriarChamadaDTO
-                {
-                    IdAtividade = 2,
-                    IdPalletOrigem = chamada.IdPalletOrigem,
-                    IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
-                    IdPalletDestino = chamada.IdPalletOrigem,
-                    IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemOrigem,
-                    IdOperador = chamada.IdOperador,
-                    IdEquipamento = chamada.IdEquipamento,
-                    Priorizar = false
-                });
+            var listaAtividades = await AtividadeBLL.GetAtividadesByAtividadeAnteriorAsync(chamada.IdAtividade);
 
-                //await _chamadaRepository.LivraPallet(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemOrigem);
+            foreach (var proximaAtividade in listaAtividades)
+            {
+                CriarChamadaDTO novaChamada = new();
+                novaChamada.IdAtividade = proximaAtividade.IdAtividade;
+
+                // fator 1
+                var mesmoModeloEquipamento = proximaAtividade.IdEquipamentoModelo == atividade.IdEquipamentoModelo;
+                // fator 2
+                var mesmoSetorTrabalho = proximaAtividade.IdSetorTrabalho == atividade.IdSetorTrabalho;
+                // fator 3
+                var desalocar = proximaAtividade.FgTipoAtividade == TipoAtividade.Desalocar;
+
+                if (desalocar)
+                {
+                    novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
+                    novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
+                    novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                    novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                    novaChamada.IdOperador = null;
+                    novaChamada.IdEquipamento = null;
+                }
+                else
+                {
+                    if (mesmoSetorTrabalho)
+                    {
+                        novaChamada.IdPalletOrigem = 0;
+                        novaChamada.IdPalletDestino = 0;
+                        novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                        novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                        novaChamada.IdOperador = null;
+                        novaChamada.IdEquipamento = null;
+                    }
+                    else
+                    {
+                        if (mesmoModeloEquipamento)
+                        {
+                            // consultar a area de destino do pallet pelo agrupador deet
+                            var areaDestinoPallet = 0;
+
+                            novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
+                            novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
+                            //novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                            //novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdOperador = chamada.IdOperador;
+                            novaChamada.IdEquipamento = chamada.IdEquipamento;
+                        }
+                        else
+                        {
+                            novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
+                            novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
+                            //novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                            //novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdOperador = null;
+                            novaChamada.IdEquipamento = null;
+                        }
+                    }
+                }
+
+                novaChamada.Priorizar = false;
+                await _chamadaRepository.CriarChamadaAsync(novaChamada);
             }
 
             return Ok();

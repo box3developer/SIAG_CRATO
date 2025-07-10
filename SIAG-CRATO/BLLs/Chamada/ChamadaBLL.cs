@@ -513,13 +513,11 @@ public class ChamadaBLL
             throw new Exception("Deve ser informado a chamada referente.");
         }
 
-        // Cria a conexão que será usada pelo repositório
         using var conexao = new SqlConnection(Global.Conexao);
-        // Instancia o repositório e o serviço que chamam os métodos correspondentes
+        
         var repository = new AtividadeRotinaRepository(conexao);
         var rotinaService = new RotinaService(repository);
 
-        // Executa a rotina mapeada a partir do enum
         var resultado = await rotinaService.ExecutarRotinaAsync(
             (Services.Rotina)filtro.AtividadeRotina.Value,
             filtro.Chamada.IdChamada
