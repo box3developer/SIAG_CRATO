@@ -464,6 +464,14 @@ public class PalletBLL
 
     }
 
+    public static async Task<int> SetAreaArmazenagem(int id, long? idAreaArmazenagem = null)
+    {
+        using var conexao = new SqlConnection(Global.Conexao);
+        var pallet = await conexao.ExecuteAsync(PalletQuery.DESALOCA_PALLET, new { idAreaArmazenagem, id });
+
+        return pallet;
+    }
+
     private static PalletDTO ConvertToDTO(PalletModel pallet)
     {
         return new()

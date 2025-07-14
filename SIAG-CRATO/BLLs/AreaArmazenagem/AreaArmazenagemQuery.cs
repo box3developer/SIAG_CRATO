@@ -8,6 +8,7 @@ public class AreaArmazenagemQuery
                                         id_tipoarea,
                                         id_areaarmazenagem, 
                                         id_agrupador, 
+                                        id_agrupador_reservado, 
                                         fg_status,
                                         nr_lado,
                                         cd_identificacao,

@@ -497,40 +497,6 @@ public class ChamadaBLL
         return chamadas.Select(ConvertToDTO).ToList();
     }
 
-    public static async Task<ValidaLeituraChamadaRetornoDTO> ValidarLeituraChamada(ValidaLeituraChamadaDTO filtro)
-    {
-        if (filtro.AtividadeRotina == null)
-        {
-            return new()
-            {
-                Valido = false,
-                Mensagem = "Deve ser informado a atividade referente."
-            };
-        }
-
-        if (filtro.Chamada == null)
-        {
-            throw new Exception("Deve ser informado a chamada referente.");
-        }
-
-        using var conexao = new SqlConnection(Global.Conexao);
-        
-        var repository = new AtividadeRotinaRepository(conexao);
-        var rotinaService = new RotinaService(repository);
-
-        var resultado = await rotinaService.ExecutarRotinaAsync(
-            (Services.Rotina)filtro.AtividadeRotina.Value,
-            filtro.Chamada.IdChamada
-        );
-
-        return new()
-        {
-            Valido = resultado.IsValid,
-            Mensagem = resultado.Mensagem
-        };
-    }
-
-
     private static ChamadaDTO ConvertToDTO(ChamadaModel chamada)
     {
         return new()

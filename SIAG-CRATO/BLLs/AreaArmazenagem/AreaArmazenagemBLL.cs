@@ -173,6 +173,24 @@ public class AreaArmazenagemBLL
         return ConvertToDTO(areasArmazenagem);
     }
 
+    public static async Task<AreaArmazenagemDTO?> GetPortaPalletLivreAsync(int idEndereco)
+    {
+        var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
+		                                            and id_tipoarea != 3
+		                                            and fg_status = 1
+		                                            order by nr_posicaoy, nr_lado";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco });
+
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
+    }
+
     public static List<StatusAreaArmazenagemDTO> GetTiposStatusGaiolas()
     {
         var listaTipos = new List<StatusAreaArmazenagemDTO>()
@@ -362,6 +380,7 @@ public class AreaArmazenagemBLL
             IdTipoArea = areaArmazenagem.IdTipoArea,
             IdEndereco = areaArmazenagem.IdEndereco,
             IdAgrupador = areaArmazenagem.IdAgrupador,
+            IdAgrupadorReservado = areaArmazenagem.IdAgrupadorReservado,
             IdCaracol = areaArmazenagem.IdCaracol,
             NrPosicaoX = areaArmazenagem.NrPosicaoX,
             NrPosicaoY = areaArmazenagem.NrPosicaoY,

@@ -8,6 +8,7 @@ public class AreaArmazenagemModel
     public int IdTipoArea { get; set; }
     public int IdEndereco { get; set; }
     public Guid IdAgrupador { get; set; }
+    public Guid IdAgrupadorReservado { get; set; }
     public string? IdCaracol { get; set; }
     public int NrPosicaoX { get; set; }
     public int NrPosicaoY { get; set; }

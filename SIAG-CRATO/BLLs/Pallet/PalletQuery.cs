@@ -7,6 +7,10 @@ public class PalletQuery
 
     public const string UPDADE_STATUS = "UPDATE pallet SET fg_status = @status WHERE id_pallet = @id";
 
+    public const string ALOCA_PALLET = "UPDATE pallet SET id_areaarmazenagem = @idAreaArmazenagem WHERE id_pallet = @id";
+
+    public const string DESALOCA_PALLET = "UPDATE pallet SET id_areaarmazenagem = NULL WHERE id_pallet = @id";
+
     public const string SELECT_COUNT_CAIXAS = "SELECT COUNT(*) FROM caixa WITH(NOLOCK)";
 
     public const string SELECT_RESERVA = @"SELECT top 1 

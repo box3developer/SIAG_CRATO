@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.BLLs.Atividade;
 using SIAG_CRATO.BLLs.AtividadeTarefa;
 using SIAG_CRATO.BLLs.Chamada;
 using SIAG_CRATO.BLLs.ChamadaTarefa;
+using SIAG_CRATO.BLLs.Endereco;
+using SIAG_CRATO.BLLs.Pallet;
 using SIAG_CRATO.Data;
 using SIAG_CRATO.DTOs.Chamada;
 using SIAG_CRATO.Repositories.Interfaces;
@@ -128,6 +131,8 @@ public class ChamadaController : ControllerCustom
     {
         try
         {
+            var enderecoBLL = new EnderecoBLL();
+
             var chamada = await ChamadaBLL.GetByIdAsync(id);
 
             if (chamada == null || chamada.FgStatus >= StatusChamada.Rejeitado)
@@ -153,6 +158,10 @@ public class ChamadaController : ControllerCustom
                 var mesmoSetorTrabalho = proximaAtividade.IdSetorTrabalho == atividade.IdSetorTrabalho;
                 // fator 3
                 var desalocar = proximaAtividade.FgTipoAtividade == TipoAtividade.Desalocar;
+                // fator 4
+                var movimentar = proximaAtividade.FgTipoAtividade == TipoAtividade.Movimentar;
+
+                var areaarmazenagemAtual = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
 
                 if (desalocar)
                 {
@@ -163,12 +172,23 @@ public class ChamadaController : ControllerCustom
                     novaChamada.IdOperador = null;
                     novaChamada.IdEquipamento = null;
                 }
+                else if (movimentar)
+                {
+                    var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
+
+                    var areaArmazenagemNova = await AreaArmazenagemBLL.GetPortaPalletLivreAsync(destinos.First().IdEndereco);
+
+                    novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
+                    novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
+                    novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                    novaChamada.IdAreaArmazenagemDestino = areaArmazenagemNova?.IdAreaArmazenagem;
+                    novaChamada.IdOperador = chamada.IdOperador;
+                    novaChamada.IdEquipamento = chamada.IdEquipamento;
+                }
                 else
                 {
                     if (mesmoSetorTrabalho)
                     {
-                        novaChamada.IdPalletOrigem = 0;
-                        novaChamada.IdPalletDestino = 0;
                         novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
                         novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
                         novaChamada.IdOperador = null;
@@ -178,26 +198,45 @@ public class ChamadaController : ControllerCustom
                     {
                         if (mesmoModeloEquipamento)
                         {
-                            // consultar a area de destino do pallet pelo agrupador deet
-                            var areaDestinoPallet = 0;
+                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
+
+                            var areaArmazenagemNova = await AreaArmazenagemBLL.GetStageInLivreAsync(destinos.First().IdEndereco);
 
                             novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
                             novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                            //novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
-                            //novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdAreaArmazenagemDestino = areaArmazenagemNova.IdAreaArmazenagem;
                             novaChamada.IdOperador = chamada.IdOperador;
                             novaChamada.IdEquipamento = chamada.IdEquipamento;
                         }
                         else
                         {
+                            // FASE 3 - Stage-out para Expedicao
                             novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
                             novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                            //novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
                             //novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
                             novaChamada.IdOperador = null;
                             novaChamada.IdEquipamento = null;
+
+                            throw new Exception("FASE 3 - Stage-out para Expedicao");
                         }
                     }
+                }
+
+                if (desalocar)
+                {
+                    await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, null);
+
+                    var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
+
+                    if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
+                        await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Livre);
+                }
+                else
+                {
+                    await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemLeitura);
+                    await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Ocupado);
                 }
 
                 novaChamada.Priorizar = false;
@@ -292,5 +331,14 @@ public class ChamadaController : ControllerCustom
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet("PosicoesPortaPallet/{idPallet}")]
+    public async Task<ActionResult> GetPosicoesPortaPallet(int idPallet)
+    {
+        var enderecoBLL = new EnderecoBLL();
+        var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPallet);
+
+        return OkResponse(destinos);
     }
 }

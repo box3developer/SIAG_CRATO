@@ -13,7 +13,7 @@ public class ParametroBLL
 
         using var conexao = new SqlConnection(Global.Conexao);
 
-        var parametro = await conexao.QueryFirstOrDefaultAsync<ParametroModel>(sql, new { nomeParametro });
+        var parametro = await conexao.QueryFirstOrDefaultAsync<ParametroModel>(sql, new { nmParametro = nomeParametro });
 
         if (parametro == null)
         {
