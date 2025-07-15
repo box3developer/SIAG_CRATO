@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.BLLs.Atividade;
 using SIAG_CRATO.BLLs.AtividadeTarefa;
@@ -143,9 +144,9 @@ public class ChamadaController : ControllerCustom
             if (atividade == null)
                 return BadRequest("Atividade não encontrada");
 
-            await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
-
             var listaAtividades = await AtividadeBLL.GetAtividadesByAtividadeAnteriorAsync(chamada.IdAtividade);
+
+            var proximasChamadas = new List<CriarChamadaDTO>();
 
             foreach (var proximaAtividade in listaAtividades)
             {
@@ -176,6 +177,9 @@ public class ChamadaController : ControllerCustom
                 {
                     var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
 
+                    if (destinos.IsNullOrEmpty())
+                        throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
+
                     var areaArmazenagemNova = await AreaArmazenagemBLL.GetPortaPalletLivreAsync(destinos.First().IdEndereco);
 
                     novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
@@ -199,6 +203,9 @@ public class ChamadaController : ControllerCustom
                         if (mesmoModeloEquipamento)
                         {
                             var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
+
+                            if (destinos.IsNullOrEmpty())
+                                throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
 
                             var areaArmazenagemNova = await AreaArmazenagemBLL.GetStageInLivreAsync(destinos.First().IdEndereco);
 
@@ -224,23 +231,31 @@ public class ChamadaController : ControllerCustom
                     }
                 }
 
-                if (desalocar)
-                {
-                    await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, null);
-
-                    var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
-
-                    if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
-                        await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Livre);
-                }
-                else
-                {
-                    await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemLeitura);
-                    await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Ocupado);
-                }
-
                 novaChamada.Priorizar = false;
+
+                proximasChamadas.Add(novaChamada);
+            }
+
+            foreach (var novaChamada in proximasChamadas)
                 await _chamadaRepository.CriarChamadaAsync(novaChamada);
+
+            await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
+
+            var desalocou = atividade.FgTipoAtividade == TipoAtividade.Desalocar;
+
+            if (desalocou)
+            {
+                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, null);
+
+                var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
+
+                if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
+                    await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Livre);
+            }
+            else
+            {
+                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemLeitura);
+                await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Ocupado);
             }
 
             return Ok();
@@ -308,9 +323,8 @@ public class ChamadaController : ControllerCustom
     {
         try
         {
-            var result = await ChamadaBLL.ValidarLeituraChamada(filtro);
 
-            return OkResponse(result);
+            return OkResponse(true);
         }
         catch (Exception ex)
         {
