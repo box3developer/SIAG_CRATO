@@ -1,7 +1,9 @@
 ﻿using System.Data;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using SIAG_CRATO.BLLs.AreaArmazenagem;
 using SIAG_CRATO.BLLs.Atividade;
+using SIAG_CRATO.BLLs.Endereco;
 using SIAG_CRATO.BLLs.Equipamento;
 using SIAG_CRATO.BLLs.EquipamentoEndereco;
 using SIAG_CRATO.BLLs.EquipamentoEnderecoPrioridade;
@@ -72,15 +74,22 @@ public class ChamadaBLL
         return chamadas.ToList();
     }
 
-    public static async Task<ChamadaDTO?> GetChamadaAbertaByOperadorAsync(long idOperador, int idEquipamento)
+    public static async Task<ChamadaDTO?> GetChamadaAbertaByOperadorAsync(long idOperador, int idEquipamento, int idEquipamentoModelo)
     {
         var sql = $@"{ChamadaQuery.SELECT} 
-                     WHERE (id_operador = @idOperador or id_equipamento = @idEquipamento)
-                           AND fg_status < @status
-                     ORDER BY fg_status desc, dt_chamada desc";
+                     WHERE (c.id_operador = @idOperador or c.id_equipamento = @idEquipamento)
+                           AND c.fg_status < @status
+	                       AND a.id_equipamentomodelo = @idEquipamentoModelo
+                     ORDER BY c.fg_status desc, c.dt_chamada desc";
 
         using var conexao = new SqlConnection(Global.Conexao);
-        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new { idOperador, idEquipamento, status = StatusChamada.Rejeitado });
+        var chamada = await conexao.QueryFirstOrDefaultAsync<ChamadaModel>(sql, new
+        {
+            idOperador,
+            idEquipamento,
+            status = StatusChamada.Rejeitado,
+            idEquipamentoModelo
+        });
 
         if (chamada == null)
         {
@@ -189,6 +198,11 @@ public class ChamadaBLL
 
     public static async Task<bool> RejeitarChamadaAsync(Guid idChamada, int idAtividadeRejeicao)
     {
+        var chamada = await GetByIdAsync(idChamada);
+
+        if (chamada == null)
+            throw new ValidacaoException("Chamada não encontrada");
+
         using var conexao = new SqlConnection(Global.Conexao);
         await conexao.ExecuteAsync(ChamadaQuery.UPDATE_REJEITAR, new
         {
@@ -196,6 +210,15 @@ public class ChamadaBLL
             idAtividadeRejeicao,
             idChamada,
         });
+
+        long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
+                ? chamada.IdAreaArmazenagemLeitura
+                : chamada.IdAreaArmazenagemDestino;
+
+        var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagem);
+
+        if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
+            await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Livre);
 
         return true;
     }
@@ -223,7 +246,7 @@ public class ChamadaBLL
         if (operador == null)
             throw new ValidacaoException("Operador não encontrado!");
 
-        var chamada = await GetChamadaAbertaByOperadorAsync(selecao.IdOperador, selecao.IdEquipamento);
+        var chamada = await GetChamadaAbertaByOperadorAsync(selecao.IdOperador, selecao.IdEquipamento, equipamento.IdEquipamentoModelo);
 
         if (chamada != null)
             return chamada.IdChamada;
@@ -262,18 +285,6 @@ public class ChamadaBLL
                                                     x.FgEvitaConflitoEndereco == ConflitoDeEnderecos.RestringirPorZonaEEndereco)
                                         .Select(x => x.IdAtividade)
                                         .ToList();
-
-        if (atividadesDeOutraZona.Count != 0)
-        {
-            equipamentosEndereco = await EquipamentoEnderecoBLL.GetByEquipamentoAsync(equipamento.IdEquipamento);
-
-            var idsEnderecos = equipamentosEndereco.Select(x => x.IdEndereco).ToList();
-
-            chamadasPendentes = chamadasPendentes.Where(x =>
-                                                    !(atividadesDeOutraZona.Contains(x.IdAtividade) &&
-                                                    !idsEnderecos.Contains(x.IdEnderecoOrigem)))
-                                                 .ToList();
-        }
 
         var equipamentosPrioridade = (await EquipamentoEnderecoPrioridadeBLL.GetListAsync())
                                         .Where(x => equipamentosEndereco
@@ -378,7 +389,7 @@ public class ChamadaBLL
         }
     }
 
-    public static async Task<bool> AtualizarLeitura(Guid idChamada, long? idAreaArmazenagem, int? idPallet)
+    public static async Task<bool> AtualizarLeitura(Guid idChamada, string? idAreaArmazenagem, int? idPallet)
     {
         if (idAreaArmazenagem == null && idPallet == null)
         {

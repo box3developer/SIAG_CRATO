@@ -3,10 +3,26 @@
 public class ChamadaQuery
 {
     public const string SELECT = @"SELECT 
-                                        id_chamada, id_palletorigem, id_areaarmazenagemorigem, id_palletdestino, id_areaarmazenagemdestino, 
-                                        id_palletleitura, id_areaarmazenagemleitura, id_operador, id_equipamento, id_atividaderejeicao, 
-                                        id_atividade, fg_status, dt_chamada, dt_recebida, dt_atendida, dt_finalizada, dt_rejeitada, id_chamadasuspensa
-                                   FROM chamada";
+                                        c.id_chamada, 
+                                        c.id_palletorigem, 
+                                        c.id_areaarmazenagemorigem, 
+                                        c.id_palletdestino, 
+                                        c.id_areaarmazenagemdestino, 
+                                        c.id_palletleitura, 
+                                        c.id_areaarmazenagemleitura, 
+                                        c.id_operador, 
+                                        c.id_equipamento, 
+                                        c.id_atividaderejeicao, 
+                                        c.id_atividade, 
+                                        c.fg_status, 
+                                        c.dt_chamada, 
+                                        c.dt_recebida, 
+                                        c.dt_atendida, 
+                                        c.dt_finalizada, 
+                                        c.dt_rejeitada, 
+                                        c.id_chamadasuspensa
+                                   FROM chamada c
+                                   INNER JOIN atividade a WITH(NOLOCK) ON (a.id_atividade = c.id_atividade)";
 
     public const string SELECT_DISPONIVEL = @"SELECT chamada.id_chamada AS id_chamada,
 	                                                 chamada.dt_chamada AS dt_chamada,

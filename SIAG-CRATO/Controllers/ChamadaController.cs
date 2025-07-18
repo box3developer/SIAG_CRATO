@@ -237,25 +237,33 @@ public class ChamadaController : ControllerCustom
             }
 
             foreach (var novaChamada in proximasChamadas)
+            {
                 await _chamadaRepository.CriarChamadaAsync(novaChamada);
+
+                await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Reservado);
+            }
 
             await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
 
             var desalocou = atividade.FgTipoAtividade == TipoAtividade.Desalocar;
 
+            long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
+                ? chamada.IdAreaArmazenagemLeitura
+                : chamada.IdAreaArmazenagemDestino;
+
             if (desalocou)
             {
                 await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, null);
 
-                var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
+                var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagem);
 
                 if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
-                    await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Livre);
+                    await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Livre);
             }
             else
             {
-                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, chamada.IdAreaArmazenagemLeitura);
-                await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Ocupado);
+                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, idAreaArmazenagem);
+                await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Ocupado);
             }
 
             return Ok();
