@@ -104,8 +104,8 @@ public class ChamadaController : ControllerCustom
         }
     }
 
-    [HttpPost("rejeitar/{id}/{idMotivo}")]
-    public async Task<ActionResult> RejeitarChamada(Guid id, int idMotivo)
+    [HttpPost("rejeitar/{id}")]
+    public async Task<ActionResult> RejeitarChamada(Guid id)
     {
         try
         {
@@ -117,9 +117,20 @@ public class ChamadaController : ControllerCustom
             if (chamada.FgStatus >= StatusChamada.Rejeitado)
                 throw new ValidacaoException("Tarefa já rejeitada");
 
-            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada, idMotivo);
+            await ChamadaBLL.RejeitarChamadaAsync(chamada.IdChamada);
 
-            return Ok(true);
+            var result = await _chamadaRepository.CriarChamadaAsync(new CriarChamadaDTO
+            {
+                IdAtividade = chamada.IdAtividade,
+                IdPalletOrigem = chamada.IdPalletOrigem,
+                IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemOrigem,
+                IdPalletDestino = chamada.IdPalletDestino,
+                IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemDestino,
+                IdOperador = null,
+                IdEquipamento = null
+            });
+
+            return Ok(result);
         }
         catch (Exception ex)
         {
@@ -143,6 +154,16 @@ public class ChamadaController : ControllerCustom
 
             if (atividade == null)
                 return BadRequest("Atividade não encontrada");
+
+            var desalocou = atividade.FgTipoAtividade == TipoAtividade.Desalocar;
+
+            long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
+                ? chamada.IdAreaArmazenagemLeitura
+                : chamada.IdAreaArmazenagemDestino;
+
+            int idPallet = chamada.IdPalletLeitura != 0
+                ? chamada.IdPalletLeitura
+                : chamada.IdPalletDestino;
 
             var listaAtividades = await AtividadeBLL.GetAtividadesByAtividadeAnteriorAsync(chamada.IdAtividade);
 
@@ -175,7 +196,7 @@ public class ChamadaController : ControllerCustom
                 }
                 else if (movimentar)
                 {
-                    var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
+                    var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPallet);
 
                     if (destinos.IsNullOrEmpty())
                         throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
@@ -202,7 +223,7 @@ public class ChamadaController : ControllerCustom
                     {
                         if (mesmoModeloEquipamento)
                         {
-                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(chamada.IdPalletLeitura);
+                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPallet);
 
                             if (destinos.IsNullOrEmpty())
                                 throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
@@ -239,30 +260,30 @@ public class ChamadaController : ControllerCustom
             foreach (var novaChamada in proximasChamadas)
             {
                 await _chamadaRepository.CriarChamadaAsync(novaChamada);
+                
+                var novaAtividade = await AtividadeBLL.GetByIdAsync(novaChamada.IdAtividade.Value);
 
-                await AreaArmazenagemBLL.SetStatusAsync(chamada.IdAreaArmazenagemLeitura, StatusAreaArmazenagem.Reservado);
+                if (novaAtividade == null)
+                    throw new ValidacaoException("Atividade não encontrada");
+
+                if (novaAtividade.FgTipoAtividade != TipoAtividade.Desalocar)
+                    await AreaArmazenagemBLL.SetStatusAsync(novaChamada.IdAreaArmazenagemDestino.Value, StatusAreaArmazenagem.Reservado);
             }
 
             await ChamadaBLL.FinalizarChamadaAsync(chamada.IdChamada);
 
-            var desalocou = atividade.FgTipoAtividade == TipoAtividade.Desalocar;
-
-            long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
-                ? chamada.IdAreaArmazenagemLeitura
-                : chamada.IdAreaArmazenagemDestino;
-
             if (desalocou)
             {
-                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, null);
+                await PalletBLL.SetAreaArmazenagem(idPallet, null);
 
                 var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagem);
 
-                if (areaArmazenagem?.IdAgrupador != null || areaArmazenagem?.IdAgrupadorReservado != null)
+                if (areaArmazenagem?.IdAgrupador == null && areaArmazenagem?.IdAgrupadorReservado == null)
                     await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Livre);
             }
             else
             {
-                await PalletBLL.SetAreaArmazenagem(chamada.IdPalletLeitura, idAreaArmazenagem);
+                await PalletBLL.SetAreaArmazenagem(idPallet, idAreaArmazenagem);
                 await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Ocupado);
             }
 

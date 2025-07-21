@@ -196,7 +196,7 @@ public class ChamadaBLL
         return true;
     }
 
-    public static async Task<bool> RejeitarChamadaAsync(Guid idChamada, int idAtividadeRejeicao)
+    public static async Task<bool> RejeitarChamadaAsync(Guid idChamada)
     {
         var chamada = await GetByIdAsync(idChamada);
 
@@ -207,8 +207,7 @@ public class ChamadaBLL
         await conexao.ExecuteAsync(ChamadaQuery.UPDATE_REJEITAR, new
         {
             statusRejeicao = (int)StatusChamada.Rejeitado,
-            idAtividadeRejeicao,
-            idChamada,
+            idChamada
         });
 
         long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
