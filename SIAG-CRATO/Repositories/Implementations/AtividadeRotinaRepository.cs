@@ -691,7 +691,7 @@ WHERE nm_parametro = @ParamStageIn;
 
             // Extrair lista distinta de id_endereco
             var enderecos = destinos
-                .Select(d => d.IdEndereco)
+                .Select(d => d)
                 .Distinct()
                 .ToList();
 

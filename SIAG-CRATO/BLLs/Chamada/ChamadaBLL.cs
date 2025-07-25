@@ -331,6 +331,7 @@ public class ChamadaBLL
         var chamadaSelecioanda = chamadasParadas
                                     .Where(x => x.QuatidadePrioridade >= 0)
                                     .OrderByDescending(x => x.QuatidadePrioridade)
+                                    .OrderByDescending(x => x.IdAtividade)
                                     .OrderBy(x => x.DataChamada)
                                     .Select(x => x.IdChamada)
                                     .FirstOrDefault();

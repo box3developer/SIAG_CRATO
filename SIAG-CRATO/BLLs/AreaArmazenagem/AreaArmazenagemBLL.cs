@@ -160,7 +160,30 @@ public class AreaArmazenagemBLL
         var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
 		                                            and id_tipoarea = @nmValor
 		                                            and fg_status = 1
-		                                            order by nr_posicaoy, nr_lado";
+		                                            order by nr_posicaoy, nr_posicaox desc, nr_lado";
+
+        using var conexao = new SqlConnection(Global.Conexao);
+        var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco, nmValor });
+
+        if (areasArmazenagem == null)
+        {
+            return null;
+        }
+
+        return ConvertToDTO(areasArmazenagem);
+    }
+
+    public static async Task<AreaArmazenagemDTO?> GetStageOutLivreAsync(int idEndereco)
+    {
+        var parametroEntity = await ParametroBLL.GetParametroByParametro("TIPO AREA STAGEOUT")
+                                    ?? throw new Exception("Erro ao executar StageOurLivre");
+
+        var nmValor = short.Parse(parametroEntity.NmValor ?? "");
+
+        var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
+		                                            and id_tipoarea = @nmValor
+		                                            and fg_status = 1
+		                                            order by nr_posicaoy, nr_posicaox desc, nr_lado";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco, nmValor });
@@ -178,7 +201,7 @@ public class AreaArmazenagemBLL
         var sql = $@"{AreaArmazenagemQuery.SELECT} where id_endereco = @idEndereco
 		                                            and id_tipoarea != 3
 		                                            and fg_status = 1
-		                                            order by nr_posicaoy, nr_lado";
+		                                            order by nr_posicaoy, nr_posicaox desc, nr_lado";
 
         using var conexao = new SqlConnection(Global.Conexao);
         var areasArmazenagem = await conexao.QueryFirstOrDefaultAsync<AreaArmazenagemModel>(sql, new { idEndereco });

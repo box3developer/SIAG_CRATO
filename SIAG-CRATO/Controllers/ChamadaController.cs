@@ -157,13 +157,20 @@ public class ChamadaController : ControllerCustom
 
             var desalocou = atividade.FgTipoAtividade == TipoAtividade.Desalocar;
 
-            long idAreaArmazenagem = chamada.IdAreaArmazenagemLeitura != 0
+            long idAreaArmazenagemDestinoChamadaFinalizada = chamada.IdAreaArmazenagemLeitura != 0
                 ? chamada.IdAreaArmazenagemLeitura
                 : chamada.IdAreaArmazenagemDestino;
 
-            int idPallet = chamada.IdPalletLeitura != 0
+            long idAreaArmazenagemOrigemChamadaFinalizada = chamada.IdAreaArmazenagemLeitura != 0
+                ? chamada.IdAreaArmazenagemLeitura
+                : chamada.IdAreaArmazenagemOrigem;
+
+            int idPalletChamadaFinalizada = chamada.IdPalletLeitura != 0
                 ? chamada.IdPalletLeitura
                 : chamada.IdPalletDestino;
+
+            long idOperadorChamadaAnterior = chamada.IdOperador;
+            int idEquipamentoChamadaAnterior = chamada.IdEquipamento;
 
             var listaAtividades = await AtividadeBLL.GetAtividadesByAtividadeAnteriorAsync(chamada.IdAtividade);
 
@@ -174,48 +181,44 @@ public class ChamadaController : ControllerCustom
                 CriarChamadaDTO novaChamada = new();
                 novaChamada.IdAtividade = proximaAtividade.IdAtividade;
 
-                // fator 1
                 var mesmoModeloEquipamento = proximaAtividade.IdEquipamentoModelo == atividade.IdEquipamentoModelo;
-                // fator 2
                 var mesmoSetorTrabalho = proximaAtividade.IdSetorTrabalho == atividade.IdSetorTrabalho;
-                // fator 3
                 var desalocar = proximaAtividade.FgTipoAtividade == TipoAtividade.Desalocar;
-                // fator 4
                 var movimentar = proximaAtividade.FgTipoAtividade == TipoAtividade.Movimentar;
 
-                var areaarmazenagemAtual = await AreaArmazenagemBLL.GetByIdAsync(chamada.IdAreaArmazenagemLeitura);
+                var areaarmazenagemAtual = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagemDestinoChamadaFinalizada);
 
                 if (desalocar)
                 {
-                    novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
-                    novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                    novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
-                    novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                    novaChamada.IdPalletOrigem = idPalletChamadaFinalizada;
+                    novaChamada.IdPalletDestino = idPalletChamadaFinalizada;
+                    novaChamada.IdAreaArmazenagemOrigem = idAreaArmazenagemDestinoChamadaFinalizada;
+                    novaChamada.IdAreaArmazenagemDestino = idAreaArmazenagemDestinoChamadaFinalizada;
                     novaChamada.IdOperador = null;
                     novaChamada.IdEquipamento = null;
                 }
                 else if (movimentar)
                 {
-                    var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPallet);
+                    var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPalletChamadaFinalizada);
 
                     if (destinos.IsNullOrEmpty())
                         throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
 
-                    var areaArmazenagemNova = await AreaArmazenagemBLL.GetPortaPalletLivreAsync(destinos.First().IdEndereco);
+                    var areaArmazenagemNova = await AreaArmazenagemBLL.GetPortaPalletLivreAsync(destinos.First());
 
-                    novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
-                    novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                    novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                    novaChamada.IdPalletOrigem = idPalletChamadaFinalizada;
+                    novaChamada.IdPalletDestino = idPalletChamadaFinalizada;
+                    novaChamada.IdAreaArmazenagemOrigem = idAreaArmazenagemDestinoChamadaFinalizada;
                     novaChamada.IdAreaArmazenagemDestino = areaArmazenagemNova?.IdAreaArmazenagem;
-                    novaChamada.IdOperador = chamada.IdOperador;
-                    novaChamada.IdEquipamento = chamada.IdEquipamento;
+                    novaChamada.IdOperador = idOperadorChamadaAnterior;
+                    novaChamada.IdEquipamento = idEquipamentoChamadaAnterior;
                 }
                 else
                 {
                     if (mesmoSetorTrabalho)
                     {
-                        novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
-                        novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
+                        novaChamada.IdAreaArmazenagemOrigem = idAreaArmazenagemDestinoChamadaFinalizada;
+                        novaChamada.IdAreaArmazenagemDestino = idAreaArmazenagemDestinoChamadaFinalizada;
                         novaChamada.IdOperador = null;
                         novaChamada.IdEquipamento = null;
                     }
@@ -223,31 +226,35 @@ public class ChamadaController : ControllerCustom
                     {
                         if (mesmoModeloEquipamento)
                         {
-                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPallet);
+                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPalletChamadaFinalizada);
 
                             if (destinos.IsNullOrEmpty())
                                 throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
 
-                            var areaArmazenagemNova = await AreaArmazenagemBLL.GetStageInLivreAsync(destinos.First().IdEndereco);
+                            var areaArmazenagemNova = await AreaArmazenagemBLL.GetStageInLivreAsync(destinos.First());
 
-                            novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
-                            novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                            novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
+                            novaChamada.IdPalletOrigem = idPalletChamadaFinalizada;
+                            novaChamada.IdPalletDestino = idPalletChamadaFinalizada;
+                            novaChamada.IdAreaArmazenagemOrigem = idAreaArmazenagemDestinoChamadaFinalizada;
                             novaChamada.IdAreaArmazenagemDestino = areaArmazenagemNova.IdAreaArmazenagem;
-                            novaChamada.IdOperador = chamada.IdOperador;
-                            novaChamada.IdEquipamento = chamada.IdEquipamento;
+                            novaChamada.IdOperador = idOperadorChamadaAnterior;
+                            novaChamada.IdEquipamento = idEquipamentoChamadaAnterior;
                         }
                         else
                         {
-                            // FASE 3 - Stage-out para Expedicao
-                            novaChamada.IdPalletOrigem = chamada.IdPalletLeitura;
-                            novaChamada.IdPalletDestino = chamada.IdPalletLeitura;
-                            novaChamada.IdAreaArmazenagemOrigem = chamada.IdAreaArmazenagemLeitura;
-                            //novaChamada.IdAreaArmazenagemDestino = chamada.IdAreaArmazenagemLeitura;
-                            novaChamada.IdOperador = null;
-                            novaChamada.IdEquipamento = null;
+                            var destinos = await enderecoBLL.ObterDestinoPalletAsync(idPalletChamadaFinalizada);
 
-                            throw new Exception("FASE 3 - Stage-out para Expedicao");
+                            if (destinos.IsNullOrEmpty())
+                                throw new ValidacaoException("Não foi possível encontrar um destino para o pallet.");
+
+                            var areaArmazenagemNova = await AreaArmazenagemBLL.GetStageOutLivreAsync(destinos.First());
+
+                            novaChamada.IdPalletOrigem = idPalletChamadaFinalizada;
+                            novaChamada.IdPalletDestino = idPalletChamadaFinalizada;
+                            novaChamada.IdAreaArmazenagemOrigem = idAreaArmazenagemDestinoChamadaFinalizada;
+                            novaChamada.IdAreaArmazenagemDestino = areaArmazenagemNova.IdAreaArmazenagem;
+                            novaChamada.IdOperador = idOperadorChamadaAnterior;
+                            novaChamada.IdEquipamento = idEquipamentoChamadaAnterior;
                         }
                     }
                 }
@@ -274,17 +281,23 @@ public class ChamadaController : ControllerCustom
 
             if (desalocou)
             {
-                await PalletBLL.SetAreaArmazenagem(idPallet, null);
+                await PalletBLL.SetAreaArmazenagem(idPalletChamadaFinalizada, null);
 
-                var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagem);
+                var areaArmazenagem = await AreaArmazenagemBLL.GetByIdAsync(idAreaArmazenagemOrigemChamadaFinalizada);
 
-                if (areaArmazenagem?.IdAgrupador == null && areaArmazenagem?.IdAgrupadorReservado == null)
-                    await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Livre);
+                if (areaArmazenagem == null)
+                    throw new ValidacaoException("Área de armazenagem não encontrada");
+
+                bool semAgrupador = areaArmazenagem?.IdAgrupador == null || areaArmazenagem?.IdAgrupador == Guid.Empty;
+                bool semAgrupadorReservado = areaArmazenagem?.IdAgrupadorReservado == null || areaArmazenagem?.IdAgrupadorReservado == Guid.Empty;
+                
+                if (semAgrupador && semAgrupadorReservado)
+                    await AreaArmazenagemBLL.SetStatusAsync(areaArmazenagem.IdAreaArmazenagem, StatusAreaArmazenagem.Livre);
             }
             else
             {
-                await PalletBLL.SetAreaArmazenagem(idPallet, idAreaArmazenagem);
-                await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagem, StatusAreaArmazenagem.Ocupado);
+                await PalletBLL.SetAreaArmazenagem(idPalletChamadaFinalizada, idAreaArmazenagemDestinoChamadaFinalizada);
+                await AreaArmazenagemBLL.SetStatusAsync(idAreaArmazenagemDestinoChamadaFinalizada, StatusAreaArmazenagem.Ocupado);
             }
 
             return Ok();

@@ -50,7 +50,7 @@ namespace SIAG_CRATO.BLLs.Endereco
             return endereco.Select(ConvertToDTO).ToList();
         }
 
-        public async Task<IEnumerable<DestinoPalletDTO>> ObterDestinoPalletAsync(int idPallet)
+        public async Task<IEnumerable<int>> ObterDestinoPalletAsync(int idPallet)
         {
             const byte STATUS_CAIXA_ARMAZENADA = 4;
             const byte TIPO_ENDERECO_PORTAPALLET = 1;
@@ -115,95 +115,111 @@ namespace SIAG_CRATO.BLLs.Endereco
                     ", new { IdAgrupador = idAgrupador });
             }
 
-            // 4) Buscar tipo de programa
-            int tipoPrograma = 0;
-            if (idPrograma.HasValue)
-            {
-                tipoPrograma = await conexao.QuerySingleOrDefaultAsync<int>(@"
-                    SELECT pr.fg_tipo
-                    FROM programa pr WITH(NOLOCK)
-                    WHERE pr.id_programa = @IdPrograma;
-                    ", new { IdPrograma = idPrograma.Value });
-            }
+            //// 4) Buscar tipo de programa
+            //int tipoPrograma = 0;
+            //if (idPrograma.HasValue)
+            //{
+            //    tipoPrograma = await conexao.QuerySingleOrDefaultAsync<int>(@"
+            //        SELECT pr.fg_tipo
+            //        FROM programa pr WITH(NOLOCK)
+            //        WHERE pr.id_programa = @IdPrograma;
+            //        ", new { IdPrograma = idPrograma.Value });
+            //}
 
-            // 5) Montar lista inicial de endereços porta-pallet ativos
-            var enderecosPP = (await conexao.QueryAsync<int>(@"
-                    SELECT e.id_endereco
-                    FROM endereco e WITH(NOLOCK)
-                    WHERE e.id_tipoendereco = @TipoEnderecoPortaPallet
-                      AND e.fg_status = @StatusAtiva;
-                    ", new { TipoEnderecoPortaPallet = TIPO_ENDERECO_PORTAPALLET, StatusAtiva = STATUS_AREA_ATIVA }))
+            var idFatia = (await conexao.QueryAsync<int>(@"
+                    select f.id_fatia from fatia f join lote l on
+	                l.dt_fatia = f.dt_inicio and
+	                l.nr_fatia = f.cd_fatia
+	                where l.cd_lote = @cdLote;
+                    ", new { cdLote = pedidoInfo.CdLote }))
                 .ToList();
 
-            // 6) Filtrar por endereços atribuídos ao pedido, se houver pedido
-            if (pedidoInfo != null)
-            {
-                var atribuídos = (await conexao.QueryAsync<int>(@"
-                    SELECT ea.id_endereco
-                    FROM enderecoarmazenagem ea WITH(NOLOCK)
-                    WHERE (@CanalPedido = @CanalMI AND ea.cd_lote = @CdLote)
-                       OR (@CanalPedido = @CanalME AND ea.cd_ordemexportacao = @CdOrdemExportacao
-                                                 AND ea.cd_veiculoexportacao = @CdVeiculoExportacao);
-                    ", new
-                {
-                    CanalPedido = pedidoInfo.CanalPedido,
-                    CanalMI = CANAL_MI,
-                    CanalME = CANAL_ME,
-                    CdLote = pedidoInfo.CdLote,
-                    CdOrdemExportacao = pedidoInfo.CdOrdemExportacao,
-                    CdVeiculoExportacao = pedidoInfo.CdVeiculoExportacao
-                })).ToHashSet();
+            //// 5) Montar lista inicial de endereços porta-pallet ativos
+            //var enderecosPP = (await conexao.QueryAsync<int>(@"
+            //        SELECT e.id_endereco
+            //        FROM endereco e WITH(NOLOCK)
+            //        WHERE e.id_tipoendereco = @TipoEnderecoPortaPallet
+            //          AND e.fg_status = @StatusAtiva
+            //        ORDER BY id_endereco;
+            //        ", new { TipoEnderecoPortaPallet = TIPO_ENDERECO_PORTAPALLET, StatusAtiva = STATUS_AREA_ATIVA }))
+            //    .ToList();
 
-                enderecosPP = enderecosPP
-                    .Where(e => atribuídos.Contains(e))
-                    .ToList();
-            }
+            var enderecos = (await conexao.QueryAsync<int>(@"
+                    select distinct id_endereco
+	                from alocacaoautomaticafatiaendereco a 
+	                where id_fatia = @idFatia;
+                    ", new { idFatia = idFatia }))
+                .ToList();
 
-            // 7) Percorrer endereços e buscar preenchimentos
-            var resultado = new List<DestinoPalletDTO>();
-            foreach (var idEndereco in enderecosPP)
-            {
-                var preenchimentos = (await conexao.QueryAsync<PreenchimentoDto>(@"
-                    SELECT
-                        p.id_preenchimento          AS IdPreenchimento,
-                        p.tp_carga                  AS TipoCargaPreenchimento,
-                        p.id_transportadora         AS IdTransportadora,
-                        p.cd_canal                  AS CanalPreenchimento,
-                        p.fg_estoqueestrategico     AS EstoqueEstrategico,
-                        p.fg_foradelinha            AS ForaDeLinha
-                    FROM preenchimento p WITH(NOLOCK)
-                    WHERE p.id_endereco = @IdEndereco
-                    ORDER BY p.nr_sequencia;
-                    ", new { IdEndereco = idEndereco })).ToList();
+            //// 6) Filtrar por endereços atribuídos ao pedido, se houver pedido
+            //if (pedidoInfo != null)
+            //{
+            //    var atribuídos = (await conexao.QueryAsync<int>(@"
+            //        SELECT ea.id_endereco
+            //        FROM enderecoarmazenagem ea WITH(NOLOCK)
+            //        WHERE (@CanalPedido = @CanalMI AND ea.cd_lote = @CdLote)
+            //           OR (@CanalPedido = @CanalME AND ea.cd_ordemexportacao = @CdOrdemExportacao
+            //                                     AND ea.cd_veiculoexportacao = @CdVeiculoExportacao);
+            //        ", new
+            //    {
+            //        CanalPedido = pedidoInfo.CanalPedido,
+            //        CanalMI = CANAL_MI,
+            //        CanalME = CANAL_ME,
+            //        CdLote = pedidoInfo.CdLote,
+            //        CdOrdemExportacao = pedidoInfo.CdOrdemExportacao,
+            //        CdVeiculoExportacao = pedidoInfo.CdVeiculoExportacao
+            //    })).ToHashSet();
 
-                if (preenchimentos.Count == 0)
-                {
-                    // sem qualquer preenchimento → pode alocar com preenchimento nulo
-                    resultado.Add(new DestinoPalletDTO { IdEndereco = idEndereco, IdPreenchimento = null });
-                }
-                else
-                {
-                    // tenta achar primeiro preenchimento que satisfaça as regras
-                    foreach (var p in preenchimentos)
-                    {
-                        if ((!string.IsNullOrEmpty(p.TipoCargaPreenchimento) && pedidoInfo?.TipoCargaPedido == p.TipoCargaPreenchimento)
-                            || (p.IdTransportadora.HasValue && p.IdTransportadora == pedidoInfo?.IdTransportadora)
-                            || (p.CanalPreenchimento != 0 && p.CanalPreenchimento == pedidoInfo?.CanalPedido)
-                            || (p.EstoqueEstrategico && tipoPrograma == 2)
-                            || (p.ForaDeLinha && tipoPrograma == 3))
-                        {
-                            resultado.Add(new DestinoPalletDTO
-                            {
-                                IdEndereco = idEndereco,
-                                IdPreenchimento = p.IdPreenchimento
-                            });
-                            break;
-                        }
-                    }
-                }
-            }
+            //    enderecosPP = enderecosPP
+            //        .Where(e => atribuídos.Contains(e))
+            //        .ToList();
+            //}
 
-            return resultado;
+            //// 7) Percorrer endereços e buscar preenchimentos
+            //var resultado = new List<DestinoPalletDTO>();
+            //foreach (var idEndereco in enderecosPP)
+            //{
+            //    var preenchimentos = (await conexao.QueryAsync<PreenchimentoDto>(@"
+            //        SELECT
+            //            p.id_preenchimento          AS IdPreenchimento,
+            //            p.tp_carga                  AS TipoCargaPreenchimento,
+            //            p.id_transportadora         AS IdTransportadora,
+            //            p.cd_canal                  AS CanalPreenchimento,
+            //            p.fg_estoqueestrategico     AS EstoqueEstrategico,
+            //            p.fg_foradelinha            AS ForaDeLinha
+            //        FROM preenchimento p WITH(NOLOCK)
+            //        WHERE p.id_endereco = @IdEndereco
+            //        ORDER BY p.nr_sequencia, p.id_endereco;
+            //        ", new { IdEndereco = idEndereco })).ToList();
+
+            //    if (preenchimentos.Count == 0)
+            //    {
+            //        // sem qualquer preenchimento → pode alocar com preenchimento nulo
+            //        resultado.Add(new DestinoPalletDTO { IdEndereco = idEndereco, IdPreenchimento = null });
+            //    }
+            //    else
+            //    {
+            //        // tenta achar primeiro preenchimento que satisfaça as regras
+            //        foreach (var p in preenchimentos)
+            //        {
+            //            if ((!string.IsNullOrEmpty(p.TipoCargaPreenchimento) && pedidoInfo?.TipoCargaPedido == p.TipoCargaPreenchimento)
+            //                || (p.IdTransportadora.HasValue && p.IdTransportadora == pedidoInfo?.IdTransportadora)
+            //                || (p.CanalPreenchimento != 0 && p.CanalPreenchimento == pedidoInfo?.CanalPedido)
+            //                || (p.EstoqueEstrategico && tipoPrograma == 2)
+            //                || (p.ForaDeLinha && tipoPrograma == 3))
+            //            {
+            //                resultado.Add(new DestinoPalletDTO
+            //                {
+            //                    IdEndereco = idEndereco,
+            //                    IdPreenchimento = p.IdPreenchimento
+            //                });
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+
+            return enderecos;
         }
 
         private static EnderecoDTO ConvertToDTO(EnderecoModel endereco)
@@ -221,8 +237,6 @@ namespace SIAG_CRATO.BLLs.Endereco
                 TpPreenchimento = endereco.TpPreenchimento,
             };
         }
-
-
 
         private class CaixaInfoDto
         {
